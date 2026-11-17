@@ -125,6 +125,7 @@
     for (let i = 0; i < photos.length; i++) {
       const p = photos[i], lay = p.layout || 'auto';
       if (kindOf(p) !== 'image') { out.push({ type: kindOf(p), items: [p], from: i }); alt = 0; continue; }
+      if (lay === 'wide') { out.push({ type: 'wide', items: [p], from: i }); alt = 1; continue; }
       if (lay === 'fill' || (lay === 'auto' && !isPortrait(p) && alt === 0)) {
         out.push({ type: 'full', items: [p], from: i }); if (lay === 'auto') alt = 1; continue;
       }
@@ -205,7 +206,10 @@
     }
     let pairs = 0, singles = 0;
     for (const s of layoutShots(photos)) {
-      if (s.type === 'full') {
+      if (s.type === 'wide') {   // whole photo, as wide as the screen; its height follows the photo
+        const x = s.items[0];
+        html += `<section class="panel shot wide" style="aspect-ratio:${+x.w || 3}/${+x.h || 2}" data-count="${pad2(s.from + 1)}" data-total="${pad2(total)}" data-cap="${esc(x.caption || '')}"><div class="bg">${img(x)}</div></section>`;
+      } else if (s.type === 'full') {
         const x = s.items[0];
         html += `<section class="panel shot grow" data-plx="5" data-count="${pad2(s.from + 1)}" data-total="${pad2(total)}" data-cap="${esc(x.caption || '')}"><div class="bg">${img(x)}</div></section>`;
       } else if (s.type === 'pair') {
@@ -575,6 +579,7 @@
   // ---------- gentle snap ----------
   // No CSS scroll-snap. Once scrolling has come to rest within SNAP_NEAR of a full-screen panel's
   // exact fit, ease the last few pixels into place. Any new input cancels it.
+  // Full-width photos (.wide) are not screen-high, so they snap by their middle to the middle of the screen.
   const SNAP_NEAR = 0.1;
   function cancelSnap() { clearTimeout(snapT); if (snapRAF) { cancelAnimationFrame(snapRAF); snapRAF = 0; } }
   function queueSnap() { clearTimeout(snapT); snapT = setTimeout(trySnap, 180); }
@@ -583,7 +588,8 @@
     const vh = window.innerHeight; let best = null;
     for (const p of panels) {
       if (p.el === nextEl) continue;
-      const top = p.el.getBoundingClientRect().top, a = Math.abs(top);
+      const r = p.el.getBoundingClientRect();
+      const top = p.el.classList.contains('wide') ? r.top + r.height / 2 - vh / 2 : r.top, a = Math.abs(top);
       if (a >= 1 && a <= vh * SNAP_NEAR && (best === null || a < Math.abs(best))) best = top;
     }
     if (best === null) return;

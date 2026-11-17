@@ -241,6 +241,9 @@ body.booting .nav { transform: translateY(-120%); opacity: 0; }
   background: rgba(255, 255, 255, .12); box-shadow: inset 0 0 0 .5px rgba(255, 255, 255, .28);
 }
 .shot .bg img { top: -5%; height: 110%; }
+/* full width: the whole photo across the screen, height set by the photo (not by the screen) */
+.panel.wide { height: auto; min-height: 0; scroll-snap-align: none; }
+.panel.wide .bg img { top: 0; height: 100%; }
 
 /* ---------- Paper: light sections with white space ----------
    Used for the home interlude, project preface, framed-photo spreads and the footer. */

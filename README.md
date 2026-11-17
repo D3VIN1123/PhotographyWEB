@@ -48,6 +48,7 @@
 | 控制全屏裁切保留哪里 | **点击缩略图**，蓝点 = 裁切时保留的焦点 |
 | 让某张照片一定全屏 | 显示方式选 **Fill** |
 | 让某张照片一定带白边、不裁切 | 显示方式选 **完整显示 Fit** |
+| 让某张照片横向铺满屏幕、不裁切 | 显示方式选 **铺满横屏 Full width**（高度跟随照片比例，停下时照片中心会轻轻对齐屏幕中心） |
 | 调整项目顺序 | 在左侧列表里拖动项目 |
 | 暂时隐藏项目 | 关掉 **在网站上显示 Published** |
 | 删除 | 照片上的 ✕ / 页面底部的 **删除这个项目** |
@@ -76,6 +77,8 @@ iPhone 的 HEIC 格式请先导出成 JPG。
    → 它会提示"不是仓库"，点 **create a repository** → `Create Repository`。
 2. 点 **Publish repository**。**取消勾选** "Keep this code private"（免费账号的 GitHub Pages 需要公开仓库）。
 3. 打开 github.com 上的这个仓库 → `Settings` → `Pages` → **Source** 选 **GitHub Actions**。
+   > 第 2 步发布时 GitHub 会立刻尝试部署，但那时 Pages 还没打开，所以**第一次一定会失败**，并发一封 "Run failed" 邮件，这是正常的。
+   > 做完这一步后，到仓库的 `Actions` → 左边点 **Deploy site** → 右边 **Run workflow** → **Run workflow**，重新部署一次即可。
 4. 等 1–2 分钟，`Settings → Pages` 页面顶部会出现你的网址：
    `https://你的用户名.github.io/仓库名/`
 

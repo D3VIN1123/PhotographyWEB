@@ -213,6 +213,7 @@
       ? `<select data-bind="${base}.layout" title="显示方式 Layout">
             <option value="auto" ${lay === 'auto' ? 'selected' : ''}>自动 Auto</option>
             <option value="fill" ${lay === 'fill' ? 'selected' : ''}>铺满裁切 Fill</option>
+            <option value="wide" ${lay === 'wide' ? 'selected' : ''}>铺满横屏 Full width</option>
             <option value="fit" ${lay === 'fit' ? 'selected' : ''}>完整显示 Fit</option></select>`
       : kind === 'youtube'
       ? `<select data-ratio="${k}" title="画面比例 Aspect ratio">${['16:9', '9:16', '4:3', '1:1', '21:9'].map(r => `<option ${r === `${ph.w}:${ph.h}` ? 'selected' : ''}>${r}</option>`).join('')}</select>`

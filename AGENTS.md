@@ -64,7 +64,8 @@ versions/              frozen copies of earlier looks (not deployed)
     "photos": [{ "type": "image"|"stack"|"video"|"youtube",   // missing = image
                  "id", "src", "thumb", "w", "h", "caption",
                  "focus": [x%, y%],             // object-position when cropped to fill
-                 "layout": "auto"|"fill"|"fit" }]   // fill = always full-bleed, fit = always framed on paper
+                 "layout": "auto"|"fill"|"fit"|"wide" }]   // fill = always full-bleed, fit = always framed on paper,
+                                                       // wide = whole photo at screen width (.panel.wide), snaps by its centre
   }]
 }
 // stack:   + "layers": [{ "id","src","thumb","w","h","label" }]  — src/thumb/w/h mirror layers[0] (admin syncStack)
