@@ -1,0 +1,531 @@
+{
+  "site": {
+    "title": "Studio Name",
+    "tagline": "Photography",
+    "footer": "All photographs © Studio Name. Please ask before using.",
+    "email": "hello@example.com",
+    "instagram": ""
+  },
+  "hero": {
+    "mode": "project",
+    "projectId": "demo-dusk-coast",
+    "kicker": "Latest · 最新",
+    "title": "",
+    "text": "",
+    "image": "",
+    "focus": [
+      50,
+      50
+    ],
+    "linkLabel": "View project",
+    "linkUrl": ""
+  },
+  "projects": [
+    {
+      "id": "demo-dusk-coast",
+      "slug": "dusk-coast",
+      "title": "Dusk Coast",
+      "subtitle": "Pacific Highway · 2026",
+      "description": "Three weeks following the last light down the coastline — where the land runs out and the colour begins.",
+      "cover": "demoduskcoast01",
+      "published": true,
+      "photos": [
+        {
+          "id": "demoduskcoast01",
+          "src": "uploads/demo/dusk-coast-01.svg",
+          "w": 2400,
+          "h": 1500,
+          "caption": "Last light over the headland",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "demoduskcoast02",
+          "src": "uploads/demo/dusk-coast-02.svg",
+          "w": 2400,
+          "h": 1500,
+          "caption": "Blue hour, low tide",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "demoduskcoast03",
+          "src": "uploads/demo/dusk-coast-03.svg",
+          "w": 1500,
+          "h": 2100,
+          "caption": "Sun pillar",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "demoduskcoast04",
+          "src": "uploads/demo/dusk-coast-04.svg",
+          "w": 1500,
+          "h": 2100,
+          "caption": "The long reflection",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "demoduskcoast05",
+          "src": "uploads/demo/dusk-coast-05.svg",
+          "w": 2400,
+          "h": 1500,
+          "caption": "Ember sky",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "demoduskcoast06",
+          "src": "uploads/demo/dusk-coast-06.svg",
+          "w": 1500,
+          "h": 2100,
+          "caption": "Standing alone",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "demoduskcoast07",
+          "src": "uploads/demo/dusk-coast-07.svg",
+          "w": 2400,
+          "h": 1500,
+          "caption": "",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        }
+      ]
+    },
+    {
+      "id": "demo-northern-quiet",
+      "slug": "northern-quiet",
+      "title": "Northern Quiet",
+      "subtitle": "Tromsø · Winter",
+      "description": "Nights above the Arctic Circle. Cold enough to hear the snow, quiet enough to hear the sky.",
+      "cover": "demonorthernquiet01",
+      "published": true,
+      "photos": [
+        {
+          "id": "demonorthernquiet01",
+          "src": "uploads/demo/northern-quiet-01.svg",
+          "w": 2400,
+          "h": 1500,
+          "caption": "First ribbon, 23:40",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "demonorthernquiet02",
+          "src": "uploads/demo/northern-quiet-02.svg",
+          "w": 2400,
+          "h": 1500,
+          "caption": "The valley holds its breath",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "demonorthernquiet03",
+          "src": "uploads/demo/northern-quiet-03.svg",
+          "w": 1500,
+          "h": 2100,
+          "caption": "Green fire",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "demonorthernquiet04",
+          "src": "uploads/demo/northern-quiet-04.svg",
+          "w": 1500,
+          "h": 2100,
+          "caption": "Violet seam",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "demonorthernquiet05",
+          "src": "uploads/demo/northern-quiet-05.svg",
+          "w": 2400,
+          "h": 1500,
+          "caption": "Before dawn",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        }
+      ]
+    },
+    {
+      "id": "demo-city-after-rain",
+      "slug": "city-after-rain",
+      "title": "City After Rain",
+      "subtitle": "Hong Kong · Night",
+      "description": "Neon, glass and wet asphalt. A city that looks its best right after the storm passes.",
+      "cover": "democityafterrain01",
+      "published": true,
+      "photos": [
+        {
+          "id": "democityafterrain01",
+          "src": "uploads/demo/city-after-rain-01.svg",
+          "w": 2400,
+          "h": 1500,
+          "caption": "Mong Kok, 1 a.m.",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "democityafterrain02",
+          "src": "uploads/demo/city-after-rain-02.svg",
+          "w": 2400,
+          "h": 1500,
+          "caption": "Harbour side",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "democityafterrain03",
+          "src": "uploads/demo/city-after-rain-03.svg",
+          "w": 1500,
+          "h": 2100,
+          "caption": "Stacked lives",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "democityafterrain04",
+          "src": "uploads/demo/city-after-rain-04.svg",
+          "w": 1500,
+          "h": 2100,
+          "caption": "Signal",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "democityafterrain05",
+          "src": "uploads/demo/city-after-rain-05.svg",
+          "w": 2400,
+          "h": 1500,
+          "caption": "Every window a story",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "democityafterrain06",
+          "src": "uploads/demo/city-after-rain-06.svg",
+          "w": 2400,
+          "h": 1500,
+          "caption": "",
+          "focus": [
+            50,
+            55
+          ],
+          "layout": "auto"
+        }
+      ]
+    },
+    {
+      "id": "mwjmi8ubzaj03",
+      "slug": "project-aj04",
+      "title": "新疆",
+      "subtitle": "China2023",
+      "description": "",
+      "cover": "261116d08e68e801",
+      "published": true,
+      "photos": [
+        {
+          "id": "261116d08e68e801",
+          "src": "uploads/261116d08e68e801.jpg",
+          "thumb": "uploads/261116d08e68e801_s.jpg",
+          "w": 3200,
+          "h": 2400,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "261116fae40ee430",
+          "src": "uploads/261116fae40ee430.jpg",
+          "thumb": "uploads/261116fae40ee430_s.jpg",
+          "w": 3200,
+          "h": 2400,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "261116e18410d5ec",
+          "src": "uploads/261116e18410d5ec.jpg",
+          "thumb": "uploads/261116e18410d5ec_s.jpg",
+          "w": 3200,
+          "h": 2400,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "261116a35c1c31e7",
+          "src": "uploads/261116a35c1c31e7.jpg",
+          "thumb": "uploads/261116a35c1c31e7_s.jpg",
+          "w": 3200,
+          "h": 2133,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        }
+      ]
+    },
+    {
+      "id": "mwjnfdnxwzym3",
+      "slug": "deep-in-the-alps",
+      "title": "Deep in the Alps",
+      "subtitle": "Swiss 2026",
+      "description": "",
+      "cover": "2611166df506d3e0",
+      "published": true,
+      "photos": [
+        {
+          "id": "261116e6d5fe24fb",
+          "src": "uploads/261116e6d5fe24fb.jpg",
+          "thumb": "uploads/261116e6d5fe24fb_s.jpg",
+          "w": 3200,
+          "h": 1800,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "mwl2sardv199d",
+          "type": "stack",
+          "layers": [
+            {
+              "id": "261117b56e9607d0",
+              "src": "uploads/261117b56e9607d0.jpg",
+              "thumb": "uploads/261117b56e9607d0_s.jpg",
+              "w": 5120,
+              "h": 3840,
+              "label": ""
+            },
+            {
+              "id": "26111709e2f4d8eb",
+              "src": "uploads/26111709e2f4d8eb.jpg",
+              "thumb": "uploads/26111709e2f4d8eb_s.jpg",
+              "w": 5120,
+              "h": 3840,
+              "label": ""
+            },
+            {
+              "id": "2611173deb2d6562",
+              "src": "uploads/2611173deb2d6562.jpg",
+              "thumb": "uploads/2611173deb2d6562_s.jpg",
+              "w": 5120,
+              "h": 3840,
+              "label": ""
+            }
+          ],
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "src": "uploads/261117b56e9607d0.jpg",
+          "thumb": "uploads/261117b56e9607d0_s.jpg",
+          "w": 5120,
+          "h": 3840
+        },
+        {
+          "id": "26111626274341b7",
+          "src": "uploads/26111626274341b7.jpg",
+          "thumb": "uploads/26111626274341b7_s.jpg",
+          "w": 3200,
+          "h": 2400,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "261116116a5aa94a",
+          "src": "uploads/261116116a5aa94a.jpg",
+          "thumb": "uploads/261116116a5aa94a_s.jpg",
+          "w": 3200,
+          "h": 1182,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "26111634cde4282f",
+          "src": "uploads/26111634cde4282f.jpg",
+          "thumb": "uploads/26111634cde4282f_s.jpg",
+          "w": 3200,
+          "h": 2400,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "261116e5263d7288",
+          "src": "uploads/261116e5263d7288.jpg",
+          "thumb": "uploads/261116e5263d7288_s.jpg",
+          "w": 3200,
+          "h": 2400,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "2611166df506d3e0",
+          "src": "uploads/2611166df506d3e0.jpg",
+          "thumb": "uploads/2611166df506d3e0_s.jpg",
+          "w": 3200,
+          "h": 2400,
+          "caption": "",
+          "focus": [
+            37,
+            52
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "2611169a692f9747",
+          "src": "uploads/2611169a692f9747.jpg",
+          "thumb": "uploads/2611169a692f9747_s.jpg",
+          "w": 3200,
+          "h": 2400,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "26111627ce621f42",
+          "src": "uploads/26111627ce621f42.jpg",
+          "thumb": "uploads/26111627ce621f42_s.jpg",
+          "w": 3200,
+          "h": 2400,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "261116e78ad8238b",
+          "src": "uploads/261116e78ad8238b.jpg",
+          "thumb": "uploads/261116e78ad8238b_s.jpg",
+          "w": 3200,
+          "h": 2400,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "261116483387a714",
+          "src": "uploads/261116483387a714.jpg",
+          "thumb": "uploads/261116483387a714_s.jpg",
+          "w": 3200,
+          "h": 2400,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "2611162863970c8f",
+          "src": "uploads/2611162863970c8f.jpg",
+          "thumb": "uploads/2611162863970c8f_s.jpg",
+          "w": 3200,
+          "h": 2400,
+          "caption": "",
+          "focus": [
+            34,
+            7
+          ],
+          "layout": "auto"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+.admin.json
+.backups/
+.claude/
+__pycache__/
+.DS_Store
