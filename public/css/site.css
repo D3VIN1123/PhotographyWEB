@@ -391,12 +391,6 @@ body.booting .nav { transform: translateY(-120%); opacity: 0; }
 .frame figcaption b { font-weight: 600; color: var(--accent); white-space: nowrap; }
 .frame.in figcaption { opacity: 1; transform: none; }
 
-/* scroll progress line */
-.progress {
-  position: fixed; z-index: 60; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent);
-  transform: scaleX(0); transform-origin: left; pointer-events: none;
-}
-
 /* nav over paper: dark ink on a milky lens */
 .nav .glass { transition: color .45s var(--ease), background .45s var(--ease), box-shadow .45s var(--ease), transform .4s var(--spring); }
 body.on-light .nav { --ink: var(--pink); --ink-2: var(--pink-2); --ink-3: var(--pink-3); }

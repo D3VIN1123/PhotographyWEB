@@ -100,8 +100,7 @@ server has no image library.
   only — no web-font download). While a `.paper` section is under the nav the scroll loop sets `body.on-light`,
   which turns the nav glass to dark ink.
 - **Scroll-driven motion** (all in `frame`): `.panel.grow` gets `--f` (1 = framed inside paper margins, 0 =
-  full-bleed) so panels open up as they reach the centre; `.words` statements light up word by word; `#progress`
-  is the top progress line. A pair of two landscapes is a `.spread.swap`: a 230vh section with a sticky `.stick`,
+  full-bleed) so panels open up as they reach the centre; `.words` statements light up word by word. A pair of two landscapes is a `.spread.swap`: a 230vh section with a sticky `.stick`,
   where the loop trades the two photos' sizes (`--s`, grid columns 7fr/4fr ↔ 4fr/7fr) and rewinds on scroll-up.
   Landscape + portrait pairs do not swap. Clicking any photo (`ZOOMABLE`: framed photos, full-screen shots, the album cover, time stacks — not home-page
   panels, which are links, and not videos) opens it full screen (`openZoom` / `closeZoom`; `zoomFrom` animates from the

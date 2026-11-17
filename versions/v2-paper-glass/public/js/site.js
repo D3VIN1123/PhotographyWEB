@@ -274,7 +274,6 @@
   let instant = false, homeTop = false, rendering = false;
   let stacks = [], mediaIO = null;
   let panels = [], papers = [], wordSets = [], swaps = [], onLight = false, nextEl = null, revealIO = null;
-  const progress = $('#progress');
 
   function parse() {
     const m = location.hash.match(/^#\/p\/(.+)$/);
@@ -401,8 +400,6 @@
           if (st.when) st.when.textContent = st.imgs[cur].dataset.label || '';
         }
       }
-      const max = document.documentElement.scrollHeight - vh;
-      progress.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max).toFixed(4) : 0})`;
     }
     if (t - rimT > (moved ? 90 : 450)) { rimT = t; Rim.update(); }
     // charge bookkeeping
