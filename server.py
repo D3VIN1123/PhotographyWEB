@@ -21,6 +21,7 @@ import os
 import re
 import secrets
 import shutil
+import subprocess
 import sys
 import threading
 import time
@@ -106,19 +107,54 @@ def read_content():
         return json.loads(json.dumps(DEFAULT_CONTENT))
 
 
-def write_content(doc):
+def content_rev():
+    """A fingerprint of content.json as it is on disk. The admin sends it back with every save,
+    so a backstage tab that was opened before someone (or something) else changed the file
+    cannot silently write its older copy over the newer one."""
+    try:
+        return hashlib.sha1(DATA_FILE.read_bytes()).hexdigest()[:16]
+    except FileNotFoundError:
+        return "none"
+
+
+def write_content(doc, expect_rev=None):
+    """Write content.json (backing up the old one). If expect_rev is given and the file has changed
+    since, nothing is written and None is returned; otherwise the new rev is returned."""
     DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
     with LOCK:
+        if expect_rev is not None and expect_rev != content_rev():
+            return None
         if DATA_FILE.exists():
             BACKUPS.mkdir(exist_ok=True)
             stamp = time.strftime("%Y%m%d-%H%M%S")
             shutil.copy2(DATA_FILE, BACKUPS / ("content-%s.json" % stamp))
-            old = sorted(BACKUPS.glob("content-*.json"))
+            old = sorted(BACKUPS.glob("content-2*.json"))   # timestamped ones only; named backups are kept
             for f in old[:-40]:
                 f.unlink()
         tmp = DATA_FILE.with_suffix(".tmp")
         tmp.write_text(json.dumps(doc, ensure_ascii=False, indent=2), "utf-8")
         os.replace(tmp, DATA_FILE)
+        return content_rev()
+
+
+DISPLAY_EDGE = 2560   # long side of the copy the website shows (sharp on 2K / 1440p screens)
+DISPLAY_Q = 60        # AVIF quality: looks the same as JPEG 82 at about 40 % of the size
+
+
+def make_display(path, pid):
+    """Make the AVIF display copy (<id>_m.avif) with macOS's built-in `sips`. Returns its path, or ''
+    when sips isn't there (another OS) — the backstage then makes a JPEG copy in the browser instead."""
+    sips = shutil.which("sips")
+    if not sips:
+        return ""
+    out = UPLOADS / ("%s_m.avif" % pid)
+    try:
+        subprocess.run([sips, "-Z", str(DISPLAY_EDGE), "-s", "format", "avif", "-s", "formatOptions", str(DISPLAY_Q),
+                        str(path), "--out", str(out)], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                       timeout=60)
+    except Exception:
+        return ""
+    return "uploads/" + out.name if out.exists() else ""
 
 
 def safe_join(base, rel):
@@ -274,7 +310,9 @@ class Handler(BaseHTTPRequestHandler):
         if path == "/api/content":
             if not self.authed():
                 return self.send_json({"error": "unauthorized"}, 401)
-            return self.send_json(read_content())
+            with LOCK:
+                doc, rev = read_content(), content_rev()
+            return self.send_json(doc, headers={"X-Content-Rev": rev})
         if path.startswith("/api/"):
             return self.send_json({"error": "not found"}, 404)
         if path == "/admin":
@@ -335,7 +373,8 @@ class Handler(BaseHTTPRequestHandler):
             ext = (query.get("ext", ["jpg"])[0] or "jpg").lower()
             pid = query.get("id", [""])[0]
             thumb = query.get("thumb", [""])[0] == "1"
-            video = ext in VIDEO_EXT and not thumb
+            mid = query.get("size", [""])[0] == "m"   # 2400px display copy (<id>_m.jpg); the original is kept for zoom
+            video = ext in VIDEO_EXT and not thumb and not mid
             limit = MAX_VIDEO if video else MAX_UPLOAD
             length = int(self.headers.get("Content-Length") or 0)
             if ext not in UPLOAD_EXT and not video:
@@ -351,7 +390,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send_json({"error": "Empty upload."}, 400)
             pid = pid or (time.strftime("%y%m%d") + secrets.token_hex(5))
             ext = "jpg" if ext == "jpeg" else ext
-            name = "%s%s.%s" % (pid, "_s" if thumb else "", ext)
+            name = "%s%s.%s" % (pid, "_s" if thumb else "_m" if mid else "", ext)
             UPLOADS.mkdir(parents=True, exist_ok=True)
             tmp = UPLOADS / (name + ".part")
             left = length
@@ -366,7 +405,12 @@ class Handler(BaseHTTPRequestHandler):
                 tmp.unlink()
                 return self.send_json({"error": "Upload interrupted."}, 400)
             os.replace(str(tmp), str(UPLOADS / name))
-            return self.send_json({"ok": True, "id": pid, "src": "uploads/" + name})
+            out = {"ok": True, "id": pid, "src": "uploads/" + name}
+            if not thumb and not mid and not video:
+                m = make_display(UPLOADS / name, pid)
+                if m:
+                    out["mid"] = m
+            return self.send_json(out)
 
         if path == "/api/delete-file":
             body = self.read_json() or {}
@@ -408,8 +452,14 @@ class Handler(BaseHTTPRequestHandler):
         if not isinstance(doc, dict) or not isinstance(doc.get("projects"), list) \
                 or not isinstance(doc.get("site"), dict) or not isinstance(doc.get("hero"), dict):
             return self.send_json({"error": "Invalid content."}, 400)
-        write_content(doc)
-        return self.send_json({"ok": True, "savedAt": int(time.time())})
+        # The tab must say which version it started from. A tab that doesn't (an old admin page still
+        # open from before this check existed) or that is behind is refused instead of overwriting.
+        rev = write_content(doc, self.headers.get("If-Match") or "missing")
+        if rev is None:
+            return self.send_json({"error": "内容已在别处更新，请刷新后台页面（⌘R）。 "
+                                            "Content changed elsewhere — reload this page.",
+                                   "conflict": True}, 409)
+        return self.send_json({"ok": True, "savedAt": int(time.time()), "rev": rev}, headers={"X-Content-Rev": rev})
 
 
 def main():

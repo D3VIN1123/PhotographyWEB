@@ -61,10 +61,14 @@ versions/              frozen copies of earlier looks (not deployed)
   "projects": [{                  // array order = gallery order = "next project" queue (wraps around)
     "id", "slug", "title", "subtitle", "description",
     "cover": "<photo id>", "published": true,
-    "photos": [{ "type": "image"|"stack"|"video"|"youtube",   // missing = image
+    "theme": "" | "indigo" | "yunnan" | "paris", // page style; indigo = dark tie-dye, yunnan = editorial field journal,
+                                  // paris = limestone + Didot, street-sign chapters (public/css/paris.css)
+    "photos": [{ "type": "image"|"stack"|"video"|"youtube"|"text",   // missing = image
                  "id", "src", "thumb", "w", "h", "caption",
                  "focus": [x%, y%],             // object-position when cropped to fill
-                 "layout": "auto"|"fill"|"fit"|"wide" }]   // fill = always full-bleed, fit = always framed on paper,
+                 "layout": "auto"|"fill"|"fit"|"wide"|"pair",   // pair = sit side by side with the next photo
+                 "mid": "uploads/<id>_m.avif",  // 2560px AVIF display copy the page shows; "src" (5120px) only loads in zoom
+                 "fx": "" | "mist" | "dawn" | "sparkle" }]   // sparkle = twinkling lights on the bright parts (sparkleHTML / placeSparkles)  // mist = drifting cloud overlay; dawn = pinned, scroll raises the sun   // fill = always full-bleed, fit = always framed on paper,
                                                        // wide = whole photo at screen width (.panel.wide), snaps by its centre
   }]
 }
@@ -72,6 +76,18 @@ versions/              frozen copies of earlier looks (not deployed)
 //            layout "fill" = full screen, otherwise framed on paper
 // video:   src = uploads/<id>.mp4|mov|webm, thumb = poster jpg (may be ""), layout "fill" | framed
 // youtube: "yt" (11-char id), "url", thumb = i.ytimg.com poster, w/h = aspect ratio; always framed
+// stack:   layout "scroll" = horizontal handscroll (rollHTML / sizeRolls / rolls in frame)
+// text:    "style": "" | "chapter" (numbered 壹贰叁…, vertical title, "kicker" English line, "ornament"
+//          contour|flags|shibori|roofs|rose|opera|seine|versailles|none; the last five only on paris pages —
+//          opera/seine/versailles are line-drawn scenes (SCENES). On a paris page a plain text block's "ornament" can be a
+//          small line drawing above the verse: metro|cafe|lamp|chandelier|eiffel (DOODLES)., plus "kicker" on plain blocks too. shibori = tie-dye medallions
+//          (`drawShibori`, seeded, avoids the text boxes).
+// text:    "tone": "" | indigo|dye|jade|maroon|dusk|night — indigo pages only: the whole page re-dyes to that
+//          colour as the block scrolls in (`TONES`, `applyTones` in frame → --cloth/--cloth-hi/--cloth-lo/--pink*/
+//          --accent/--pat on body). "" = keep the previous colour. --pat fades in the tie-dye dot tile (.paper::before).
+// text:    subtitle block on paper — "title", "caption", "align" left|center|right, "height" px ("" = auto),
+//          "size" / "csize" px ("" = auto), "font" serif|sans|song|kai|mono, "color" #rrggbb ("" = ink).
+//          Not counted or numbered as a picture (`countOf`, `num[]` in layoutShots); breaks auto pairs.
 ```
 Only image and stack modules can be a project cover (`visual()` in both JS files).
 
@@ -80,12 +96,21 @@ Unpublished projects are filtered client-side, so they are still present in the 
 ## API (`server.py`, cookie session, all JSON)
 
 `GET /api/state` · `POST /api/setup {password}` (localhost only, first run) · `POST /api/login` · `POST /api/logout`
-· `GET|PUT /api/content` (PUT replaces the whole document, backs up the old one) ·
+· `GET|PUT /api/content` (PUT replaces the whole document, backs up the old one; GET returns an `X-Content-Rev`
+header = sha1 of content.json, and PUT must send it back as `If-Match` or gets **409** — so a stale backstage tab,
+or one opened before an agent edited content.json by hand, can't overwrite newer content. This actually happened
+once: keep it) ·
 `POST /api/upload?ext=jpg[&id=…&thumb=1]` (raw body, streamed to disk; images ≤ 60 MB, videos mp4/m4v/mov/webm ≤ 95 MB
 because GitHub refuses files over 100 MB) · `POST /api/delete-file {files:[…]}` · `POST /api/password`.
 
 Static files are served with HTTP byte ranges (Safari needs them for `<video>`).
-Images are resized **in the browser** (`admin.js → processFile`, max edge 5120px, thumb 640px) because the
+**Display copies (performance):** the page never shows the 5120px originals (≈5.5 MB / 17 MP each — decoding ~30 of
+them per page was what made scrolling stutter). `img()` uses `mid` (2560px AVIF q60, ≈0.3 MB; browsers without AVIF fall back to the original via `onerror`) and keeps the original in
+`data-full`; `openZoom` swaps the original in for the magnifier. New uploads: the server makes `<id>_m.avif` with `sips` (`make_display` in server.py, returned as `mid`); only where
+sips is missing does `processFile` upload a JPEG copy (`/api/upload?size=m`); `scripts/make_display.py` (macOS `sips`) fills in older photos — run it if a photo has no `mid`.
+Deploys run `scripts/prune_unused.py` so uploads no album references aren't published (GitHub Pages limit is 1 GB).
+
+Images are resized **in the browser** (`admin.js → processFile`, max edge 5120px, thumb 640px; the AVIF display copy is made by the server) because the
 server has no image library.
 
 ## Front-end map (`public/js/site.js`)
@@ -114,7 +139,11 @@ server has no image library.
   layer to layer (hold → fade → hold), so mid-fade is a 50/50 average. Tick marks + layer `label` update with it.
 - **Video / YouTube** (`mediaHTML`, `playMedia`): muted autoplay when ≥35 % on screen, pause when off. YouTube iframes
   (youtube-nocookie) are created on first view and paused/resumed via the iframe postMessage API. Framed media are not zoomable. Framed photos and paper text reveal once via the IntersectionObserver (`.in`).
-- **Scroll loop** (`frame`): parallax on `.bg img` (`data-plx` = % of travel), picks the centred panel to drive
+- **Eased wheel scrolling** (`Smooth`, `SMOOTH = 0.13`): wheel/trackpad input moves a target and the page glides to it
+  (non-linear, frame-rate independent); keys, scrollbar and touch stay native; inner scrollers and zoom mode are left
+  alone. Set `SMOOTH = 0` to turn it off. `trySnap` waits until it has settled.
+- **Scroll loop** (`frame`): all element rects are read first (`rect()` cache per frame), then styles are written — keep
+  it that way (a read after a write forces a full layout mid-frame). parallax on `.bg img` (`data-plx` = % of travel), picks the centred panel to drive
   the caption HUD (full-bleed shots only), and decays the charge.
 - **Keep-scrolling charge** (`feed` / `fire`): only counts once the page has rested at the very bottom for
   380 ms (so trackpad inertia does not trigger it). Wheel/touch/keys add to `charge.v` (0→1), exposed to CSS as
@@ -139,6 +168,20 @@ server has no image library.
   intentionally excluded — to change what hides, edit the selector list in the "Auto-hiding chrome" CSS block.
 - Glass is reserved for text surfaces and navigation (nav pill, cards, HUD). Photos stay untouched.
 
+- **Captions** may have two lines ("中文\nEnglish"): `capHTML` sets them as main + small line; the HUD joins them.
+- **彩云之南** (project-vpo0) is the showcase for the indigo theme: chapters, handscroll, mist, dawn. Its pre-redesign
+  content is in `.backups/content-before-yunnan-redesign.json`.
+- **Yunnan** (`#/p/yunnan`, id `mwmd69nuoum0t`) is a separate project from 彩云之南. Its `theme: "yunnan"`
+  uses `yunnanHTML` in `site.js` and scoped `public/css/yunnan.css`: five English chapters, paper/indigo spreads,
+  original-photo handscroll, scroll-lit mountain and a fixed chapter guide. Chapter text (`style: "chapter"`),
+  captions, photos and stacks are ordinary backstage modules. The guide derives from these chapters; no new
+  content fields. All 51 original photos are retained (five river photos are layers in a scroll stack).
+  Reduced motion / narrow screens use a native horizontal river gallery. Pre-edit copies are in
+  `.backups/yunnan-journal-original/`. Do not apply this design to 彩云之南 or frozen versions.
+  Chapter colours: mist green → uneven indigo dye → warm earth with a red-ochre opening → mineral grey →
+  midnight blue. `ynDyeHTML` adds stitched resist-dye rings/petal knots to the old-town opening and interlude;
+  patterns stay on the page around the photographs. The chapter guide follows the existing auto-hiding chrome.
+
 ## Admin map (`admin/admin.js`)
 
 Content cards and stack layers are reordered with a pointer-based sortable (press anywhere that isn't an input,
@@ -149,6 +192,12 @@ XHR so progress shows, YouTube via a pasted link (`parseYouTube`).
 One in-memory `doc`; inputs carry `data-bind="path.into.doc"`, buttons `data-act="…"`; every change calls
 `dirty()` → debounced `save()` (PUT whole doc). Structural changes call `render()`; typing does not re-render.
 `sel` is `'hero' | 'site' | <project id>`.
+
+## Owner's wishes about AI
+
+The owner does not want their photographs used to train AI. `index.html` carries `noai`/`noimageai` and
+`tdm-reservation` meta tags and `public/robots.txt` blocks AI-training crawlers (effective once the site has its own
+domain). Keep these.
 
 ## Gotchas
 

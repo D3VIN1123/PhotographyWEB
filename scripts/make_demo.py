@@ -165,7 +165,7 @@ def main():
             photos.append({"id": "demo%s%02d" % (slug.replace("-", ""), n), "src": "uploads/demo/" + name,
                            "w": w, "h": h, "caption": cap, "focus": [50, 55], "layout": "auto"})
         projects.append({"id": "demo-" + slug, "slug": slug, "title": title, "subtitle": sub, "description": desc,
-                         "cover": photos[0]["id"], "published": True, "photos": photos})
+                         "cover": photos[0]["id"], "published": True, "theme": "", "photos": photos})
     doc = {
         "site": {"title": "Studio Name", "tagline": "Photography",
                  "intro": "Coastlines at dusk, quiet northern light and cities after rain. A record of places, kept while walking.",

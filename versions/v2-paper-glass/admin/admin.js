@@ -26,17 +26,22 @@
   }
 
   let doc = null, sel = 'hero', saveTimer = 0, saving = false, queued = false, busy = false;
+  // rev = the version of content.json this tab loaded; a save is refused if the file changed since
+  // (another tab, another device, or an edit made outside the backstage), so nothing gets overwritten.
+  let rev = '', stale = false;
 
   // ---------- api ----------
   async function api(method, path, body, raw) {
     const opt = { method, headers: {}, credentials: 'same-origin' };
     if (raw) opt.body = body;
     else if (body !== undefined) { opt.headers['Content-Type'] = 'application/json'; opt.body = JSON.stringify(body); }
+    if (path === '/api/content' && method === 'PUT') opt.headers['If-Match'] = rev;
     const res = await fetch(path, opt);
     let data = {};
     try { data = await res.json(); } catch (e) { /* non-json */ }
     if (res.status === 401 && path !== '/api/login') { gate('login'); throw new Error('Please log in again.'); }
-    if (!res.ok) throw new Error(data.error || ('Request failed (' + res.status + ')'));
+    if (!res.ok) { const err = new Error(data.error || ('Request failed (' + res.status + ')')); err.conflict = res.status === 409; throw err; }
+    if (path === '/api/content' && res.headers.get('X-Content-Rev')) rev = res.headers.get('X-Content-Rev');
     return data;
   }
   function toast(msg) { toastEl.textContent = msg; toastEl.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => toastEl.classList.remove('show'), 2600); }
@@ -45,10 +50,20 @@
   function setStatus(kind, label) { const el = document.getElementById('status'); if (el) { el.className = 'status ' + kind; el.textContent = label; } }
   function dirty(now) { setStatus('dirty', '未保存 Unsaved…'); clearTimeout(saveTimer); saveTimer = setTimeout(save, now ? 0 : 700); }
   async function save() {
+    if (stale) { setStatus('error', '请刷新页面 Reload this page'); return; }
     if (saving) { queued = true; return; }
     saving = true; fixSlugs();
     try { await api('PUT', '/api/content', doc); setStatus('', '已保存 Saved'); }
-    catch (e) { setStatus('error', '保存失败 ' + e.message); }
+    catch (e) {
+      setStatus('error', '保存失败 ' + e.message);
+      if (e.conflict) {
+        stale = true; queued = false;
+        if (confirm('这个后台页面打开之后，网站内容已经在别处被修改过（另一个标签页或别的设备）。\n' +
+                    '为了不覆盖新的内容，刚才的修改没有保存。点「确定」重新载入最新内容。\n\n' +
+                    'The content was changed elsewhere since this page was opened, so this change was not saved. ' +
+                    'Press OK to reload the latest version.')) location.reload();
+      }
+    }
     saving = false;
     if (queued) { queued = false; save(); }
   }
@@ -117,7 +132,7 @@
         const c = coverOf(p);
         return `<button class="item ${sel === p.id ? 'on' : ''}" draggable="true" data-act="go" data-id="${p.id}" data-pi="${i}">
           <span class="ico" style="${c ? `background-image:url('${esc(url(c.thumb || c.src))}')` : ''}">${c ? '' : '▢'}</span>
-          <span class="name">${esc(p.title || 'Untitled')}</span><span class="tag">${p.published === false ? '隐藏' : p.photos.length}</span></button>`;
+          <span class="name">${esc(p.title || 'Untitled')}</span><span class="tag">${p.published === false ? '隐藏' : p.photos.filter(x => kindOf(x) !== 'text').length}</span></button>`;
       }).join('')}
       <button class="item add" data-act="add-project"><span class="ico">＋</span><span class="name">新建项目 Add a new project</span></button>
       <div class="grow"></div>
@@ -183,6 +198,9 @@
         ${field('副标题 Subtitle <em>（地点 / 年份）</em>', base + '.subtitle', p.subtitle, { ph: 'Iceland · 2026' })}
         ${field('简介 Description', base + '.description', p.description, { full: true, area: true })}
         ${field('网址名 URL slug <em>（英文小写，用 - 连接）</em>', base + '.slug', p.slug)}
+        <label class="field"><span>页面风格 Page style</span><select data-bind="${base}.theme" data-rerender>
+          <option value="" ${!p.theme ? 'selected' : ''}>默认 · 米白纸 Paper</option>
+          <option value="indigo" ${p.theme === 'indigo' ? 'selected' : ''}>靛蓝 · 深色 Indigo (dark)</option></select></label>
         <div class="field"><span>状态 Visibility</span><label class="switch" style="height:42px"><input type="checkbox" data-bind="${base}.published" ${p.published === false ? '' : 'checked'}> 在网站上显示 Published</label></div>
       </div>
     </div>
@@ -194,6 +212,7 @@
         <button class="btn" data-act="add-stack"><b>＋ 时间叠图</b> Image stack<small>同一地点不同时间的一组照片，滚动时渐变过渡</small></button>
         <button class="btn" data-act="add-video"><b>＋ 视频文件</b> Video file<small>MP4 / MOV / WebM，最大 ${MAX_VIDEO_MB} MB，静音自动播放</small></button>
         <button class="btn" data-act="add-youtube"><b>＋ YouTube 链接</b> YouTube link<small>粘贴链接，进入画面时静音自动播放</small></button>
+        <button class="btn" data-act="add-text"><b>＋ 文字</b> Subtitle<small>标题 + 正文，放在照片之间，可调对齐、高度、字号、字体、颜色</small></button>
       </div>
       <input type="file" id="file" accept="image/jpeg,image/png,image/webp" multiple hidden>
       <div class="photos" id="photos">${p.photos.map((ph, k) => photoHTML(p, ph, k, i)).join('') || '<div class="empty">还没有照片 No photos yet</div>'}</div>
@@ -201,8 +220,67 @@
     <div class="rowend"><span class="hint">上移/下移项目：在左侧列表拖动。</span><button class="btn danger" data-act="delete-project">删除这个项目 Delete project</button></div>`;
   }
 
+  // ---- subtitle (text) module ----
+  // page colour that a text block switches the (indigo) page to as it scrolls in — see TONES in site.js
+  const TONES = [
+    ['', '不变 · 沿用上一段 Keep'], ['indigo', '靛蓝 Indigo'], ['dye', '扎染蓝 Tie-dye blue'], ['jade', '碧青 Jade'],
+    ['maroon', '绛红 Maroon'], ['dusk', '暮紫 Dusk'], ['night', '夜 Night'],
+  ];
+  const FONTS = [
+    ['serif', '衬线 Serif', '"Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, "Songti SC", Georgia, serif'],
+    ['sans', '无衬线 Sans', '-apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif'],
+    ['song', '宋体 Song', '"Songti SC", "STSong", "Noto Serif SC", "SimSun", serif'],
+    ['kai', '楷体 Kai', '"Kaiti SC", "STKaiti", "KaiTi", serif'],
+    ['mono', '等宽 Mono', 'ui-monospace, "SF Mono", Menlo, Consolas, monospace'],
+  ];
+  function textPreview(ph, k) {   // a half-size preview of how the block will look on the site
+    const font = (FONTS.find(f => f[0] === ph.font) || FONTS[0])[2];
+    const color = /^#[0-9a-f]{6}$/i.test(ph.color || '') ? ph.color : '#1d1a16';
+    const ts = (+ph.size > 0 ? +ph.size : 56) / 2, cs = (+ph.csize > 0 ? +ph.csize : 19) / 2, h = +ph.height > 0 ? Math.min(+ph.height / 2, 320) : 0;
+    const al = ['left', 'center', 'right'].includes(ph.align) ? ph.align : 'left';
+    return `<div class="tpv" data-k="${k}" style='text-align:${al};color:${color};font-family:${font};${h ? `min-height:${h}px;` : ''}'>
+      <div class="tpv-t" style="font-size:${ts}px">${esc(ph.title || '') || '<span class="ph">标题 Subtitle</span>'}</div>
+      <div class="tpv-c" style="font-size:${cs}px">${esc(ph.caption || '').replace(/\n/g, '<br>') || '<span class="ph">正文 Caption</span>'}</div></div>`;
+  }
+  function textCard(ph, k, base) {
+    const al = ph.align || 'left', num = (v, ph2) => `value="${esc(v || '')}" placeholder="${ph2}"`;
+    return `<div class="photo text" data-k="${k}">
+      ${textPreview(ph, k)}
+      <div class="body">
+        <div class="tgrid">
+          <label class="mini"><span>样式 Style</span><select data-bind="${base}.style" data-rerender>
+            <option value="" ${ph.style !== 'chapter' ? 'selected' : ''}>普通 Text</option>
+            <option value="chapter" ${ph.style === 'chapter' ? 'selected' : ''}>章节开篇 Chapter</option></select></label>
+          ${ph.style === 'chapter' ? `<label class="mini"><span>装饰 Ornament</span><select data-bind="${base}.ornament">
+            <option value="contour" ${!ph.ornament || ph.ornament === 'contour' ? 'selected' : ''}>山形等高线 Contours</option>
+            <option value="flags" ${ph.ornament === 'flags' ? 'selected' : ''}>经幡 Prayer flags</option>
+            <option value="shibori" ${ph.ornament === 'shibori' ? 'selected' : ''}>扎染 Tie-dye</option>
+            <option value="none" ${ph.ornament === 'none' ? 'selected' : ''}>无 None</option></select></label>` : ''}
+          ${(project() || {}).theme === 'indigo' ? `<label class="mini"><span title="从这一段开始，整页慢慢染成这个颜色（只对靛蓝页面风格有效） The page fades to this colour from this block on">底色 Page colour</span><select data-bind="${base}.tone">
+            ${TONES.map(t => `<option value="${t[0]}" ${(ph.tone || '') === t[0] ? 'selected' : ''}>${t[1]}</option>`).join('')}</select></label>` : ''}
+        </div>
+        <label class="mini"><span>小标题 Kicker <em>（标题上方的一行小字，章节里显示为英文副题）</em></span><input type="text" data-bind="${base}.kicker" value="${esc(ph.kicker || '')}"></label>
+        <label class="mini"><span>${ph.style === 'chapter' ? '章节名 Chapter title（竖排）' : '标题 Subtitle'}</span><input type="text" data-bind="${base}.title" value="${esc(ph.title || '')}"></label>
+        <label class="mini"><span>正文 Caption</span><textarea data-bind="${base}.caption" rows="3">${esc(ph.caption || '')}</textarea></label>
+        <div class="seg small">${[['left', '左 Left'], ['center', '中 Centre'], ['right', '右 Right']].map(([v, l]) =>
+          `<button class="${al === v ? 'on' : ''}" data-act="text-align" data-k="${k}" data-v="${v}">${l}</button>`).join('')}</div>
+        <div class="tgrid">
+          <label class="mini"><span>高度 Height (px)</span><input type="number" min="0" step="10" data-bind="${base}.height" ${num(ph.height, '自动 Auto')}></label>
+          <label class="mini"><span>标题字号 (px)</span><input type="number" min="8" max="400" data-bind="${base}.size" ${num(ph.size, '自动 Auto')}></label>
+          <label class="mini"><span>正文字号 (px)</span><input type="number" min="8" max="200" data-bind="${base}.csize" ${num(ph.csize, '自动 Auto')}></label>
+          <label class="mini"><span>字体 Font</span><select data-bind="${base}.font">${FONTS.map(f => `<option value="${f[0]}" ${(ph.font || 'serif') === f[0] ? 'selected' : ''}>${f[1]}</option>`).join('')}</select></label>
+          <div class="mini"><span>颜色 Colour</span><div class="colorrow"><input type="color" data-bind="${base}.color" value="${/^#[0-9a-f]{6}$/i.test(ph.color || '') ? ph.color : '#1d1a16'}">
+            <button class="btn small" data-act="text-color-reset" data-k="${k}">${ph.color ? '恢复默认' : '默认 Default'}</button></div></div>
+        </div>
+        <div class="acts"><span class="grip" title="按住拖动排序 Drag to reorder">⠿ 文字 Subtitle</span><span style="flex:1"></span>
+          <button class="btn small danger" data-act="delete-photo" data-k="${k}" title="删除 Delete">✕</button></div>
+      </div>
+    </div>`;
+  }
+
   function photoHTML(p, ph, k, i) {
     const kind = kindOf(ph), base = `projects.${i}.photos.${k}`;
+    if (kind === 'text') return textCard(ph, k, base);
     const f = ph.focus || [50, 50], isCover = coverOf(p) === ph, lay = ph.layout || 'auto';
     const ratio = ph.w && ph.h ? `${ph.w} / ${ph.h}` : '16 / 9';
     const num = String(k + 1).padStart(2, '0');
@@ -214,12 +292,18 @@
             <option value="auto" ${lay === 'auto' ? 'selected' : ''}>自动 Auto</option>
             <option value="fill" ${lay === 'fill' ? 'selected' : ''}>铺满裁切 Fill</option>
             <option value="wide" ${lay === 'wide' ? 'selected' : ''}>铺满横屏 Full width</option>
-            <option value="fit" ${lay === 'fit' ? 'selected' : ''}>完整显示 Fit</option></select>`
+            <option value="fit" ${lay === 'fit' ? 'selected' : ''}>完整显示 Fit</option>
+            <option value="pair" ${lay === 'pair' ? 'selected' : ''}>与下一张并排 Pair with next</option></select>`
       : kind === 'youtube'
       ? `<select data-ratio="${k}" title="画面比例 Aspect ratio">${['16:9', '9:16', '4:3', '1:1', '21:9'].map(r => `<option ${r === `${ph.w}:${ph.h}` ? 'selected' : ''}>${r}</option>`).join('')}</select>`
       : `<select data-bind="${base}.layout" title="显示方式 Layout">
-            <option value="auto" ${lay !== 'fill' ? 'selected' : ''}>带白边 Framed</option>
-            <option value="fill" ${lay === 'fill' ? 'selected' : ''}>全屏 Full screen</option></select>`;
+            <option value="auto" ${lay !== 'fill' && lay !== 'scroll' ? 'selected' : ''}>带白边 Framed</option>
+            <option value="fill" ${lay === 'fill' ? 'selected' : ''}>全屏 Full screen</option>
+            ${kind === 'stack' ? `<option value="scroll" ${lay === 'scroll' ? 'selected' : ''}>横向长卷 Handscroll</option>` : ''}</select>`;
+    const fxSel = kind === 'image' ? `<select data-bind="${base}.fx" title="特效 Effect">
+            <option value="" ${!ph.fx ? 'selected' : ''}>无特效 No effect</option>
+            <option value="mist" ${ph.fx === 'mist' ? 'selected' : ''}>流云 Drifting mist</option>
+            <option value="dawn" ${ph.fx === 'dawn' ? 'selected' : ''}>日照金山 Sunrise on scroll</option></select>` : '';
     return `<div class="photo ${kind}" data-k="${k}">
       <div class="thumb" ${focusable ? `data-act="focus" data-k="${k}" title="点击设置焦点 Click to set focus"` : ''} style="aspect-ratio:${ratio}">
         ${thumbSrc ? `<img src="${esc(url(thumbSrc))}" loading="lazy" alt="">` : ''}
@@ -234,7 +318,8 @@
             <input type="text" data-bind="${base}.layers.${j}.label" value="${esc(l.label || '')}" placeholder="时间 e.g. 06:10"></div>`).join('')}
           <button class="layer add" data-act="add-layer" data-k="${k}" title="添加图层 Add layers">＋</button></div>` : ''}
         ${kind === 'youtube' ? `<input type="text" data-yt="${k}" value="${esc(ph.url || '')}" placeholder="https://youtu.be/…">` : ''}
-        <textarea data-bind="${base}.caption" placeholder="说明文字 Caption…" rows="2">${esc(ph.caption || '')}</textarea>
+        <textarea data-bind="${base}.caption" placeholder="说明文字 Caption…（第二行可写英文）" rows="2">${esc(ph.caption || '')}</textarea>
+        ${fxSel ? `<div class="acts">${fxSel}</div>` : ''}
         <div class="acts">
           <span class="grip" title="按住拖动排序 Drag to reorder">⠿</span>
           ${select}
@@ -396,7 +481,7 @@
   app.addEventListener('input', e => {
     const b = e.target.dataset.bind; if (!b || !doc) return;
     const v = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-    if (/\.title$/.test(b) && b.startsWith('projects.')) {   // keep slug following the title until it is customised
+    if (/^projects\.\d+\.title$/.test(b)) {   // keep slug following the title until it is customised
       const p = project();
       if (p && (!p.slug || p.slug === slugify(p.title) || /^project-/.test(p.slug))) {
         p.slug = slugify(v) || 'project-' + p.id.slice(-4);
@@ -405,6 +490,8 @@
     }
     setPath(b, v); dirty();
     if (sel === 'hero') updatePreview();
+    const tc = e.target.closest('.photo.text');   // live preview of a subtitle block
+    if (tc) { const k = +tc.dataset.k, old = tc.querySelector('.tpv'); old.outerHTML = textPreview(project().photos[k], k); }
   });
   app.addEventListener('change', e => {
     const t = e.target;
@@ -447,6 +534,14 @@
     else if (act === 'add-stack') addStackFiles(await pickFiles('image/jpeg,image/png,image/webp', true));
     else if (act === 'add-layer' && p) addStackFiles(await pickFiles('image/jpeg,image/png,image/webp', true), k);
     else if (act === 'add-video') addVideoFile();
+    else if (act === 'add-text' && p) {
+      p.photos.push({ id: uid(), type: 'text', title: '', caption: '', align: 'left', height: '', size: '', csize: '', font: 'serif', color: '' });
+      dirty(true); render();
+      const cards = app.querySelectorAll('.photo.text'), last = cards[cards.length - 1];
+      if (last) { last.scrollIntoView({ block: 'center' }); const t = last.querySelector('input[type=text]'); if (t) t.focus(); }
+    }
+    else if (act === 'text-align' && p) { p.photos[k].align = el.dataset.v; dirty(); render(); }
+    else if (act === 'text-color-reset' && p) { p.photos[k].color = ''; dirty(); render(); }
     else if (act === 'add-youtube' && p) {
       const u = prompt('粘贴 YouTube 链接 Paste a YouTube link'); if (!u) return;
       const yt = parseYouTube(u); if (!yt) { toast('无法识别这个 YouTube 链接 Not a YouTube link'); return; }
@@ -466,7 +561,7 @@
     else if (act === 'cover' && p) { p.cover = p.photos[k].id; dirty(); render(); }
     else if (act === 'delete-photo' && p) {
       const ph = p.photos[k];
-      const what = { stack: `这组时间叠图（${(ph.layers || []).length} 张）`, video: '这个视频', youtube: '这个 YouTube 视频' }[kindOf(ph)] || '这张照片';
+      const what = { stack: `这组时间叠图（${(ph.layers || []).length} 张）`, video: '这个视频', youtube: '这个 YouTube 视频', text: '这个文字块' }[kindOf(ph)] || '这张照片';
       if (!confirm(`删除${what}？ Delete?`)) return;
       p.photos.splice(k, 1); if (p.cover === ph.id) p.cover = (p.photos.find(visual) || {}).id || '';
       render(); await save();

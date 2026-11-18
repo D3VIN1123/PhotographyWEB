@@ -41,7 +41,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/2611173561e590d9_m.avif"
         },
         {
           "id": "261117503823a557",
@@ -54,7 +55,8 @@
             48,
             51
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/261117503823a557_m.avif"
         },
         {
           "id": "2611172a1263325c",
@@ -67,7 +69,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/2611172a1263325c_m.avif"
         },
         {
           "id": "261117e7fb6a3d7f",
@@ -80,7 +83,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/261117e7fb6a3d7f_m.avif"
         },
         {
           "id": "26111763904fd487",
@@ -93,7 +97,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/26111763904fd487_m.avif"
         },
         {
           "id": "2611176c91c55d3f",
@@ -106,7 +111,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/2611176c91c55d3f_m.avif"
         },
         {
           "id": "26111726286c8b99",
@@ -119,7 +125,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/26111726286c8b99_m.avif"
         },
         {
           "id": "2611175235886527",
@@ -132,7 +139,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/2611175235886527_m.avif"
         },
         {
           "id": "26111754c066bf73",
@@ -145,7 +153,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/26111754c066bf73_m.avif"
         }
       ]
     },
@@ -153,205 +162,26 @@
       "id": "mwl4uvcugvpo0",
       "slug": "project-vpo0",
       "title": "彩云之南",
-      "subtitle": "China Yunnan",
-      "description": "",
+      "subtitle": "云南 · Yunnan, China",
+      "description": "彩云之南，云是会变色的：清晨银灰，正午棉白，日暮时烧成金与玫瑰。从古城的灯火到江水、寺院与雪山，这一页只收下了路上的光。\nSouth of the coloured clouds, where the sky changes its mind all day.",
       "cover": "2611176538f908de",
       "published": true,
       "photos": [
         {
-          "id": "261117c970dba410",
-          "src": "uploads/261117c970dba410.jpg",
-          "thumb": "uploads/261117c970dba410_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117481cf55832",
-          "src": "uploads/261117481cf55832.jpg",
-          "thumb": "uploads/261117481cf55832_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "2611170c8a36b895",
-          "src": "uploads/2611170c8a36b895.jpg",
-          "thumb": "uploads/2611170c8a36b895_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117069c258b66",
-          "src": "uploads/261117069c258b66.jpg",
-          "thumb": "uploads/261117069c258b66_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "2611175799cd534f",
-          "src": "uploads/2611175799cd534f.jpg",
-          "thumb": "uploads/2611175799cd534f_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117abd6dc3ac2",
-          "src": "uploads/261117abd6dc3ac2.jpg",
-          "thumb": "uploads/261117abd6dc3ac2_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117d70e3594b7",
-          "src": "uploads/261117d70e3594b7.jpg",
-          "thumb": "uploads/261117d70e3594b7_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117517f58d980",
-          "src": "uploads/261117517f58d980.jpg",
-          "thumb": "uploads/261117517f58d980_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "2611179744fb5129",
-          "src": "uploads/2611179744fb5129.jpg",
-          "thumb": "uploads/2611179744fb5129_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "2611173516e899fc",
-          "src": "uploads/2611173516e899fc.jpg",
-          "thumb": "uploads/2611173516e899fc_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117ec83cc68a6",
-          "src": "uploads/261117ec83cc68a6.jpg",
-          "thumb": "uploads/261117ec83cc68a6_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "26111714620d7287",
-          "src": "uploads/26111714620d7287.jpg",
-          "thumb": "uploads/26111714620d7287_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "2611177bf2f877b2",
-          "src": "uploads/2611177bf2f877b2.jpg",
-          "thumb": "uploads/2611177bf2f877b2_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "26111742c532c003",
-          "src": "uploads/26111742c532c003.jpg",
-          "thumb": "uploads/26111742c532c003_s.jpg",
-          "w": 5120,
-          "h": 2178,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "2611176538f908de",
-          "src": "uploads/2611176538f908de.jpg",
-          "thumb": "uploads/2611176538f908de_s.jpg",
-          "w": 3992,
-          "h": 2661,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
+          "id": "yn3w3d2sdgif",
+          "type": "text",
+          "title": "云下",
+          "caption": "山把云留住，云又把山藏起来。\nMountains keep the clouds, and the clouds keep the mountains.",
+          "kicker": "Beneath the Clouds",
+          "style": "chapter",
+          "ornament": "contour",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": "",
+          "tone": ""
         },
         {
           "id": "26111721fdd5f89a",
@@ -359,103 +189,72 @@
           "thumb": "uploads/26111721fdd5f89a_s.jpg",
           "w": 5120,
           "h": 3413,
-          "caption": "",
+          "caption": "日暮，云边镶着光\nDusk, the clouds edged in light",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "fill",
+          "mid": "uploads/26111721fdd5f89a_m.avif"
         },
         {
-          "id": "261117982ac6039f",
-          "src": "uploads/261117982ac6039f.jpg",
-          "thumb": "uploads/261117982ac6039f_s.jpg",
+          "id": "261117c970dba410",
+          "src": "uploads/261117c970dba410.jpg",
+          "thumb": "uploads/261117c970dba410_s.jpg",
           "w": 5120,
           "h": 3415,
-          "caption": "",
+          "caption": "雪峰半掩在云里\nA snow peak, half-hidden in cloud",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "fit",
+          "mid": "uploads/261117c970dba410_m.avif"
         },
         {
-          "id": "2611176f8555cb3d",
-          "src": "uploads/2611176f8555cb3d.jpg",
-          "thumb": "uploads/2611176f8555cb3d_s.jpg",
-          "w": 5120,
-          "h": 1346,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
+          "id": "ynmooxu81aky",
+          "type": "text",
+          "title": "雪线以上，是云住的地方。",
+          "caption": "Above the snow line is where the clouds live.",
+          "kicker": "",
+          "style": "",
+          "ornament": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": "",
+          "tone": ""
         },
         {
-          "id": "261117320674abde",
-          "src": "uploads/261117320674abde.jpg",
-          "thumb": "uploads/261117320674abde_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117c5a99d54a3",
-          "src": "uploads/261117c5a99d54a3.jpg",
-          "thumb": "uploads/261117c5a99d54a3_s.jpg",
+          "id": "261117481cf55832",
+          "src": "uploads/261117481cf55832.jpg",
+          "thumb": "uploads/261117481cf55832_s.jpg",
           "w": 5120,
           "h": 3415,
-          "caption": "",
+          "caption": "雾从松林里慢慢升起\nMist rising slowly through the pines",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "fill",
+          "fx": "mist",
+          "mid": "uploads/261117481cf55832_m.avif"
         },
         {
-          "id": "2611174df24bdb93",
-          "src": "uploads/2611174df24bdb93.jpg",
-          "thumb": "uploads/2611174df24bdb93_s.jpg",
+          "id": "261117517f58d980",
+          "src": "uploads/261117517f58d980.jpg",
+          "thumb": "uploads/261117517f58d980_s.jpg",
           "w": 5120,
-          "h": 3414,
-          "caption": "",
+          "h": 3415,
+          "caption": "光从山脊后面落下来\nLight falling from behind the ridge",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117bb989ee3b4",
-          "src": "uploads/261117bb989ee3b4.jpg",
-          "thumb": "uploads/261117bb989ee3b4_s.jpg",
-          "w": 5120,
-          "h": 3414,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "2611179d8e356f41",
-          "src": "uploads/2611179d8e356f41.jpg",
-          "thumb": "uploads/2611179d8e356f41_s.jpg",
-          "w": 5120,
-          "h": 3413,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
+          "layout": "pair",
+          "mid": "uploads/261117517f58d980_m.avif"
         },
         {
           "id": "2611172dc15fcf42",
@@ -463,38 +262,542 @@
           "thumb": "uploads/2611172dc15fcf42_s.jpg",
           "w": 5120,
           "h": 3413,
-          "caption": "",
+          "caption": "水面上的雾，被阳光梳成一道一道\nMist on the water, combed into rays by the sun",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/2611172dc15fcf42_m.avif"
         },
         {
-          "id": "261117e56ba49aff",
-          "src": "uploads/261117e56ba49aff.jpg",
-          "thumb": "uploads/261117e56ba49aff_s.jpg",
+          "id": "261117069c258b66",
+          "src": "uploads/261117069c258b66.jpg",
+          "thumb": "uploads/261117069c258b66_s.jpg",
           "w": 5120,
-          "h": 3413,
-          "caption": "",
+          "h": 3415,
+          "caption": "山坡上的村子，梯田一层一层铺开\nA hillside village, its terraces laid out in steps",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "fit",
+          "mid": "uploads/261117069c258b66_m.avif"
         },
         {
-          "id": "261117b17b021286",
-          "src": "uploads/261117b17b021286.jpg",
-          "thumb": "uploads/261117b17b021286_s.jpg",
+          "id": "yn9ntrgv1lbu",
+          "type": "text",
+          "title": "古城",
+          "caption": "天一黑，木楼里的灯一盏一盏亮起来。下过雨的石板路，把每一盏灯都映了两遍。\nWhen dusk comes, the wooden lanes light up one window at a time — and the rain-washed stones show every lamp twice.",
+          "kicker": "The Old Town, After Dark",
+          "style": "chapter",
+          "ornament": "shibori",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": "",
+          "tone": "dye"
+        },
+        {
+          "id": "261118ddfe29e7bc",
+          "src": "uploads/261118ddfe29e7bc.jpg",
+          "thumb": "uploads/261118ddfe29e7bc_s.jpg",
+          "w": 5056,
+          "h": 3786,
+          "caption": "从天上往下看，路灯把屋顶一块一块缝了起来\nFrom above, the street lights stitch the rooftops together",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": "",
+          "mid": "uploads/261118ddfe29e7bc_m.avif"
+        },
+        {
+          "id": "26111822b9e38465",
+          "src": "uploads/26111822b9e38465.jpg",
+          "thumb": "uploads/26111822b9e38465_s.jpg",
+          "w": 3414,
+          "h": 5120,
+          "caption": "雨刚停，石板路上还亮着灯\nThe rain has just stopped; lamplight still on the stones",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "fx": "",
+          "mid": "uploads/26111822b9e38465_m.avif"
+        },
+        {
+          "id": "261118ddeb0744cf",
+          "src": "uploads/261118ddeb0744cf.jpg",
+          "thumb": "uploads/261118ddeb0744cf_s.jpg",
+          "w": 3414,
+          "h": 5120,
+          "caption": "城楼在雨夜里亮起来\nThe gate tower, lit on a rainy night",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "fx": "",
+          "mid": "uploads/261118ddeb0744cf_m.avif"
+        },
+        {
+          "id": "yntown0rain01",
+          "type": "text",
+          "title": "下起雨来，整条街都撑开了伞。",
+          "caption": "When the rain comes, the whole street opens its umbrellas.",
+          "kicker": "",
+          "style": "",
+          "ornament": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": "",
+          "tone": ""
+        },
+        {
+          "id": "261118b2064f560e",
+          "src": "uploads/261118b2064f560e.jpg",
+          "thumb": "uploads/261118b2064f560e_s.jpg",
           "w": 5120,
           "h": 3414,
-          "caption": "",
+          "caption": "伞面上开着一树花\nA tree in blossom on an umbrella",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "fit",
+          "fx": "",
+          "mid": "uploads/261118b2064f560e_m.avif"
+        },
+        {
+          "id": "2611175799cd534f",
+          "src": "uploads/2611175799cd534f.jpg",
+          "thumb": "uploads/2611175799cd534f_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "木楼亮灯的时候\nWhen the wooden houses light up",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/2611175799cd534f_m.avif"
+        },
+        {
+          "id": "261117abd6dc3ac2",
+          "src": "uploads/261117abd6dc3ac2.jpg",
+          "thumb": "uploads/261117abd6dc3ac2_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "甜茶馆门口，有人坐着歇脚\nOutside the tea house, someone resting",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "mid": "uploads/261117abd6dc3ac2_m.avif"
+        },
+        {
+          "id": "2611185b18db75d6",
+          "src": "uploads/2611185b18db75d6.jpg",
+          "thumb": "uploads/2611185b18db75d6_s.jpg",
+          "w": 4959,
+          "h": 3306,
+          "caption": "灯笼一盏接一盏，挂到巷子尽头\nLantern after lantern, all the way down the lane",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": "",
+          "mid": "uploads/2611185b18db75d6_m.avif"
+        },
+        {
+          "id": "yntown0dye001",
+          "type": "text",
+          "title": "线扎紧的地方，蓝色进不去，就留下了白。",
+          "caption": "Where the thread is tied tight, the indigo cannot reach — and the white is what remains.",
+          "kicker": "扎染 · Tie-dye",
+          "style": "",
+          "ornament": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": "",
+          "tone": ""
+        },
+        {
+          "id": "261118cbc17c403d",
+          "src": "uploads/261118cbc17c403d.jpg",
+          "thumb": "uploads/261118cbc17c403d_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "灯下的扎染，一块挨着一块\nTie-dyed cloth under the lamps, hung edge to edge",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": "",
+          "mid": "uploads/261118cbc17c403d_m.avif"
+        },
+        {
+          "id": "26111861a84f38f3",
+          "src": "uploads/26111861a84f38f3.jpg",
+          "thumb": "uploads/26111861a84f38f3_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "飞檐挑着最后一点天光\nThe flying eaves hold up the last of the light",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "fx": "",
+          "mid": "uploads/26111861a84f38f3_m.avif"
+        },
+        {
+          "id": "26111853a27245a1",
+          "src": "uploads/26111853a27245a1.jpg",
+          "thumb": "uploads/26111853a27245a1_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "彩绘的斗拱，柱子后面是山\nPainted brackets; behind the pillar, the mountains",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "fx": "",
+          "mid": "uploads/26111853a27245a1_m.avif"
+        },
+        {
+          "id": "ynsfbmsmldiy",
+          "type": "text",
+          "title": "江流",
+          "caption": "水从雪山上下来，一路都不肯慢。把快门放慢一点，它就变成了雾。\nThe water comes down from the snow in a hurry. Slow the shutter, and it turns to mist.",
+          "kicker": "Where the Rivers Run",
+          "style": "chapter",
+          "ornament": "contour",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": "",
+          "tone": "jade"
+        },
+        {
+          "id": "2611170c8a36b895",
+          "src": "uploads/2611170c8a36b895.jpg",
+          "thumb": "uploads/2611170c8a36b895_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "浑黄的江水，撞上黑色的岩壁\nOchre water against black rock",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/2611170c8a36b895_m.avif"
+        },
+        {
+          "id": "yniaqbq3aoss",
+          "type": "text",
+          "title": "江水撞上岩壁的声音，大得盖过了心跳。",
+          "caption": "The river against the rock — louder than a heartbeat.",
+          "kicker": "",
+          "style": "",
+          "ornament": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": "",
+          "tone": ""
+        },
+        {
+          "id": "ynyd6vi8byyp",
+          "type": "stack",
+          "layout": "scroll",
+          "caption": "江水长卷\nA handscroll of rivers",
+          "focus": [
+            50,
+            50
+          ],
+          "layers": [
+            {
+              "id": "2611173516e899fc",
+              "src": "uploads/2611173516e899fc.jpg",
+              "thumb": "uploads/2611173516e899fc_s.jpg",
+              "w": 5120,
+              "h": 3415,
+              "label": "石头间的流水 · Water between the stones",
+              "mid": "uploads/2611173516e899fc_m.avif"
+            },
+            {
+              "id": "2611179744fb5129",
+              "src": "uploads/2611179744fb5129.jpg",
+              "thumb": "uploads/2611179744fb5129_s.jpg",
+              "w": 5120,
+              "h": 3415,
+              "label": "一块石头，一道白色的水痕 · One stone, one white trail",
+              "mid": "uploads/2611179744fb5129_m.avif"
+            },
+            {
+              "id": "26111714620d7287",
+              "src": "uploads/26111714620d7287.jpg",
+              "thumb": "uploads/26111714620d7287_s.jpg",
+              "w": 5120,
+              "h": 3415,
+              "label": "慢门下，水变成了雾 · At a slow shutter, water turns to mist",
+              "mid": "uploads/26111714620d7287_m.avif"
+            },
+            {
+              "id": "2611177bf2f877b2",
+              "src": "uploads/2611177bf2f877b2.jpg",
+              "thumb": "uploads/2611177bf2f877b2_s.jpg",
+              "w": 5120,
+              "h": 3415,
+              "label": "青苔与碧水 · Moss and jade water",
+              "mid": "uploads/2611177bf2f877b2_m.avif"
+            }
+          ],
+          "src": "uploads/2611173516e899fc.jpg",
+          "thumb": "uploads/2611173516e899fc_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "mid": "uploads/2611173516e899fc_m.avif"
+        },
+        {
+          "id": "26111742c532c003",
+          "src": "uploads/26111742c532c003.jpg",
+          "thumb": "uploads/26111742c532c003_s.jpg",
+          "w": 5120,
+          "h": 2178,
+          "caption": "从高处看，水是碧色的\nFrom above, the water runs jade-green",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "mid": "uploads/26111742c532c003_m.avif"
+        },
+        {
+          "id": "ynfz5f2hl322",
+          "type": "text",
+          "title": "香格里拉",
+          "caption": "高原的风很干净，经幡把每一句祈愿都吹向更远的地方。\nOn the plateau the wind is clean, and the prayer flags carry every wish a little further.",
+          "kicker": "Shangri-La",
+          "style": "chapter",
+          "ornament": "flags",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": "",
+          "tone": "maroon"
+        },
+        {
+          "id": "261117d70e3594b7",
+          "src": "uploads/261117d70e3594b7.jpg",
+          "thumb": "uploads/261117d70e3594b7_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "湖边的草甸，树刚发了新叶\nA lakeside meadow, the trees in new leaf",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": "mist",
+          "mid": "uploads/261117d70e3594b7_m.avif"
+        },
+        {
+          "id": "261117320674abde",
+          "src": "uploads/261117320674abde.jpg",
+          "thumb": "uploads/261117320674abde_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "乌云压着金顶\nStorm clouds above the golden roofs",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261117320674abde_m.avif"
+        },
+        {
+          "id": "261117c5a99d54a3",
+          "src": "uploads/261117c5a99d54a3.jpg",
+          "thumb": "uploads/261117c5a99d54a3_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "整座寺院，像一座长在山坡上的城\nThe monastery, like a town grown into the hillside",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/261117c5a99d54a3_m.avif"
+        },
+        {
+          "id": "2611174df24bdb93",
+          "src": "uploads/2611174df24bdb93.jpg",
+          "thumb": "uploads/2611174df24bdb93_s.jpg",
+          "w": 5120,
+          "h": 3414,
+          "caption": "隔着经幡的颜色\nSeen through the colours of the prayer flags",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "mid": "uploads/2611174df24bdb93_m.avif"
+        },
+        {
+          "id": "261118c8eec052a6",
+          "src": "uploads/261118c8eec052a6.jpg",
+          "thumb": "uploads/261118c8eec052a6_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "藏式彩绘的墙角，远处屋檐下的灯亮了\nA painted Tibetan corner; further off, lamps come on under the eaves",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": "",
+          "mid": "uploads/261118c8eec052a6_m.avif"
+        },
+        {
+          "id": "261117bb989ee3b4",
+          "src": "uploads/261117bb989ee3b4.jpg",
+          "thumb": "uploads/261117bb989ee3b4_s.jpg",
+          "w": 5120,
+          "h": 3414,
+          "caption": "金顶、白塔，和背后的雪山\nGilded roof, a stupa, and the snow range behind",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261117bb989ee3b4_m.avif"
+        },
+        {
+          "id": "ynez60h8ivtq",
+          "type": "text",
+          "title": "雨落在车窗上，窗外的山被揉成了一幅油画。",
+          "caption": "Rain on the window, and the mountains outside turn to oil paint.",
+          "kicker": "",
+          "style": "",
+          "ornament": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": "",
+          "tone": ""
+        },
+        {
+          "id": "2611179d8e356f41",
+          "src": "uploads/2611179d8e356f41.jpg",
+          "thumb": "uploads/2611179d8e356f41_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "雨中的车窗\nRain on the window",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/2611179d8e356f41_m.avif"
+        },
+        {
+          "id": "ynhdiu777r69",
+          "type": "text",
+          "title": "卡瓦格博",
+          "caption": "梅里雪山主峰，海拔六千七百四十米，至今无人登顶。云散开的那几分钟里，整座山被点亮。\nThe highest peak of the Meili range — 6,740 metres, and never climbed. For the few minutes the clouds part, the whole mountain is lit.",
+          "kicker": "Kawagebo",
+          "style": "chapter",
+          "ornament": "contour",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": "",
+          "tone": "dusk"
+        },
+        {
+          "id": "261117ec83cc68a6",
+          "src": "uploads/261117ec83cc68a6.jpg",
+          "thumb": "uploads/261117ec83cc68a6_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "林线之上的一层薄雪\nA dusting of snow above the tree line",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261117ec83cc68a6_m.avif"
+        },
+        {
+          "id": "261117982ac6039f",
+          "src": "uploads/261117982ac6039f.jpg",
+          "thumb": "uploads/261117982ac6039f_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "云开了一道缝，光只落在山顶\nA gap in the cloud, and the light lands only on the summit",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/261117982ac6039f_m.avif"
+        },
+        {
+          "id": "2611176f8555cb3d",
+          "src": "uploads/2611176f8555cb3d.jpg",
+          "thumb": "uploads/2611176f8555cb3d_s.jpg",
+          "w": 5120,
+          "h": 1346,
+          "caption": "梅里雪山\nThe Meili range",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "mid": "uploads/2611176f8555cb3d_m.avif"
+        },
+        {
+          "id": "yne6tcgq9czp",
+          "type": "text",
+          "title": "等云散开。",
+          "caption": "Wait for the clouds to part.",
+          "kicker": "",
+          "style": "",
+          "ornament": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": "",
+          "tone": ""
         },
         {
           "id": "2611170caf252438",
@@ -502,12 +805,28 @@
           "thumb": "uploads/2611170caf252438_s.jpg",
           "w": 5120,
           "h": 2880,
-          "caption": "",
+          "caption": "日照金山\nSunrise on the golden mountain",
+          "focus": [
+            55,
+            28
+          ],
+          "layout": "auto",
+          "fx": "dawn",
+          "mid": "uploads/2611170caf252438_m.avif"
+        },
+        {
+          "id": "2611176538f908de",
+          "src": "uploads/2611176538f908de.jpg",
+          "thumb": "uploads/2611176538f908de_s.jpg",
+          "w": 3992,
+          "h": 2661,
+          "caption": "金色退去之前\nBefore the gold fades",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "fit",
+          "mid": "uploads/2611176538f908de_m.avif"
         },
         {
           "id": "26111770f6915682",
@@ -515,192 +834,103 @@
           "thumb": "uploads/26111770f6915682_s.jpg",
           "w": 5120,
           "h": 1089,
-          "caption": "",
+          "caption": "整条山脊都烧了起来\nThe whole ridge catches fire",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "wide",
+          "mid": "uploads/26111770f6915682_m.avif"
+        },
+        {
+          "id": "ynlqyxws187d",
+          "type": "text",
+          "title": "星河",
+          "caption": "夜里的山谷很安静。银河挂在头顶，盘山路上的车灯，是另一条慢慢流动的河。\nAt night the valley goes quiet. The Milky Way hangs overhead, and the headlights on the switchbacks become a second, slower river.",
+          "kicker": "Night",
+          "style": "chapter",
+          "ornament": "none",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": "",
+          "tone": "night"
+        },
+        {
+          "id": "261117e56ba49aff",
+          "src": "uploads/261117e56ba49aff.jpg",
+          "thumb": "uploads/261117e56ba49aff_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "银河与盘山路\nThe Milky Way and the switchback road",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/261117e56ba49aff_m.avif"
+        },
+        {
+          "id": "ynfljisxuery",
+          "type": "text",
+          "title": "彩云之南，下次再见。",
+          "caption": "South of the coloured clouds — until next time.",
+          "kicker": "",
+          "style": "",
+          "ornament": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": "",
+          "tone": "indigo"
         }
-      ]
+      ],
+      "theme": "indigo"
     },
     {
       "id": "mwl4fiotklvap",
       "slug": "paris",
       "title": "Paris",
-      "subtitle": "Paris 2025",
-      "description": "",
+      "subtitle": "Paris · 巴黎",
+      "description": "巴黎是奶油色的石头和锌灰色的屋顶；光从教堂的玫瑰窗里落下来，是蓝色和红色的。这一集从白天的屋顶出发，经过歌剧院、塞纳河和凡尔赛，走到夜里的卢浮宫。\nCream-coloured stone and zinc-grey roofs; light that falls blue and red through the rose windows. From the rooftops by day, through the Opéra, along the Seine and out to Versailles, to the Louvre at night.",
       "cover": "261117216b5ecb28",
       "published": true,
       "photos": [
         {
-          "id": "261117216b5ecb28",
-          "src": "uploads/261117216b5ecb28.jpg",
-          "thumb": "uploads/261117216b5ecb28_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
+          "id": "pa0metro0001",
+          "type": "text",
+          "style": "",
+          "title": "从地铁口走上来，巴黎就开始了。",
+          "caption": "Up the steps from the Métro, and Paris begins.",
+          "kicker": "",
+          "ornament": "metro",
+          "tone": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
         },
         {
-          "id": "261117afd2fe71ad",
-          "src": "uploads/261117afd2fe71ad.jpg",
-          "thumb": "uploads/261117afd2fe71ad_s.jpg",
-          "w": 3415,
-          "h": 5120,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117f6e9eaca5e",
-          "src": "uploads/261117f6e9eaca5e.jpg",
-          "thumb": "uploads/261117f6e9eaca5e_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "2611171a96c11a5b",
-          "src": "uploads/2611171a96c11a5b.jpg",
-          "thumb": "uploads/2611171a96c11a5b_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "wide"
-        },
-        {
-          "id": "261117cbae5fb81b",
-          "src": "uploads/261117cbae5fb81b.jpg",
-          "thumb": "uploads/261117cbae5fb81b_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117bc049dd110",
-          "src": "uploads/261117bc049dd110.jpg",
-          "thumb": "uploads/261117bc049dd110_s.jpg",
-          "w": 3415,
-          "h": 5120,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "2611170808587758",
-          "src": "uploads/2611170808587758.jpg",
-          "thumb": "uploads/2611170808587758_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117103a560a74",
-          "src": "uploads/261117103a560a74.jpg",
-          "thumb": "uploads/261117103a560a74_s.jpg",
-          "w": 3415,
-          "h": 5120,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117fb47664c73",
-          "src": "uploads/261117fb47664c73.jpg",
-          "thumb": "uploads/261117fb47664c73_s.jpg",
-          "w": 3415,
-          "h": 5120,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "26111751d1337f0b",
-          "src": "uploads/26111751d1337f0b.jpg",
-          "thumb": "uploads/26111751d1337f0b_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "2611178dc58e180f",
-          "src": "uploads/2611178dc58e180f.jpg",
-          "thumb": "uploads/2611178dc58e180f_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117ae403a28b4",
-          "src": "uploads/261117ae403a28b4.jpg",
-          "thumb": "uploads/261117ae403a28b4_s.jpg",
-          "w": 3415,
-          "h": 5120,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "2611176cd85be7b9",
-          "src": "uploads/2611176cd85be7b9.jpg",
-          "thumb": "uploads/2611176cd85be7b9_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
+          "id": "pa0toits0001",
+          "type": "text",
+          "style": "chapter",
+          "title": "Les Toits",
+          "kicker": "Vue d'en haut",
+          "caption": "巴黎的屋顶几乎都是锌皮的，灰蓝色，一片接着一片，中间冒出一排一排的烟囱。\nThe roofs of Paris are mostly zinc — grey-blue, one after another, with rows of chimney pots in between.",
+          "ornament": "roofs",
+          "tone": "zinc",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
         },
         {
           "id": "2611172e672913ba",
@@ -708,12 +938,61 @@
           "thumb": "uploads/2611172e672913ba_s.jpg",
           "w": 5120,
           "h": 3415,
-          "caption": "",
+          "caption": "锌灰色的屋顶，一直铺到远处的教堂\nZinc roofs, all the way to the church in the distance",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "fill",
+          "mid": "uploads/2611172e672913ba_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "2611176cd85be7b9",
+          "src": "uploads/2611176cd85be7b9.jpg",
+          "thumb": "uploads/2611176cd85be7b9_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "一座哥特式的钟楼，孤零零地立在屋顶之间\nA lone Gothic tower among the rooftops",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/2611176cd85be7b9_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "pa0verse0001",
+          "type": "text",
+          "style": "",
+          "title": "每一根烟囱下面，都是一户人家。",
+          "caption": "Under every chimney pot, a home.",
+          "kicker": "",
+          "ornament": "",
+          "tone": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "pa0mont00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "Montmartre",
+          "kicker": "18e Arrt",
+          "caption": "坡很陡，人很多。山顶的圣心堂是白色的，据说它的石头淋了雨会更白。\nA steep hill and a crowd. The basilica at the top is white — its stone is said to grow whiter in the rain.",
+          "ornament": "none",
+          "tone": "stone",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
         },
         {
           "id": "2611172332d0dffb",
@@ -721,64 +1000,14 @@
           "thumb": "uploads/2611172332d0dffb_s.jpg",
           "w": 5120,
           "h": 3415,
-          "caption": "",
+          "caption": "上山的路，尽头是圣心堂\nThe way up, and Sacré-Cœur at the end of it",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
-        },
-        {
-          "id": "2611174dc4ba915b",
-          "src": "uploads/2611174dc4ba915b.jpg",
-          "thumb": "uploads/2611174dc4ba915b_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117f7172e75c1",
-          "src": "uploads/261117f7172e75c1.jpg",
-          "thumb": "uploads/261117f7172e75c1_s.jpg",
-          "w": 3415,
-          "h": 5120,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261117515cbf2459",
-          "src": "uploads/261117515cbf2459.jpg",
-          "thumb": "uploads/261117515cbf2459_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "26111765115dc528",
-          "src": "uploads/26111765115dc528.jpg",
-          "thumb": "uploads/26111765115dc528_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
+          "layout": "fill",
+          "mid": "uploads/2611172332d0dffb_m.avif",
+          "fx": ""
         },
         {
           "id": "2611177147657ff3",
@@ -786,12 +1015,91 @@
           "thumb": "uploads/2611177147657ff3_s.jpg",
           "w": 3268,
           "h": 4899,
-          "caption": "",
+          "caption": "坡上的房子，好像随时要滑下来\nA house on the slope, about to slide downhill",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "fit",
+          "mid": "uploads/2611177147657ff3_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "pa0cafe00001",
+          "type": "text",
+          "style": "",
+          "title": "坡上的咖啡馆，椅子都朝着街。",
+          "caption": "On the hill, the café chairs all face the street.",
+          "kicker": "",
+          "ornament": "cafe",
+          "tone": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611174dc4ba915b",
+          "src": "uploads/2611174dc4ba915b.jpg",
+          "thumb": "uploads/2611174dc4ba915b_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "穹顶下的马赛克\nThe mosaic beneath the dome",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/2611174dc4ba915b_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "261117f7172e75c1",
+          "src": "uploads/261117f7172e75c1.jpg",
+          "thumb": "uploads/261117f7172e75c1_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "烛台一排一排亮着\nRows of candles, lit",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/261117f7172e75c1_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "261117515cbf2459",
+          "src": "uploads/261117515cbf2459.jpg",
+          "thumb": "uploads/261117515cbf2459_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "光从高窗落下来，落在金色的雕像上\nLight from the high windows, falling on a golden statue",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "mid": "uploads/261117515cbf2459_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "pa0haus00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "Bd Haussmann",
+          "kicker": "9e Arrt",
+          "caption": "百货公司的玻璃穹顶下，人们抬头看的时间，比低头看货架的时间还长。爬上屋顶，整个巴黎都在脚下。\nUnder the department store’s glass dome, people spend longer looking up than at the shelves. Climb to the roof and all of Paris is at your feet.",
+          "ornament": "none",
+          "tone": "stone",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
         },
         {
           "id": "2611176a6f0c0195",
@@ -799,12 +1107,14 @@
           "thumb": "uploads/2611176a6f0c0195_s.jpg",
           "w": 5120,
           "h": 3415,
-          "caption": "",
+          "caption": "老佛爷百货的玻璃穹顶\nThe glass dome of the Galeries Lafayette",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "fill",
+          "mid": "uploads/2611176a6f0c0195_m.avif",
+          "fx": ""
         },
         {
           "id": "2611175b74d1e95f",
@@ -812,12 +1122,14 @@
           "thumb": "uploads/2611175b74d1e95f_s.jpg",
           "w": 5120,
           "h": 3415,
-          "caption": "",
+          "caption": "屋顶上看歌剧院，铁塔站在远处\nThe Opéra from the roof, the tower far off",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "fill",
+          "mid": "uploads/2611175b74d1e95f_m.avif",
+          "fx": ""
         },
         {
           "id": "2611178cfdd43ee7",
@@ -825,12 +1137,367 @@
           "thumb": "uploads/2611178cfdd43ee7_s.jpg",
           "w": 5120,
           "h": 3415,
-          "caption": "",
+          "caption": "云很低，铁塔站在天边\nLow cloud, and the tower on the horizon",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "wide",
+          "mid": "uploads/2611178cfdd43ee7_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "pa0garn00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "Palais Garnier",
+          "kicker": "9e Arrt",
+          "caption": "加尼叶歌剧院。大楼梯、大休息厅、金色的天花板——加斯东·勒鲁的《歌剧魅影》，就发生在这座楼里。\nThe Palais Garnier: the Grand Staircase, the Grand Foyer, ceilings of gold. Gaston Leroux set The Phantom of the Opera inside this building.",
+          "ornament": "opera",
+          "tone": "gilt",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611189b7db6f76e",
+          "src": "uploads/2611189b7db6f76e.jpg",
+          "mid": "uploads/2611189b7db6f76e_m.avif",
+          "thumb": "uploads/2611189b7db6f76e_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "大楼梯，像一场还没开演的戏\nThe Grand Staircase, like a play before the curtain rises",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": ""
+        },
+        {
+          "id": "pa0chand0001",
+          "type": "text",
+          "style": "",
+          "title": "灯一亮，金色就从墙上流下来。",
+          "caption": "When the lights come on, the gold runs down the walls.",
+          "kicker": "",
+          "ornament": "chandelier",
+          "tone": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "26111853316d8092",
+          "src": "uploads/26111853316d8092.jpg",
+          "mid": "uploads/26111853316d8092_m.avif",
+          "thumb": "uploads/26111853316d8092_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "大休息厅，天花板从头画到尾\nThe Grand Foyer, painted from end to end",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": ""
+        },
+        {
+          "id": "261118ffd0a1274d",
+          "src": "uploads/261118ffd0a1274d.jpg",
+          "mid": "uploads/261118ffd0a1274d_m.avif",
+          "thumb": "uploads/261118ffd0a1274d_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "柱头上的金叶子\nGold leaf on every capital",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "fx": ""
+        },
+        {
+          "id": "2611188a487019b1",
+          "src": "uploads/2611188a487019b1.jpg",
+          "mid": "uploads/2611188a487019b1_m.avif",
+          "thumb": "uploads/2611188a487019b1_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "一盏接一盏的吊灯\nChandelier after chandelier",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "fx": ""
+        },
+        {
+          "id": "pa0sein00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "La Seine",
+          "kicker": "Rive droite · Rive gauche",
+          "caption": "塞纳河把巴黎分成右岸和左岸。秋天的下午，云压得很低，河边的树先黄了。\nThe Seine divides Paris into the Right Bank and the Left. On an autumn afternoon the cloud hangs low, and the trees along the quays turn first.",
+          "ornament": "seine",
+          "tone": "seine",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611185d1f577096",
+          "src": "uploads/2611185d1f577096.jpg",
+          "mid": "uploads/2611185d1f577096_m.avif",
+          "thumb": "uploads/2611185d1f577096_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "秋天的塞纳河，游船往下游开\nThe Seine in autumn, a tour boat heading downstream",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "fx": ""
+        },
+        {
+          "id": "261118f293f4208a",
+          "src": "uploads/261118f293f4208a.jpg",
+          "mid": "uploads/261118f293f4208a_m.avif",
+          "thumb": "uploads/261118f293f4208a_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "河水绕过西岱岛\nThe river curving round the Île de la Cité",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "fx": ""
+        },
+        {
+          "id": "pa0lamp00001",
+          "type": "text",
+          "style": "",
+          "title": "沿着河走，书摊、桥和路灯，都不着急。",
+          "caption": "Along the river, the book stalls, the bridges and the lamps are in no hurry.",
+          "kicker": "",
+          "ornament": "lamp",
+          "tone": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611186090568414",
+          "src": "uploads/2611186090568414.jpg",
+          "mid": "uploads/2611186090568414_m.avif",
+          "thumb": "uploads/2611186090568414_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "桥上走着的两个人\nTwo people crossing the bridge",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "fx": ""
+        },
+        {
+          "id": "261118ebd0e4ee1c",
+          "src": "uploads/261118ebd0e4ee1c.jpg",
+          "mid": "uploads/261118ebd0e4ee1c_m.avif",
+          "thumb": "uploads/261118ebd0e4ee1c_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "桥上的路灯，远处是西岱岛的尖顶\nLamps on the bridge, the spires of the island beyond",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "fx": ""
+        },
+        {
+          "id": "pa0cite00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "Île de la Cité",
+          "kicker": "1er · 4e Arrt",
+          "caption": "两座教堂，隔着几百米。修复后的圣母院，石头白得发亮；圣礼拜堂的墙，几乎全是玻璃。\nTwo churches a few hundred metres apart: Notre-Dame, restored, its stone shining white — and Sainte-Chapelle, whose walls are almost all glass.",
+          "ornament": "rose",
+          "tone": "vitrail",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611170808587758",
+          "src": "uploads/2611170808587758.jpg",
+          "thumb": "uploads/2611170808587758_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "修复后的圣母院，石头是新的白\nNotre-Dame restored — the stone a new white",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/2611170808587758_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "261117103a560a74",
+          "src": "uploads/261117103a560a74.jpg",
+          "thumb": "uploads/261117103a560a74_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "跪着的雕像，背后是一整面蓝\nA kneeling figure against a wall of blue",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/261117103a560a74_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "261117fb47664c73",
+          "src": "uploads/261117fb47664c73.jpg",
+          "thumb": "uploads/261117fb47664c73_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "画满星星的拱顶下\nUnder a vault painted with stars",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "mid": "uploads/261117fb47664c73_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "pa0verse0002",
+          "type": "text",
+          "style": "",
+          "title": "在这里，光是有颜色的。",
+          "caption": "Here, light has a colour.",
+          "kicker": "",
+          "ornament": "",
+          "tone": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "26111751d1337f0b",
+          "src": "uploads/26111751d1337f0b.jpg",
+          "thumb": "uploads/26111751d1337f0b_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "圣礼拜堂：墙是玻璃做的\nSainte-Chapelle: walls made of glass",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/26111751d1337f0b_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "2611178dc58e180f",
+          "src": "uploads/2611178dc58e180f.jpg",
+          "thumb": "uploads/2611178dc58e180f_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "烛台、彩窗，和一处还在修缮的窗\nCandles, glass, and one window still under repair",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/2611178dc58e180f_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "261117ae403a28b4",
+          "src": "uploads/261117ae403a28b4.jpg",
+          "thumb": "uploads/261117ae403a28b4_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "每一格玻璃里，都是一个故事\nA story in every pane",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "mid": "uploads/261117ae403a28b4_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "pa0vers00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "Versailles",
+          "kicker": "Yvelines · 78",
+          "caption": "从巴黎坐一趟郊区火车，就到了国王的宫殿：金色、白色，还有画在天花板上的天空。\nOne suburban train from Paris and you reach the king’s palace: gold, white, and a sky painted on the ceiling.",
+          "ornament": "versailles",
+          "tone": "stone",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611185d45536ef9",
+          "src": "uploads/2611185d45536ef9.jpg",
+          "mid": "uploads/2611185d45536ef9_m.avif",
+          "thumb": "uploads/2611185d45536ef9_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "凡尔赛宫的皇家礼拜堂\nThe Royal Chapel at Versailles",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": ""
+        },
+        {
+          "id": "pa0troc00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "Trocadéro",
+          "kicker": "16e Arrt",
+          "caption": "傍晚的天是淡紫色的。广场上每个人都在和铁塔合影，有人伸出手，把它轻轻捏在指尖。\nThe evening sky turns lilac. Everyone on the square is taking a picture with the tower; someone reaches out and pinches it between two fingers.",
+          "ornament": "none",
+          "tone": "lilac",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
         },
         {
           "id": "261117d10b7e3751",
@@ -838,12 +1505,167 @@
           "thumb": "uploads/261117d10b7e3751_s.jpg",
           "w": 5120,
           "h": 2880,
-          "caption": "",
+          "caption": "把铁塔捏在指尖\nThe tower, between finger and thumb",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "wide",
+          "mid": "uploads/261117d10b7e3751_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "pa0louv00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "Le Louvre",
+          "kicker": "1er Arrt",
+          "caption": "天黑以后，玻璃金字塔从里面亮起来，像一盏放在宫殿正中间的灯。\nAfter dark the glass pyramid lights up from inside, like a lamp set down in the middle of a palace.",
+          "ornament": "none",
+          "tone": "lilac",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261117216b5ecb28",
+          "src": "uploads/261117216b5ecb28.jpg",
+          "thumb": "uploads/261117216b5ecb28_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "暮色里的卢浮宫\nThe Louvre at dusk",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/261117216b5ecb28_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "261117afd2fe71ad",
+          "src": "uploads/261117afd2fe71ad.jpg",
+          "thumb": "uploads/261117afd2fe71ad_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "从博物馆的窗里看出去\nLooking out through a museum window",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/261117afd2fe71ad_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "261117bc049dd110",
+          "src": "uploads/261117bc049dd110.jpg",
+          "thumb": "uploads/261117bc049dd110_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "月亮挂在穹顶上\nThe moon above the dome",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "mid": "uploads/261117bc049dd110_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "pa0verse0003",
+          "type": "text",
+          "style": "",
+          "title": "天黑了，金字塔亮了。",
+          "caption": "Night falls, and the pyramid lights up.",
+          "kicker": "",
+          "ornament": "",
+          "tone": "indigo",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261118c84f9b9f61",
+          "src": "uploads/261118c84f9b9f61.jpg",
+          "mid": "uploads/261118c84f9b9f61_m.avif",
+          "thumb": "uploads/261118c84f9b9f61_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "一道光从远处扫过宫殿的屋顶\nA beam of light sweeping over the palace roofs",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "fx": ""
+        },
+        {
+          "id": "261117cbae5fb81b",
+          "src": "uploads/261117cbae5fb81b.jpg",
+          "thumb": "uploads/261117cbae5fb81b_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "月亮、金字塔，和水里的另一座金字塔\nThe moon, the pyramid, and another pyramid in the water",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/261117cbae5fb81b_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "261117f6e9eaca5e",
+          "src": "uploads/261117f6e9eaca5e.jpg",
+          "thumb": "uploads/261117f6e9eaca5e_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "拿破仑庭院，正中间的金字塔\nThe Cour Napoléon, the pyramid at its centre",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "mid": "uploads/261117f6e9eaca5e_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "2611171a96c11a5b",
+          "src": "uploads/2611171a96c11a5b.jpg",
+          "thumb": "uploads/2611171a96c11a5b_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "倒影把金字塔变成了一颗钻石\nThe reflection turns the pyramid into a diamond",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/2611171a96c11a5b_m.avif",
+          "fx": ""
+        },
+        {
+          "id": "pa0verse0004",
+          "type": "text",
+          "style": "",
+          "title": "入夜以后，每到整点，铁塔会闪烁五分钟。",
+          "caption": "After dark, on the hour, the tower glitters for five minutes.",
+          "kicker": "",
+          "ornament": "eiffel",
+          "tone": "night",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
         },
         {
           "id": "261117b6d28b9f9c",
@@ -851,14 +1673,48 @@
           "thumb": "uploads/261117b6d28b9f9c_s.jpg",
           "w": 5120,
           "h": 3415,
-          "caption": "",
+          "caption": "站在铁塔正下方，往上看\nStanding right beneath the tower, looking up",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "fill",
+          "mid": "uploads/261117b6d28b9f9c_m.avif",
+          "fx": "sparkle"
+        },
+        {
+          "id": "pa0verse0005",
+          "type": "text",
+          "style": "",
+          "title": "À bientôt, Paris.",
+          "caption": "下次见，巴黎 · Until next time",
+          "kicker": "",
+          "ornament": "",
+          "tone": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611180aad6722fd",
+          "src": "uploads/2611180aad6722fd.jpg",
+          "mid": "uploads/2611180aad6722fd_m.avif",
+          "thumb": "uploads/2611180aad6722fd_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "拍下这些照片的人，在歌剧院的大楼梯上\nThe one behind the camera, on the Opéra’s Grand Staircase",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "fx": ""
         }
-      ]
+      ],
+      "theme": "paris"
     },
     {
       "id": "mwl4kwkz15m33",
@@ -880,7 +1736,8 @@
             85,
             15
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/2611179d99d0a6f6_m.avif"
         },
         {
           "id": "2611175d09c73478",
@@ -893,7 +1750,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/2611175d09c73478_m.avif"
         },
         {
           "id": "2611173c9363bea3",
@@ -906,7 +1764,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/2611173c9363bea3_m.avif"
         },
         {
           "id": "261117229deb66a1",
@@ -919,7 +1778,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/261117229deb66a1_m.avif"
         },
         {
           "id": "mwl4od3dvxndg",
@@ -931,7 +1791,8 @@
               "thumb": "uploads/2611174e6626789b_s.jpg",
               "w": 5120,
               "h": 3840,
-              "label": ""
+              "label": "",
+              "mid": "uploads/2611174e6626789b_m.avif"
             },
             {
               "id": "261117185408b0a3",
@@ -939,7 +1800,8 @@
               "thumb": "uploads/261117185408b0a3_s.jpg",
               "w": 5120,
               "h": 3840,
-              "label": ""
+              "label": "",
+              "mid": "uploads/261117185408b0a3_m.avif"
             }
           ],
           "caption": "",
@@ -951,7 +1813,8 @@
           "src": "uploads/2611174e6626789b.jpg",
           "thumb": "uploads/2611174e6626789b_s.jpg",
           "w": 5120,
-          "h": 3840
+          "h": 3840,
+          "mid": "uploads/2611174e6626789b_m.avif"
         },
         {
           "id": "26111717f158cb91",
@@ -964,7 +1827,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/26111717f158cb91_m.avif"
         },
         {
           "id": "261117fa10889513",
@@ -977,7 +1841,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/261117fa10889513_m.avif"
         },
         {
           "id": "2611179a4ab18e5e",
@@ -990,7 +1855,8 @@
             81,
             13
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/2611179a4ab18e5e_m.avif"
         },
         {
           "id": "261117545d96e3c0",
@@ -1003,7 +1869,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/261117545d96e3c0_m.avif"
         },
         {
           "id": "261117e85411d1b1",
@@ -1016,7 +1883,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/261117e85411d1b1_m.avif"
         }
       ]
     },
@@ -1040,7 +1908,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/2611173c2bf836d3_m.avif"
         },
         {
           "id": "2611174fd7ed28e8",
@@ -1053,7 +1922,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/2611174fd7ed28e8_m.avif"
         },
         {
           "id": "261117a15a604a72",
@@ -1066,7 +1936,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/261117a15a604a72_m.avif"
         },
         {
           "id": "26111743de9cbf36",
@@ -1079,7 +1950,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/26111743de9cbf36_m.avif"
         },
         {
           "id": "261117a649cfa9d5",
@@ -1092,7 +1964,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/261117a649cfa9d5_m.avif"
         },
         {
           "id": "261117408c6d6844",
@@ -1105,7 +1978,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/261117408c6d6844_m.avif"
         },
         {
           "id": "261117a36b770523",
@@ -1118,7 +1992,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/261117a36b770523_m.avif"
         },
         {
           "id": "2611174a29a1fb5b",
@@ -1131,7 +2006,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/2611174a29a1fb5b_m.avif"
         },
         {
           "id": "261117b4d8c79bfb",
@@ -1144,7 +2020,8 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/261117b4d8c79bfb_m.avif"
         },
         {
           "id": "2611177b7517ad70",
@@ -1157,9 +2034,860 @@
             50,
             50
           ],
-          "layout": "auto"
+          "layout": "auto",
+          "mid": "uploads/2611177b7517ad70_m.avif"
         }
       ]
+    },
+    {
+      "id": "mwmd69nuoum0t",
+      "slug": "yunnan",
+      "title": "Yunnan",
+      "subtitle": "Southwest China",
+      "description": "There are places you remember as a colour. Here, it is the blue of a river, the amber of a rain-lit lane, the gold that briefly finds a mountain. These photographs follow those small changes: from the forest floor to the roofs of the high country, and on into the night.",
+      "cover": "2611183091508e70",
+      "published": true,
+      "photos": [
+        {
+          "id": "yunnan-chapter-1",
+          "type": "text",
+          "style": "chapter",
+          "title": "Where the\nwater slows.",
+          "kicker": "Water & woodland",
+          "caption": "The forest lets the mist pass through. Water gathers the colour of the trees, then carries it away. The first part of the journey follows its quieter paths.",
+          "ornament": "none",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261118f18e6f583c",
+          "src": "uploads/261118f18e6f583c.jpg",
+          "thumb": "uploads/261118f18e6f583c_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "The forest appears, disappears, appears again.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/261118f18e6f583c_m.avif"
+        },
+        {
+          "id": "261118ec11c54ece",
+          "src": "uploads/261118ec11c54ece.jpg",
+          "thumb": "uploads/261118ec11c54ece_s.jpg",
+          "w": 5120,
+          "h": 2880,
+          "caption": "Autumn holds its reflection in the shallows.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/261118ec11c54ece_m.avif"
+        },
+        {
+          "id": "2611180efebc1b07",
+          "src": "uploads/2611180efebc1b07.jpg",
+          "thumb": "uploads/2611180efebc1b07_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "Bare branches, doubled by the stillness.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/2611180efebc1b07_m.avif"
+        },
+        {
+          "id": "261118e30d266f31",
+          "src": "uploads/261118e30d266f31.jpg",
+          "thumb": "uploads/261118e30d266f31_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "New leaves at the foot of a dark forest.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/261118e30d266f31_m.avif"
+        },
+        {
+          "id": "261118a7ac2535f4",
+          "src": "uploads/261118a7ac2535f4.jpg",
+          "thumb": "uploads/261118a7ac2535f4_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "The meadow belongs to the horses for a while.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261118a7ac2535f4_m.avif"
+        },
+        {
+          "id": "261118f529ae3486",
+          "src": "uploads/261118f529ae3486.jpg",
+          "thumb": "uploads/261118f529ae3486_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "Light rests on the lake before it reaches the shore.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261118f529ae3486_m.avif"
+        },
+        {
+          "id": "2611181867627dc5",
+          "src": "uploads/2611181867627dc5.jpg",
+          "thumb": "uploads/2611181867627dc5_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "A road passes through the green folds of the hills.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/2611181867627dc5_m.avif"
+        },
+        {
+          "id": "26111872b5a6771c",
+          "src": "uploads/26111872b5a6771c.jpg",
+          "thumb": "uploads/26111872b5a6771c_s.jpg",
+          "w": 5120,
+          "h": 3836,
+          "caption": "The fields follow the patient curves of the land.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/26111872b5a6771c_m.avif"
+        },
+        {
+          "id": "2611184dcbb00194",
+          "src": "uploads/2611184dcbb00194.jpg",
+          "thumb": "uploads/2611184dcbb00194_s.jpg",
+          "w": 5120,
+          "h": 3414,
+          "caption": "The forest gives way to a small, stony clearing.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/2611184dcbb00194_m.avif"
+        },
+        {
+          "id": "26111857de1a8f1d",
+          "src": "uploads/26111857de1a8f1d.jpg",
+          "thumb": "uploads/26111857de1a8f1d_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "A small atlas of stones and running water.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/26111857de1a8f1d_m.avif"
+        },
+        {
+          "id": "yunnan-note-current",
+          "type": "text",
+          "style": "",
+          "title": "The river keeps moving.\nThe photograph asks it to stay.",
+          "caption": "A slower shutter leaves the stones where they are, and lets everything else pass.",
+          "kicker": "On the current",
+          "align": "center",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "26111830c913f065",
+          "src": "uploads/26111830c913f065.jpg",
+          "thumb": "uploads/26111830c913f065_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "Ochre water meets the dark wall of the gorge.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/26111830c913f065_m.avif"
+        },
+        {
+          "id": "2611186463b108ff",
+          "src": "uploads/2611186463b108ff.jpg",
+          "thumb": "uploads/2611186463b108ff_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "For all its weight, the rock cannot hold the river.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/2611186463b108ff_m.avif"
+        },
+        {
+          "id": "yunnan-river-scroll",
+          "type": "stack",
+          "layout": "scroll",
+          "caption": "Five ways of watching water.",
+          "focus": [
+            50,
+            50
+          ],
+          "layers": [
+            {
+              "id": "2611187c0b40416a",
+              "src": "uploads/2611187c0b40416a.jpg",
+              "thumb": "uploads/2611187c0b40416a_s.jpg",
+              "w": 5120,
+              "h": 3415,
+              "label": "The current draws a blue line through the forest.",
+              "mid": "uploads/2611187c0b40416a_m.avif"
+            },
+            {
+              "id": "2611182cc371270f",
+              "src": "uploads/2611182cc371270f.jpg",
+              "thumb": "uploads/2611182cc371270f_s.jpg",
+              "w": 5120,
+              "h": 3414,
+              "label": "A hundred small currents, finding one way through.",
+              "mid": "uploads/2611182cc371270f_m.avif"
+            },
+            {
+              "id": "26111838970a2266",
+              "src": "uploads/26111838970a2266.jpg",
+              "thumb": "uploads/26111838970a2266_s.jpg",
+              "w": 5120,
+              "h": 3413,
+              "label": "Water loosens its grip on the stones.",
+              "mid": "uploads/26111838970a2266_m.avif"
+            },
+            {
+              "id": "261118e7107e6a98",
+              "src": "uploads/261118e7107e6a98.jpg",
+              "thumb": "uploads/261118e7107e6a98_s.jpg",
+              "w": 5120,
+              "h": 3415,
+              "label": "One stone divides the water into two silken paths.",
+              "mid": "uploads/261118e7107e6a98_m.avif"
+            },
+            {
+              "id": "2611189a4a1db977",
+              "src": "uploads/2611189a4a1db977.jpg",
+              "thumb": "uploads/2611189a4a1db977_s.jpg",
+              "w": 5120,
+              "h": 3415,
+              "label": "Beneath the moving surface, the stones remain.",
+              "mid": "uploads/2611189a4a1db977_m.avif"
+            }
+          ],
+          "src": "uploads/2611187c0b40416a.jpg",
+          "thumb": "uploads/2611187c0b40416a_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "mid": "uploads/2611187c0b40416a_m.avif"
+        },
+        {
+          "id": "2611182e203d8295",
+          "src": "uploads/2611182e203d8295.jpg",
+          "thumb": "uploads/2611182e203d8295_s.jpg",
+          "w": 5120,
+          "h": 3414,
+          "caption": "White water writes along the shore.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/2611182e203d8295_m.avif"
+        },
+        {
+          "id": "2611188520037944",
+          "src": "uploads/2611188520037944.jpg",
+          "thumb": "uploads/2611188520037944_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "The river leaves a white fringe on the stones.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/2611188520037944_m.avif"
+        },
+        {
+          "id": "261118d123242d7d",
+          "src": "uploads/261118d123242d7d.jpg",
+          "thumb": "uploads/261118d123242d7d_s.jpg",
+          "w": 5120,
+          "h": 2178,
+          "caption": "From here, the current is a pattern of turquoise and white.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "mid": "uploads/261118d123242d7d_m.avif"
+        },
+        {
+          "id": "yunnan-chapter-2",
+          "type": "text",
+          "style": "chapter",
+          "title": "When the\nlamps come on.",
+          "kicker": "After dark",
+          "caption": "Blue settles over the roofs. Below it, the lanes collect a warmer light: a doorway, a paper umbrella, a lantern reflected in rain. The town is read one window at a time.",
+          "ornament": "none",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611184ded90db74",
+          "src": "uploads/2611184ded90db74.jpg",
+          "thumb": "uploads/2611184ded90db74_s.jpg",
+          "w": 5056,
+          "h": 3786,
+          "caption": "From above, the streets become threads of light.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/2611184ded90db74_m.avif"
+        },
+        {
+          "id": "2611183659f94a8b",
+          "src": "uploads/2611183659f94a8b.jpg",
+          "thumb": "uploads/2611183659f94a8b_s.jpg",
+          "w": 3414,
+          "h": 5120,
+          "caption": "Rain polishes the last blue hour into the stones.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/2611183659f94a8b_m.avif"
+        },
+        {
+          "id": "261118048295229f",
+          "src": "uploads/261118048295229f.jpg",
+          "thumb": "uploads/261118048295229f_s.jpg",
+          "w": 3414,
+          "h": 5120,
+          "caption": "The tower keeps the last of the evening.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261118048295229f_m.avif"
+        },
+        {
+          "id": "261118f2a0a0ac99",
+          "src": "uploads/261118f2a0a0ac99.jpg",
+          "thumb": "uploads/261118f2a0a0ac99_s.jpg",
+          "w": 5120,
+          "h": 3414,
+          "caption": "A little shelter, lit from within.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261118f2a0a0ac99_m.avif"
+        },
+        {
+          "id": "2611180a6290087a",
+          "src": "uploads/2611180a6290087a.jpg",
+          "thumb": "uploads/2611180a6290087a_s.jpg",
+          "w": 4959,
+          "h": 3306,
+          "caption": "Lantern after lantern, the lane draws you in.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/2611180a6290087a_m.avif"
+        },
+        {
+          "id": "26111859d6396b8b",
+          "src": "uploads/26111859d6396b8b.jpg",
+          "thumb": "uploads/26111859d6396b8b_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "Cloth and calligraphy, warm beneath the lamps.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/26111859d6396b8b_m.avif"
+        },
+        {
+          "id": "yunnan-note-cloth",
+          "type": "text",
+          "style": "",
+          "title": "The evening is stitched\nin blue and amber.",
+          "caption": "Blue in the cloth, gold in the windows. The old lanes hold both.",
+          "kicker": "Old town / Indigo & lamplight",
+          "align": "center",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611183b7afa9b5a",
+          "src": "uploads/2611183b7afa9b5a.jpg",
+          "thumb": "uploads/2611183b7afa9b5a_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "Above the doorway, another evening gathers.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/2611183b7afa9b5a_m.avif"
+        },
+        {
+          "id": "261118311877416a",
+          "src": "uploads/261118311877416a.jpg",
+          "thumb": "uploads/261118311877416a_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "At the threshold, the light is almost enough to touch.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261118311877416a_m.avif"
+        },
+        {
+          "id": "yunnan-chapter-3",
+          "type": "text",
+          "style": "chapter",
+          "title": "A quieter\nkind of gold.",
+          "kicker": "High country",
+          "caption": "Up here, gold belongs to the roofs as much as to the sun. Painted beams hold the darkness beneath the eaves; the mountains keep their distance. Look slowly. There is more than one way to be still.",
+          "ornament": "none",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261118f714fca00e",
+          "src": "uploads/261118f714fca00e.jpg",
+          "thumb": "uploads/261118f714fca00e_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "A gold roof, held between two walls.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/261118f714fca00e_m.avif"
+        },
+        {
+          "id": "261118f0581b07a8",
+          "src": "uploads/261118f0581b07a8.jpg",
+          "thumb": "uploads/261118f0581b07a8_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "Painted timber, a red pillar, the mountain beyond.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261118f0581b07a8_m.avif"
+        },
+        {
+          "id": "2611189e5ae59ae7",
+          "src": "uploads/2611189e5ae59ae7.jpg",
+          "thumb": "uploads/2611189e5ae59ae7_s.jpg",
+          "w": 5120,
+          "h": 2880,
+          "caption": "A roofline against a sky still deciding on rain.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "mid": "uploads/2611189e5ae59ae7_m.avif"
+        },
+        {
+          "id": "261118c39f29875e",
+          "src": "uploads/261118c39f29875e.jpg",
+          "thumb": "uploads/261118c39f29875e_s.jpg",
+          "w": 5120,
+          "h": 3414,
+          "caption": "Gold above the rooftops. Weather above everything.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/261118c39f29875e_m.avif"
+        },
+        {
+          "id": "2611180d3d0b9ca4",
+          "src": "uploads/2611180d3d0b9ca4.jpg",
+          "thumb": "uploads/2611180d3d0b9ca4_s.jpg",
+          "w": 5120,
+          "h": 3414,
+          "caption": "A monastery glimpsed through a blur of colour.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/2611180d3d0b9ca4_m.avif"
+        },
+        {
+          "id": "261118bcf027f028",
+          "src": "uploads/261118bcf027f028.jpg",
+          "thumb": "uploads/261118bcf027f028_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "The hillside gathers around the golden roofs.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/261118bcf027f028_m.avif"
+        },
+        {
+          "id": "261118733e6f7ba4",
+          "src": "uploads/261118733e6f7ba4.jpg",
+          "thumb": "uploads/261118733e6f7ba4_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "A brief clearing in the weather.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261118733e6f7ba4_m.avif"
+        },
+        {
+          "id": "261118099f6dc2de",
+          "src": "uploads/261118099f6dc2de.jpg",
+          "thumb": "uploads/261118099f6dc2de_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "A painted corner under the weight of the weather.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261118099f6dc2de_m.avif"
+        },
+        {
+          "id": "2611181baab9f9c0",
+          "src": "uploads/2611181baab9f9c0.jpg",
+          "thumb": "uploads/2611181baab9f9c0_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "The eaves lift into the falling blue.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/2611181baab9f9c0_m.avif"
+        },
+        {
+          "id": "yunnan-chapter-4",
+          "type": "text",
+          "style": "chapter",
+          "title": "Learning\nto wait.",
+          "kicker": "Mountain light",
+          "caption": "For a long time, there is only cloud. Then a ridge appears, a patch of snow brightens, and the scale of the landscape changes. The light stays briefly. The looking takes longer.",
+          "ornament": "none",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261118bb802606af",
+          "src": "uploads/261118bb802606af.jpg",
+          "thumb": "uploads/261118bb802606af_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "Before the day has found its colours.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/261118bb802606af_m.avif"
+        },
+        {
+          "id": "261118eb8b322f53",
+          "src": "uploads/261118eb8b322f53.jpg",
+          "thumb": "uploads/261118eb8b322f53_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "Above the trees, the last snow lingers.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/261118eb8b322f53_m.avif"
+        },
+        {
+          "id": "261118a5eb8e9167",
+          "src": "uploads/261118a5eb8e9167.jpg",
+          "thumb": "uploads/261118a5eb8e9167_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "Cloud shadows move across the high country.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261118a5eb8e9167_m.avif"
+        },
+        {
+          "id": "261118057907ccc7",
+          "src": "uploads/261118057907ccc7.jpg",
+          "thumb": "uploads/261118057907ccc7_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "The mountain, close enough to fill the frame.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261118057907ccc7_m.avif"
+        },
+        {
+          "id": "26111864609f92c8",
+          "src": "uploads/26111864609f92c8.jpg",
+          "thumb": "uploads/26111864609f92c8_s.jpg",
+          "w": 5120,
+          "h": 1346,
+          "caption": "Snow, cloud and the long line between.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "mid": "uploads/26111864609f92c8_m.avif"
+        },
+        {
+          "id": "261118a6d42149c7",
+          "src": "uploads/261118a6d42149c7.jpg",
+          "thumb": "uploads/261118a6d42149c7_s.jpg",
+          "w": 5120,
+          "h": 3414,
+          "caption": "The ridge catches the light before the valley does.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "mid": "uploads/261118a6d42149c7_m.avif"
+        },
+        {
+          "id": "26111866b385df60",
+          "src": "uploads/26111866b385df60.jpg",
+          "thumb": "uploads/26111866b385df60_s.jpg",
+          "w": 5120,
+          "h": 2880,
+          "caption": "The same mountain, a little more sky.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/26111866b385df60_m.avif"
+        },
+        {
+          "id": "261118b77c47f0bd",
+          "src": "uploads/261118b77c47f0bd.jpg",
+          "thumb": "uploads/261118b77c47f0bd_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "Between two clouds, a little room for the light.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261118b77c47f0bd_m.avif"
+        },
+        {
+          "id": "261118bac9d6d0f8",
+          "src": "uploads/261118bac9d6d0f8.jpg",
+          "thumb": "uploads/261118bac9d6d0f8_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "Rain on the window; the world becomes a watercolour.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261118bac9d6d0f8_m.avif"
+        },
+        {
+          "id": "yunnan-note-cloud",
+          "type": "text",
+          "style": "",
+          "title": "To see a mountain,\nfirst learn to wait.",
+          "caption": "The cloud is part of the view.",
+          "kicker": "Between cloud and snow",
+          "align": "center",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261118a59fd4250b",
+          "src": "uploads/261118a59fd4250b.jpg",
+          "thumb": "uploads/261118a59fd4250b_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "A window in the clouds, open for a moment.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/261118a59fd4250b_m.avif"
+        },
+        {
+          "id": "2611183091508e70",
+          "src": "uploads/2611183091508e70.jpg",
+          "thumb": "uploads/2611183091508e70_s.jpg",
+          "w": 3952,
+          "h": 2635,
+          "caption": "For a moment, the clouds leave a seam of gold.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": "dawn",
+          "mid": "uploads/2611183091508e70_m.avif"
+        },
+        {
+          "id": "261118548e3387fb",
+          "src": "uploads/261118548e3387fb.jpg",
+          "thumb": "uploads/261118548e3387fb_s.jpg",
+          "w": 3992,
+          "h": 2661,
+          "caption": "Before the gold gives way to blue.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "mid": "uploads/261118548e3387fb_m.avif"
+        },
+        {
+          "id": "2611187b3d290197",
+          "src": "uploads/2611187b3d290197.jpg",
+          "thumb": "uploads/2611187b3d290197_s.jpg",
+          "w": 5120,
+          "h": 1089,
+          "caption": "A whole horizon, touched with gold.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "mid": "uploads/2611187b3d290197_m.avif"
+        },
+        {
+          "id": "yunnan-chapter-5",
+          "type": "text",
+          "style": "chapter",
+          "title": "The other\nriver.",
+          "kicker": "Nightfall",
+          "caption": "The road keeps a thin thread of light. Far above it, the stars make another crossing. After all the noise of water, the journey comes to rest beneath a larger silence.",
+          "ornament": "none",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261118e6031e3cf5",
+          "src": "uploads/261118e6031e3cf5.jpg",
+          "thumb": "uploads/261118e6031e3cf5_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "Headlights trace the valley beneath a river of stars.",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/261118e6031e3cf5_m.avif"
+        },
+        {
+          "id": "yunnan-note-night",
+          "type": "text",
+          "style": "",
+          "title": "A river in the valley.\nAnother in the sky.",
+          "caption": "And for a little while, a place to stand between them.",
+          "kicker": "The last field note",
+          "align": "center",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        }
+      ],
+      "theme": "yunnan"
     }
   ]
 }

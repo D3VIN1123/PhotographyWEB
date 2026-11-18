@@ -34,6 +34,8 @@
   // a project's "photos" are modules: image (default), stack (time layers), video (uploaded file), youtube
   const kindOf = ph => (ph && ph.type) || 'image';
   const visual = ph => ph && (kindOf(ph) === 'image' || kindOf(ph) === 'stack') && ph.src;
+  // photos / videos / stacks count as pictures; subtitle blocks ("text") do not
+  const countOf = p => (p.photos || []).reduce((n, x) => n + (kindOf(x) === 'text' ? 0 : kindOf(x) === 'stack' ? Math.max(1, (x.layers || []).length) : 1), 0);
   const coverOf = p => p && ((p.photos || []).find(x => x.id === p.cover && visual(x)) || (p.photos || []).find(visual)) || null;
   const isPortrait = ph => ph.w && ph.h && ph.h > ph.w * 1.05;
   const pos = ph => { const f = (ph && ph.focus) || [50, 50]; return `object-position:${+f[0] || 50}% ${+f[1] || 50}%`; };
@@ -81,13 +83,13 @@
       <div class="label reveal">A photographic record<b>${pad2(projects.length)} album${projects.length === 1 ? '' : 's'}</b></div>
       ${intro ? `<p class="statement words">${words(intro)}</p>` : ''}
       <div class="index">
-        ${projects.map((p, i) => `<a class="reveal" style="--d:${i}" href="#/p/${esc(p.slug)}"><b>№${pad2(i + 1)}</b><span class="t">${esc(p.title)}</span><span class="s">${esc(p.subtitle || '')}</span><span class="n">${plural((p.photos || []).length)} ${ARROW}</span></a>`).join('')}
+        ${projects.map((p, i) => `<a class="reveal" style="--d:${i}" href="#/p/${esc(p.slug)}"><b>№${pad2(i + 1)}</b><span class="t">${esc(p.title)}</span><span class="s">${esc(p.subtitle || '')}</span><span class="n">${plural(countOf(p))} ${ARROW}</span></a>`).join('')}
       </div>
     </section>
     <div class="paper marquee" aria-hidden="true"><div class="track">${names}${names}${names}${names}</div></div>`;
     }
     projects.forEach((p, i) => {
-      const n = (p.photos || []).length;
+      const n = countOf(p);
       html += `
     <a class="panel proj grow" id="proj-${esc(p.slug)}" href="#/p/${esc(p.slug)}" data-plx="8">
       <div class="bg">${img(coverOf(p), '', i === 0)}</div><div class="shade"></div>
@@ -122,27 +124,77 @@
   function layoutShots(photos) {
     const out = []; let alt = 0;
     const auto = p => p && kindOf(p) === 'image' && (p.layout || 'auto') === 'auto';
+    // "from" is the picture's number on the page (subtitle blocks are not numbered)
+    const num = []; photos.reduce((c, p, k) => { num[k] = c; return kindOf(p) === 'text' ? c : c + 1; }, 0);
     for (let i = 0; i < photos.length; i++) {
       const p = photos[i], lay = p.layout || 'auto';
-      if (kindOf(p) !== 'image') { out.push({ type: kindOf(p), items: [p], from: i }); alt = 0; continue; }
-      if (lay === 'wide') { out.push({ type: 'wide', items: [p], from: i }); alt = 1; continue; }
-      if (lay === 'fill' || (lay === 'auto' && !isPortrait(p) && alt === 0)) {
-        out.push({ type: 'full', items: [p], from: i }); if (lay === 'auto') alt = 1; continue;
+      if (kindOf(p) !== 'image') { out.push({ type: kindOf(p), items: [p], from: num[i] }); alt = 0; continue; }
+      if (p.fx === 'dawn') { out.push({ type: 'dawn', items: [p], from: num[i] }); alt = 0; continue; }
+      if (lay === 'wide') { out.push({ type: 'wide', items: [p], from: num[i] }); alt = 1; continue; }
+      if (lay === 'pair' && photos[i + 1] && kindOf(photos[i + 1]) === 'image' && photos[i + 1].src) {   // "pair with the next photo"
+        out.push({ type: 'pair', items: [p, photos[i + 1]], from: num[i] }); i++; alt = 0; continue;
       }
-      if (lay === 'auto' && auto(photos[i + 1])) { out.push({ type: 'pair', items: [p, photos[i + 1]], from: i }); i++; }
-      else out.push({ type: 'single', items: [p], from: i });
+      if (lay === 'fill' || (lay === 'auto' && !isPortrait(p) && alt === 0)) {
+        out.push({ type: 'full', items: [p], from: num[i] }); if (lay === 'auto') alt = 1; continue;
+      }
+      if (lay === 'auto' && auto(photos[i + 1])) { out.push({ type: 'pair', items: [p, photos[i + 1]], from: num[i] }); i++; }
+      else out.push({ type: 'single', items: [p], from: num[i] });
       alt = 0;
     }
     return out;
   }
 
+  // Captions may have two lines ("中文\nEnglish"): the first is set as the main line, the second smaller.
+  function capHTML(c) {
+    const L = String(c || '').split(/\n+/).map(x => x.trim()).filter(Boolean);
+    return L.length > 1 ? `<span class="cap two"><span class="c1">${esc(L[0])}</span><span class="c2">${esc(L.slice(1).join(' '))}</span></span>` : esc(L[0] || '');
+  }
+  const capLine = c => String(c || '').split(/\n+/).map(x => x.trim()).filter(Boolean).join('  ·  ');
+  // per-photo effects: "mist" = slow drifting cloud over the photo
+  const fxIn = ph => ph && ph.fx === 'mist' ? '<div class="mist" aria-hidden="true"></div>' : '';
+
   const frame1 = (ph, i) => `<figure class="frame${isPortrait(ph) ? ' tall' : ''}" style="--ar:${((+ph.w || 3) / (+ph.h || 2)).toFixed(3)}">` +
-    `<div class="clip" style="aspect-ratio:${+ph.w || 3}/${+ph.h || 2}">${img(ph)}</div>` +
-    `<figcaption><b>№${pad2(i + 1)}</b>${esc(ph.caption || '')}</figcaption></figure>`;
+    `<div class="clip" style="aspect-ratio:${+ph.w || 3}/${+ph.h || 2}">${img(ph)}${fxIn(ph)}</div>` +
+    `<figcaption><b>№${pad2(i + 1)}</b>${capHTML(ph.caption)}</figcaption></figure>`;
+
+  // Handscroll (长卷): a stack whose layout is "scroll". The photos sit side by side on one long
+  // strip that slides sideways as you scroll down, like unrolling a Chinese handscroll.
+  function rollHTML(x, i) {
+    const L = (x.layers || []).filter(l => l && l.src); if (!L.length) return '';
+    const C = String(x.caption || '').split(/\n+/).map(t => t.trim()).filter(Boolean);
+    return `
+    <section class="paper roll">
+      <div class="stick">
+        ${C.length ? `<div class="roll-head"><b>№${pad2(i + 1)}</b><span class="c1">${esc(C[0])}</span>${C[1] ? `<span class="c2">${esc(C.slice(1).join(' '))}</span>` : ''}</div>` : ''}
+        <div class="roll-track">${L.map((l, j) => `
+          <figure class="frame roll-item" style="--ar:${((+l.w || 3) / (+l.h || 2)).toFixed(3)}">
+            <div class="clip">${img({ src: l.src, caption: l.label, focus: x.focus })}</div>
+            <figcaption><b>${pad2(j + 1)}</b>${esc(l.label || '')}</figcaption></figure>`).join('')}
+        </div>
+        <div class="roll-line"><i></i></div>
+      </div>
+    </section>`;
+  }
+
+  // "Dawn" effect (日照金山): the frame is pinned and scrolling brings the sun up — the photo goes
+  // from cold pre-dawn blue to its full colour, with a warm glow where the light lands (focus point).
+  function dawnHTML(x, i, total) {
+    const f = x.focus || [50, 40], C = String(x.caption || '').split(/\n+/).map(t => t.trim()).filter(Boolean);
+    return `
+    <section class="dawn" data-count="${pad2(i + 1)}" data-total="${pad2(total)}">
+      <div class="stick">
+        <div class="bg">${img(x)}</div>
+        <div class="dawn-cold"></div><div class="dawn-glow" style="--gx:${+f[0] || 50}%;--gy:${+f[1] || 40}%"></div>
+        <div class="dawn-hint">向下滚动，等太阳出来<span>Keep scrolling for the sun</span></div>
+        ${C.length ? `<div class="dawn-title"><span class="c1">${esc(C[0])}</span>${C[1] ? `<span class="c2">${esc(C.slice(1).join(' '))}</span>` : ''}</div>` : ''}
+      </div>
+    </section>`;
+  }
 
   // Time stack: the frame stays pinned while scrolling cross-fades layer to layer.
   // Halfway through a fade both photos show at 50 % — an average, like a slow double exposure.
   function stackHTML(x, i) {
+    if (x.layout === 'scroll') return rollHTML(x, i);
     const L = (x.layers || []).filter(l => l && l.src); if (!L.length) return '';
     const full = x.layout === 'fill', w = +L[0].w || 3, h = +L[0].h || 2;
     const layers = L.map((l, j) => `<img class="layer" src="${esc(l.src)}" alt="${esc(l.label || x.caption || '')}" data-label="${esc(l.label || '')}" style="opacity:${j ? 0 : 1};${pos(x)}" loading="lazy" decoding="async" draggable="false">`).join('');
@@ -154,6 +206,80 @@
           <figcaption><b>№${pad2(i + 1)}</b><span class="cap">${esc(x.caption || '')}</span>
             <span class="when">${esc(L[0].label || '')}</span><span class="ticks">${L.map((l, j) => `<i${j ? '' : ' class="on"'}></i>`).join('')}</span></figcaption>
         </figure>
+      </div>
+    </section>`;
+  }
+
+  // Subtitle block: a heading and a paragraph on paper, between the pictures.
+  // Alignment, block height (px), sizes (px), font and colour are all set in the backstage.
+  const FONTS = {
+    serif: 'var(--serif)', sans: 'var(--font)', mono: 'ui-monospace, "SF Mono", Menlo, Consolas, monospace',
+    song: '"Songti SC", "STSong", "Noto Serif SC", "SimSun", serif', kai: '"Kaiti SC", "STKaiti", "KaiTi", "Kaiti TC", serif',
+  };
+  // Page colours for dark (indigo) albums. A text block with a "tone" dyes the whole page into that colour
+  // as it scrolls in (blended in the scroll loop, so it rewinds on the way back up).
+  // bg = cloth colour, hi / lo = the uneven dye (light and dark patches), ink = text, ac = accent, pat = tie-dye
+  // dot pattern strength in the cloth.
+  const TONES = {
+    indigo: { bg: [17, 26, 44], hi: [40, 62, 110, .55], lo: [22, 36, 70, .7], ink: [236, 227, 210], ac: [212, 162, 76], pat: 0 },
+    dye:    { bg: [21, 39, 80], hi: [54, 88, 156, .5], lo: [9, 20, 50, .75], ink: [238, 240, 243], ac: [232, 170, 96], pat: 1 },
+    jade:   { bg: [11, 35, 37], hi: [32, 96, 90, .45], lo: [5, 20, 24, .72], ink: [228, 236, 226], ac: [203, 166, 92], pat: 0 },
+    maroon: { bg: [45, 16, 21], hi: [116, 38, 42, .45], lo: [22, 6, 10, .72], ink: [243, 229, 213], ac: [228, 180, 82], pat: 0 },
+    dusk:   { bg: [31, 27, 50], hi: [88, 74, 138, .42], lo: [13, 11, 30, .72], ink: [237, 231, 226], ac: [236, 182, 96], pat: 0 },
+    night:  { bg: [8, 11, 22], hi: [28, 38, 80, .4], lo: [0, 0, 6, .6], ink: [228, 226, 220], ac: [204, 198, 180], pat: 0 },
+  };
+  const NUMERALS = ['壹','贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾', '拾壹', '拾贰'];
+  // Five-colour prayer flags strung across a chapter opening (blue, white, red, green, yellow)
+  function flagsHTML() {
+    // flags hang on one sagging string (a quadratic curve); the svg draws the string, the flags sit on it.
+    // viewBox units: 100 wide, 20 high = 12vw → one unit is 0.6vw vertically
+    const n = 28, cols = ['#3d5f9b', '#e8e2d4', '#b0473c', '#3e7a58', '#d5a640'];
+    const P0 = [2, 1.2], P1 = [50, 15], P2 = [98, 4.2];
+    const at = t => [0, 1].map(k => (1 - t) * (1 - t) * P0[k] + 2 * (1 - t) * t * P1[k] + t * t * P2[k]);
+    return `<div class="flags" aria-hidden="true"><svg viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M${P0} Q${P1} ${P2}"/></svg>${
+      Array.from({ length: n }, (v, i) => {
+        const [x, y] = at((i + 0.5) / n);
+        return `<i style="--i:${i};left:${x.toFixed(2)}%;top:${(y * 0.6).toFixed(2)}vw;background:${cols[i % 5]}"></i>`;
+      }).join('')}</div>`;
+  }
+  // Chapter opening: a numeral, a large vertical Chinese title, a small English line and a passage
+  // that lights up word by word. Ornament: "contour" (drawn mountain contour lines) or "flags".
+  const toneAttr = x => TONES[x.tone] ? ` data-tone="${x.tone}"` : '';
+  function chapterHTML(x, n, st) {
+    const orn = ['flags', 'shibori'].includes(x.ornament) ? x.ornament : x.ornament === 'none' ? '' : 'contour';
+    return `
+    <section class="paper chapter${orn ? ' orn-' + orn : ''}"${st.length ? ` style='${st.join(';')}'` : ''} data-seed="${n}"${toneAttr(x)}>
+      <i class="cloud a"></i><i class="cloud b"></i><i class="cloud c"></i>
+      ${orn === 'contour' ? '<svg class="contour" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>' : ''}
+      ${orn === 'shibori' ? '<svg class="shibori" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>' : ''}
+      ${orn === 'flags' ? flagsHTML() : ''}
+      <div class="ch-in">
+        <div class="ch-num reveal">${NUMERALS[n - 1] || n}</div>
+        ${x.title ? `<h2 class="ch-title reveal" style="--d:1">${esc(x.title)}</h2>` : ''}
+        <div class="ch-side">
+          ${x.kicker ? `<div class="ch-kicker reveal" style="--d:2">${esc(x.kicker)}</div>` : ''}
+          ${x.caption ? `<p class="ch-text words">${words(x.caption)}</p>` : ''}
+        </div>
+      </div>
+    </section>`;
+  }
+  function textHTML(x, chapterNo) {
+    if (!x.title && !x.caption) return '';
+    const align = ['left', 'center', 'right'].includes(x.align) ? x.align : 'left';
+    const st = [];
+    const h = Math.round(+x.height); if (h > 0) st.push(`min-height:${Math.min(h, 4000)}px`, 'padding-top:0', 'padding-bottom:0');
+    const ts = +x.size, cs = +x.csize;
+    if (ts > 0) st.push(`--ts:${Math.min(ts, 400)}px`);
+    if (cs > 0) st.push(`--cs:${Math.min(cs, 200)}px`);
+    if (FONTS[x.font]) st.push(`--tf:${FONTS[x.font]}`);
+    if (/^#[0-9a-f]{6}$/i.test(x.color || '')) st.push(`--tc:${x.color}`);
+    if (chapterNo) return chapterHTML(x, chapterNo, st);
+    return `
+    <section class="paper textblock ${align}"${st.length ? ` style='${st.join(';')}'` : ''}${toneAttr(x)}>
+      <div class="tb-in">
+        ${x.kicker ? `<div class="tb-kicker reveal">${esc(x.kicker)}</div>` : ''}
+        ${x.title ? `<h2 class="tb-title reveal">${text(x.title)}</h2>` : ''}
+        ${x.caption ? `<p class="tb-cap reveal" style="--d:1">${text(x.caption)}</p>` : ''}
       </div>
     </section>`;
   }
@@ -182,7 +308,7 @@
   }
 
   function projectHTML(p) {
-    const photos = p.photos || [], total = photos.length, idx = projects.indexOf(p);
+    const photos = p.photos || [], total = countOf(p), idx = projects.indexOf(p);
     const next = projects.length > 1 ? projects[(idx + 1) % projects.length] : null;
     let html = `
     <section class="panel cover grow" data-plx="8">
@@ -204,14 +330,16 @@
       <p class="statement words">${words(p.description)}</p>
     </section>`;
     }
-    let pairs = 0, singles = 0;
+    let pairs = 0, singles = 0, chapters = 0;
     for (const s of layoutShots(photos)) {
       if (s.type === 'wide') {   // whole photo, as wide as the screen; its height follows the photo
         const x = s.items[0];
-        html += `<section class="panel shot wide" style="aspect-ratio:${+x.w || 3}/${+x.h || 2}" data-count="${pad2(s.from + 1)}" data-total="${pad2(total)}" data-cap="${esc(x.caption || '')}"><div class="bg">${img(x)}</div></section>`;
+        html += `<section class="panel shot wide" style="aspect-ratio:${+x.w || 3}/${+x.h || 2}" data-count="${pad2(s.from + 1)}" data-total="${pad2(total)}" data-cap="${esc(capLine(x.caption))}"><div class="bg">${img(x)}${fxIn(x)}</div></section>`;
       } else if (s.type === 'full') {
         const x = s.items[0];
-        html += `<section class="panel shot grow" data-plx="5" data-count="${pad2(s.from + 1)}" data-total="${pad2(total)}" data-cap="${esc(x.caption || '')}"><div class="bg">${img(x)}</div></section>`;
+        html += `<section class="panel shot grow" data-plx="5" data-count="${pad2(s.from + 1)}" data-total="${pad2(total)}" data-cap="${esc(capLine(x.caption))}"><div class="bg">${img(x)}${fxIn(x)}</div></section>`;
+      } else if (s.type === 'dawn') {
+        html += dawnHTML(s.items[0], s.from, total);
       } else if (s.type === 'pair') {
         const [a, b] = s.items, kind = isPortrait(a) && isPortrait(b) ? 'pp' : isPortrait(a) ? 'pl' : isPortrait(b) ? 'lp' : (pairs % 2 ? 'sl' : 'ls');
         pairs++;
@@ -219,6 +347,8 @@
           const ar = Math.max((+a.w || 3) / (+a.h || 2), (+b.w || 3) / (+b.h || 2)).toFixed(3);
           html += `<section class="paper spread pair swap ${kind}" style="--ar:${ar}"><div class="stick">${frame1(a, s.from)}${frame1(b, s.from + 1)}</div></section>`;
         } else html += `<section class="paper spread pair ${kind}">${frame1(a, s.from)}${frame1(b, s.from + 1)}</section>`;
+      } else if (s.type === 'text') {
+        html += textHTML(s.items[0], s.items[0].style === 'chapter' ? ++chapters : 0);
       } else if (s.type === 'stack') {
         html += stackHTML(s.items[0], s.from);
       } else if (s.type === 'video' || s.type === 'youtube') {
@@ -272,8 +402,31 @@
   // ---------- router ----------
   let route = { type: 'home' }, prevRoute = null;
   let instant = false, homeTop = false, rendering = false;
-  let stacks = [], mediaIO = null;
+  let stacks = [], mediaIO = null, dawns = [], rolls = [];
   let panels = [], papers = [], wordSets = [], swaps = [], onLight = false, nextEl = null, revealIO = null;
+  let toneMarks = [], toneKey = '';
+  const TONE_VARS = ['--cloth', '--cloth-hi', '--cloth-lo', '--pink', '--pink-2', '--pink-3', '--accent', '--pat'];
+  const mixTone = (a, b, k) => {
+    const m = (p, q) => p.map((v, i) => v + (q[i] - v) * k);
+    return { bg: m(a.bg, b.bg), hi: m(a.hi, b.hi), lo: m(a.lo, b.lo), ink: m(a.ink, b.ink), ac: m(a.ac, b.ac), pat: a.pat + (b.pat - a.pat) * k };
+  };
+  // each tone mark starts dyeing the page when its top enters the bottom of the screen and is done
+  // by the time it reaches the top fifth; marks are in page order, so later ones blend over earlier ones
+  function applyTones(vh) {
+    let c = TONES.indigo;
+    for (const m of toneMarks) {
+      const k = Math.min(1, Math.max(0, (vh * 0.9 - m.el.getBoundingClientRect().top) / (vh * 0.7)));
+      if (k <= 0) break;
+      c = mixTone(c, m.t, k * k * (3 - 2 * k));
+    }
+    const rgb = v => `rgb(${v.slice(0, 3).map(Math.round)})`, rgba = (v, a) => `rgba(${v.slice(0, 3).map(Math.round)},${(a == null ? v[3] : a).toFixed(3)})`;
+    const vals = [rgb(c.bg), rgba(c.hi), rgba(c.lo), rgb(c.ink), rgba(c.ink, .7), rgba(c.ink, .42), rgb(c.ac), c.pat.toFixed(3)];
+    const key = vals.join('|');
+    if (key === toneKey) return;
+    toneKey = key;
+    const s = document.body.style;
+    TONE_VARS.forEach((k, i) => s.setProperty(k, vals[i]));
+  }
 
   function parse() {
     const m = location.hash.match(/^#\/p\/(.+)$/);
@@ -291,6 +444,10 @@
     prevRoute = route; route = r;
     view.innerHTML = r.type === 'project' ? projectHTML(r.project) : (projects.length || content.hero ? homeHTML() : '<div class="empty">No content yet.</div>');
     document.title = r.type === 'project' ? `${r.project.title} — ${content.site.title || ''}` : (content.site.title || 'Photography');
+    // per-album page style ("theme"), set in the backstage; "indigo" is a dark theme
+    const theme = r.type === 'project' && /^[a-z]+$/.test(r.project.theme || '') ? r.project.theme : '';
+    document.body.dataset.theme = theme;
+    document.body.classList.toggle('theme-dark', theme === 'indigo');
 
     // returning home with the Back button lands on the project you just left
     let top = 0;
@@ -317,8 +474,16 @@
       grow: !reduceMotion && el.classList.contains('grow'), f: -1,
     }));
     panels.forEach(p => revealIO.observe(p.el));
-    $$('.frame, .paper .reveal', view).forEach(el => revealIO.observe(el));
-    papers = $$('.paper', view);
+    $$('.frame, .paper .reveal, .chapter', view).forEach(el => revealIO.observe(el));
+    papers = document.body.classList.contains('theme-dark') ? [] : $$('.paper', view);   // dark pages keep the light nav
+    dawns = $$('.dawn', view).map(el => ({ el, sun: -1 }));
+    rolls = $$('.roll', view).map(el => ({ el, track: $('.roll-track', el), items: $$('.roll-item', el), w: 0, p: -1 }));
+    sizeRolls();
+    $$('.chapter svg.contour', view).forEach(drawContour);
+    $$('.chapter svg.shibori', view).forEach(drawShibori);
+    TONE_VARS.forEach(k => document.body.style.removeProperty(k)); toneKey = '';
+    toneMarks = document.body.classList.contains('theme-dark')
+      ? $$('[data-tone]', view).map(el => ({ el, t: TONES[el.dataset.tone] })).filter(m => m.t) : [];
     swaps = $$('.spread.swap', view).map(el => ({ el, stick: $('.stick', el), sl: el.classList.contains('sl'), s: -1 }));
     stacks = $$('.stack', view).map(el => ({ el, imgs: $$('img.layer', el), when: $('.when', el), ticks: $$('.ticks i', el), ops: [], cur: 0 }));
     if (mediaIO) mediaIO.disconnect();
@@ -358,6 +523,7 @@
         }
       }
       updateHud(current);
+      if (toneMarks.length) applyTones(vh);
       // is the nav sitting on paper? then it switches to dark ink
       let light = false;
       for (const el of papers) { const r = el.getBoundingClientRect(); if (r.top <= 42 && r.bottom > 42) { light = true; break; } }
@@ -382,6 +548,29 @@
         if (s !== w.s) {
           w.s = s; w.el.style.setProperty('--s', s);
           w.stick.style.gridTemplateColumns = canSwap ? `${(7 - 3 * s).toFixed(4)}fr ${(4 + 3 * s).toFixed(4)}fr` : '';
+        }
+      }
+      // dawn: scroll progress through the pinned section raises the sun (--sun 0 → 1)
+      for (const d of dawns) {
+        const r = d.el.getBoundingClientRect(); if (r.bottom < -100 || r.top > vh + 100) continue;
+        const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - vh)));
+        const k = reduceMotion ? 1 : Math.min(1, Math.max(0, (p - 0.08) / 0.7)), sun = +(k * k * (3 - 2 * k)).toFixed(3);
+        if (sun !== d.sun) { d.sun = sun; d.el.style.setProperty('--sun', sun); }
+      }
+      // handscroll: vertical scroll → sideways travel of the strip
+      for (const ro of rolls) {
+        const r = ro.el.getBoundingClientRect(); if (r.bottom < -100 || r.top > vh + 100) continue;
+        const p = +Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - vh))).toFixed(4);
+        if (p === ro.p) continue; ro.p = p;
+        const shift = p * ro.w;
+        ro.track.style.transform = `translate3d(${(-shift).toFixed(1)}px,0,0)`;
+        ro.el.style.setProperty('--p', p);
+        if (!reduceMotion) {   // each photo drifts a little inside its frame — depth, like looking through a window
+          const vw = window.innerWidth;
+          for (const it of ro.items) {
+            const c = it.offsetLeft + it.offsetWidth / 2 - shift - vw / 2;
+            const im = it._im || (it._im = $('img', it)); if (im) im.style.transform = `translate3d(${(-c * 0.06).toFixed(1)}px,0,0)`;
+          }
         }
       }
       // time stacks: hold, cross-fade, hold … across the pinned scroll distance
@@ -483,7 +672,120 @@
     }
   });
   addEventListener('hashchange', render);
-  addEventListener('resize', () => { lastY = -1; markTab(route.hash); });
+  addEventListener('resize', () => { lastY = -1; markTab(route.hash); sizeRolls(); });
+  // a handscroll section is as tall as its strip is wide, so scrolling down unrolls it exactly
+  function sizeRolls() {
+    for (const ro of rolls) {
+      ro.w = Math.max(0, ro.track.scrollWidth - window.innerWidth);
+      ro.el.style.height = (window.innerHeight + ro.w) + 'px'; ro.p = -1;
+    }
+  }
+  // mountain contour lines for chapter openings: wobbly rings around a summit, drawn in on reveal.
+  // Seeded per chapter so they look the same on every visit.
+  function drawContour(svg) {
+    let seed = (+svg.closest('.chapter').dataset.seed || 1) * 9301 + 49297;
+    const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+    const cx = 560 + rnd() * 260, cy = 380 + rnd() * 260, rings = 15, ph = [rnd() * 6, rnd() * 6, rnd() * 6];
+    let out = '';
+    for (let k = 1; k <= rings; k++) {
+      const base = k * 44, pts = [];
+      for (let a = 0; a <= 72; a++) {
+        const t = a / 72 * Math.PI * 2;
+        const r = base * (1 + 0.16 * Math.sin(3 * t + ph[0] + k * 0.18) + 0.08 * Math.sin(5 * t + ph[1] - k * 0.11) + 0.05 * Math.sin(2 * t + ph[2]));
+        pts.push(`${(cx + Math.cos(t) * r * 1.25).toFixed(1)},${(cy + Math.sin(t) * r).toFixed(1)}`);
+      }
+      out += `<path d="M${pts.join('L')}Z" pathLength="1" style="--k:${k}"${k % 5 === 0 ? ' class="index"' : ''}/>`;
+    }
+    svg.innerHTML = out;
+  }
+
+  // Tie-dye (扎染) ornament: Bai-style medallions as the white "resist" left on indigo cloth — rings of
+  // stitch dots and dashes around a tied centre, a ring of petals, short rays — plus scattered four-dot
+  // flowers and a zigzag border. Every line is drawn twice: a blurred wide copy (the dye wicking into the
+  // cloth) under a crisp one. Rings appear from the centre outwards when the chapter scrolls in.
+  function drawShibori(svg) {
+    const n = +svg.closest('.chapter').dataset.seed || 1;
+    let seed = n * 7919 + 1013;
+    const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+    const b = svg.getBoundingClientRect(), W = 1000;
+    const H = Math.round(W * Math.min(1.6, Math.max(0.45, (b.height || 620) / (b.width || 1000))));
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    const TAU = Math.PI * 2, f = v => v.toFixed(1);
+    // a slightly wobbly closed loop: hand-tied, not compass-drawn
+    const loop = (cx, cy, r, wob) => {
+      const p1 = rnd() * TAU, p2 = rnd() * TAU; let d = '';
+      for (let a = 0; a <= 90; a++) {
+        const t = a / 90 * TAU, rr = r * (1 + wob * Math.sin(3 * t + p1) + wob * 0.6 * Math.sin(7 * t + p2));
+        d += (a ? 'L' : 'M') + f(cx + Math.cos(t) * rr) + ',' + f(cy + Math.sin(t) * rr);
+      }
+      return d + 'Z';
+    };
+    const stitch = (d, r, kind, s) => {
+      const N = Math.max(7, Math.round(TAU * r / ((kind === 'dot' ? 11 : 13) * s))), p = 1000 / N;
+      return kind === 'dot'
+        ? `<path d="${d}" pathLength="1000" class="dot" stroke-dasharray="0 ${p.toFixed(2)}"/>`
+        : `<path d="${d}" pathLength="1000" class="dash" stroke-dasharray="${(p * 0.55).toFixed(2)} ${(p * 0.45).toFixed(2)}"/>`;
+    };
+    let out = '', m = 0;
+    const discs = [];
+    function medal(cx, cy, R) {
+      discs.push([cx, cy, R]);
+      const s = Math.max(0.4, R / 300), cyc = ['dot', 'dash', 'dot', 'petal', 'dot', 'dash', 'ray'];
+      let g = `<g class="rg" style="--r:0"><circle cx="${f(cx)}" cy="${f(cy)}" r="${f(8 * s)}" class="core"/></g>`, r = 24 * s, i = 0;
+      while (r < R) {
+        const kind = cyc[i % cyc.length]; let inner = '';
+        if (kind === 'petal') {
+          const N = Math.max(6, Math.round(TAU * r / (36 * s))), pr = 11 * s;
+          for (let j = 0; j < N; j++) { const t = j / N * TAU; inner += stitch(loop(cx + Math.cos(t) * r, cy + Math.sin(t) * r, pr, 0.06), pr, 'dot', s); }
+          r += 30 * s;
+        } else if (kind === 'ray') {
+          const N = Math.round(TAU * r / (15 * s)); let d = '';
+          for (let j = 0; j < N; j++) { const t = j / N * TAU, c = Math.cos(t), si = Math.sin(t); d += `M${f(cx + c * (r - 7 * s))},${f(cy + si * (r - 7 * s))}L${f(cx + c * (r + 7 * s))},${f(cy + si * (r + 7 * s))}`; }
+          inner = `<path d="${d}" class="ray"/>`;
+          r += 24 * s;
+        } else {
+          inner = stitch(loop(cx, cy, r, 0.012), r, kind, s);
+          r += 15 * s;
+        }
+        g += `<g class="rg" style="--r:${++i}">${inner}</g>`;
+      }
+      out += `<g style="--m:${m++}">${g}</g>`;
+    }
+    const free = (x, y, pad) => discs.every(([cx, cy, R]) => Math.hypot(x - cx, y - cy) > R + pad);
+    // keep the pattern out from under the chapter's text (boxes in viewBox units)
+    const sc = W / (b.width || 1000);
+    const boxes = $$('.ch-num, .ch-title, .ch-side', svg.parentNode).map(e => {
+      const r = e.getBoundingClientRect();
+      return [(r.left - b.left) * sc - 24, (r.top - b.top) * sc - 24, (r.right - b.left) * sc + 24, (r.bottom - b.top) * sc + 24];
+    });
+    const clear = (x, y, R) => boxes.every(([l, t, r, bm]) => Math.hypot(Math.max(l - x, 0, x - r), Math.max(t - y, 0, y - bm)) >= R);
+    // one large medallion rising out of a corner or edge, then a few small ones where there is room
+    const spots = [[0.07, 0.98], [0.97, 1.02], [1.03, 0.5], [0.95, -0.02], [0.05, 0.02]];
+    let big = null;
+    for (let R = Math.min(W, H) * 0.56; R > 110 && !big; R *= 0.88) {
+      for (const [sx, sy] of spots) if (clear(W * sx, H * sy, R)) { big = [W * sx, H * sy, R]; break; }
+    }
+    medal(...(big || [W * 0.07, H * 0.98, 140]));
+    for (let tries = 0, made = 0; tries < 160 && made < 5; tries++) {
+      const R = 42 + rnd() * 60, x = R * 0.4 + rnd() * (W - R * 0.8), y = R + rnd() * (H - 2 * R);
+      if (free(x, y, R + 30) && clear(x, y, R + 16)) { medal(x, y, R); made++; }
+    }
+    // four-dot flowers (撮花) scattered over the rest of the cloth
+    let dots = '';
+    for (let tries = 0, made = 0; tries < 500 && made < 52; tries++) {
+      const x = 16 + rnd() * (W - 32), y = 20 + rnd() * (H - 90);
+      if (!free(x, y, 22) || !clear(x, y, 14)) continue;
+      const a = rnd() * TAU, e = 6;
+      for (let j = 0; j < 4; j++) dots += `<circle cx="${f(x + Math.cos(a + j * TAU / 4) * e)}" cy="${f(y + Math.sin(a + j * TAU / 4) * e)}" r="2.4" class="core"/>`;
+      made++;
+    }
+    // zigzag stitched border along the bottom
+    let zz = '';
+    for (let x = 0, k = 0; x <= W + 30; x += 30, k++) zz += (k ? 'L' : 'M') + x + ',' + (H - 46 + (k % 2 ? -14 : 14));
+    out += `<g style="--m:${m + 1}"><g class="rg" style="--r:0">${dots}</g><g class="rg" style="--r:3"><path d="${zz}" pathLength="1000" class="dash" stroke-dasharray="4 4"/></g></g>`;
+    svg.innerHTML = `<defs><filter id="sbh-${n}" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3"/></filter></defs>
+      <g class="halo" filter="url(#sbh-${n})">${out}</g><g class="crisp">${out}</g>`;
+  }
 
   // pointer-follow sheen on glass
   document.addEventListener('pointermove', e => {
@@ -605,7 +907,7 @@
   // ---------- click any photo to view it full screen ("zoom mode") ----------
   // Framed photos, full-screen photos, the album cover and time stacks. (Home-page panels are links to
   // albums, and videos need their own clicks, so those are left out.)
-  const ZOOMABLE = '.frame.in:not(.media) .clip, .panel.shot:not(.media) .bg, .panel.cover .bg';
+  const ZOOMABLE = '.frame.in:not(.media) .clip, .panel.shot:not(.media) .bg, .panel.cover .bg, .dawn .bg';
   // Where the photo sits on the page right now: the whole (uncropped) picture as a uniformly scaled
   // transform, plus a clip-path for the part that is actually visible — so cropped full-screen
   // photos grow out of exactly what you clicked, without stretching.

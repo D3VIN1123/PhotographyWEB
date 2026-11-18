@@ -20,6 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      # photos removed in the backstage stay on disk; leave them out of the published copy (1 GB limit)
+      - run: python3 scripts/prune_unused.py public
       - uses: actions/upload-pages-artifact@v3
         with:
           path: public
