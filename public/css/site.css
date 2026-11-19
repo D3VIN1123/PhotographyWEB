@@ -691,3 +691,43 @@ body[data-theme="indigo"] .next { background: #070a12; }
   .mist::before, .mist::after, .chapter .cloud, .flags i { animation: none; }
   .chapter svg.contour path, .shibori .rg { transition-duration: .01s; transition-delay: 0s; }
 }
+
+/* ============================================================
+   No fades on photographs or video (owner, Nov 2026): every photo and film keeps its hard, full edge.
+   The next album: its photograph fills the block from the top; a blurred copy over it clears as you scroll in
+   (site.js sets --nb 0 → 1 from the block's position), so the hand-off is a Gaussian blur in time, not a gradient edge.
+   ============================================================ */
+.next { height: 128vh; min-height: 640px; place-items: end center; padding-bottom: 13vh; }
+.next-blur { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
+.next-blur img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.14); filter: blur(28px) saturate(.85);
+  opacity: calc((1 - var(--nb, 0)) * (1 - var(--charge, 0))); }
+.next-inner { z-index: 3; }
+
+/* ---------- full-width film (YouTube, layout "fill") ---------- */
+.ytfull { position: relative; width: 100%; aspect-ratio: var(--ar, 1.7778); max-height: 100vh; overflow: hidden; cursor: pointer; color: var(--ink); outline: none; }
+.ytfull .clip.yt { position: absolute; inset: 0; background: center / cover no-repeat; }
+.ytfull iframe { position: absolute; left: 50%; top: 50%; width: 100%; height: 100%; border: 0; transform: translate(-50%, -50%) scale(1.24); pointer-events: none; }
+.yt-over { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; background: rgba(10, 10, 10, .08); transition: background .6s var(--ease); }
+.yt-play { display: inline-flex; align-items: center; gap: .9em; height: 44px; padding: 0 24px; border: 1px solid rgba(244, 241, 234, .6); border-radius: 999px;
+  font: 400 10.5px/1 var(--mono); letter-spacing: .26em; text-transform: uppercase; text-shadow: 0 1px 12px rgba(0, 0, 0, .4);
+  opacity: .7; transition: opacity .5s var(--ease), background .5s var(--ease), color .5s var(--ease); }
+.yt-play b { font-weight: 400; }
+.yt-cap { position: absolute; left: var(--pad); bottom: 16%; font-size: 19px; text-shadow: 0 1px 14px rgba(0, 0, 0, .45); }
+.ytfull:hover .yt-over, .ytfull:focus-visible .yt-over { background: rgba(10, 10, 10, .22); }
+.ytfull:hover .yt-play, .ytfull:focus-visible .yt-play { opacity: 1; background: var(--ink); color: #161513; text-shadow: none; }
+.ytmodal { position: fixed; inset: 0; z-index: 95; background: #000; }
+.ytmodal iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.ytclose { position: absolute; top: 18px; right: 18px; z-index: 2; height: 36px; padding: 0 16px; border: 1px solid rgba(255, 255, 255, .5); border-radius: 999px; background: rgba(0, 0, 0, .4); color: #fff; cursor: pointer;
+  font: 400 10.5px/1 var(--mono); letter-spacing: .24em; text-transform: uppercase; }
+
+/* ---------- big Chinese titles take their album's colour (gold only for 北京's palace) ---------- */
+.plate-big.cjk.t-plain  { --gold: linear-gradient(178deg, #fdfaf3 0%, #ece5d7 55%, #cdc3b1 100%); }
+.plate-big.cjk.t-huizhou { --gold: linear-gradient(178deg, #ffffff 0%, #eeede8 48%, #b8b7b0 100%); }
+.plate-big.cjk.t-caiyun, .plate-big.cjk.t-indigo { --gold: linear-gradient(178deg, #fdfcff 0%, #e3e6f3 46%, #a3aed6 100%); }
+.plate-big.cjk.t-yunnan { --gold: linear-gradient(178deg, #f6faf9 0%, #d6e5e2 50%, #8fb2b4 100%); }
+.plate-big.cjk.t-paris  { --gold: linear-gradient(178deg, #fbf6ec 0%, #e8dcc6 55%, #bba886 100%); }
+
+@media (max-width: 760px) {
+  .next { height: 100svh; }
+  .yt-cap { display: none; }
+}

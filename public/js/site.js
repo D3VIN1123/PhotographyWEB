@@ -70,7 +70,7 @@
     return `
       <div class="plate-top reveal"><span>Album ${pad2(i + 1)} / ${pad2(projects.length)}</span>${pl.coords ? `<span>${esc(pl.coords)}</span>` : ''}</div>
       <div class="plate">
-        <${H} class="plate-big${isCJK(pl.big) ? ' cjk' : ''} reveal" style="--d:1">${esc(pl.big)}</${H}>
+        <${H} class="plate-big${isCJK(pl.big) ? ' cjk' : ''} t-${/^[a-z]+$/.test(p.theme || '') ? p.theme : 'plain'} reveal" style="--d:1">${esc(pl.big)}</${H}>
         <div class="plate-side">
           ${pl.en ? `<div class="plate-en reveal" style="--d:2">${esc(pl.en)}</div>` : ''}
           ${cov && cov.caption ? `<div class="plate-cap reveal" style="--d:3">${capRich(cov.caption)}</div>` : ''}
@@ -177,7 +177,7 @@
     function scroll(vh) {
       if (!el) return false;
       const r = rect(el);
-      p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - vh)));
+      p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - vh * 1.35)));
       return r.bottom > 42 && p < 0.5;
     }
     function tick(t) {
@@ -386,9 +386,17 @@
     lanternnight: { bg: [17, 16, 16], hi: [96, 30, 22, .22], lo: [0, 0, 0, .5], ink: [232, 224, 212], ac: [214, 104, 72], pat: 0 },
     palace:       { bg: [74, 33, 29], hi: [112, 50, 42, .3], lo: [36, 14, 12, .55], ink: [238, 228, 210], ac: [214, 178, 112], pat: 0 },
     hutong:       { bg: [232, 230, 225], hi: [244, 243, 240, .6], lo: [208, 205, 198, .4], ink: [34, 33, 32], ac: [166, 58, 40], pat: 0 },
+    // 彩云之南 (zen): the clouds change colour through the day — silver cloud, an indigo night in the old town,
+    // jade river, plateau ochre, snow at first light, the starry night (night)
+    cloud:        { bg: [236, 238, 240], hi: [248, 249, 250, .6], lo: [214, 218, 226, .4], ink: [30, 34, 44], ac: [112, 122, 168], pat: 0 },
+    indigodusk:   { bg: [24, 30, 48], hi: [44, 58, 96, .3], lo: [10, 14, 26, .55], ink: [232, 230, 224], ac: [214, 170, 110], pat: 0 },
+    jadewater:    { bg: [226, 233, 230], hi: [242, 246, 244, .6], lo: [196, 210, 205, .4], ink: [28, 40, 38], ac: [62, 124, 114], pat: 0 },
+    ochre:        { bg: [236, 228, 214], hi: [248, 242, 232, .6], lo: [214, 198, 176, .4], ink: [44, 34, 28], ac: [160, 70, 48], pat: 0 },
+    snowlight:    { bg: [238, 236, 234], hi: [252, 250, 248, .6], lo: [220, 214, 210, .4], ink: [36, 32, 34], ac: [196, 128, 80], pat: 0 },
+    snow:         { bg: [240, 241, 242], hi: [252, 252, 253, .6], lo: [222, 224, 228, .4], ink: [32, 34, 38], ac: [160, 52, 40], pat: 0 },
     apricot:      { bg: [236, 228, 216], hi: [248, 240, 228, .6], lo: [220, 204, 184, .4], ink: [48, 36, 28], ac: [178, 96, 52], pat: 0 },
   });
-  const BASE_TONE = { indigo: 'indigo', paris: 'stone', huizhou: 'whitewall', beijing: 'hutong' };   // the page colour before the first toned block
+  const BASE_TONE = { indigo: 'indigo', paris: 'stone', huizhou: 'whitewall', beijing: 'hutong', caiyun: 'cloud' };   // the page colour before the first toned block
   const NUMERALS = ['壹','贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾', '拾壹', '拾贰'];
   // Five-colour prayer flags strung across a chapter opening (blue, white, red, green, yellow)
   function flagsHTML() {
@@ -618,19 +626,56 @@
       P.push(['M410 296V236A40 40 0 0 1 490 236V296M402 236H498M398 228H502', 'gold'], ['M330 220h18v22h-18zM560 214h18v22h-18zM690 230h16v20h-16zM160 236h16v20h-16z']);
       return P;
     },
-    fishdance() {   // a fish lantern carried through the village at night: hills, rooftops, people on poles, sparks
-      const P = [['M0 110Q140 40 280 92T560 70T820 92T1000 60', 'tower'], ['M0 140Q180 100 360 128T720 116T1000 104', 'tower'],
-        ['M40 220V180H120V160H170V180H240V220M600 220V176H660V156H720V176H800V220M820 220V188H900V220', 'tower']];
-      // the fish: body, tail, fin, eye, scales
-      P.push(['M300 150C360 96 520 92 600 140C520 186 360 188 300 150Z', 'gold'], ['M300 150L256 112M300 150L252 190M256 112Q276 150 252 190', 'gold'],
-        ['M440 104Q462 74 492 80Q474 96 478 108', 'gold'], ['M574 132a8 8 0 1 0 0.1 0', 'gold']);
-      let sc = ''; for (let x = 350; x <= 540; x += 32) sc += `M${x} 118q14 16 0 32q14 16 0 32`; P.push([sc, 'gold']);
-      // the bearers: poles, heads, bodies, legs mid-stride
+    fishdance() {   // a fish lantern (鱼灯) carried at night, drawn from the photographs: a plump red carp with rows of
+                    // round scales, spiky scalloped dorsal fins, a big ringed eye, curled tail lobes, held up on poles by
+                    // bearers in loose robes; horse-head walls and hills behind, fireworks overhead
+      const P = [['M0 112Q140 50 280 94T560 74T820 94T1000 64', 'tower'], ['M0 146Q180 108 360 132T720 120T1000 108', 'tower']];
+      // horse-head walls (stepped gables), left and right
+      const gable = (x0, w) => { const s = w / 6; return `M${x0} 252V206H${x0 + s}V194H${x0 + 2 * s}V182H${x0 + 4 * s}V194H${x0 + 5 * s}V206H${x0 + w}V252` +
+        `M${x0 - 4} 206h${s + 8}M${x0 + s - 4} 194h${s + 8}M${x0 + 2 * s - 4} 182h${2 * s + 8}M${x0 + 4 * s - 4} 194h${s + 8}M${x0 + 5 * s - 4} 206h${s + 8}`; };
+      P.push([gable(30, 150) + gable(200, 96) + gable(800, 120) + gable(930, 64), 'tower']);
+      P.push(['M64 252V228h18v24M236 252V230h14v22M846 252V226h20v26', 'tower']);
+      // fireworks: two bursts of short rays
+      let fw = '';
+      for (const [cx, cy, r] of [[190, 58, 30], [860, 46, 24], [700, 30, 14]]) {
+        for (let k = 0; k < 14; k++) { const t = k / 14 * Math.PI * 2, c = Math.cos(t), si = Math.sin(t); fw += `M${(cx + c * r * 0.4).toFixed(1)} ${(cy + si * r * 0.4).toFixed(1)}L${(cx + c * r).toFixed(1)} ${(cy + si * r).toFixed(1)}`; }
+      }
+      P.push([fw, 'gold']);
+      // the fish body (filled with the page colour first, so the hills don't show through it)
+      const body = 'M330 142C390 100 450 80 520 82C600 84 670 98 706 122Q726 132 732 141Q724 153 706 164C650 192 580 202 510 198C440 194 380 180 330 160Z';
+      P.push(['M262 94Q300 120 330 142L330 160Q296 180 258 210Q280 150 262 94Z', 'occ'], [body, 'occ'], [body, 'gold']);
+      // scales: rows of round scales overlapping toward the tail
+      const top = [[330, 142], [380, 112], [440, 92], [520, 82], [600, 86], [660, 98]], bot = [[330, 160], [400, 182], [470, 195], [520, 198], [600, 192], [660, 180]];
+      const at = (pts, x) => { for (let i = 1; i < pts.length; i++) if (x <= pts[i][0]) { const [x0, y0] = pts[i - 1], [x1, y1] = pts[i]; return y0 + (y1 - y0) * (x - x0) / (x1 - x0); } return pts[pts.length - 1][1]; };
+      let sc = '';
+      for (let x = 366, col = 0; x <= 640; x += 17, col++) {
+        const t = at(top, x) + 9, bt = at(bot, x) - 7, r = 9;
+        for (let y = t + (col % 2 ? 7.5 : 0); y <= bt - r; y += 15) sc += `M${x} ${(y - r).toFixed(1)}a${r} ${r} 0 0 0 0 ${2 * r}`;
+      }
+      P.push([sc, 'gold']);
+      // head: gill line, ringed eye, open mouth with curled lips, a barbel
+      P.push(['M654 102Q638 140 656 184', 'gold'], ['M690 122a12 12 0 1 0 0.1 0M690 128a6 6 0 1 0 0.1 0', 'gold'],
+        ['M732 141q-12 4-22 1M731 139q9-5 5-13q-5-3-8 2M714 152q12 12 26 8q7-3 4-10', 'gold']);
+      // dorsal fins: two crests of spikes, the tips swept back, joined by a scalloped edge
+      const fin = (x0, x1, h) => { let d = `M${x0} ${at(top, x0).toFixed(1)}`; const n = 5, w = (x1 - x0) / n;
+        for (let i = 0; i < n; i++) { const xa = x0 + i * w, xb = xa + w; d += `L${(xa + w * 0.15).toFixed(1)} ${(at(top, xa) - h).toFixed(1)}Q${(xa + w * 0.7).toFixed(1)} ${(at(top, xa) - h * 0.35).toFixed(1)} ${xb.toFixed(1)} ${at(top, xb).toFixed(1)}`; }
+        return d; };
+      P.push([fin(410, 500, 40) + fin(530, 620, 34), 'gold']);
+      // tail: upper and lower lobes ending in curls, with rays; small belly fins
+      P.push(['M330 142C314 126 292 106 264 94Q252 90 256 102Q264 108 268 100M264 94Q280 124 292 150Q276 180 258 210Q252 222 264 220Q270 212 262 208M258 210C284 196 308 178 330 160', 'gold'],
+        ['M330 150L276 108M330 150L290 150M330 150L274 194', 'gold'], ['M600 182q-12 22-34 28q8-14 6-30M430 190q-8 18-26 24q6-10 4-22', 'gold']);
+      // bearers walking right, each holding a pole up to the belly
       let men = '';
-      for (const x of [340, 420, 500, 570]) men += `M${x} 176V214M${x - 6} 222a6 6 0 1 0 12 0a6 6 0 1 0-12 0M${x} 228V260M${x} 240l-14 12M${x} 240l14 6M${x} 260l-12 34M${x} 260l14 34`;
+      for (const x of [396, 512, 618]) {
+        const px = x + 10, py = at(bot, px);
+        men += `M${px} ${py.toFixed(1)}V236`;                                   // pole
+        men += `M${x - 7} 244a7 7 0 1 0 14 0a7 7 0 1 0-14 0`;                   // head
+        men += `M${x - 4} 252L${x - 15} 288H${x + 13}L${x + 5} 252Z`;            // robe
+        men += `M${x + 2} 256L${px} 238M${x - 2} 258L${x - 12} 272`;             // arms: one up to the pole
+        men += `M${x - 7} 288l-7 9M${x + 6} 288l9 8`;                            // feet mid-stride
+      }
       P.push([men]);
-      let sp = ''; for (const [x, y] of [[230, 70], [640, 54], [700, 96], [180, 120], [760, 40]]) sp += `M${x - 10} ${y}h20M${x} ${y - 10}v20M${x - 7} ${y - 7}l14 14M${x + 7} ${y - 7}l-14 14`;
-      P.push([sp, 'gold'], ['M20 296H980']);
+      P.push(['M20 297H980'], ['M300 293h40M420 293h60M560 293h30M680 293h50', 'tower']);
       return P;
     },
     eaves() {   // a palace hall, front view: hip roof with upturned eaves, ridge ornaments, roof beasts on the corners,
@@ -761,7 +806,39 @@
     };
     cv._fw = fw; fireIO.observe(cv);
   }
+  // 彩云之南 (zen): one soft cloud of colour drifts behind each chapter — the cloud of that hour, in the chapter's
+  // accent colour — and a single 祥云 wisp is drawn across in one stroke. A small coloured dot carries the
+  // number; the title stands vertically; the ornaments (contour lines, prayer flags, tie-dye rings) are kept faint.
+  function cyRings(n) {
+    const rnd = seeded(n * 7 + 5); let d = '';
+    for (let k = 1; k <= 8; k++) {
+      const r = k * 34; let p = '';
+      for (let a = 0; a <= 64; a++) { const t = a / 64 * Math.PI * 2, rr = r * (1 + 0.015 * Math.sin(t * 5 + k + rnd())); p += (a ? 'L' : 'M') + (300 + Math.cos(t) * rr).toFixed(1) + ' ' + (300 + Math.sin(t) * rr).toFixed(1); }
+      d += `<path d="${p}Z" stroke-dasharray="${k % 3 ? '3 6' : '0 7'}" stroke-width="${k % 3 ? 1.4 : 2.6}"/>`;
+    }
+    return `<svg class="cy-rings" viewBox="0 0 600 600" aria-hidden="true"><circle cx="300" cy="300" r="5"/>${d}</svg>`;
+  }
+  function caiyunChapterHTML(x, n, st) {
+    const orn = ['flags', 'shibori'].includes(x.ornament) ? x.ornament : x.ornament === 'none' ? '' : 'contour', t = String(x.title || '');
+    return `
+    <section class="paper chapter cy-ch${orn ? ' orn-' + orn : ''}"${st.length ? ` style='${st.join(';')}'` : ''} data-seed="${n}"${toneAttr(x)}>
+      <i class="cy-cloud" aria-hidden="true"></i><i class="cy-cloud b" aria-hidden="true"></i>
+      ${orn === 'contour' ? '<svg class="contour" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>' : ''}
+      ${orn === 'flags' ? flagsHTML() : ''}${orn === 'shibori' ? cyRings(n) : ''}
+      <svg class="cy-wisp" viewBox="0 0 1000 160" aria-hidden="true"><path pathLength="1" d="M40 112C180 112 260 72 400 84S640 122 760 94C840 76 884 42 852 24C828 10 798 28 810 50C820 66 844 60 842 46"/><path pathLength="1" d="M140 132C300 128 420 108 560 116S760 134 870 116"/></svg>
+      <div class="cy-meta reveal"><span>Ch. ${pad2(n)} / ${pad2(chTotal)}</span><i></i><span>${esc(x.kicker || '')}</span></div>
+      <div class="cy-in">
+        <div class="cy-dot reveal"><span>${NUMERALS[n - 1] || n}</span></div>
+        ${t ? `<h2 class="cy-title reveal" style="--d:1">${esc(t)}</h2>` : ''}
+        <div class="cy-side">
+          ${x.kicker ? `<div class="cy-kicker reveal" style="--d:2">${esc(x.kicker)}</div>` : ''}
+          ${x.caption ? `<p class="cy-text words">${words(x.caption)}</p>` : ''}
+        </div>
+      </div>
+    </section>`;
+  }
   function chapterHTML(x, n, st) {
+    if (pageTheme === 'caiyun') return caiyunChapterHTML(x, n, st);
     if (pageTheme === 'paris') return parisChapterHTML(x, n, st);
     if (pageTheme === 'huizhou') return huizhouChapterHTML(x, n, st);
     if (pageTheme === 'beijing') return beijingChapterHTML(x, n, st);
@@ -810,6 +887,12 @@
     const w = +x.w || 16, h = +x.h || 9, cap = esc(x.caption || '');
     if (kindOf(x) === 'youtube') {
       const id = String(x.yt || '').match(/^[\w-]{11}$/) ? x.yt : ''; if (!id) return '';
+      // full width: plays silently with no YouTube controls; a click opens it full screen with sound
+      if (x.layout === 'fill') return `
+    <section class="ytfull" style="--ar:${(w / h).toFixed(4)}" role="button" tabindex="0" data-yt-open="${id}" aria-label="Play the film full screen">
+      <div class="clip yt bleed" data-yt="${id}" style="background-image:url('https://i.ytimg.com/vi/${id}/maxresdefault.jpg')"></div>
+      <div class="yt-over"><span class="yt-play">Play film <b>▸</b></span>${x.caption ? `<span class="yt-cap">${capRich(x.caption)}</span>` : ''}</div>
+    </section>`;
       return `
     <section class="paper spread single media ${side}"><figure class="frame media" style="--ar:${(w / h).toFixed(3)}">
       <div class="clip yt" style="aspect-ratio:${w}/${h}" data-yt="${id}"></div>
@@ -1006,6 +1089,7 @@
     html += `
     <section class="next" id="next" data-href="${esc(target.href)}">
       <div class="bg">${img(target.image)}</div>
+      <div class="next-blur" aria-hidden="true">${img(target.image)}</div>
       <div class="next-inner">
         <div class="next-line">${target.line}</div>
         <div class="ring">
@@ -1294,6 +1378,8 @@
       else { charge.arrived = 0; charge.v = 0; }
       if (charge.v > 0 && t - charge.last > 140) charge.v = Math.max(0, charge.v - dt * 0.9);
       if (charge.v !== charge.shown) { charge.shown = charge.v; nextEl.style.setProperty('--charge', charge.v.toFixed(3)); }
+      const nr = rect(nextEl), nb = Math.min(1, Math.max(0, (vh - nr.top) / (vh * .9))).toFixed(3);
+      if (nb !== charge.nb) { charge.nb = nb; nextEl.style.setProperty('--nb', nb); }
     }
     requestAnimationFrame(frame);
   }
@@ -1638,13 +1724,35 @@
     if (!f) {   // the YouTube player is only created the first time it comes on screen
       if (!on) return;
       const id = el.dataset.yt, origin = /^https?:/.test(location.origin) ? '&origin=' + encodeURIComponent(location.origin) : '';
+      const quiet = el.classList.contains('bleed') ? '&controls=0&disablekb=1&fs=0&iv_load_policy=3&cc_load_policy=0' : '';
       f = document.createElement('iframe');
-      f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&playsinline=1&loop=1&playlist=${id}&rel=0&modestbranding=1&enablejsapi=1${origin}`;
+      f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&playsinline=1&loop=1&playlist=${id}&rel=0&modestbranding=1&enablejsapi=1${quiet}${origin}`;
+      if (quiet) { f.tabIndex = -1; f.setAttribute('aria-hidden', 'true'); }
       f.title = 'YouTube video'; f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true;
       el.appendChild(f); return;
     }
     if (f.contentWindow) f.contentWindow.postMessage(JSON.stringify({ event: 'command', func: on ? 'playVideo' : 'pauseVideo', args: [] }), '*');
   }
+  // full-width film: click (or Enter) opens a full-screen player with sound and controls; leaving full screen closes it
+  function openFilm(sec) {
+    const id = sec.dataset.ytOpen, quiet = $('.clip.yt', sec); if (!id || document.querySelector('.ytmodal')) return;
+    playMedia(quiet, false);
+    const box = document.createElement('div'); box.className = 'ytmodal';
+    box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=0&rel=0&modestbranding=1" title="YouTube video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe><button class="ytclose" type="button" aria-label="Close">Close ✕</button>`;
+    document.body.appendChild(box); setUI(true);
+    const close = () => { if (!box.isConnected) return; box.remove(); if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); playMedia(quiet, true); poke(); };
+    $('.ytclose', box).addEventListener('click', close);
+    const fs = box.requestFullscreen || box.webkitRequestFullscreen;
+    if (fs) { const r = fs.call(box); if (r && r.catch) r.catch(() => {}); }
+    const onfs = () => { if (!document.fullscreenElement && !document.webkitFullscreenElement) { document.removeEventListener('fullscreenchange', onfs); document.removeEventListener('webkitfullscreenchange', onfs); close(); } };
+    setTimeout(() => { document.addEventListener('fullscreenchange', onfs); document.addEventListener('webkitfullscreenchange', onfs); }, 400);
+    box._close = close;
+  }
+  document.addEventListener('click', e => { const sec = e.target.closest && e.target.closest('[data-yt-open]'); if (sec) openFilm(sec); });
+  addEventListener('keydown', e => {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-yt-open]')) { e.preventDefault(); openFilm(e.target); }
+    if (e.key === 'Escape') { const m = document.querySelector('.ytmodal'); if (m && m._close) m._close(); }
+  });
   document.addEventListener('click', e => {
     const b = e.target.closest && e.target.closest('.snd'); if (!b) return;
     const v = b.parentElement.querySelector('video'); if (!v) return;

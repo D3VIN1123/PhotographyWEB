@@ -155,6 +155,34 @@
           ],
           "layout": "auto",
           "mid": "uploads/26111754c066bf73_m.avif"
+        },
+        {
+          "id": "26111924c6a8080d",
+          "src": "uploads/26111924c6a8080d.jpg",
+          "mid": "uploads/26111924c6a8080d_m.avif",
+          "thumb": "uploads/26111924c6a8080d_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "261119cca0813819",
+          "src": "uploads/261119cca0813819.jpg",
+          "mid": "uploads/261119cca0813819_m.avif",
+          "thumb": "uploads/261119cca0813819_s.jpg",
+          "w": 5120,
+          "h": 3834,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
         }
       ],
       "place": "新疆",
@@ -301,7 +329,7 @@
           "csize": "",
           "font": "",
           "color": "",
-          "tone": "dye"
+          "tone": "indigodusk"
         },
         {
           "id": "261118ddfe29e7bc",
@@ -497,7 +525,7 @@
           "csize": "",
           "font": "",
           "color": "",
-          "tone": "jade"
+          "tone": "jadewater"
         },
         {
           "id": "2611170c8a36b895",
@@ -610,7 +638,7 @@
           "csize": "",
           "font": "",
           "color": "",
-          "tone": "maroon"
+          "tone": "ochre"
         },
         {
           "id": "261117d70e3594b7",
@@ -742,7 +770,7 @@
           "csize": "",
           "font": "",
           "color": "",
-          "tone": "dusk"
+          "tone": "snowlight"
         },
         {
           "id": "261117ec83cc68a6",
@@ -889,10 +917,10 @@
           "csize": "",
           "font": "",
           "color": "",
-          "tone": "indigo"
+          "tone": ""
         }
       ],
-      "theme": "indigo",
+      "theme": "caiyun",
       "place": "云南",
       "placeEn": "Yunnan",
       "coords": "25.61°N · 100.27°E"
@@ -1941,6 +1969,34 @@
           "fx": ""
         },
         {
+          "id": "2611191e5e599098",
+          "src": "uploads/2611191e5e599098.jpg",
+          "mid": "uploads/2611191e5e599098_m.avif",
+          "thumb": "uploads/2611191e5e599098_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "红墙之上，琉璃瓦和彩画\nGlazed tiles and painted beams above a red wall",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair"
+        },
+        {
+          "id": "261119ab670c9d85",
+          "src": "uploads/261119ab670c9d85.jpg",
+          "mid": "uploads/261119ab670c9d85_m.avif",
+          "thumb": "uploads/261119ab670c9d85_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "屋脊上的脊兽，一个跟着一个\nRidge beasts, one after another along the eave",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
           "id": "bj0verse0001",
           "type": "text",
           "style": "",
@@ -1955,6 +2011,148 @@
           "csize": "",
           "font": "",
           "color": ""
+        },
+        {
+          "id": "261119d9a3b7a344",
+          "src": "uploads/261119d9a3b7a344.jpg",
+          "mid": "uploads/261119d9a3b7a344_m.avif",
+          "thumb": "uploads/261119d9a3b7a344_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "石栏的缝隙里，一角金顶\nA golden roof through a gap in the stone balustrade",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair"
+        },
+        {
+          "id": "261119f315fa0663",
+          "src": "uploads/261119f315fa0663.jpg",
+          "mid": "uploads/261119f315fa0663_m.avif",
+          "thumb": "uploads/261119f315fa0663_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "汉白玉栏杆后面的山墙\nA painted gable behind the white marble balustrade",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "2611198a921dfd91",
+          "src": "uploads/2611198a921dfd91.jpg",
+          "mid": "uploads/2611198a921dfd91_m.avif",
+          "thumb": "uploads/2611198a921dfd91_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "阴影里的琉璃瓦和脊兽\nGlazed tiles and a roof beast, in shadow",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
+        },
+        {
+          "id": "2611192eb8660c14",
+          "src": "uploads/2611192eb8660c14.jpg",
+          "mid": "uploads/2611192eb8660c14_m.avif",
+          "thumb": "uploads/2611192eb8660c14_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "暗处的斗拱\nBracket sets in the dark",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair"
+        },
+        {
+          "id": "2611192b18c88360",
+          "src": "uploads/2611192b18c88360.jpg",
+          "mid": "uploads/2611192b18c88360_m.avif",
+          "thumb": "uploads/2611192b18c88360_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "枝条后面的红柱子\nA red pillar behind the branches",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "bj0snow00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "雪",
+          "kicker": "Snow on the Palace",
+          "caption": "下雪的时候，紫禁城只剩下红、白、灰三种颜色，整座城都安静了。\nWhen it snows, the Forbidden City is left with three colours — red, white and grey — and the whole city goes quiet.",
+          "align": "left",
+          "tone": "snow",
+          "ornament": "none",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261119ee99837287",
+          "src": "uploads/261119ee99837287.jpg",
+          "mid": "uploads/261119ee99837287_m.avif",
+          "thumb": "uploads/261119ee99837287_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "从景山往南看，雪里的紫禁城\nThe Forbidden City in snow, looking south from Jingshan",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
+        },
+        {
+          "id": "261119af1e4b06e7",
+          "src": "uploads/261119af1e4b06e7.jpg",
+          "mid": "uploads/261119af1e4b06e7_m.avif",
+          "thumb": "uploads/261119af1e4b06e7_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "雪里的角楼\nThe corner tower in snow",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair"
+        },
+        {
+          "id": "261119cbfccfb34a",
+          "src": "uploads/261119cbfccfb34a.jpg",
+          "mid": "uploads/261119cbfccfb34a_m.avif",
+          "thumb": "uploads/261119cbfccfb34a_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "雪天里的中国结\nA red knot on a snowy day",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "26111989f61d665e",
+          "src": "uploads/26111989f61d665e.jpg",
+          "mid": "uploads/26111989f61d665e_m.avif",
+          "thumb": "uploads/26111989f61d665e_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "石兽，角楼，一场雪\nA stone beast, the corner tower, a fall of snow",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
         },
         {
           "id": "bj0axis00001",
@@ -2018,6 +2216,48 @@
           "fx": ""
         },
         {
+          "id": "2611190cc77f230e",
+          "src": "uploads/2611190cc77f230e.jpg",
+          "mid": "uploads/2611190cc77f230e_m.avif",
+          "thumb": "uploads/2611190cc77f230e_s.jpg",
+          "w": 5120,
+          "h": 3200,
+          "caption": "景山上的亭子，天快黑了\nA pavilion on Jingshan, as night comes on",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
+        },
+        {
+          "id": "26111982cc0ec372",
+          "src": "uploads/26111982cc0ec372.jpg",
+          "mid": "uploads/26111982cc0ec372_m.avif",
+          "thumb": "uploads/26111982cc0ec372_s.jpg",
+          "w": 3414,
+          "h": 5120,
+          "caption": "汉白玉栏杆和飞檐\nMarble balustrades and flying eaves",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair"
+        },
+        {
+          "id": "26111925a4bea012",
+          "src": "uploads/26111925a4bea012.jpg",
+          "mid": "uploads/26111925a4bea012_m.avif",
+          "thumb": "uploads/26111925a4bea012_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "飞檐，和最后一点天光\nUpturned eaves and the last of the light",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
           "id": "2611174a29a1fb5b",
           "src": "uploads/2611174a29a1fb5b.jpg",
           "thumb": "uploads/2611174a29a1fb5b_s.jpg",
@@ -2064,6 +2304,64 @@
           "fx": ""
         },
         {
+          "id": "bj0baita0001",
+          "type": "text",
+          "style": "chapter",
+          "title": "白塔",
+          "kicker": "The White Dagoba",
+          "caption": "北海的白塔，从老城很多地方都能远远看见。\nBeihai’s White Dagoba can be seen from far across the old city.",
+          "align": "left",
+          "tone": "",
+          "ornament": "none",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261119d784dc057e",
+          "src": "uploads/261119d784dc057e.jpg",
+          "mid": "uploads/261119d784dc057e_m.avif",
+          "thumb": "uploads/261119d784dc057e_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "花枝后面，远远的白塔\nThe White Dagoba, far beyond the blossom",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
+        },
+        {
+          "id": "2611198c811ea150",
+          "src": "uploads/2611198c811ea150.jpg",
+          "mid": "uploads/2611198c811ea150_m.avif",
+          "thumb": "uploads/2611198c811ea150_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "白塔上的眼光门\nThe niche on the face of the White Dagoba",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair"
+        },
+        {
+          "id": "261119a4d7a07103",
+          "src": "uploads/261119a4d7a07103.jpg",
+          "mid": "uploads/261119a4d7a07103_m.avif",
+          "thumb": "uploads/261119a4d7a07103_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "白塔，和它脚下的殿顶\nThe White Dagoba above a temple roof",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
           "id": "bj0yihe00001",
           "type": "text",
           "style": "chapter",
@@ -2093,6 +2391,34 @@
           "layout": "wide",
           "mid": "uploads/2611174fd7ed28e8_m.avif",
           "fx": ""
+        },
+        {
+          "id": "261119b2f8ba6ee4",
+          "src": "uploads/261119b2f8ba6ee4.jpg",
+          "mid": "uploads/261119b2f8ba6ee4_m.avif",
+          "thumb": "uploads/261119b2f8ba6ee4_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "柳枝，夕阳，冰面\nWillow, sunset, ice",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair"
+        },
+        {
+          "id": "26111986d2c48eb8",
+          "src": "uploads/26111986d2c48eb8.jpg",
+          "mid": "uploads/26111986d2c48eb8_m.avif",
+          "thumb": "uploads/26111986d2c48eb8_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "太阳落到西山后面\nThe sun going down behind the Western Hills",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
         },
         {
           "id": "261117a15a604a72",
@@ -2126,6 +2452,48 @@
           "color": ""
         },
         {
+          "id": "2611191f7b849c12",
+          "src": "uploads/2611191f7b849c12.jpg",
+          "mid": "uploads/2611191f7b849c12_m.avif",
+          "thumb": "uploads/2611191f7b849c12_s.jpg",
+          "w": 3414,
+          "h": 5120,
+          "caption": "湖边的灯，一条船\nLights along the lake, and one boat",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair"
+        },
+        {
+          "id": "261119c2ba07912d",
+          "src": "uploads/261119c2ba07912d.jpg",
+          "mid": "uploads/261119c2ba07912d_m.avif",
+          "thumb": "uploads/261119c2ba07912d_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "夜里的湖岸\nThe lakeshore at night",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "26111937bcabcb95",
+          "src": "uploads/26111937bcabcb95.jpg",
+          "mid": "uploads/26111937bcabcb95_m.avif",
+          "thumb": "uploads/26111937bcabcb95_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "柳树下的灯\nLights beneath the willows",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
+        },
+        {
           "id": "26111743de9cbf36",
           "src": "uploads/26111743de9cbf36.jpg",
           "thumb": "uploads/26111743de9cbf36_s.jpg",
@@ -2139,6 +2507,48 @@
           "layout": "fill",
           "mid": "uploads/26111743de9cbf36_m.avif",
           "fx": ""
+        },
+        {
+          "id": "26111981ce81218a",
+          "src": "uploads/26111981ce81218a.jpg",
+          "mid": "uploads/26111981ce81218a_m.avif",
+          "thumb": "uploads/26111981ce81218a_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "蓝调时分的国贸\nThe business district at blue hour",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
+        },
+        {
+          "id": "261119787767ba6e",
+          "src": "uploads/261119787767ba6e.jpg",
+          "mid": "uploads/261119787767ba6e_m.avif",
+          "thumb": "uploads/261119787767ba6e_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "胡同口，银河SOHO亮着\nGalaxy SOHO glowing over a hutong lane",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair"
+        },
+        {
+          "id": "261119baa13203a1",
+          "src": "uploads/261119baa13203a1.jpg",
+          "mid": "uploads/261119baa13203a1_m.avif",
+          "thumb": "uploads/261119baa13203a1_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "曲线，一层叠着一层\nCurves, floor upon floor",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
         },
         {
           "id": "261117a649cfa9d5",
@@ -2176,6 +2586,441 @@
       "place": "北京",
       "placeEn": "Beijing",
       "coords": "39.92°N · 116.39°E"
+    },
+    {
+      "id": "mwmr1dqe105a5",
+      "slug": "project-05a5",
+      "title": "徽州",
+      "subtitle": "安徽呈坎 · 2026",
+      "description": "呈坎在黄山市徽州区，是一座按八卦布局的古村。白墙、黑瓦、马头墙，荷塘绕着村子。夏天的夜里，村里人举着鱼灯走过石桥，烟花在头顶炸开。\nChengkan, in the Huizhou district of Huangshan, is an old village laid out to the eight trigrams: white walls, black tiles, stepped gables, lotus ponds all around. On summer nights the villagers carry fish lanterns over the stone bridges while fireworks break overhead.",
+      "cover": "26111802be906147",
+      "published": true,
+      "photos": [
+        {
+          "id": "hz0wall00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "粉墙",
+          "kicker": "White Walls, Dark Tiles",
+          "caption": "徽州的房子，墙是白的，瓦是黑的。马头墙一级一级叠上去，原本是为了挡火。\nIn Huizhou the walls are white and the tiles are black. The stepped “horse-head” gables climb tier by tier — they were built to stop fire spreading.",
+          "ornament": "huiwalls",
+          "tone": "whitewall",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611181b350cff47",
+          "src": "uploads/2611181b350cff47.jpg",
+          "mid": "uploads/2611181b350cff47_m.avif",
+          "thumb": "uploads/2611181b350cff47_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "荷塘边的村子，山在后面\nThe village by the lotus pond, the hills behind",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "fx": ""
+        },
+        {
+          "id": "261118f18d129ad8",
+          "src": "uploads/261118f18d129ad8.jpg",
+          "mid": "uploads/261118f18d129ad8_m.avif",
+          "thumb": "uploads/261118f18d129ad8_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "马头墙，一级一级\nHorse-head walls, tier upon tier",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "fx": ""
+        },
+        {
+          "id": "261118feec349dda",
+          "src": "uploads/261118feec349dda.jpg",
+          "mid": "uploads/261118feec349dda_m.avif",
+          "thumb": "uploads/261118feec349dda_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "墙上的雨痕，和几把晒着的伞\nRain-streaked walls, and a few parasols",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "fx": ""
+        },
+        {
+          "id": "261118d3a376e203",
+          "src": "uploads/261118d3a376e203.jpg",
+          "mid": "uploads/261118d3a376e203_m.avif",
+          "thumb": "uploads/261118d3a376e203_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "石桥和它的倒影，合成一个圆\nA stone bridge and its reflection, closing into a circle",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "fx": ""
+        },
+        {
+          "id": "261118fb2f717336",
+          "src": "uploads/261118fb2f717336.jpg",
+          "mid": "uploads/261118fb2f717336_m.avif",
+          "thumb": "uploads/261118fb2f717336_s.jpg",
+          "w": 3840,
+          "h": 5120,
+          "caption": "木门两边的对联\nA couplet either side of a wooden door",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "fx": ""
+        },
+        {
+          "id": "261119044423be1a",
+          "src": "uploads/261119044423be1a.jpg",
+          "mid": "uploads/261119044423be1a_m.avif",
+          "thumb": "uploads/261119044423be1a_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "白墙上贴满了红色的斗方，过节的样子\nRed diamond papers all over a white wall, dressed for the festival",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit"
+        },
+        {
+          "id": "hz0verse0001",
+          "type": "text",
+          "style": "",
+          "title": "心中若有桃花源，何处不是水云间。",
+          "caption": "If a Peach Blossom Spring lives in your heart, where is not among water and clouds?",
+          "kicker": "",
+          "ornament": "cloud",
+          "tone": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "hz0well00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "天井",
+          "kicker": "The Skywell",
+          "caption": "走进屋里，头顶是一方天井。下雨的时候，四面屋檐的水都流进院子里，叫“四水归堂”。\nInside, a square of sky opens overhead. When it rains, the water from all four roofs runs into the courtyard — “four waters return to the hall”.",
+          "ornament": "none",
+          "tone": "misty",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261118fcb57d7d8f",
+          "src": "uploads/261118fcb57d7d8f.jpg",
+          "mid": "uploads/261118fcb57d7d8f_m.avif",
+          "thumb": "uploads/261118fcb57d7d8f_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "抬头，是一方天\nLook up: a square of sky",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "fx": ""
+        },
+        {
+          "id": "2611187e2ea911de",
+          "src": "uploads/2611187e2ea911de.jpg",
+          "mid": "uploads/2611187e2ea911de_m.avif",
+          "thumb": "uploads/2611187e2ea911de_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "院子里的老松和一池水\nAn old pine and a pool in the courtyard",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": ""
+        },
+        {
+          "id": "2611183656f3a749",
+          "src": "uploads/2611183656f3a749.jpg",
+          "mid": "uploads/2611183656f3a749_m.avif",
+          "thumb": "uploads/2611183656f3a749_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "井口里，盛着一井的灯\nA well holding a whole well of lights",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "fx": ""
+        },
+        {
+          "id": "hz0lotu00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "荷塘",
+          "kicker": "Lotus Ponds",
+          "caption": "村子被荷塘围着。白天，鱼灯就靠在桥边，等着天黑。\nThe village is ringed with lotus ponds. By day the fish lanterns rest by the bridges, waiting for dark.",
+          "ornament": "none",
+          "tone": "",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611182df63a305a",
+          "src": "uploads/2611182df63a305a.jpg",
+          "mid": "uploads/2611182df63a305a_m.avif",
+          "thumb": "uploads/2611182df63a305a_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "荷叶中间，一条小船慢慢划过\nA small boat drifting through the lotus leaves",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": ""
+        },
+        {
+          "id": "261119123ea26663",
+          "src": "uploads/261119123ea26663.jpg",
+          "mid": "uploads/261119123ea26663_m.avif",
+          "thumb": "uploads/261119123ea26663_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "山脚下的村子和荷塘\nThe village and its lotus ponds at the foot of the hills",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide"
+        },
+        {
+          "id": "261118a4823904da",
+          "src": "uploads/261118a4823904da.jpg",
+          "mid": "uploads/261118a4823904da_m.avif",
+          "thumb": "uploads/261118a4823904da_s.jpg",
+          "w": 5120,
+          "h": 3414,
+          "caption": "水面上的荷叶\nLotus leaves on still water",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "fx": ""
+        },
+        {
+          "id": "2611192828253a26",
+          "src": "uploads/2611192828253a26.jpg",
+          "mid": "uploads/2611192828253a26_m.avif",
+          "thumb": "uploads/2611192828253a26_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "满塘的荷叶，后面是白墙\nA pond full of lotus, white walls behind",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit"
+        },
+        {
+          "id": "26111821c829080b",
+          "src": "uploads/26111821c829080b.jpg",
+          "mid": "uploads/26111821c829080b_m.avif",
+          "thumb": "uploads/26111821c829080b_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "白天的鱼灯，还没点亮\nA fish lantern by day, not yet lit",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": ""
+        },
+        {
+          "id": "hz0verse0002",
+          "type": "text",
+          "style": "",
+          "title": "鱼，谐音“余”。年年有余。",
+          "caption": "Yú, the fish, sounds like yú, plenty: may every year have more than enough.",
+          "kicker": "",
+          "ornament": "fish",
+          "tone": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "hz0fish00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "鱼灯",
+          "kicker": "The Fish Lanterns",
+          "caption": "天黑了，灯一盏一盏点起来。鼓声里，鱼灯从石桥上游过去，烟花在头顶一朵一朵地开。\nNight falls and the lanterns are lit one by one. To the drums, the fish lanterns swim across the stone bridge, and fireworks open overhead.",
+          "ornament": "fishdance",
+          "tone": "lanternnight",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "mwmr5qxcdgi6l",
+          "type": "youtube",
+          "yt": "rFMs54AoV8o",
+          "url": "https://youtu.be/rFMs54AoV8o",
+          "thumb": "https://i.ytimg.com/vi/rFMs54AoV8o/hqdefault.jpg",
+          "w": 16,
+          "h": 9,
+          "caption": "鱼灯会 · 短片\nThe fish-lantern festival · a short film",
+          "layout": "fill",
+          "fx": ""
+        },
+        {
+          "id": "26111867e476c898",
+          "src": "uploads/26111867e476c898.jpg",
+          "mid": "uploads/26111867e476c898_m.avif",
+          "thumb": "uploads/26111867e476c898_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "天快黑了，广场上的鱼灯都已经就位\nNearly dark, and the fish lanterns are in place on the square",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "fx": "embers"
+        },
+        {
+          "id": "26111802be906147",
+          "src": "uploads/26111802be906147.jpg",
+          "mid": "uploads/26111802be906147_m.avif",
+          "thumb": "uploads/26111802be906147_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "荷塘里亮起来的鱼灯\nFish lanterns lit up on the lotus pond",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "fx": "embers"
+        },
+        {
+          "id": "261118e8a738112b",
+          "src": "uploads/261118e8a738112b.jpg",
+          "mid": "uploads/261118e8a738112b_m.avif",
+          "thumb": "uploads/261118e8a738112b_s.jpg",
+          "w": 3840,
+          "h": 5120,
+          "caption": "鼓点响起，烟花升空\nThe drums begin, the fireworks go up",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "fx": ""
+        },
+        {
+          "id": "2611194c2dce75d7",
+          "src": "uploads/2611194c2dce75d7.jpg",
+          "mid": "uploads/2611194c2dce75d7_m.avif",
+          "thumb": "uploads/2611194c2dce75d7_s.jpg",
+          "w": 3840,
+          "h": 5120,
+          "caption": "人群头顶，烟花开了\nFireworks open above the crowd",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "2611186bc8341392",
+          "src": "uploads/2611186bc8341392.jpg",
+          "mid": "uploads/2611186bc8341392_m.avif",
+          "thumb": "uploads/2611186bc8341392_s.jpg",
+          "w": 5043,
+          "h": 3364,
+          "caption": "船上的鱼灯，水里还有一条\nA fish lantern on a boat, and another in the water",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": "fireworks"
+        },
+        {
+          "id": "26111877dee8a785",
+          "src": "uploads/26111877dee8a785.jpg",
+          "mid": "uploads/26111877dee8a785_m.avif",
+          "thumb": "uploads/26111877dee8a785_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "石桥上，两条鱼灯迎面相遇\nOn the stone bridge, two fish lanterns meet",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": "embers"
+        },
+        {
+          "id": "hz0verse0003",
+          "type": "text",
+          "style": "",
+          "title": "灯灭了，鱼游回了夜里。",
+          "caption": "The lanterns go out, and the fish swim back into the night.",
+          "kicker": "",
+          "ornament": "lantern",
+          "tone": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
+        }
+      ],
+      "theme": "huizhou",
+      "place": "徽州",
+      "placeEn": "Chengkan · 呈坎",
+      "coords": "29.98°N · 118.37°E"
     },
     {
       "id": "mwmd69nuoum0t",
@@ -3029,385 +3874,6 @@
       "place": "Yunnan",
       "placeEn": "Southwest China",
       "coords": "26.87°N · 100.23°E"
-    },
-    {
-      "id": "mwmr1dqe105a5",
-      "slug": "project-05a5",
-      "title": "徽州",
-      "subtitle": "安徽呈坎 · 2026",
-      "description": "呈坎在黄山市徽州区，是一座按八卦布局的古村。白墙、黑瓦、马头墙，荷塘绕着村子。夏天的夜里，村里人举着鱼灯走过石桥，烟花在头顶炸开。\nChengkan, in the Huizhou district of Huangshan, is an old village laid out to the eight trigrams: white walls, black tiles, stepped gables, lotus ponds all around. On summer nights the villagers carry fish lanterns over the stone bridges while fireworks break overhead.",
-      "cover": "26111802be906147",
-      "published": true,
-      "photos": [
-        {
-          "id": "hz0wall00001",
-          "type": "text",
-          "style": "chapter",
-          "title": "粉墙",
-          "kicker": "White Walls, Dark Tiles",
-          "caption": "徽州的房子，墙是白的，瓦是黑的。马头墙一级一级叠上去，原本是为了挡火。\nIn Huizhou the walls are white and the tiles are black. The stepped “horse-head” gables climb tier by tier — they were built to stop fire spreading.",
-          "ornament": "huiwalls",
-          "tone": "whitewall",
-          "align": "left",
-          "height": "",
-          "size": "",
-          "csize": "",
-          "font": "",
-          "color": ""
-        },
-        {
-          "id": "2611181b350cff47",
-          "src": "uploads/2611181b350cff47.jpg",
-          "mid": "uploads/2611181b350cff47_m.avif",
-          "thumb": "uploads/2611181b350cff47_s.jpg",
-          "w": 5120,
-          "h": 2560,
-          "caption": "荷塘边的村子，山在后面\nThe village by the lotus pond, the hills behind",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "wide",
-          "fx": ""
-        },
-        {
-          "id": "261118f18d129ad8",
-          "src": "uploads/261118f18d129ad8.jpg",
-          "mid": "uploads/261118f18d129ad8_m.avif",
-          "thumb": "uploads/261118f18d129ad8_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "马头墙，一级一级\nHorse-head walls, tier upon tier",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "pair",
-          "fx": ""
-        },
-        {
-          "id": "261118feec349dda",
-          "src": "uploads/261118feec349dda.jpg",
-          "mid": "uploads/261118feec349dda_m.avif",
-          "thumb": "uploads/261118feec349dda_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "墙上的雨痕，和几把晒着的伞\nRain-streaked walls, and a few parasols",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "fx": ""
-        },
-        {
-          "id": "261118d3a376e203",
-          "src": "uploads/261118d3a376e203.jpg",
-          "mid": "uploads/261118d3a376e203_m.avif",
-          "thumb": "uploads/261118d3a376e203_s.jpg",
-          "w": 3415,
-          "h": 5120,
-          "caption": "石桥和它的倒影，合成一个圆\nA stone bridge and its reflection, closing into a circle",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "pair",
-          "fx": ""
-        },
-        {
-          "id": "261118fb2f717336",
-          "src": "uploads/261118fb2f717336.jpg",
-          "mid": "uploads/261118fb2f717336_m.avif",
-          "thumb": "uploads/261118fb2f717336_s.jpg",
-          "w": 3840,
-          "h": 5120,
-          "caption": "木门两边的对联\nA couplet either side of a wooden door",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "fx": ""
-        },
-        {
-          "id": "hz0verse0001",
-          "type": "text",
-          "style": "",
-          "title": "心中若有桃花源，何处不是水云间。",
-          "caption": "If a Peach Blossom Spring lives in your heart, where is not among water and clouds?",
-          "kicker": "",
-          "ornament": "cloud",
-          "tone": "",
-          "align": "center",
-          "height": "",
-          "size": "40",
-          "csize": "",
-          "font": "",
-          "color": ""
-        },
-        {
-          "id": "hz0well00001",
-          "type": "text",
-          "style": "chapter",
-          "title": "天井",
-          "kicker": "The Skywell",
-          "caption": "走进屋里，头顶是一方天井。下雨的时候，四面屋檐的水都流进院子里，叫“四水归堂”。\nInside, a square of sky opens overhead. When it rains, the water from all four roofs runs into the courtyard — “four waters return to the hall”.",
-          "ornament": "none",
-          "tone": "misty",
-          "align": "left",
-          "height": "",
-          "size": "",
-          "csize": "",
-          "font": "",
-          "color": ""
-        },
-        {
-          "id": "261118fcb57d7d8f",
-          "src": "uploads/261118fcb57d7d8f.jpg",
-          "mid": "uploads/261118fcb57d7d8f_m.avif",
-          "thumb": "uploads/261118fcb57d7d8f_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "抬头，是一方天\nLook up: a square of sky",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "fit",
-          "fx": ""
-        },
-        {
-          "id": "2611187e2ea911de",
-          "src": "uploads/2611187e2ea911de.jpg",
-          "mid": "uploads/2611187e2ea911de_m.avif",
-          "thumb": "uploads/2611187e2ea911de_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "院子里的老松和一池水\nAn old pine and a pool in the courtyard",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "fill",
-          "fx": ""
-        },
-        {
-          "id": "2611183656f3a749",
-          "src": "uploads/2611183656f3a749.jpg",
-          "mid": "uploads/2611183656f3a749_m.avif",
-          "thumb": "uploads/2611183656f3a749_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "井口里，盛着一井的灯\nA well holding a whole well of lights",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "fit",
-          "fx": ""
-        },
-        {
-          "id": "hz0lotu00001",
-          "type": "text",
-          "style": "chapter",
-          "title": "荷塘",
-          "kicker": "Lotus Ponds",
-          "caption": "村子被荷塘围着。白天，鱼灯就靠在桥边，等着天黑。\nThe village is ringed with lotus ponds. By day the fish lanterns rest by the bridges, waiting for dark.",
-          "ornament": "none",
-          "tone": "",
-          "align": "left",
-          "height": "",
-          "size": "",
-          "csize": "",
-          "font": "",
-          "color": ""
-        },
-        {
-          "id": "2611182df63a305a",
-          "src": "uploads/2611182df63a305a.jpg",
-          "mid": "uploads/2611182df63a305a_m.avif",
-          "thumb": "uploads/2611182df63a305a_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "荷叶中间，一条小船慢慢划过\nA small boat drifting through the lotus leaves",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "fill",
-          "fx": ""
-        },
-        {
-          "id": "261118a4823904da",
-          "src": "uploads/261118a4823904da.jpg",
-          "mid": "uploads/261118a4823904da_m.avif",
-          "thumb": "uploads/261118a4823904da_s.jpg",
-          "w": 5120,
-          "h": 3414,
-          "caption": "水面上的荷叶\nLotus leaves on still water",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "fit",
-          "fx": ""
-        },
-        {
-          "id": "26111821c829080b",
-          "src": "uploads/26111821c829080b.jpg",
-          "mid": "uploads/26111821c829080b_m.avif",
-          "thumb": "uploads/26111821c829080b_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "白天的鱼灯，还没点亮\nA fish lantern by day, not yet lit",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "fill",
-          "fx": ""
-        },
-        {
-          "id": "hz0verse0002",
-          "type": "text",
-          "style": "",
-          "title": "鱼，谐音“余”。年年有余。",
-          "caption": "Yú, the fish, sounds like yú, plenty: may every year have more than enough.",
-          "kicker": "",
-          "ornament": "fish",
-          "tone": "",
-          "align": "center",
-          "height": "",
-          "size": "40",
-          "csize": "",
-          "font": "",
-          "color": ""
-        },
-        {
-          "id": "hz0fish00001",
-          "type": "text",
-          "style": "chapter",
-          "title": "鱼灯",
-          "kicker": "The Fish Lanterns",
-          "caption": "天黑了，灯一盏一盏点起来。鼓声里，鱼灯从石桥上游过去，烟花在头顶一朵一朵地开。\nNight falls and the lanterns are lit one by one. To the drums, the fish lanterns swim across the stone bridge, and fireworks open overhead.",
-          "ornament": "fishdance",
-          "tone": "lanternnight",
-          "align": "left",
-          "height": "",
-          "size": "",
-          "csize": "",
-          "font": "",
-          "color": ""
-        },
-        {
-          "id": "mwmr5qxcdgi6l",
-          "type": "youtube",
-          "yt": "rFMs54AoV8o",
-          "url": "https://youtu.be/rFMs54AoV8o",
-          "thumb": "https://i.ytimg.com/vi/rFMs54AoV8o/hqdefault.jpg",
-          "w": 16,
-          "h": 9,
-          "caption": "鱼灯会 · 短片\nThe fish-lantern festival · a short film",
-          "layout": "auto",
-          "fx": ""
-        },
-        {
-          "id": "26111867e476c898",
-          "src": "uploads/26111867e476c898.jpg",
-          "mid": "uploads/26111867e476c898_m.avif",
-          "thumb": "uploads/26111867e476c898_s.jpg",
-          "w": 5120,
-          "h": 2560,
-          "caption": "天快黑了，广场上的鱼灯都已经就位\nNearly dark, and the fish lanterns are in place on the square",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "wide",
-          "fx": "embers"
-        },
-        {
-          "id": "26111802be906147",
-          "src": "uploads/26111802be906147.jpg",
-          "mid": "uploads/26111802be906147_m.avif",
-          "thumb": "uploads/26111802be906147_s.jpg",
-          "w": 5120,
-          "h": 2560,
-          "caption": "荷塘里亮起来的鱼灯\nFish lanterns lit up on the lotus pond",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "wide",
-          "fx": "embers"
-        },
-        {
-          "id": "261118e8a738112b",
-          "src": "uploads/261118e8a738112b.jpg",
-          "mid": "uploads/261118e8a738112b_m.avif",
-          "thumb": "uploads/261118e8a738112b_s.jpg",
-          "w": 3840,
-          "h": 5120,
-          "caption": "鼓点响起，烟花升空\nThe drums begin, the fireworks go up",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "fit",
-          "fx": ""
-        },
-        {
-          "id": "2611186bc8341392",
-          "src": "uploads/2611186bc8341392.jpg",
-          "mid": "uploads/2611186bc8341392_m.avif",
-          "thumb": "uploads/2611186bc8341392_s.jpg",
-          "w": 5043,
-          "h": 3364,
-          "caption": "船上的鱼灯，水里还有一条\nA fish lantern on a boat, and another in the water",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "fill",
-          "fx": "fireworks"
-        },
-        {
-          "id": "26111877dee8a785",
-          "src": "uploads/26111877dee8a785.jpg",
-          "mid": "uploads/26111877dee8a785_m.avif",
-          "thumb": "uploads/26111877dee8a785_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "石桥上，两条鱼灯迎面相遇\nOn the stone bridge, two fish lanterns meet",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "fill",
-          "fx": "embers"
-        },
-        {
-          "id": "hz0verse0003",
-          "type": "text",
-          "style": "",
-          "title": "灯灭了，鱼游回了夜里。",
-          "caption": "The lanterns go out, and the fish swim back into the night.",
-          "kicker": "",
-          "ornament": "lantern",
-          "tone": "",
-          "align": "center",
-          "height": "",
-          "size": "40",
-          "csize": "",
-          "font": "",
-          "color": ""
-        }
-      ],
-      "theme": "huizhou",
-      "place": "徽州",
-      "placeEn": "Chengkan · 呈坎",
-      "coords": "29.98°N · 118.37°E"
     }
   ]
 }

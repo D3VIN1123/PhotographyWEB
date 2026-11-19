@@ -1,0 +1,86 @@
+/* ============================================================
+   Theme: 彩云之南 (project.theme = "caiyun") — "zen design concept", Nov 2026
+   Replaces the dark indigo-and-gold look. The page is pale cloud-coloured cloth; the colour of the clouds
+   changes chapter by chapter (tones cloud → indigodusk → jadewater → ochre → snowlight → night, see TONES).
+   Chapter openings: one soft cloud of the chapter's colour drifting behind, a single 祥云 wisp drawn in one
+   stroke, a small coloured dot with the number, a vertical title; ornaments are faint (contour lines, prayer
+   flags, tie-dye rings on the old-town night). Photographs clear like mist: they come in from a soft blur.
+   ============================================================ */
+body[data-theme="caiyun"] {
+  --cloth: rgb(236, 238, 240); --cloth-hi: rgba(248, 249, 250, .6); --cloth-lo: rgba(214, 218, 226, .4);
+  --pink: rgb(30, 34, 44); --pink-2: rgba(30, 34, 44, .66); --pink-3: rgba(30, 34, 44, .4); --accent: rgb(112, 122, 168);
+  --hair: color-mix(in srgb, var(--pink) 14%, transparent);
+  background: var(--cloth);
+}
+body[data-theme="caiyun"] .paper {
+  background-color: var(--cloth);
+  background-image: radial-gradient(120% 80% at 15% 0%, var(--cloth-hi), transparent 60%), radial-gradient(90% 70% at 100% 100%, var(--cloth-lo), transparent 60%);
+}
+body[data-theme="caiyun"] .preface .statement { font-family: var(--song); font-weight: 300; font-size: clamp(19px, 1.7vw, 27px); line-height: 2.2; max-width: 30em; }
+body[data-theme="caiyun"] .spread { padding-top: clamp(100px, 22vh, 240px); padding-bottom: clamp(100px, 22vh, 240px); }
+
+/* ---------- photographs clear like mist ---------- */
+body[data-theme="caiyun"] .frame .clip { clip-path: none; background: transparent; }
+body[data-theme="caiyun"] .frame .clip img { opacity: 0; filter: blur(16px) saturate(.6); scale: 1.06; transition: opacity 1.8s ease, filter 2.8s ease, scale 3.2s var(--ease); }
+body[data-theme="caiyun"] .frame.in .clip img { opacity: 1; filter: none; scale: 1; }
+
+/* ---------- verses: centred, a coloured dot above ---------- */
+body[data-theme="caiyun"] .textblock.center .tb-in::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-bottom: 10px; }
+body[data-theme="caiyun"] .textblock .tb-title { font-family: var(--song); font-weight: 300; font-size: clamp(22px, 2.1vw, 34px); letter-spacing: .32em; line-height: 1.8; }
+body[data-theme="caiyun"] .textblock .tb-kicker { color: var(--accent); }
+
+/* ---------- chapter: a cloud of colour, one wisp ---------- */
+.cy-ch { position: relative; min-height: 112vh; overflow: hidden; display: grid; align-items: center; padding: 24vh var(--gutter) 18vh; }
+.cy-cloud {
+  position: absolute; z-index: 0; right: -24vmax; top: -16vmax; width: 84vmax; height: 58vmax; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 30%, transparent), color-mix(in srgb, var(--accent) 9%, transparent) 55%, transparent);
+  opacity: 0; transform: translate(8vmax, 3vmax) scale(.86); transition: opacity 3.2s ease, transform 9s cubic-bezier(.2, .6, .2, 1);
+  animation: cy-drift 46s ease-in-out infinite alternate;
+}
+.cy-cloud.b { right: auto; top: auto; left: -28vmax; bottom: -26vmax; width: 62vmax; height: 46vmax; animation-duration: 58s; animation-direction: alternate-reverse; }
+.chapter.in .cy-cloud { opacity: 1; transform: none; }
+.chapter.in .cy-cloud.b { opacity: .55; }
+@keyframes cy-drift { from { translate: 0 0; } to { translate: -9vmax 4vmax; } }
+body[data-theme="caiyun"] .chapter svg.contour path { opacity: .1; }
+body[data-theme="caiyun"] .chapter svg.contour path.index { opacity: .2; }
+.cy-ch .flags { opacity: .5; top: auto; bottom: 8vh; }
+.cy-ch.orn-flags { padding-top: 24vh; padding-bottom: calc(10vh + 12vw); }
+.cy-rings { position: absolute; z-index: 0; right: 5vw; top: 50%; translate: 0 -50%; width: min(56vh, 40vw); height: auto; pointer-events: none; opacity: 0; transform: scale(.9); transition: opacity 3s ease .4s, transform 5s cubic-bezier(.2, .7, .2, 1) .4s; }
+.cy-rings path { fill: none; stroke: var(--pink); stroke-linecap: round; opacity: .2; }
+.cy-rings circle { fill: var(--pink); opacity: .25; }
+.chapter.in .cy-rings { opacity: 1; transform: none; }
+.cy-wisp { position: absolute; z-index: 1; left: 7vw; top: 15vh; width: min(62vw, 820px); height: auto; overflow: visible; pointer-events: none; }
+.cy-wisp path { fill: none; stroke: var(--accent); stroke-width: 1.2; vector-effect: non-scaling-stroke; stroke-linecap: round; opacity: .7;
+  stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 4s cubic-bezier(.6, 0, .2, 1) .3s; }
+.cy-wisp path + path { opacity: .32; transition-delay: .9s; }
+.chapter.in .cy-wisp path { stroke-dashoffset: 0; }
+.cy-meta { position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); top: calc(var(--nav-h) + 3vh); display: flex; align-items: center; gap: 1.6em; color: var(--pink-3);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; white-space: nowrap; }
+.cy-meta i { flex: 1; height: 1px; background: currentColor; opacity: .35; }
+.cy-in { position: relative; z-index: 2; display: flex; align-items: flex-start; gap: clamp(28px, 4.4vw, 80px); max-width: 64rem; margin-left: 4vw; }
+.cy-dot { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--cloth); font-family: var(--song); font-size: 14px; line-height: 1; }
+.cy-ch .cy-dot.reveal { filter: none; transform: scale(.2); transition: transform .9s cubic-bezier(.3, 1.5, .5, 1) 1.4s, opacity .5s ease 1.4s; }
+.cy-ch.in .cy-dot.reveal { opacity: .95; transform: none; }
+.cy-title { flex: none; writing-mode: vertical-rl; margin: 0; font-family: var(--song); font-weight: 300; font-size: clamp(56px, 6.4vw, 112px); line-height: 1; letter-spacing: .32em; }
+.cy-ch .cy-title.reveal { opacity: 1; filter: none; transform: none; clip-path: inset(0 0 100% 0); transition: clip-path 2.6s cubic-bezier(.6, 0, .2, 1) .5s; }
+.cy-ch.in .cy-title.reveal { clip-path: inset(0 0 -4% 0); }
+.cy-side { max-width: 27em; display: flex; flex-direction: column; gap: 22px; padding-top: .5em; }
+.cy-kicker { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 2.4vw, 40px); line-height: 1.1; }
+.cy-text { margin: 0; font-family: var(--song); font-weight: 300; font-size: clamp(15px, 1.15vw, 18px); line-height: 2.15; }
+.cy-text .w { opacity: .14; transition: opacity .9s var(--ease); }
+.cy-text .w.on { opacity: .9; }
+
+@media (max-width: 760px) {
+  .cy-ch { padding: 22vh var(--gutter) 14vh; align-items: start; }
+  .cy-in { flex-wrap: wrap; gap: 20px 18px; margin-left: 0; }
+  .cy-side { flex: 1 1 100%; padding-top: 0; }
+  .cy-title { font-size: clamp(54px, 16vw, 80px); }
+  .cy-wisp { width: 86vw; left: 4vw; top: 13vh; }
+  .cy-rings { width: 80vw; right: -20vw; opacity: .6; }
+  .cy-meta span:last-child, .cy-meta i:nth-of-type(1) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cy-cloud { animation: none; }
+  .cy-wisp path { transition: none; stroke-dashoffset: 0; }
+  body[data-theme="caiyun"] .frame .clip img { opacity: 1; filter: none; scale: 1; transition: none; }
+}

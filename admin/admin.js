@@ -209,7 +209,8 @@
           <option value="yunnan" ${p.theme === 'yunnan' ? 'selected' : ''}>云南手记 · Yunnan journal</option>
           <option value="paris" ${p.theme === 'paris' ? 'selected' : ''}>巴黎 · 石头与玻璃 Paris (stone &amp; glass)</option>
           <option value="huizhou" ${p.theme === 'huizhou' ? 'selected' : ''}>徽州 · 粉墙黛瓦 Huizhou (ink &amp; white walls)</option>
-          <option value="beijing" ${p.theme === 'beijing' ? 'selected' : ''}>北京 · 皇城 Beijing (palace red &amp; gold)</option></select></label>
+          <option value="beijing" ${p.theme === 'beijing' ? 'selected' : ''}>北京 · 中轴 Beijing (zen, central axis)</option>
+          <option value="caiyun" ${p.theme === 'caiyun' ? 'selected' : ''}>彩云 · 禅 Caiyun (zen, coloured clouds)</option></select></label>
         <div class="field"><span>状态 Visibility</span><label class="switch" style="height:42px"><input type="checkbox" data-bind="${base}.published" ${p.published === false ? '' : 'checked'}> 在网站上显示 Published</label></div>
       </div>
     </div>
@@ -238,6 +239,9 @@
     ['gilt', '鎏金 Gilt (dark)'], ['seine', '秋日河岸 Seine (light)'],
     ['whitewall', '粉墙 White wall (light)'], ['misty', '烟雨 Misty green (light)'], ['lanternnight', '灯夜 Lantern night (dark)'],
     ['hutong', '胡同灰 Hutong grey (light)'], ['palace', '宫墙红 Palace red (dark)'], ['apricot', '冬日杏色 Winter apricot (light)'],
+    ['snow', '雪白 Snow (light)'],
+    ['cloud', '云白 Cloud (light)'], ['indigodusk', '靛夜 Indigo night (dark)'], ['jadewater', '碧水 Jade water (light)'],
+    ['ochre', '赭石 Plateau ochre (light)'], ['snowlight', '雪光 First light (light)'],
   ];
   const FONTS = [
     ['serif', '衬线 Serif', '"Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, "Songti SC", Georgia, serif'],
@@ -281,7 +285,7 @@
             : ['paris', 'huizhou', 'beijing'].includes((project() || {}).theme) ? `<label class="mini"><span>小插画 Line drawing</span><select data-bind="${base}.ornament">
             ${[['', '无 None'], ['metro', '地铁口 Métro entrance'], ['cafe', '咖啡桌 Café table'], ['lamp', '路灯 Street lamp'], ['chandelier', '吊灯 Chandelier'], ['eiffel', '铁塔 Eiffel Tower'], ['fish', '鱼灯 Fish lantern'], ['lantern', '灯笼 Lantern'], ['cloud', '祥云 Cloud scroll']]
               .map(o => `<option value="${o[0]}" ${(ph.ornament || '') === o[0] ? 'selected' : ''}>${o[1]}</option>`).join('')}</select></label>` : ''}
-          ${['indigo', 'paris', 'huizhou', 'beijing'].includes((project() || {}).theme) ? `<label class="mini"><span title="从这一段开始，整页慢慢染成这个颜色（靛蓝 / 巴黎页面风格有效） The page fades to this colour from this block on">底色 Page colour</span><select data-bind="${base}.tone">
+          ${['indigo', 'paris', 'huizhou', 'beijing', 'caiyun'].includes((project() || {}).theme) ? `<label class="mini"><span title="从这一段开始，整页慢慢染成这个颜色（靛蓝 / 巴黎页面风格有效） The page fades to this colour from this block on">底色 Page colour</span><select data-bind="${base}.tone">
             ${TONES.map(t => `<option value="${t[0]}" ${(ph.tone || '') === t[0] ? 'selected' : ''}>${t[1]}</option>`).join('')}</select></label>` : ''}
         </div>
         <label class="mini"><span>小标题 Kicker <em>（标题上方的一行小字，章节里显示为英文副题）</em></span><input type="text" data-bind="${base}.kicker" value="${esc(ph.kicker || '')}"></label>
@@ -320,7 +324,10 @@
             <option value="fit" ${lay === 'fit' ? 'selected' : ''}>完整显示 Fit</option>
             <option value="pair" ${lay === 'pair' ? 'selected' : ''}>与下一张并排 Pair with next</option></select>`
       : kind === 'youtube'
-      ? `<select data-ratio="${k}" title="画面比例 Aspect ratio">${['16:9', '9:16', '4:3', '1:1', '21:9'].map(r => `<option ${r === `${ph.w}:${ph.h}` ? 'selected' : ''}>${r}</option>`).join('')}</select>`
+      ? `<select data-ratio="${k}" title="画面比例 Aspect ratio">${['16:9', '9:16', '4:3', '1:1', '21:9'].map(r => `<option ${r === `${ph.w}:${ph.h}` ? 'selected' : ''}>${r}</option>`).join('')}</select>
+         <select data-bind="${base}.layout" title="显示方式 Layout">
+            <option value="auto" ${lay !== 'fill' ? 'selected' : ''}>带白边 Framed</option>
+            <option value="fill" ${lay === 'fill' ? 'selected' : ''}>满屏无界面 Full width, no YouTube controls (click = full screen)</option></select>`
       : `<select data-bind="${base}.layout" title="显示方式 Layout">
             <option value="auto" ${lay !== 'fill' && lay !== 'scroll' ? 'selected' : ''}>带白边 Framed</option>
             <option value="fill" ${lay === 'fill' ? 'selected' : ''}>全屏 Full screen</option>

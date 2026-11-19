@@ -203,6 +203,17 @@ domain). Keep these.
 
 ## Gotchas
 
+- **Zen design concept** (owner's name for it): the shared approach of the 徽州, 北京 and 彩云之南 pages — quiet tones that change per
+  chapter, vertical Song-light titles, one small seal/dot for the number, one drawn line per chapter, faint ornaments, lots of
+  empty space, photos that reveal softly. 彩云之南 uses `theme: "caiyun"` (`caiyunChapterHTML`, `css/caiyun.css`, tones cloud /
+  indigodusk / jadewater / ochre / snowlight / night); the old dark `indigo` theme is unused but kept.
+- **No fades on photos or video** (owner: 绝对不要): never put gradient/mask edges, paper gradients or overlaps on photographs or
+  films — they keep hard full edges. The `.next` hand-off is a blurred copy (`.next-blur`) whose opacity drops as the block
+  scrolls in (`--nb`, set in `frame`), not a spatial gradient.
+- **Full-width film**: a YouTube module with `layout: "fill"` plays muted with `controls=0` (iframe scaled 1.24 to crop YouTube's
+  overlays, pointer-events off); clicking opens `.ytmodal` full screen with sound (`openFilm`).
+- **Title colour**: `.plate-big.cjk.t-<theme>` sets `--gold` per album (gold only for 北京).
+
 - **AVIF display copies must have even width and height.** Chrome cannot decode sips' AVIFs with an odd side (2560×1707):
   the image stays blank and `onerror` never fires, so there is no fallback. `make_display` (server.py) and
   `scripts/make_display.py` now size to even numbers; `python3 scripts/make_display.py --fix-odd` remakes old odd ones.
