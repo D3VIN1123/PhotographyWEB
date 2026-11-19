@@ -26,7 +26,7 @@
   const ARROW = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
 
   const view = $('#view'), hud = $('#hud'), hudCount = $('#hud-count'), hudCap = $('#hud-cap');
-  const tabsScroll = $('#tabs-scroll'), lens = $('#tabs-lens');
+  const where = $('#where'), menu = $('#menu'), menuBtn = $('#menu-btn');
 
   // ---------- data ----------
   let content = { site: {}, hero: {}, projects: [] };
@@ -39,6 +39,17 @@
   const coverOf = p => p && ((p.photos || []).find(x => x.id === p.cover && visual(x)) || (p.photos || []).find(visual)) || null;
   const isPortrait = ph => ph.w && ph.h && ph.h > ph.w * 1.05;
   const pos = ph => { const f = (ph && ph.focus) || [50, 50]; return `object-position:${+f[0] || 50}% ${+f[1] || 50}%`; };
+  const isCJK = s => /[\u2e80-\u9fff]/.test(s || '');
+  const capLines = c => String(c || '').split(/\n+/).map(x => x.trim()).filter(Boolean);
+  // Captions are written "中文\nEnglish". They are set like the title plate: the English in italic serif,
+  // the Chinese after it, small and letter-spaced.
+  function capRich(c) {
+    const L = capLines(c); if (!L.length) return '';
+    const zh = L.filter(isCJK).join(' '), en = L.filter(x => !isCJK(x)).join(' ');
+    return `<span class="cr">${en ? `<em class="cr-en">${esc(en)}</em>` : ''}${zh ? `<span class="cr-zh">${esc(zh)}</span>` : ''}</span>`;
+  }
+  // an album's name for plates, the menu and the nav: big word (place, else title), English line, coordinates
+  const placeOf = p => ({ big: String(p.place || p.title || '').trim(), en: String(p.placeEn || p.subtitle || '').trim(), coords: String(p.coords || '').trim() });
 
   function img(ph, cls = '', eager = false) {
     if (!ph || !ph.src) return '';
@@ -50,57 +61,176 @@
   }
 
   // ---------- templates ----------
-  function heroData() {
-    const h = content.hero || {}, site = content.site || {};
-    const p = h.mode === 'project' ? (projects.find(x => x.id === h.projectId) || projects[0]) : null;
-    if (p) {
-      return { kicker: h.kicker || 'Latest', title: h.title || p.title, body: h.text || p.description || p.subtitle || '',
-               image: coverOf(p), label: h.linkLabel || 'View project', url: '#/p/' + p.slug };
-    }
-    return { kicker: h.kicker || '', title: h.title || site.title || '', body: h.text || '',
-             image: h.image ? { src: h.image, mid: h.imageMid, focus: h.focus } : coverOf(projects[0]),
-             label: h.linkLabel || '', url: safeUrl(h.linkUrl) };
+  // The title plate laid over a full-bleed photo (album covers, home panels, the opened threshold):
+  // a mono line along the top (album number, coordinates); bottom-left a big title — Chinese in heavy Song
+  // with a gold fade, Latin in italic serif; beside it the English name, the cover photo's caption and a
+  // mono line with the frame count; an outlined button bottom-right.
+  function plate(p, o) {
+    const pl = placeOf(p), cov = coverOf(p), i = projects.indexOf(p), H = o.h || 'h2';
+    return `
+      <div class="plate-top reveal"><span>Album ${pad2(i + 1)} / ${pad2(projects.length)}</span>${pl.coords ? `<span>${esc(pl.coords)}</span>` : ''}</div>
+      <div class="plate">
+        <${H} class="plate-big${isCJK(pl.big) ? ' cjk' : ''} reveal" style="--d:1">${esc(pl.big)}</${H}>
+        <div class="plate-side">
+          ${pl.en ? `<div class="plate-en reveal" style="--d:2">${esc(pl.en)}</div>` : ''}
+          ${cov && cov.caption ? `<div class="plate-cap reveal" style="--d:3">${capRich(cov.caption)}</div>` : ''}
+          <div class="plate-meta reveal" style="--d:4"><span>${pad2(countOf(p))} frames</span>${pl.big !== p.title ? `<span>${esc(p.title)}</span>` : ''}</div>
+        </div>
+      </div>
+      ${o.btn ? `<span class="plate-btn reveal" style="--d:5"${o.zoom ? ' role="button" tabindex="0" data-zoom' : ''}>${esc(o.btn)} <b>↗</b></span>` : ''}`;
   }
 
-  function homeHTML() {
-    const h = heroData(), site = content.site || {};
-    const ext = /^https?:/i.test(h.url) ? ' target="_blank" rel="noopener"' : '';
-    let html = `
-    <section class="panel hero grow" data-plx="8">
-      <div class="bg">${img(h.image, '', true)}</div><div class="shade"></div>
-      <div class="card glass" data-lg="46">
-        ${h.kicker ? `<div class="kicker reveal"><i></i>${esc(h.kicker)}</div>` : ''}
-        <h1 class="reveal" style="--d:1">${text(h.title)}</h1>
-        ${h.body ? `<p class="lead reveal" style="--d:2">${text(h.body)}</p>` : ''}
-        ${h.label && h.url ? `<a class="btn reveal" style="--d:3" href="${esc(h.url)}"${ext}>${esc(h.label)}${ARROW}</a>` : ''}
+  // ---------- home: the threshold (入口) ----------
+  // The first screen is a sheet of paper with a round opening in it, ringed by a brush-drawn ensō. Through the
+  // opening the albums' covers come and go, slowly; the opening breathes, drifts a little with the mouse, and
+  // closes and reopens on every change. Hovering an album name on the left holds its photograph. Scrolling
+  // down opens the circle until the photograph fills the screen and its title plate appears.
+  function thSlides() {
+    const h = content.hero || {};
+    const list = projects.filter(p => coverOf(p)).map(p => ({ p, url: '#/p/' + p.slug }));
+    const first = list.findIndex(s => s.p.id === h.projectId);
+    if (first > 0) list.unshift(list.splice(first, 1)[0]);
+    return list;
+  }
+  let slides = [];
+  let ensoCache = '';
+  // A dry-brush ensō: dozens of thin bristle lines follow the circle, each with its own offset, start and end,
+  // so the stroke is heavy where the brush lands and breaks into streaks as the ink runs out. Baked to an image.
+  function ensoURL() {
+    if (ensoCache) return ensoCache;
+    const rnd = seeded(23), C = 500, R = 440, a0 = -2.2, sweep = Math.PI * 2 * 0.93;
+    let out = '';
+    for (let b = 0; b < 64; b++) {
+      const off = rnd() * 2 - 1, t0 = rnd() * rnd() * 0.06, t1 = 0.62 + rnd() * 0.38 - Math.abs(off) * 0.18;
+      const ph = rnd() * 6, sw = 1.4 + rnd() * 3.6, op = 0.35 + rnd() * 0.6;
+      let d = '';
+      for (let k = 0; k <= 140; k++) {
+        const t = t0 + (t1 - t0) * k / 140;
+        const w = 46 * (1 - 0.62 * t) * (t < 0.04 ? 0.7 + t * 7.5 : 1);   // the press at the start, then thinner
+        const r = R + off * w / 2 + 5 * Math.sin(t * 9 + ph) * (0.3 + t) + 4 * Math.sin(t * 2.3);
+        const a = a0 + sweep * t;
+        d += (k ? 'L' : 'M') + (C + Math.cos(a) * r).toFixed(1) + ' ' + (C + Math.sin(a) * r).toFixed(1);
+      }
+      out += `<path d="${d}" stroke-width="${sw.toFixed(2)}" opacity="${op.toFixed(2)}"/>`;
+    }
+    const doc = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1400" height="1400"><g fill="none" stroke="#1d1c19" stroke-linecap="round" stroke-linejoin="round">${out}</g></svg>`;
+    return (ensoCache = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(doc));
+  }
+  function thresholdHTML() {
+    slides = thSlides(); if (!slides.length) return '';
+    const site = content.site || {};
+    return `
+    <section class="threshold" id="threshold">
+      <div class="th-stick">
+        <a class="th-ap" href="${esc(slides[0].url)}" aria-label="Open album">
+          ${slides.map((s, i) => `<div class="th-img${i ? '' : ' on'}">${img(coverOf(s.p), '', i === 0)}</div>`).join('')}
+          <div class="th-shade"></div>
+          <div class="th-plate"></div>
+        </a>
+        <img class="th-enso" src="${ensoURL()}" alt="" aria-hidden="true" draggable="false">
+        <div class="th-paper">
+          <div class="th-top"><span>A photographic record</span><span>${esc(site.title || '')}</span></div>
+          <nav class="th-list" aria-label="Albums">${slides.map((s, i) => { const pl = placeOf(s.p); return `<a href="${esc(s.url)}" data-th="${i}"${i ? '' : ' class="on"'}><b>${pad2(projects.indexOf(s.p) + 1)}</b><span class="${isCJK(pl.big) ? 'cjk' : ''}">${esc(pl.big)}</span><em>${esc(pl.en)}</em></a>`; }).join('')}</nav>
+          <div class="th-word"></div>
+          <div class="th-edge"><span class="th-count"></span><i></i><span class="th-coords"></span></div>
+          <div class="th-hint"><span>Scroll to enter</span><i></i><span>入</span></div>
+        </div>
       </div>
-      ${projects.length ? '<div class="scroll-hint"><span>Gallery</span><i></i></div>' : ''}
     </section>`;
-    // paper interlude: statement that lights up word by word, then the list of albums
+  }
+  const Threshold = (() => {
+    const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    let el = null, ap, imgs, enso, paper, links, word, count, coords, plateEl, shade, cur = -1, timer = 0, swapT = 0;
+    let p = 0, px = 0, py = 0, tx = 0, ty = 0, breath = 1, key = '', hold = false, base = 0;
+    function setup() {
+      clearInterval(timer); clearTimeout(swapT); cur = -1; key = ''; p = 0;
+      el = $('#threshold', view); if (!el) return;
+      ap = $('.th-ap', el); imgs = $$('.th-img', el); enso = $('.th-enso', el); paper = $('.th-paper', el); shade = $('.th-shade', el);
+      links = $$('[data-th]', el); word = $('.th-word', el); count = $('.th-count', el); coords = $('.th-coords', el); plateEl = $('.th-plate', el);
+      show(0, true);
+      if (!reduceMotion) timer = setInterval(() => { if (!hold && p < 0.02 && !document.hidden && !zoomed) show((cur + 1) % imgs.length); }, 5600);
+      links.forEach(a => {
+        a.addEventListener('pointerenter', () => { hold = true; show(+a.dataset.th); });
+        a.addEventListener('pointerleave', () => { hold = false; });
+        a.addEventListener('focus', () => show(+a.dataset.th));
+      });
+      requestAnimationFrame(() => el && el.classList.add('ready'));
+    }
+    function show(i, first) {
+      if (i === cur || !slides[i]) return; cur = i;
+      const s = slides[i], pl = placeOf(s.p), cov = coverOf(s.p);
+      imgs.forEach((d, j) => d.classList.toggle('on', j === i));
+      links.forEach((a, j) => a.classList.toggle('on', j === i));
+      ap.href = s.url;
+      if (!first && !reduceMotion) breath = 0.82;   // closes a little and opens again: a breath
+      const fill = () => {
+        word.innerHTML = `<div class="th-big${isCJK(pl.big) ? ' cjk' : ''}">${esc(pl.big)}</div>${pl.en ? `<div class="th-en">${esc(pl.en)}</div>` : ''}${cov && cov.caption ? `<div class="th-cap">${capRich(cov.caption)}</div>` : ''}`;
+        word.classList.remove('swap');
+      };
+      clearTimeout(swapT);
+      if (first) fill(); else { word.classList.add('swap'); swapT = setTimeout(fill, 380); }
+      count.textContent = `${pad2(projects.indexOf(s.p) + 1)} / ${pad2(projects.length)}`;
+      coords.textContent = pl.coords;
+      plateEl.innerHTML = plate(s.p, { btn: 'Open album' });
+    }
+    // scroll position → how far the circle has opened (0 … 1); the nav reads dark ink while it is paper
+    function scroll(vh) {
+      if (!el) return false;
+      const r = rect(el);
+      p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - vh)));
+      return r.bottom > 42 && p < 0.5;
+    }
+    function tick(t) {
+      if (!el || !el.isConnected) return;
+      const vw = window.innerWidth, vh = window.innerHeight, narrow = vw <= 760;
+      px += (tx - px) * 0.05; py += (ty - py) * 0.05; breath += (1 - breath) * 0.035;
+      const k = Math.min(1, p / 0.62), e = k * k * (3 - 2 * k);
+      base = narrow ? Math.min(vh * 0.27, vw * 0.38) : Math.min(vh * 0.31, vw * 0.23);
+      const r0 = base * breath * (reduceMotion ? 1 : 1 + 0.018 * Math.sin(t / 1900));
+      const R = Math.hypot(vw, vh) / 2 + 4, r = r0 + (R - r0) * e;
+      const ox = px * (1 - e), oy = py * (1 - e);
+      const cx = vw / 2 + ox, cy = (narrow ? vh * 0.4 : vh / 2) * (1 - e) + (vh / 2) * e + oy;
+      const nk = [r, cx, cy].map(v => v.toFixed(1)).join() + (p >= 1 ? 'end' : '');
+      if (nk === key) return; key = nk;
+      ap.style.clipPath = `circle(${r.toFixed(1)}px at ${cx.toFixed(1)}px ${cy.toFixed(1)}px)`;
+      const sc = (1.1 - 0.1 * e).toFixed(4);
+      for (const d of imgs) d.style.transform = `translate3d(${(-ox * 0.7).toFixed(1)}px,${(-oy * 0.7).toFixed(1)}px,0) scale(${sc})`;
+      const ew = base * 2.5;
+      enso.style.width = enso.style.height = ew.toFixed(0) + 'px';
+      enso.style.transform = `translate3d(${(cx - ew / 2).toFixed(1)}px,${(cy - ew / 2).toFixed(1)}px,0) scale(${(r / base).toFixed(4)})`;
+      enso.style.opacity = Math.max(0, 1 - e * 1.7).toFixed(3);
+      paper.style.opacity = Math.max(0, 1 - p / 0.28).toFixed(3);
+      paper.style.visibility = p > 0.3 ? 'hidden' : '';
+      const q = Math.min(1, Math.max(0, (p - 0.6) / 0.28)).toFixed(3);
+      plateEl.style.opacity = q; shade.style.opacity = q;
+      plateEl.style.visibility = +q ? 'visible' : 'hidden';
+    }
+    addEventListener('pointermove', e => {
+      if (!fine || !el) return;
+      tx = (e.clientX / window.innerWidth - 0.5) * 70; ty = (e.clientY / window.innerHeight - 0.5) * 50;
+    }, { passive: true });
+    return { setup, scroll, tick };
+  })();
+
+  function homeHTML() {
+    const site = content.site || {};
+    let html = thresholdHTML();
     const intro = site.intro || site.tagline || '';
     if (projects.length) {
-      const names = projects.map(p => `<span>${esc(p.title)}</span>`).join('<i>—</i>') + '<i>—</i>';
       html += `
     <section class="paper intro">
-      <div class="label reveal">A photographic record<b>${pad2(projects.length)} album${projects.length === 1 ? '' : 's'}</b></div>
+      <div class="label reveal"><span>Index</span><b>${pad2(projects.length)} albums</b></div>
       ${intro ? `<p class="statement words">${words(intro)}</p>` : ''}
       <div class="index">
-        ${projects.map((p, i) => `<a class="reveal" style="--d:${i}" href="#/p/${esc(p.slug)}"><b>№${pad2(i + 1)}</b><span class="t">${esc(p.title)}</span><span class="s">${esc(p.subtitle || '')}</span><span class="n">${plural(countOf(p))} ${ARROW}</span></a>`).join('')}
+        ${projects.map((p, i) => { const pl = placeOf(p); return `<a class="reveal" style="--d:${i}" href="#/p/${esc(p.slug)}"><b>${pad2(i + 1)}</b><span class="t${isCJK(pl.big) ? ' cjk' : ''}">${esc(pl.big)}</span><em class="s">${esc(pl.en)}</em><span class="c">${esc(pl.coords)}</span><span class="n">${pad2(countOf(p))} fr <i>↗</i></span></a>`; }).join('')}
       </div>
-    </section>
-    <div class="paper marquee" aria-hidden="true"><div class="track">${names}${names}${names}${names}</div></div>`;
+    </section>`;
     }
-    projects.forEach((p, i) => {
-      const n = countOf(p);
+    projects.forEach(p => {
       html += `
     <a class="panel proj grow" id="proj-${esc(p.slug)}" href="#/p/${esc(p.slug)}" data-plx="8">
-      <div class="bg">${img(coverOf(p), '', i === 0)}</div><div class="shade"></div>
-      <div class="card glass" data-lg="40">
-        <div class="idx reveal">Album ${pad2(i + 1)} / ${pad2(projects.length)}</div>
-        <h2 class="reveal" style="--d:1">${esc(p.title)}</h2>
-        ${p.subtitle ? `<p class="sub reveal" style="--d:2">${esc(p.subtitle)}</p>` : ''}
-        <div class="row reveal" style="--d:3"><span>${plural(n)}</span><span class="open">Open album ${ARROW}</span></div>
-      </div>
+      <div class="bg">${img(coverOf(p))}</div><div class="shade"></div>
+      ${plate(p, { btn: 'Open album' })}
     </a>`;
     });
     const links = [];
@@ -111,7 +241,7 @@
     }
     html += `
     <footer class="paper foot">
-      <div class="label reveal">Afterword</div>
+      <div class="label reveal"><span>Afterword</span></div>
       <div class="foot-title reveal" style="--d:1">${esc(site.title || '')}</div>
       <p class="foot-text reveal" style="--d:2">${text(site.footer || site.tagline || '')}</p>
       <div class="foot-row reveal" style="--d:3"><nav>${links.join('')}</nav><a class="up" href="#/">Back to the beginning ↑</a></div>
@@ -153,11 +283,22 @@
   }
   const capLine = c => String(c || '').split(/\n+/).map(x => x.trim()).filter(Boolean).join('  ·  ');
   // per-photo effects: "mist" = slow drifting cloud over the photo
-  const fxIn = ph => ph && ph.fx === 'mist' ? '<div class="mist" aria-hidden="true"></div>' : ph && ph.fx === 'sparkle' ? sparkleHTML(ph) : '';
+  const fxIn = ph => ph && ph.fx === 'mist' ? '<div class="mist" aria-hidden="true"></div>' : ph && ph.fx === 'sparkle' ? sparkleHTML(ph) :
+    ph && ph.fx === 'embers' ? emberHTML(ph) : ph && ph.fx === 'fireworks' ? '<canvas class="fw" aria-hidden="true"></canvas>' + emberHTML(ph) : '';
 
-  const frame1 = (ph, i) => `<figure class="frame${isPortrait(ph) ? ' tall' : ''}" style="--ar:${((+ph.w || 3) / (+ph.h || 2)).toFixed(3)}">` +
-    `<div class="clip" style="aspect-ratio:${+ph.w || 3}/${+ph.h || 2}">${img(ph)}${fxIn(ph)}</div>` +
-    `<figcaption><b>№${pad2(i + 1)}</b>${capHTML(ph.caption)}</figcaption></figure>`;
+  // Framed photo with film-edge text: the way numbers and words run along the rebate of a negative — frame
+  // number with a small triangle, the half-frame "A" mark, the album's name spaced out, the next number, and a
+  // vertical line of text up one side. Three arrangements take turns (fe-a / fe-b / fe-c); see "Film-edge text"
+  // in site.css. No sprocket holes or film is drawn: only the type.
+  let edge = { code: '', coords: '' };
+  const frame1 = (ph, i) => {
+    const n = i + 1, v = 'fe-' + 'abc'[i % 3];
+    return `<figure class="frame ${v}${isPortrait(ph) ? ' tall' : ''}" style="--ar:${((+ph.w || 3) / (+ph.h || 2)).toFixed(3)}">` +
+      `<div class="fe-wrap"><div class="clip" style="aspect-ratio:${+ph.w || 3}/${+ph.h || 2}">${img(ph)}${fxIn(ph)}</div>` +
+      `<div class="fe-col" aria-hidden="true"><span>${pad2(n)}</span><i></i><span>${esc(edge.code)}</span><i></i><span>${esc(edge.coords || 'Dewen Tao')}</span></div></div>` +
+      `<div class="fe-row" aria-hidden="true"><span>${n}</span><span class="tri">▸</span><span>${n}A</span><span class="fe-mid">${esc(edge.code)}</span><span>${n + 1}</span><span class="tri">▸</span></div>` +
+      `<figcaption><b>${pad2(n)}</b>${capRich(ph.caption)}</figcaption></figure>`;
+  };
 
   // Handscroll (长卷): a stack whose layout is "scroll". The photos sit side by side on one long
   // strip that slides sideways as you scroll down, like unrolling a Chinese handscroll.
@@ -237,7 +378,17 @@
     seine:   { bg: [216, 212, 203], hi: [238, 234, 226, .6], lo: [178, 171, 156, .45], ink: [36, 38, 44], ac: [166, 108, 54], pat: 0 },
     vitrail: { bg: [17, 15, 27], hi: [38, 50, 118, .45], lo: [78, 16, 34, .38], ink: [236, 230, 220], ac: [216, 172, 86], pat: 0 },
   };
-  const BASE_TONE = { indigo: 'indigo', paris: 'stone' };   // the page colour before the first toned block
+  Object.assign(TONES, {
+    // 徽州: white walls, a misty green day, lantern night — 北京: grey hutong brick, palace red, winter apricot
+    // (zen remaster, Nov 2026: quieter, greyer versions of the same journey)
+    whitewall:    { bg: [239, 238, 234], hi: [250, 250, 248, .6], lo: [218, 217, 211, .4], ink: [34, 35, 36], ac: [160, 58, 44], pat: 0 },
+    misty:        { bg: [226, 229, 226], hi: [242, 244, 241, .6], lo: [198, 204, 199, .4], ink: [33, 38, 36], ac: [140, 70, 56], pat: 0 },
+    lanternnight: { bg: [17, 16, 16], hi: [96, 30, 22, .22], lo: [0, 0, 0, .5], ink: [232, 224, 212], ac: [214, 104, 72], pat: 0 },
+    palace:       { bg: [74, 33, 29], hi: [112, 50, 42, .3], lo: [36, 14, 12, .55], ink: [238, 228, 210], ac: [214, 178, 112], pat: 0 },
+    hutong:       { bg: [232, 230, 225], hi: [244, 243, 240, .6], lo: [208, 205, 198, .4], ink: [34, 33, 32], ac: [166, 58, 40], pat: 0 },
+    apricot:      { bg: [236, 228, 216], hi: [248, 240, 228, .6], lo: [220, 204, 184, .4], ink: [48, 36, 28], ac: [178, 96, 52], pat: 0 },
+  });
+  const BASE_TONE = { indigo: 'indigo', paris: 'stone', huizhou: 'whitewall', beijing: 'hutong' };   // the page colour before the first toned block
   const NUMERALS = ['壹','贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾', '拾壹', '拾贰'];
   // Five-colour prayer flags strung across a chapter opening (blue, white, red, green, yellow)
   function flagsHTML() {
@@ -255,7 +406,7 @@
   // Chapter opening: a numeral, a large vertical Chinese title, a small English line and a passage
   // that lights up word by word. Ornament: "contour" (drawn mountain contour lines) or "flags".
   const toneAttr = x => TONES[x.tone] ? ` data-tone="${x.tone}"` : '';
-  let pageTheme = '';   // theme of the project being built (set in projectHTML)
+  let pageTheme = '', chTotal = 0;   // theme and chapter count of the project being built (set in projectHTML)
 
   // Paris chapter opening: a blue enamel street sign (top line = kicker, e.g. "18e Arrt"; name = title),
   // a Didot passage that lights up word by word, and an optional ornament: "roofs" (zinc rooftops and
@@ -433,8 +584,187 @@
       lum.forEach(([i, l]) => { if (l < cut) i.remove(); });
     };
   }
+  // ---- Chinese page styles: 徽州 (huizhou) and 北京 (beijing) ----
+  // Same building blocks as Paris (tones, line-drawn scenes, doodles); each has its own chapter opening.
+  const DRAW_THEMES = new Set(['paris', 'huizhou', 'beijing']);   // pages where doodles / scenes are drawn
+  Object.assign(DOODLES, {
+    // a fish lantern on its pole
+    fish: ['M100 196V128', 'M40 96C64 64 128 60 158 92C128 122 64 124 40 96Z', 'M40 96L18 74M40 96L16 120M18 74Q30 96 16 120',
+      'M150 86a5 5 0 1 0 0.1 0', 'M70 78q8 8 0 16q8 8 0 16M88 74q8 10 0 20q8 10 0 20M106 74q8 10 0 20q8 10 0 20M124 78q8 8 0 16q8 8 0 16',
+      'M96 68Q104 50 118 52Q110 62 112 70', 'M100 124L100 128M92 128H108', 'M60 150q4-6 0-12M140 146q4-6 0-12M76 160q4-6 0-12'],
+    // a round red lantern with tassel
+    lantern: ['M100 6V26', 'M86 26H114V34H86Z', 'M100 34C60 34 50 70 52 92C54 116 70 140 100 140C130 140 146 116 148 92C150 70 140 34 100 34Z',
+      'M100 34C82 50 78 116 100 140M100 34C118 50 122 116 100 140M100 34C70 44 62 120 100 140M100 34C130 44 138 120 100 140',
+      'M86 140H114V148H86Z', 'M92 148V186M100 148V192M108 148V186'],
+    // auspicious cloud scroll (祥云)
+    cloud: ['M30 120C30 96 56 88 70 102C72 74 112 70 120 96C134 80 164 90 160 112C176 114 178 136 160 140H44C32 140 26 130 30 120Z',
+      'M70 102C76 112 72 122 62 122C54 122 52 112 60 110', 'M120 96C118 110 128 118 138 112', 'M60 140q20 18 40 0q20 18 40 0'],
+  });
+  Object.assign(SCENES, {
+    huiwalls() {   // 马头墙: white walls stepping down in tiers, each tier capped with dark tiles; a door and small windows; hills behind
+      const P = [['M0 120Q120 60 240 100T480 84T720 96T1000 70', 'tower'], ['M0 150Q160 110 320 136T640 124T1000 112', 'tower'], ['M40 296H960']];
+      const house = (x, w, h, steps) => {
+        let d = `M${x} 296V${296 - h}`, tile = '';
+        const sw = w / (steps * 2 + 1);
+        let cx = x, cy = 296 - h;
+        for (let i = 0; i < steps; i++) { tile += `M${cx - 6} ${cy}H${cx + sw + 6}M${cx - 4} ${cy - 6}H${cx + sw + 4}M${cx + sw / 2} ${cy - 6}l0 -8`; d += `H${cx + sw}V${cy - 26}`; cx += sw; cy -= 26; }
+        tile += `M${cx - 6} ${cy}H${cx + sw + 6}M${cx - 4} ${cy - 6}H${cx + sw + 4}`; d += `H${cx + sw}`; cx += sw;
+        for (let i = 0; i < steps; i++) { d += `V${cy + 26}`; cy += 26; tile += `M${cx - 6} ${cy}H${cx + sw + 6}M${cx - 4} ${cy - 6}H${cx + sw + 4}M${cx + sw / 2} ${cy - 6}l0 -8`; d += `H${cx + sw}`; cx += sw; }
+        d += `V296`;
+        return [d, tile];
+      };
+      const hs = [[90, 230, 120, 2], [300, 300, 150, 3], [620, 260, 130, 2]];
+      for (const [x, w, h, s] of hs) { const [d, t] = house(x, w, h, s); P.push([d + 'Z', 'occ'], [d], [t]); }
+      P.push(['M410 296V236A40 40 0 0 1 490 236V296M402 236H498M398 228H502', 'gold'], ['M330 220h18v22h-18zM560 214h18v22h-18zM690 230h16v20h-16zM160 236h16v20h-16z']);
+      return P;
+    },
+    fishdance() {   // a fish lantern carried through the village at night: hills, rooftops, people on poles, sparks
+      const P = [['M0 110Q140 40 280 92T560 70T820 92T1000 60', 'tower'], ['M0 140Q180 100 360 128T720 116T1000 104', 'tower'],
+        ['M40 220V180H120V160H170V180H240V220M600 220V176H660V156H720V176H800V220M820 220V188H900V220', 'tower']];
+      // the fish: body, tail, fin, eye, scales
+      P.push(['M300 150C360 96 520 92 600 140C520 186 360 188 300 150Z', 'gold'], ['M300 150L256 112M300 150L252 190M256 112Q276 150 252 190', 'gold'],
+        ['M440 104Q462 74 492 80Q474 96 478 108', 'gold'], ['M574 132a8 8 0 1 0 0.1 0', 'gold']);
+      let sc = ''; for (let x = 350; x <= 540; x += 32) sc += `M${x} 118q14 16 0 32q14 16 0 32`; P.push([sc, 'gold']);
+      // the bearers: poles, heads, bodies, legs mid-stride
+      let men = '';
+      for (const x of [340, 420, 500, 570]) men += `M${x} 176V214M${x - 6} 222a6 6 0 1 0 12 0a6 6 0 1 0-12 0M${x} 228V260M${x} 240l-14 12M${x} 240l14 6M${x} 260l-12 34M${x} 260l14 34`;
+      P.push([men]);
+      let sp = ''; for (const [x, y] of [[230, 70], [640, 54], [700, 96], [180, 120], [760, 40]]) sp += `M${x - 10} ${y}h20M${x} ${y - 10}v20M${x - 7} ${y - 7}l14 14M${x + 7} ${y - 7}l-14 14`;
+      P.push([sp, 'gold'], ['M20 296H980']);
+      return P;
+    },
+    eaves() {   // a palace hall, front view: hip roof with upturned eaves, ridge ornaments, roof beasts on the corners,
+                // bracket sets, columns, lattice doors and a stone terrace with steps
+      const P = [];
+      P.push(['M330 70H670', 'gold'], ['M330 70q-6-26-22-30q10 14 2 30M670 70q6-26 22-30q-10 14-2 30', 'gold']);
+      P.push(['M330 70Q262 118 172 146Q152 150 140 136M670 70Q738 118 828 146Q848 150 860 136']);
+      P.push(['M148 146Q500 176 852 146M166 156Q500 184 834 156']);
+      let t = ''; for (let x = 346; x <= 654; x += 14) { const xb = 500 + (x - 500) * 2.05, yb = 166 + 8 * (1 - Math.abs(x - 500) / 160); t += `M${x} 74L${xb.toFixed(1)} ${yb.toFixed(1)}`; }
+      P.push([t, 'tower']);
+      let bs = '';
+      for (let i = 0; i < 5; i++) {
+        const u = 0.55 + i * 0.075;
+        const lx = 330 - (330 - 172) * u, ly = 70 + (146 - 70) * Math.pow(u, 0.8) - 6, rx = 670 + (828 - 670) * u;
+        bs += `M${lx.toFixed(1)} ${ly.toFixed(1)}q-4-9 2-12q4 0 4 5M${rx.toFixed(1)} ${ly.toFixed(1)}q4-9-2-12q-4 0-4 5`;
+      }
+      P.push([bs, 'gold']);
+      let br = 'M196 186H804M196 194H804'; for (let x = 206; x <= 794; x += 28) br += `M${x} 186v8M${x - 6} 186h12`; P.push([br]);
+      P.push(['M214 204H786M214 212H786', 'gold']);
+      let c = ''; const cols = [230, 310, 400, 455, 545, 600, 690, 770]; for (const x of cols) c += `M${x} 212V276M${x + 8} 212V276`; P.push([c]);
+      let dr = ''; for (const [x0, x1] of [[408, 455], [463, 545], [553, 600]]) { dr += `M${x0} 220H${x1}V270H${x0}Z`; for (let y = 226; y < 266; y += 8) dr += `M${x0 + 4} ${y}H${x1 - 4}`; for (let x = x0 + 8; x < x1; x += 10) dr += `M${x} 222V244`; }
+      P.push([dr, 'tower']);
+      P.push(['M184 276H816M172 284H828M160 292H840'], ['M444 292L456 276M556 292L544 276M462 292V278M538 292V278', 'tower']);
+      return P;
+    },
+  });
+  // ink-wash mountains: three soft ridges, darker in front, fading into mist
+  function inkHills(seed) {
+    const rnd = seeded(seed * 3 + 11);
+    const ridge = (base, amp, k) => {
+      let d = `M0 300L0 ${base}`;
+      for (let x = 0; x <= 1000; x += 25) {
+        const y = base - amp * (0.5 + 0.5 * Math.sin(x / (90 + k * 30) + rnd() * 0.6 + k)) - amp * 0.35 * Math.sin(x / 37 + k * 2);
+        d += ` L${x} ${y.toFixed(1)}`;
+      }
+      return d + ' L1000 300Z';
+    };
+    return `<svg class="hz-hills" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true"><defs>${[0, 1, 2].map(k => `<linearGradient id="hzg${seed}-${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity="${[0.16, 0.24, 0.36][k]}"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient>`).join('')}</defs>${
+      [[150, 70], [190, 60], [230, 50]].map(([b, a], k) => `<path class="l${k}" d="${ridge(b, a, k)}" fill="url(#hzg${seed}-${k})"/>`).join('')}</svg>`;
+  }
+  // 徽州 (zen): a nearly empty wall. The chapter's characters stand huge and almost invisible on the right,
+  // like a name worn into whitewash; one ink line is drawn across (a roof ridge, a horizon); a drop of ink
+  // blooms slowly behind the title; a tiny red seal carries the number. A film-edge line runs along the top.
+  function brushLine(n) {
+    const rnd = seeded(n * 5 + 3); let d = 'M0 30';
+    for (let x = 50; x <= 1000; x += 50) d += ` L${x} ${(30 + (rnd() - 0.5) * 5 + Math.sin(x / 160 + n) * 3).toFixed(1)}`;
+    return d;
+  }
+  function huizhouChapterHTML(x, n, st) {
+    const orn = SCENES[x.ornament] ? x.ornament : '', t = String(x.title || '');
+    return `
+    <section class="paper chapter hz-ch${orn ? ' orn-' + orn : ''}"${st.length ? ` style='${st.join(';')}'` : ''} data-seed="${n}"${toneAttr(x)}>
+      <div class="hz-ghost" aria-hidden="true">${esc(t)}</div>
+      <i class="hz-drop" aria-hidden="true"></i>
+      <svg class="hz-ridge" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true"><path d="${brushLine(n)}" pathLength="1"/></svg>
+      ${orn ? sceneSVG(orn) : ''}
+      <div class="hz-meta reveal"><span>Ch. ${pad2(n)} / ${pad2(chTotal)}</span><i></i><span>${esc(t)}</span><i></i><span>${esc(x.kicker || '')}</span></div>
+      <div class="hz-in">
+        <div class="hz-seal reveal"><span>${NUMERALS[n - 1] || n}</span></div>
+        ${t ? `<h2 class="hz-title reveal" style="--d:1">${esc(t)}</h2>` : ''}
+        <div class="hz-side">
+          ${x.kicker ? `<div class="hz-kicker reveal" style="--d:2">${esc(x.kicker)}</div>` : ''}
+          ${x.caption ? `<p class="hz-text words">${words(x.caption)}</p>` : ''}
+        </div>
+      </div>
+    </section>`;
+  }
+  // 北京 (zen): everything hangs on the central axis — a hairline down the middle of the page. A chapter
+  // title is split across it (紫 | 禁), the halves sliding in from either side to meet; a small vermilion seal
+  // sits on the line; the passage is centred beneath. Ornaments: "studs" (the gate's 9 × 9, as fine dots) or a scene.
+  function beijingChapterHTML(x, n, st) {
+    const orn = x.ornament === 'studs' || SCENES[x.ornament] ? x.ornament : '';
+    const ch = [...String(x.title || '')], h = ch.length > 1 ? Math.floor(ch.length / 2) : 0;
+    return `
+    <section class="paper chapter bj-ch${orn ? ' orn-' + orn : ''}${h ? '' : ' one'}"${st.length ? ` style='${st.join(';')}'` : ''} data-seed="${n}"${toneAttr(x)}>
+      ${SCENES[orn] ? sceneSVG(orn) : ''}
+      <div class="bj-meta reveal"><span>第${NUMERALS[n - 1] || n}</span><span>Ch. ${pad2(n)} / ${pad2(chTotal)}</span></div>
+      <i class="bj-ax grow"></i>
+      ${orn === 'studs' ? `<div class="bj-studs" aria-hidden="true">${Array.from({ length: 81 }, (v, i) => `<i style="--i:${(i % 9) + Math.floor(i / 9)}"></i>`).join('')}</div><i class="bj-ax"></i>` : ''}
+      <h2 class="bj-gate">${h ? `<span class="l">${esc(ch.slice(0, h).join(''))}</span><span class="r">${esc(ch.slice(h).join(''))}</span>` : `<span class="c">${esc(ch.join(''))}</span>`}</h2>
+      <i class="bj-ax"></i>
+      <div class="bj-seal reveal"><span>${NUMERALS[n - 1] || n}</span></div>
+      <div class="bj-side">
+        ${x.kicker ? `<div class="bj-kicker reveal">${esc(x.kicker)}</div>` : ''}
+        ${x.caption ? `<p class="bj-text words">${words(x.caption)}</p>` : ''}
+      </div>
+      <i class="bj-ax grow"></i>
+    </section>`;
+  }
+  // Photo effects for night festivals: "embers" (warm sparks drifting up, CSS only) and "fireworks"
+  // (bursts drawn on a canvas, only while the photo is on screen)
+  function emberHTML(ph) {
+    const rnd = seeded([...String(ph.id || 'e')].reduce((a, c) => (a * 31 + c.charCodeAt(0)) % 233280, 3));
+    let s = '';
+    for (let i = 0; i < 26; i++) s += `<i style="left:${(rnd() * 100).toFixed(1)}%;--s:${(0.5 + rnd()).toFixed(2)};--x:${((rnd() - 0.5) * 60).toFixed(0)}px;animation-duration:${(7 + rnd() * 8).toFixed(1)}s;animation-delay:${(-rnd() * 14).toFixed(1)}s"></i>`;
+    return `<div class="embers" aria-hidden="true">${s}</div>`;
+  }
+  const fireIO = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
+    const fw = e.target._fw; if (!fw) return; fw.on = e.isIntersecting; if (fw.on && !fw.raf) fw.raf = requestAnimationFrame(fw.step);
+  }), { threshold: 0.2 }) : null;
+  function startFireworks(cv) {
+    if (reduceMotion || !fireIO) return;
+    const ctx = cv.getContext('2d'), dpr = Math.min(1.5, window.devicePixelRatio || 1);
+    const parts = [], cols = [[255, 214, 140], [255, 160, 96], [255, 244, 220], [255, 110, 80]];
+    let last = 0, next = 0;
+    const fw = { on: false, raf: 0 };
+    fw.step = t => {
+      fw.raf = 0; if (!fw.on || !cv.isConnected) { ctx.clearRect(0, 0, cv.width, cv.height); parts.length = 0; return; }
+      const w = cv.clientWidth, h = cv.clientHeight;
+      if (cv.width !== Math.round(w * dpr)) { cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); }
+      const dt = Math.min(50, t - last || 16) / 1000; last = t;
+      if (t > next) {   // a new burst somewhere in the sky
+        const cx = w * (0.15 + Math.random() * 0.7), cy = h * (0.1 + Math.random() * 0.35), c = cols[(Math.random() * cols.length) | 0], n = 70;
+        for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2, v = 60 + Math.random() * 110; parts.push({ x: cx, y: cy, vx: Math.cos(a) * v, vy: Math.sin(a) * v, life: 1, c }); }
+        next = t + 900 + Math.random() * 1600;
+      }
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.globalCompositeOperation = 'source-over'; ctx.clearRect(0, 0, w, h);
+      ctx.globalCompositeOperation = 'lighter';
+      for (let i = parts.length - 1; i >= 0; i--) {
+        const p = parts[i];
+        p.vy += 60 * dt; p.vx *= 0.985; p.vy *= 0.985; p.x += p.vx * dt; p.y += p.vy * dt; p.life -= dt * 0.55;
+        if (p.life <= 0) { parts.splice(i, 1); continue; }
+        ctx.fillStyle = `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${(p.life * 0.9).toFixed(3)})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, 1.1 + p.life * 1.4, 0, Math.PI * 2); ctx.fill();
+      }
+      fw.raf = requestAnimationFrame(fw.step);
+    };
+    cv._fw = fw; fireIO.observe(cv);
+  }
   function chapterHTML(x, n, st) {
     if (pageTheme === 'paris') return parisChapterHTML(x, n, st);
+    if (pageTheme === 'huizhou') return huizhouChapterHTML(x, n, st);
+    if (pageTheme === 'beijing') return beijingChapterHTML(x, n, st);
     const orn = ['flags', 'shibori'].includes(x.ornament) ? x.ornament : x.ornament === 'none' ? '' : 'contour';
     return `
     <section class="paper chapter${orn ? ' orn-' + orn : ''}"${st.length ? ` style='${st.join(';')}'` : ''} data-seed="${n}"${toneAttr(x)}>
@@ -464,9 +794,9 @@
     if (/^#[0-9a-f]{6}$/i.test(x.color || '')) st.push(`--tc:${x.color}`);
     if (chapterNo) return chapterHTML(x, chapterNo, st);
     return `
-    <section class="paper textblock ${align}${pageTheme === 'paris' && DOODLES[x.ornament] ? ' has-doodle' : ''}"${st.length ? ` style='${st.join(';')}'` : ''}${toneAttr(x)}>
+    <section class="paper textblock ${align}${DRAW_THEMES.has(pageTheme) && DOODLES[x.ornament] ? ' has-doodle' : ''}"${st.length ? ` style='${st.join(';')}'` : ''}${toneAttr(x)}>
       <div class="tb-in">
-        ${pageTheme === 'paris' && DOODLES[x.ornament] ? doodleSVG(x.ornament) : ''}
+        ${DRAW_THEMES.has(pageTheme) && DOODLES[x.ornament] ? doodleSVG(x.ornament) : ''}
         ${x.kicker ? `<div class="tb-kicker reveal">${esc(x.kicker)}</div>` : ''}
         ${x.title ? `<h2 class="tb-title reveal">${text(x.title)}</h2>` : ''}
         ${x.caption ? `<p class="tb-cap reveal" style="--d:1">${text(x.caption)}</p>` : ''}
@@ -487,9 +817,9 @@
     }
     if (!x.src) return '';
     const vid = cls => `<video class="${cls}" src="${esc(x.src)}"${x.thumb ? ` poster="${esc(x.thumb)}"` : ''} muted loop playsinline preload="metadata" style="${pos(x)}"></video>` +
-      `<button class="snd glass" type="button" aria-label="Sound">${SOUND}<span>Sound</span></button>`;
+      `<button class="snd" type="button" aria-label="Sound">${SOUND}<span>Sound</span></button>`;
     if (x.layout === 'fill') {
-      return `<section class="panel shot grow media" data-count="${pad2(i + 1)}" data-total="${pad2(total)}" data-cap="${cap}"><div class="bg">${vid('cover')}</div></section>`;
+      return `<section class="panel shot grow media" data-count="${pad2(i + 1)}" data-total="${pad2(total)}" data-cap="${esc(x.caption || '')}"><div class="bg">${vid('cover')}</div></section>`;
     }
     return `
     <section class="paper spread single media ${side}"><figure class="frame media" style="--ar:${(w / h).toFixed(3)}">
@@ -627,23 +957,20 @@
     pageTheme = p.theme || '';
     const photos = p.photos || [], total = countOf(p), idx = projects.indexOf(p);
     const next = projects.length > 1 ? projects[(idx + 1) % projects.length] : null;
+    const pl = placeOf(p);
+    edge = { code: (pl.en + (isCJK(pl.big) ? ' ' + pl.big : '')).trim() || p.title, coords: pl.coords };
+    chTotal = photos.filter(x => kindOf(x) === 'text' && x.style === 'chapter').length;
     let html = `
     <section class="panel cover grow" data-plx="8">
       <div class="bg">${img(coverOf(p), '', true)}</div><div class="shade"></div>
-      <div class="card glass" data-lg="46">
-        <div class="kicker reveal">Album ${pad2(idx + 1)}</div>
-        <h1 class="reveal" style="--d:1">${esc(p.title)}</h1>
-        <div class="meta reveal" style="--d:2">
-          ${p.subtitle ? `<span class="chip">${esc(p.subtitle)}</span>` : ''}
-          <span class="chip">${plural(total)}</span>
-        </div>
-      </div>
-      ${total ? '<div class="scroll-hint"><span>Scroll</span><i></i></div>' : ''}
+      ${plate(p, { h: 'h1', btn: 'View full frame', zoom: true })}
+      ${total ? '<div class="scroll-hint"><i></i></div>' : ''}
     </section>`;
+    if (pageTheme === 'beijing') html += `<div class="bj-ruler is-hidden" aria-hidden="true"><span class="bj-r-top">永定门<em>Yongdingmen</em></span><span class="bj-r-bar"><i></i></span><span class="bj-r-km">0.0 km</span><span class="bj-r-bot">钟鼓楼<em>Bell &amp; Drum Towers</em></span></div>`;
     if (p.description) {
       html += `
     <section class="paper preface">
-      <div class="label reveal">Album ${pad2(idx + 1)}<b>${esc(p.subtitle || plural(total))}</b></div>
+      <div class="label reveal"><span>Album ${pad2(idx + 1)}</span><b>${esc(p.subtitle || plural(total))}</b></div>
       <p class="statement words">${words(p.description)}</p>
     </section>`;
     }
@@ -651,10 +978,10 @@
     for (const s of layoutShots(photos)) {
       if (s.type === 'wide') {   // whole photo, as wide as the screen; its height follows the photo
         const x = s.items[0];
-        html += `<section class="panel shot wide" style="aspect-ratio:${+x.w || 3}/${+x.h || 2}" data-count="${pad2(s.from + 1)}" data-total="${pad2(total)}" data-cap="${esc(capLine(x.caption))}"><div class="bg">${img(x)}${fxIn(x)}</div></section>`;
+        html += `<section class="panel shot wide" style="aspect-ratio:${+x.w || 3}/${+x.h || 2}" data-count="${pad2(s.from + 1)}" data-total="${pad2(total)}" data-cap="${esc(x.caption || '')}"><div class="bg">${img(x)}${fxIn(x)}</div></section>`;
       } else if (s.type === 'full') {
         const x = s.items[0];
-        html += `<section class="panel shot grow" data-plx="5" data-count="${pad2(s.from + 1)}" data-total="${pad2(total)}" data-cap="${esc(capLine(x.caption))}"><div class="bg">${img(x)}${fxIn(x)}</div></section>`;
+        html += `<section class="panel shot grow" data-plx="5" style="--ar:${+x.w || 3}/${+x.h || 2}" data-count="${pad2(s.from + 1)}" data-total="${pad2(total)}" data-cap="${esc(x.caption || '')}"><div class="bg">${img(x)}${fxIn(x)}</div></section>`;
       } else if (s.type === 'dawn') {
         html += dawnHTML(s.items[0], s.from, total);
       } else if (s.type === 'pair') {
@@ -675,7 +1002,7 @@
       }
     }
     const target = next ? { href: '#/p/' + next.slug, title: next.title, sub: next.subtitle || '', image: coverOf(next), line: 'Keep scrolling for next project' }
-                        : { href: '#/', title: content.site.title || 'Home', sub: '', image: heroData().image, line: 'Keep scrolling to return home' };
+                        : { href: '#/', title: content.site.title || 'Home', sub: '', image: coverOf(projects[0]), line: 'Keep scrolling to return home' };
     html += `
     <section class="next" id="next" data-href="${esc(target.href)}">
       <div class="bg">${img(target.image)}</div>
@@ -692,28 +1019,37 @@
     return html;
   }
 
-  // ---------- nav tabs ----------
+  // ---------- nav + albums menu ----------
+  // The nav is plain type: the name on the left, where you are in the middle, "Albums" on the right, which
+  // opens a full-screen index (a photograph of the album you point at shows beside the list).
   function buildNav() {
     const site = content.site || {};
-    $('#brand').innerHTML = `${esc(site.title || 'Photography')}${site.tagline ? `<small>${esc(site.tagline)}</small>` : ''}`;
-    $$('.tab', tabsScroll).forEach(t => t.remove());
-    const add = (href, label) => {
-      const a = document.createElement('a');
-      a.className = 'tab'; a.href = href; a.textContent = label;
-      tabsScroll.appendChild(a);
-    };
-    add('#/', 'Home');
-    projects.forEach(p => add('#/p/' + p.slug, p.title));
+    $('#brand').textContent = site.title || 'Photography';
+    menu.innerHTML = `<div class="menu-in">
+      <div class="menu-head"><span>Albums</span><span>${pad2(projects.length)}</span></div>
+      <nav class="menu-list">${projects.map((p, i) => { const pl = placeOf(p); return `<a href="#/p/${esc(p.slug)}" data-i="${i}"><b>${pad2(i + 1)}</b><span class="t${isCJK(pl.big) ? ' cjk' : ''}">${esc(pl.big)}</span><em>${esc(pl.en)}</em><span class="c">${esc(pl.coords)}</span></a>`; }).join('')}
+        <a href="#/" class="home"><b>00</b><span class="t">Index</span><em>The beginning</em></a></nav>
+      <div class="menu-peek" aria-hidden="true">${projects.map((p, i) => `<div data-i="${i}">${img(coverOf(p))}</div>`).join('')}</div>
+    </div>`;
+    $$('.menu-list a[data-i]', menu).forEach(a => a.addEventListener('pointerenter', () => peek(+a.dataset.i)));
   }
-
-  function markTab(hash) {
-    let on = null;
-    $$('.tab', tabsScroll).forEach(t => { const m = t.getAttribute('href') === hash; t.classList.toggle('on', m); if (m) on = t; });
-    if (!on) { lens.classList.remove('ready'); return; }
-    lens.style.width = on.offsetWidth + 'px';
-    lens.style.transform = `translateX(${on.offsetLeft}px)`;
-    lens.classList.add('ready');
-    tabsScroll.scrollTo({ left: on.offsetLeft - (tabsScroll.clientWidth - on.offsetWidth) / 2, behavior: 'smooth' });
+  function peek(i) { $$('.menu-peek > div', menu).forEach(d => d.classList.toggle('on', +d.dataset.i === i)); }
+  function setMenu(open) {
+    if (open === document.body.classList.contains('menu-open')) return;
+    document.body.classList.toggle('menu-open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    if (open) { menu.hidden = false; void menu.offsetWidth; menu.classList.add('open'); Smooth.stop(); peek(route.type === 'project' ? projects.indexOf(route.project) : 0); }
+    else { menu.classList.remove('open'); setTimeout(() => { if (!menu.classList.contains('open')) menu.hidden = true; }, 700); }
+  }
+  menuBtn.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+  addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+  function markWhere(r) {
+    if (r.type === 'project') {
+      const p = r.project, pl = placeOf(p), i = projects.indexOf(p);
+      where.innerHTML = `<b>${pad2(i + 1)}</b>${esc(pl.en || p.title)}${isCJK(pl.big) ? ` <span>${esc(pl.big)}</span>` : ''}`;
+    } else where.innerHTML = `<b>00</b>Index`;
+    $$('.menu-list a', menu).forEach(a => a.classList.toggle('on', a.getAttribute('href') === r.hash));
   }
 
   // ---------- router ----------
@@ -722,7 +1058,7 @@
   let stacks = [], mediaIO = null, dawns = [], rolls = [];
   let panels = [], papers = [], wordSets = [], swaps = [], onLight = false, nextEl = null, revealIO = null;
   let toneMarks = [], toneKey = '', toneDark = false;
-  let ynChapters = [], ynGuide = null, ynActive = -1;
+  let ynChapters = [], ynGuide = null, ynActive = -1, bjRuler = null;
   const TONE_VARS = ['--cloth', '--cloth-hi', '--cloth-lo', '--pink', '--pink-2', '--pink-3', '--accent', '--pat'];
   const mixTone = (a, b, k) => {
     const m = (p, q) => p.map((v, i) => v + (q[i] - v) * k);
@@ -767,6 +1103,7 @@
     const theme = r.type === 'project' && /^[a-z]+$/.test(r.project.theme || '') ? r.project.theme : '';
     document.body.dataset.theme = theme;
     document.body.classList.toggle('theme-dark', theme === 'indigo');
+    document.body.classList.toggle('home', r.type === 'home');
 
     // returning home with the Back button lands on the project you just left
     let top = 0;
@@ -778,7 +1115,7 @@
     window.scrollTo(0, top);
 
     setupView();
-    markTab(r.hash);
+    markWhere(r); setMenu(false);
     if (!skip) { view.classList.add('pre'); view.classList.remove('out'); void view.offsetWidth; view.classList.remove('pre'); }
     rendering = false; scrollRef = window.scrollY;
     if (!skip) poke();   // after the keep-scrolling hand-off the reader is still scrolling down: leave the chrome as it was
@@ -803,8 +1140,9 @@
     $$('.chapter svg.pa-roofs', view).forEach(drawRoofs);
     $$('.chapter svg.pa-rose', view).forEach(drawRose);
     $$('.sparkle', view).forEach(placeSparkles);
+    $$('canvas.fw', view).forEach(startFireworks);
     TONE_VARS.forEach(k => document.body.style.removeProperty(k)); toneKey = ''; toneDark = false;
-    toneMarks = document.body.classList.contains('theme-dark') || document.body.dataset.theme === 'paris'
+    toneMarks = document.body.classList.contains('theme-dark') || !!BASE_TONE[document.body.dataset.theme]
       ? $$('[data-tone]', view).map(el => ({ el, t: TONES[el.dataset.tone] })).filter(m => m.t) : [];
     swaps = $$('.spread.swap', view).map(el => ({ el, stick: $('.stick', el), sl: el.classList.contains('sl'), s: -1 }));
     stacks = $$('.stack', view).map(el => ({ el, imgs: $$('img.layer', el), when: $('.when', el), ticks: $$('.ticks i', el), ops: [], cur: 0 }));
@@ -816,12 +1154,13 @@
     ynChapters = $$('[data-yn-chapter]', view);
     nextEl = $('#next', view);
     charge.v = 0; charge.done = false; charge.arrived = 0;
-    Glass.scan();
-    lastY = -1; rimT = 0;
+    Threshold.setup();
+    bjRuler = $('.bj-ruler', view);
+    lastY = -1;
   }
 
   // ---------- scroll loop: parallax, HUD, charge decay ----------
-  let lastY = -1, lastT = 0, rimT = 0, hudKey = null, hudTimer = 0;
+  let lastY = -1, lastT = 0, hudKey = null, hudTimer = 0;
   const charge = { v: 0, last: 0, arrived: 0, done: false, shown: -1 };
   const atBottom = () => window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
 
@@ -871,10 +1210,18 @@
         ynGuide.style.setProperty('--yn-progress', progress.toFixed(4));
       }
       if (toneMarks.length) applyTones(vh);
+      // 北京: the central-axis ruler on the right reads how far along the page you are (0 → 7.8 km)
+      if (bjRuler) {
+        const max = Math.max(1, document.documentElement.scrollHeight - vh * 2), k = Math.max(0, Math.min(1, (y - vh) / max));
+        bjRuler.classList.toggle('is-hidden', y < vh * 0.75 || !!(nextEl && rect(nextEl).top < vh * 0.7));
+        bjRuler.style.setProperty('--p', k.toFixed(4));
+        bjRuler.lastChild.previousSibling.textContent = (k * 7.8).toFixed(1) + ' km';
+      }
       // is the nav sitting on paper? then it switches to dark ink
-      let light = false;
+      let light = Threshold.scroll(vh);
       for (const el of papers) { const r = rect(el); if (r.top <= 42 && r.bottom > 42) { light = true; break; } }
       if (toneDark) light = false;
+      document.body.classList.toggle('tone-dark', toneDark);
       if (light !== onLight) { onLight = light; document.body.classList.toggle('on-light', light); }
       // statements light up word by word
       for (const s of wordSets) {
@@ -940,7 +1287,7 @@
         }
       }
     }
-    if (t - rimT > (moved ? 90 : 450)) { rimT = t; Rim.update(); }
+    Threshold.tick(t);
     // charge bookkeeping
     if (nextEl && !charge.done) {
       if (atBottom()) { if (!charge.arrived) charge.arrived = t; }
@@ -959,7 +1306,7 @@
     if (!key) { hud.classList.remove('show'); return; }
     const apply = () => {
       hudCount.innerHTML = `${key.dataset.count} <em>/ ${key.dataset.total}</em>`;
-      hudCap.textContent = key.dataset.cap || '';
+      hudCap.innerHTML = capRich(key.dataset.cap);
       hud.classList.remove('swap');
     };
     if (hud.classList.contains('show')) { hud.classList.add('swap'); hudTimer = setTimeout(apply, 200); }
@@ -1074,7 +1421,7 @@
     }
   });
   addEventListener('hashchange', render);
-  addEventListener('resize', () => { lastY = -1; markTab(route.hash); sizeRolls(); });
+  addEventListener('resize', () => { lastY = -1; sizeRolls(); });
   // a handscroll section is as tall as its strip is wide, so scrolling down unrolls it exactly
   function sizeRolls() {
     for (const ro of rolls) {
@@ -1188,16 +1535,41 @@
     let zz = '';
     for (let x = 0, k = 0; x <= W + 30; x += 30, k++) zz += (k ? 'L' : 'M') + x + ',' + (H - 46 + (k % 2 ? -14 : 14));
     out += `<g style="--m:${m + 1}"><g class="rg" style="--r:0">${dots}</g><g class="rg" style="--r:3"><path d="${zz}" pathLength="1000" class="dash" stroke-dasharray="4 4"/></g></g>`;
-    svg.innerHTML = `<defs><filter id="sbh-${n}" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3"/></filter></defs>
-      <g class="halo" filter="url(#sbh-${n})">${out}</g><g class="crisp">${out}</g>`;
+    // Baked into a static image: a live SVG with a full-screen blur re-renders on every frame while anything
+    // moves over it (that made this chapter stutter). As an <img> it is rasterised once and only fades in.
+    const ink = 'rgb(238,240,243)';
+    const doc = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W * 2}" height="${H * 2}">
+      <style>path{fill:none;stroke:${ink};stroke-linecap:round}.core{fill:${ink};stroke:none}.dot{stroke-width:3.4}.dash{stroke-width:2.3}.ray{stroke-width:1.8}.halo path{stroke-width:8}</style>
+      <defs><filter id="b" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3"/></filter></defs>
+      <g class="halo" opacity=".16" filter="url(#b)">${out}</g><g opacity=".3">${out}</g></svg>`;
+    const im = new Image();
+    im.className = 'shibori-img'; im.alt = ''; im.decoding = 'async'; im.setAttribute('aria-hidden', 'true');
+    im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(doc.replace(/style="--[^"]*"/g, ''));
+    svg.replaceWith(im);
   }
 
-  // pointer-follow sheen on glass
-  document.addEventListener('pointermove', e => {
-    const g = e.target.closest && e.target.closest('.glass'); if (!g) return;
-    const r = g.getBoundingClientRect();
-    g.style.setProperty('--mx', (e.clientX - r.left) + 'px'); g.style.setProperty('--my', (e.clientY - r.top) + 'px');
-  }, { passive: true });
+  // ---------- 徽州 lantern ----------
+  // On 徽州's night pages (a dark tone) the mouse carries a faint lantern glow across the paper. It hides
+  // over photographs, so they are never tinted.
+  const Lantern = (() => {
+    if (reduceMotion || !matchMedia('(hover: hover) and (pointer: fine)').matches) return null;
+    const el = document.createElement('div'); el.className = 'lantern'; el.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(el);
+    let x = -999, y = -999, cx = -999, cy = -999, raf = 0, over = false;
+    const step = () => {
+      cx += (x - cx) * 0.12; cy += (y - cy) * 0.12;
+      el.style.transform = `translate3d(${cx.toFixed(1)}px,${cy.toFixed(1)}px,0)`;
+      raf = Math.abs(x - cx) + Math.abs(y - cy) > 0.5 ? requestAnimationFrame(step) : 0;
+    };
+    addEventListener('pointermove', e => {
+      if (e.pointerType !== 'mouse') return;
+      x = e.clientX; y = e.clientY; if (cx < -900) { cx = x; cy = y; }
+      const o = !!(e.target.closest && e.target.closest('.clip, .panel, .stack, .dawn, .roll, .next'));
+      if (o !== over) { over = o; el.classList.toggle('off', o); }
+      if (!raf) raf = requestAnimationFrame(step);
+    }, { passive: true });
+    return el;
+  })();
 
   // ---------- auto-hiding chrome ----------
   // Scrolling down half a screen, or 5 s without input, hides the nav / caption HUD / project title card
@@ -1222,7 +1594,7 @@
     if (zoomed) return;
     setUI(false);
     clearTimeout(idleTimer);
-    idleTimer = setTimeout(() => { if (document.querySelector('.nav .glass:hover, .hud:hover')) poke(); else setUI(true); }, IDLE_MS);
+    idleTimer = setTimeout(() => { if (document.querySelector('.nav:hover, .hud:hover') || document.body.classList.contains('menu-open')) poke(); else setUI(true); }, IDLE_MS);
   }
   addEventListener('scroll', () => {
     const y = window.scrollY, d = y - scrollRef;
@@ -1374,6 +1746,8 @@
   }
   document.addEventListener('click', e => {
     if (zoomed) { closeZoom(); return; }
+    const zb = e.target.closest && e.target.closest('[data-zoom]');
+    if (zb) { const bg = $('.bg', zb.closest('.panel')); if (bg) openZoom(bg); return; }
     const clip = e.target.closest && e.target.closest(ZOOMABLE); if (clip) openZoom(clip);
   });
   addEventListener('keydown', e => { if (zoomed && e.key === 'Escape') closeZoom(); });
@@ -1482,130 +1856,6 @@
   })();
   addEventListener('resize', () => closeZoom(true));
 
-  // Tints each glass rim with the colours of the photo under it: 12 points around the
-  // element's edge are looked up in a tiny cached copy of the image and become a conic gradient.
-  const Rim = (() => {
-    const cache = new WeakMap(), N = 12;
-    function pixels(im) {
-      let c = cache.get(im); if (c) return c;
-      if (!im.complete || !im.naturalWidth) return null;
-      const w = 48, h = Math.max(8, Math.round(48 * im.naturalHeight / im.naturalWidth));
-      const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
-      try { const ctx = cv.getContext('2d', { willReadFrequently: true }); ctx.drawImage(im, 0, 0, w, h); c = { d: ctx.getImageData(0, 0, w, h).data, w, h }; }
-      catch (e) { c = { d: null }; }
-      cache.set(im, c); return c;
-    }
-    function lookup(x, y, layers) {
-      for (const L of layers) {
-        const r = L.r; if (x < r.left || x > r.right || y < r.top || y > r.bottom) continue;
-        const u = Math.min(.999, Math.max(0, (x - r.left - L.ox) / L.dw)), v = Math.min(.999, Math.max(0, (y - r.top - L.oy) / L.dh));
-        const i = ((v * L.c.h | 0) * L.c.w + (u * L.c.w | 0)) * 4, d = L.c.d;
-        return [d[i], d[i + 1], d[i + 2]];
-      }
-      return null;
-    }
-    function vivid(c) {   // more saturated and lifted, so it reads as light caught in the edge
-      const avg = (c[0] + c[1] + c[2]) / 3, o = c.map(v => avg + (v - avg) * 1.8);
-      const k = Math.min(2.4, 215 / Math.max(40, ...o));
-      return o.map(v => Math.round(Math.max(0, Math.min(255, v * k * .88 + 30))));
-    }
-    function update() {
-      const vh = window.innerHeight, layers = [];
-      for (const p of panels) {
-        const pr = p.el.getBoundingClientRect(); if (pr.bottom < 0 || pr.top > vh) continue;
-        for (let k = p.all.length - 1; k >= 0; k--) {   // later images sit on top
-          const im = p.all[k], c = pixels(im); if (!c || !c.d) continue;
-          const r = im.getBoundingClientRect(), s = Math.max(r.width / im.naturalWidth, r.height / im.naturalHeight);
-          const dw = im.naturalWidth * s, dh = im.naturalHeight * s, f = (im.style.objectPosition || '50% 50%').split(' ').map(parseFloat);
-          const fx = isNaN(f[0]) ? 50 : f[0], fy = isNaN(f[1]) ? 50 : f[1];
-          layers.push({ r, c, dw, dh, ox: (r.width - dw) * fx / 100, oy: (r.height - dh) * fy / 100 });
-        }
-      }
-      if (!layers.length) return;
-      for (const el of $$('.glass')) {
-        const r = el.getBoundingClientRect(); if (!r.width || r.bottom < 0 || r.top > vh) continue;
-        const cx = r.left + r.width / 2, cy = r.top + r.height / 2, stops = []; let sum = [0, 0, 0], last = null;
-        for (let i = 0; i < N; i++) {
-          const a = i / N * Math.PI * 2, dx = Math.sin(a), dy = -Math.cos(a);
-          const t = Math.min(r.width / 2 / (Math.abs(dx) || 1e-6), r.height / 2 / (Math.abs(dy) || 1e-6));
-          const raw = lookup(cx + dx * t, cy + dy * t, layers) || last; if (!raw) { stops.length = 0; break; }
-          last = raw; const c = vivid(raw); sum = sum.map((v, j) => v + c[j]);
-          stops.push(`rgba(${c[0]},${c[1]},${c[2]},.85) ${Math.round(i / N * 360)}deg`);
-        }
-        if (!stops.length) continue;
-        const rim = `conic-gradient(from 0deg, ${stops.join(', ')}, ${stops[0].replace(/ \d+deg$/, ' 360deg')})`;
-        if (el._rim === rim) continue; el._rim = rim;
-        el.style.setProperty('--rim', rim);
-        el.style.setProperty('--rim-glow', `rgba(${sum.map(v => Math.round(v / N)).join(',')},.30)`);
-      }
-    }
-    return { update };
-  })();
-
-  // ---------- Liquid Glass refraction ----------
-  // For each [data-lg] element we paint a displacement map (red = x shift, green = y shift)
-  // shaped like a convex lens rim and feed it to backdrop-filter through an SVG filter.
-  // Only Chromium renders SVG filters in backdrop-filter; other browsers keep the
-  // frosted fallback from the stylesheet.
-  const Glass = (() => {
-    const ok = !!window.chrome && CSS.supports('backdrop-filter', 'blur(1px)') &&
-               !matchMedia('(prefers-reduced-transparency: reduce)').matches;
-    const defs = $('#lg-defs'), items = new Map();
-    let seq = 0;
-    const ro = ok ? new ResizeObserver(es => es.forEach(e => build(e.target))) : null;
-
-    function map(w, h, r, bezel) {
-      const c = document.createElement('canvas'); c.width = w; c.height = h;
-      const ctx = c.getContext('2d'), im = ctx.createImageData(w, h), d = im.data;
-      const hx = w / 2, hy = h / 2;
-      for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
-        const px = x + .5 - hx, py = y + .5 - hy;
-        const qx = Math.abs(px) - (hx - r), qy = Math.abs(py) - (hy - r);
-        let dist, nx, ny; // distance inside the rounded rect + outward normal
-        if (qx > 0 && qy > 0) { const l = Math.hypot(qx, qy) || 1; dist = r - l; nx = qx / l * Math.sign(px); ny = qy / l * Math.sign(py); }
-        else if (qx > qy) { dist = -qx + r; nx = Math.sign(px); ny = 0; }
-        else { dist = -qy + r; nx = 0; ny = Math.sign(py); }
-        let m = 0;
-        if (dist >= 0 && dist < bezel) { const k = 1 - dist / bezel; m = 1 - Math.sqrt(1 - k * k); }
-        const i = (y * w + x) * 4;
-        d[i] = 128 - nx * m * 127; d[i + 1] = 128 - ny * m * 127; d[i + 2] = 128; d[i + 3] = 255;
-      }
-      ctx.putImageData(im, 0, 0);
-      return c.toDataURL();
-    }
-
-    function build(el) {
-      const it = items.get(el); if (!it) return;
-      const w = Math.round(el.offsetWidth), h = Math.round(el.offsetHeight);
-      if (!w || !h || (it.w === w && it.h === h)) return;
-      it.w = w; it.h = h;
-      const r = Math.min(parseFloat(getComputedStyle(el).borderTopLeftRadius) || 0, w / 2, h / 2);
-      const bezel = Math.min(+el.dataset.bezel || 22, w / 2, h / 2);
-      it.filter.innerHTML =
-        `<feImage href="${map(w, h, r, bezel)}" x="0" y="0" width="${w}" height="${h}" preserveAspectRatio="none" result="m"/>` +
-        `<feDisplacementMap in="SourceGraphic" in2="m" scale="${+el.dataset.lg || 30}" xChannelSelector="R" yChannelSelector="G"/>`;
-      const f = `url(#${it.id}) blur(${+el.dataset.blur || 1.5}px) saturate(1.7) brightness(1.06)`;
-      el.style.backdropFilter = f;
-    }
-
-    function scan() {
-      if (!ok) return;
-      for (const [el, it] of items) if (!el.isConnected) { ro.unobserve(el); it.filter.remove(); items.delete(el); }
-      $$('[data-lg]').forEach(el => {
-        if (items.has(el)) return;
-        const id = 'lg-' + (++seq);
-        const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
-        filter.setAttribute('id', id);
-        filter.setAttribute('x', '0'); filter.setAttribute('y', '0'); filter.setAttribute('width', '100%'); filter.setAttribute('height', '100%');
-        filter.setAttribute('color-interpolation-filters', 'sRGB');
-        defs.appendChild(filter);
-        items.set(el, { id, filter, w: 0, h: 0 });
-        ro.observe(el);
-      });
-    }
-    return { scan, ok };
-  })();
-
   // ---------- boot ----------
   async function boot() {
     document.body.classList.add('booting');
@@ -1622,7 +1872,6 @@
     await render();
     document.body.classList.remove('booting');
     requestAnimationFrame(frame);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => markTab(route.hash));
   }
   boot();
 })();

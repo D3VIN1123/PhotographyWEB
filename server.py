@@ -149,7 +149,12 @@ def make_display(path, pid):
         return ""
     out = UPLOADS / ("%s_m.avif" % pid)
     try:
-        subprocess.run([sips, "-Z", str(DISPLAY_EDGE), "-s", "format", "avif", "-s", "formatOptions", str(DISPLAY_Q),
+        # both sides must be even: Chrome can't decode sips' AVIFs with an odd side (they stay blank)
+        r = subprocess.run([sips, "-g", "pixelWidth", "-g", "pixelHeight", str(path)], capture_output=True, text=True, timeout=30).stdout
+        w, h = [int(line.split(":")[1]) for line in r.splitlines() if "pixel" in line][:2]
+        k = DISPLAY_EDGE / float(max(w, h))
+        tw, th = max(2, int(round(w * k)) // 2 * 2), max(2, int(round(h * k)) // 2 * 2)
+        subprocess.run([sips, "-z", str(th), str(tw), "-s", "format", "avif", "-s", "formatOptions", str(DISPLAY_Q),
                         str(path), "--out", str(out)], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
                        timeout=60)
     except Exception:

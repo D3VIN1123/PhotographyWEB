@@ -164,7 +164,7 @@ def main():
             (OUT / name).write_text(svg(kind, seed, w, h, pal), "utf-8")
             photos.append({"id": "demo%s%02d" % (slug.replace("-", ""), n), "src": "uploads/demo/" + name,
                            "w": w, "h": h, "caption": cap, "focus": [50, 55], "layout": "auto"})
-        projects.append({"id": "demo-" + slug, "slug": slug, "title": title, "subtitle": sub, "description": desc,
+        projects.append({"id": "demo-" + slug, "slug": slug, "title": title, "subtitle": sub, "place": "", "placeEn": "", "coords": "", "description": desc,
                          "cover": photos[0]["id"], "published": True, "theme": "", "photos": photos})
     doc = {
         "site": {"title": "Studio Name", "tagline": "Photography",

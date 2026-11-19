@@ -79,6 +79,7 @@ body[data-theme="paris"] .textblock.center .tb-in::before { content: "❦"; font
   vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; }
 .pa-scene path { opacity: .5; transition: stroke-dashoffset 2.4s cubic-bezier(.5, 0, .2, 1); transition-delay: calc(.3s + var(--k) * 120ms); }
 .pa-scene path.tower { opacity: .3; }
+.pa-scene path.occ { fill: var(--cloth); stroke: none; opacity: 1; transition: none; }
 .pa-scene path.gold, .pa-doodle path.gold { stroke: var(--accent); opacity: .85; }
 .chapter.in .pa-scene path { stroke-dashoffset: 0; }
 .pa-ch:has(.pa-scene) { padding-bottom: calc(min(94vw, 112vh) * .3 + 8vh); }

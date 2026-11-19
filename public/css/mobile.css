@@ -1,0 +1,99 @@
+/* ============================================================
+   Phones, portrait — loaded after every page style so it wins.
+   Everything that sits side by side on a desktop is stacked top to bottom; full-screen landscape photos
+   are shown whole (a tall screen would otherwise crop away most of the frame); the nav keeps only the
+   name and "Albums"; film-edge side lines are dropped (no room beside the photo), the row stays.
+   ============================================================ */
+@media (max-width: 760px) {
+  :root { --pad: 18px; --gutter: 22px; --nav-h: 62px; }
+
+  /* ---- chrome ---- */
+  .nav { padding: max(0px, env(safe-area-inset-top)) var(--pad) 0; grid-template-columns: 1fr auto; }
+  .nav-where { display: none; }
+  .brand { font-size: 19px; }
+  .hud { left: var(--pad); right: var(--pad); bottom: max(16px, env(safe-area-inset-bottom)); max-width: none; gap: 12px; }
+  .hud-cap { font-size: 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .menu-in { grid-template-columns: 1fr; gap: 0; padding-top: calc(var(--nav-h) + 3vh); }
+  .menu-peek { display: none; }
+  .menu-list a { grid-template-columns: 38px 1fr; gap: 4px 12px; padding: 16px 0; }
+  .menu-list em, .menu-list .c { grid-column: 2; }
+  .menu-list .c { font-size: 9.5px; }
+
+  /* ---- title plate: stacked ---- */
+  .plate-top { font-size: 9.5px; letter-spacing: .18em; }
+  .plate { right: var(--pad); bottom: calc(var(--pad) + 64px); flex-direction: column; align-items: flex-start; gap: 14px; }
+  .plate-big { font-size: clamp(56px, 17vw, 84px); }
+  .plate-big.cjk { font-size: clamp(72px, 24vw, 120px); }
+  .plate-en { font-size: clamp(28px, 8.6vw, 40px); }
+  .plate-cap { font-size: 16px; }
+  .plate-btn { left: var(--pad); right: auto; bottom: var(--pad); height: 36px; }
+  .grow .plate, .grow .plate-btn, .grow .plate-top { translate: none; padding: 0; }
+
+  /* ---- home threshold ---- */
+  .threshold { height: 250vh; }
+  .th-list, .th-edge { display: none; }
+  .th-hint { white-space: nowrap; }
+  .th-word { max-width: none; right: var(--pad); bottom: calc(var(--pad) + 40px); }
+  .th-big { font-size: 15vw; } .th-big.cjk { font-size: 17vw; }
+  .th-en { font-size: 24px; }
+  .th-cap { font-size: 15px; }
+  .th-hint { bottom: var(--pad); }
+  .index a { grid-template-columns: 34px 1fr auto; gap: 4px 12px; }
+  .index .s, .index .c { grid-column: 2; }
+  .index .n { grid-row: 1; grid-column: 3; }
+  .index .t { font-size: 26px; }
+
+  /* ---- photos ---- */
+  .panel.shot { height: auto; min-height: 0; aspect-ratio: var(--ar, 3 / 2); }
+  .panel.shot .bg img { top: -4%; height: 108%; }
+  .panel.grow:not(.cover):not(.proj) .bg, .panel.grow:not(.cover):not(.proj) .shade { clip-path: none; }
+  .panel.cover { height: 100svh; }
+  .panel.proj { height: 88svh; min-height: 480px; }
+  .spread, body[data-theme] .spread { padding: 10vh var(--gutter); gap: 8vh; }
+  .spread.pair, .spread.pair.pp { grid-template-columns: 1fr !important; padding-left: var(--gutter) !important; padding-right: var(--gutter) !important; }
+  .spread.pair .frame { margin-top: 0 !important; }
+  .spread.single .frame { width: 100%; justify-self: stretch !important; }
+  .spread.pair.pp .frame:nth-child(2) { width: 78%; justify-self: end; }   /* two portraits: a little stagger, like a contact sheet */
+  .fe-col { display: none; }
+  .fe-row { font-size: 8.5px; gap: 1em; }
+  .frame figcaption { font-size: 16px; }
+  .dawn .bg img { object-fit: contain; }
+  .stack .stick { padding: 12vh 14px 8vh; }
+
+  /* ---- text ---- */
+  .preface, .intro { padding-top: 16vh; padding-bottom: 8vh; }
+  .preface .statement { font-size: clamp(21px, 6.2vw, 28px); line-height: 1.55; }
+  body[data-theme="huizhou"] .preface .statement, body[data-theme="beijing"] .preface .statement { font-size: 17px; line-height: 2.1; }
+  .textblock { padding-top: 10vh !important; padding-bottom: 10vh !important; }
+  .textblock .tb-title { font-size: min(var(--ts, 30px), 8vw) !important; line-height: 1.45; }
+  body[data-theme="huizhou"] .textblock.center .tb-title { font-size: 22px !important; line-height: 1.9; }
+
+  /* ---- chapter openings: everything in one column ---- */
+  .chapter { padding: 14vh var(--gutter) 12vh; min-height: 92svh; }
+  .ch-in { grid-template-columns: auto auto; gap: 22px 18px; }
+  .ch-side { grid-column: 1 / -1; padding-top: 0; }
+  .pa-in { max-width: none; }
+  .pa-sign { font-size: clamp(26px, 8.5vw, 40px); min-width: 0; max-width: 100%; }
+  .pa-sign b { white-space: normal; text-align: center; }
+  .pa-ch { padding-bottom: 30vh; }
+  .pa-ch:has(.pa-scene) { padding-bottom: calc(94vw * .3 + 8vh); }
+  .pa-rose-wrap { width: 92vw; right: -34vw; top: auto; bottom: -10vh; translate: none; opacity: .5; }
+  .pa-roofs { height: 26vh; }
+  /* 徽州 */
+  .hz-ch, .hz-ch.orn-huiwalls, .hz-ch.orn-fishdance { padding-top: 22vh; align-items: start; }
+  .hz-ch.orn-huiwalls, .hz-ch.orn-fishdance { padding-bottom: calc(94vw * .3 + 8vh); }
+  .hz-in { flex-wrap: wrap; align-items: flex-start; gap: 20px 18px; }
+  .hz-side { flex: 1 1 100%; }
+  .hz-title { font-size: clamp(54px, 16vw, 80px); }
+  .hz-ghost { font-size: 52vw; right: -4vw; }
+  .hz-meta span:nth-of-type(3), .hz-meta i:nth-of-type(2) { display: none; }
+  .hz-ridge { top: 15vh; }
+  /* 北京 */
+  .bj-ch { padding: 0 var(--gutter); min-height: 100svh; }
+  .bj-ch.orn-eaves { padding-bottom: calc(94vw * .3); }
+  .bj-gate { font-size: clamp(76px, 25vw, 120px); column-gap: 30px; }
+  .bj-ruler { display: none; }
+}
+@media (max-width: 760px) and (hover: none) {
+  .frame:hover .clip img { scale: 1; }   /* no sticky hover zoom after a tap */
+}

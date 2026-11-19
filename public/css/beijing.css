@@ -1,0 +1,88 @@
+/* ============================================================
+   Theme: 北京 / 皇城根ber地道 (project.theme = "beijing") — zen remaster, Nov 2026
+   Everything hangs on the central axis: a hairline down the middle of the page, as the city hangs on its
+   7.8 km axis. Photographs sit centred on it; chapter titles are split across it (紫 | 禁) and slide in from
+   both sides to meet; a small vermilion seal sits on the line. A ruler on the right counts the kilometres
+   from 永定门 to 钟鼓楼 as you scroll (site.js: bjRuler). Colours are quiet: grey brick, a muted palace red,
+   winter apricot, the city at night (tones hutong / palace / apricot / night).
+   ============================================================ */
+body[data-theme="beijing"] {
+  --cloth: rgb(232, 230, 225); --cloth-hi: rgba(244, 243, 240, .6); --cloth-lo: rgba(208, 205, 198, .4);
+  --pink: rgb(34, 33, 32); --pink-2: rgba(34, 33, 32, .66); --pink-3: rgba(34, 33, 32, .4); --accent: rgb(166, 58, 40);
+  --hair: color-mix(in srgb, var(--pink) 14%, transparent);
+  --axis: color-mix(in srgb, var(--pink) 22%, transparent);
+  background: var(--cloth);
+}
+body[data-theme="beijing"] .paper { background: var(--cloth); }
+/* the axis runs behind the photographs */
+body[data-theme="beijing"] .spread, body[data-theme="beijing"] .stack.paper, body[data-theme="beijing"] .preface {
+  background-image: linear-gradient(var(--axis), var(--axis)); background-size: 1px 100%; background-position: 50% 0; background-repeat: no-repeat;
+}
+body[data-theme="beijing"] .preface { text-align: center; }
+body[data-theme="beijing"] .preface .label { justify-content: center; }
+body[data-theme="beijing"] .preface .statement { margin-left: auto; margin-right: auto; font-family: var(--song); font-weight: 300; font-size: clamp(19px, 1.7vw, 27px); line-height: 2.2; max-width: 28em;
+  background: var(--cloth); padding: 3vh 0; }
+body[data-theme="beijing"] .spread.single .frame { justify-self: center; margin-left: 0; margin-right: 0; }
+body[data-theme="beijing"] .spread { padding-top: clamp(100px, 22vh, 240px); padding-bottom: clamp(100px, 22vh, 240px); }
+body[data-theme="beijing"] .frame .clip img { filter: saturate(.86); }
+
+/* verses: centred on the axis, which stops short above and below the words */
+body[data-theme="beijing"] .textblock .tb-in::before, body[data-theme="beijing"] .textblock .tb-in::after {
+  content: ""; width: 1px; height: 12vh; background: var(--axis); margin: 0 auto; }
+body[data-theme="beijing"] .textblock { padding-top: 0; padding-bottom: 0; }
+body[data-theme="beijing"] .textblock .tb-in { margin: 0 auto; text-align: center; align-items: center; gap: 3.4vh; }
+body[data-theme="beijing"] .textblock .tb-title { font-family: var(--song); font-weight: 300; font-size: clamp(22px, 2.1vw, 34px); letter-spacing: .4em; line-height: 1.8; }
+body[data-theme="beijing"] .textblock .pa-doodle { width: clamp(80px, 7vw, 110px); margin: 0 auto; }
+
+/* ---------- chapter: the gate on the axis ---------- */
+.bj-ch { position: relative; min-height: 118vh; overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 var(--gutter); }
+.bj-ch.orn-eaves { padding-bottom: calc(min(94vw, 112vh) * .3); }
+.bj-ch .pa-scene path { opacity: .32; }
+.bj-ax { flex: none; width: 1px; height: 6vh; background: var(--axis); transform: scaleY(0); transform-origin: top; transition: transform 2.6s cubic-bezier(.6, 0, .2, 1) .2s; }
+.bj-ax.grow { flex: 1 1 14vh; min-height: 14vh; }
+.chapter.in .bj-ax { transform: none; }
+.bj-meta { position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); top: calc(var(--nav-h) + 3vh); display: flex; justify-content: space-between; color: var(--pink-3);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; }
+.bj-meta span:first-child { font-family: var(--song); letter-spacing: .4em; }
+.bj-gate { position: relative; width: 100%; display: grid; grid-template-columns: 1fr 1fr; column-gap: clamp(44px, 7vw, 130px); margin: 0;
+  font-family: var(--song); font-weight: 300; font-size: clamp(96px, 14vw, 250px); line-height: 1.04; letter-spacing: .04em; }
+.bj-gate::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--axis); transform: scaleY(0); transition: transform 2.4s cubic-bezier(.6, 0, .2, 1) .6s; }
+.chapter.in .bj-gate::before { transform: none; }
+.bj-gate span { display: block; opacity: 0; transition: transform 3s cubic-bezier(.5, 0, .1, 1) .3s, opacity 2.2s ease .3s; }
+.bj-gate .l { text-align: right; transform: translateX(-12vw); }
+.bj-gate .r { text-align: left; transform: translateX(12vw); }
+.bj-gate .c { grid-column: 1 / -1; text-align: center; transform: scale(1.08); }
+.bj-ch.one .bj-gate::before { display: none; }
+.chapter.in .bj-gate span { opacity: 1; transform: none; }
+.bj-seal { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 2px; margin-bottom: 4.4vh;
+  background: var(--accent); color: #f6ede2; font-family: var(--song); font-size: 15px; line-height: 1; }
+.bj-ch .bj-seal.reveal { filter: none; transform: scale(1.6); transition: transform .5s cubic-bezier(.3, 1.5, .5, 1) 2.2s, opacity .3s ease 2.2s; }
+.bj-ch.in .bj-seal.reveal { opacity: .95; transform: none; }
+.bj-side { max-width: 30em; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.bj-kicker { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 2.3vw, 38px); line-height: 1.1; }
+.bj-text { margin: 0; font-family: var(--song); font-weight: 300; font-size: clamp(15px, 1.15vw, 18px); line-height: 2.15; }
+.bj-text .w { opacity: .14; transition: opacity .9s var(--ease); }
+.bj-text .w.on { opacity: .9; }
+/* the gate's 9 × 9 studs, as fine dots */
+.bj-studs { flex: none; width: clamp(90px, 8vw, 130px); display: grid; grid-template-columns: repeat(9, 1fr); gap: clamp(5px, .5vw, 8px); }
+.bj-studs i { aspect-ratio: 1; border-radius: 50%; background: var(--accent); opacity: 0; transform: scale(0);
+  transition: transform .6s cubic-bezier(.3, 1.6, .5, 1), opacity .4s ease; transition-delay: calc(1s + var(--i) * 45ms); }
+.chapter.in .bj-studs i { opacity: .85; transform: none; }
+
+/* ---------- the axis ruler (fixed, right edge) ---------- */
+.bj-ruler { position: fixed; z-index: 44; right: var(--pad); top: 50%; translate: 0 -50%; height: 58vh; display: flex; flex-direction: column; align-items: center; gap: 14px;
+  color: var(--ink-2); text-shadow: 0 1px 10px rgba(0, 0, 0, .3); pointer-events: none; transition: opacity .9s var(--ease), color .6s, filter .9s; }
+body.on-light .bj-ruler { color: var(--pink-2); text-shadow: none; }
+.bj-ruler.is-hidden, body.ui-off .bj-ruler, body.menu-open .bj-ruler { opacity: 0; filter: blur(4px); }
+.bj-r-top, .bj-r-bot { writing-mode: vertical-rl; font-family: var(--song); font-size: 12px; letter-spacing: .3em; }
+.bj-r-top em, .bj-r-bot em { font-style: normal; font-family: var(--mono); font-size: 9px; letter-spacing: .2em; text-transform: uppercase; margin-top: 1em; opacity: .7; }
+.bj-r-bar { position: relative; flex: 1; width: 9px;
+  background: linear-gradient(currentColor, currentColor) 50% 0 / 1px 100% no-repeat,
+              repeating-linear-gradient(to bottom, currentColor 0 1px, transparent 1px calc(100% / 7.8)); opacity: .55; }
+.bj-r-bar i { position: absolute; left: -5px; right: -5px; height: 2px; top: calc(var(--p, 0) * 100%); background: var(--accent); }
+.bj-r-km { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; color: var(--accent); white-space: nowrap; }
+body:not(.on-light) .bj-r-km { color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .bj-studs i, .bj-gate span, .bj-ax, .bj-gate::before { transition-duration: .01s; transition-delay: 0s; }
+}

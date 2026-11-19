@@ -1,0 +1,107 @@
+/* ============================================================
+   Theme: 徽州 / 呈坎 (project.theme = "huizhou") — zen remaster, Nov 2026
+   The page is a whitewashed wall with almost nothing on it. Chapter openings: the chapter's characters
+   stand huge and nearly invisible (like a name worn into whitewash), one ink line is drawn across, a drop
+   of ink blooms behind the title, a tiny red seal carries the number. Photographs bloom in like ink in
+   water (a round mask that spreads) and gain their colour as they settle. Verses are set vertically, like
+   a couplet on a door. At night (tone lanternnight) the mouse carries a faint lantern glow (site.js: Lantern).
+   Photo effects for the night: fx "embers" (sparks drifting up) and "fireworks" (bursts on a canvas).
+   ============================================================ */
+body[data-theme="huizhou"] {
+  --cloth: rgb(239, 238, 234); --cloth-hi: rgba(250, 250, 248, .6); --cloth-lo: rgba(218, 217, 211, .4);
+  --pink: rgb(34, 35, 36); --pink-2: rgba(34, 35, 36, .66); --pink-3: rgba(34, 35, 36, .4); --accent: rgb(160, 58, 44);
+  --hair: color-mix(in srgb, var(--pink) 14%, transparent);
+  background: var(--cloth);
+}
+/* rice paper: long fibres, very faint */
+body[data-theme="huizhou"] .paper {
+  background-color: var(--cloth);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .2 0 0 0 0 .18 0 0 0 .045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(120% 80% at 15% 0%, var(--cloth-hi), transparent 60%),
+    radial-gradient(90% 70% at 100% 100%, var(--cloth-lo), transparent 60%);
+}
+body[data-theme="huizhou"] .preface .statement { font-family: var(--song); font-weight: 300; font-size: clamp(19px, 1.7vw, 27px); line-height: 2.2; max-width: 30em; }
+
+/* ---------- photographs bloom in like ink in water ---------- */
+@property --bloom { syntax: "<percentage>"; inherits: false; initial-value: 0%; }
+body[data-theme="huizhou"] .frame .clip {
+  clip-path: none;
+  -webkit-mask: radial-gradient(circle at 46% 58%, #000 calc(var(--bloom) - 22%), transparent var(--bloom));
+          mask: radial-gradient(circle at 46% 58%, #000 calc(var(--bloom) - 22%), transparent var(--bloom));
+  transition: --bloom 3.2s cubic-bezier(.3, 0, .15, 1);
+}
+body[data-theme="huizhou"] .frame.in .clip { --bloom: 160%; }
+body[data-theme="huizhou"] .frame .clip img { filter: grayscale(.85) contrast(.92); scale: 1.06; transition: filter 3.6s ease .4s, scale 3.6s var(--ease); }
+body[data-theme="huizhou"] .frame.in .clip img { filter: none; scale: 1; }
+body[data-theme="huizhou"] .frame.media .clip { -webkit-mask: none; mask: none; }
+body[data-theme="huizhou"] .spread { padding-top: clamp(100px, 22vh, 240px); padding-bottom: clamp(100px, 22vh, 240px); }
+
+/* ---------- verses: vertical, like a couplet ---------- */
+body[data-theme="huizhou"] .textblock.center .tb-in { flex-direction: row-reverse; align-items: flex-start; justify-content: center; gap: clamp(28px, 4vw, 70px); text-align: left; }
+body[data-theme="huizhou"] .textblock.center .tb-title {
+  writing-mode: vertical-rl; max-height: 54vh; font-family: var(--song); font-weight: 300;
+  font-size: clamp(24px, 2.3vw, 36px); line-height: 1.9; letter-spacing: .5em;
+}
+body[data-theme="huizhou"] .textblock.center .tb-cap { max-width: 15em; margin-top: 1.4em; font-size: clamp(15px, 1.15vw, 18px); }
+body[data-theme="huizhou"] .textblock.center .pa-doodle { width: clamp(90px, 8vw, 130px); margin: 0; }
+
+/* ---------- chapter: the empty wall ---------- */
+.hz-ch { position: relative; min-height: 112vh; overflow: hidden; display: grid; align-items: end; padding: 26vh var(--gutter) 16vh; }
+.hz-ch.orn-huiwalls, .hz-ch.orn-fishdance { align-items: start; padding-top: 28vh; padding-bottom: calc(min(94vw, 112vh) * .3 + 10vh); }
+.hz-ch .pa-scene path { opacity: .34; }
+.hz-ch .pa-scene path.tower { opacity: .2; }
+.hz-ghost {
+  position: absolute; right: 3vw; top: 50%; translate: 0 -50%; z-index: 0; writing-mode: vertical-rl; pointer-events: none;
+  font-family: var(--song); font-weight: 900; font-size: min(38vh, 24vw); line-height: 1; color: var(--pink); white-space: nowrap;
+  opacity: 0; transition: opacity 5s ease .4s;
+}
+.chapter.in .hz-ghost { opacity: .05; }
+.hz-drop {
+  position: absolute; z-index: 0; left: calc(var(--gutter) + 6vw); bottom: 20vh; width: 64vmax; height: 64vmax; margin: -32vmax; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--pink) 12%, transparent), color-mix(in srgb, var(--pink) 5%, transparent) 45%, transparent 72%);
+  transform: scale(.08); opacity: 0; transition: transform 7s cubic-bezier(.15, .7, .1, 1) .6s, opacity 3s ease .6s;
+}
+.chapter.in .hz-drop { transform: none; opacity: 1; }
+.hz-ch.orn-huiwalls .hz-drop, .hz-ch.orn-fishdance .hz-drop { bottom: auto; top: 36vh; }
+.hz-ch.orn-fishdance .hz-drop { background: radial-gradient(closest-side, rgba(214, 104, 72, .16), rgba(214, 104, 72, .05) 45%, transparent 72%); }
+.hz-ridge { position: absolute; left: 0; top: 19vh; width: 100%; height: 60px; z-index: 1; overflow: visible; pointer-events: none; }
+.hz-ridge path { fill: none; stroke: var(--pink); stroke-width: 1.1; vector-effect: non-scaling-stroke; opacity: .4;
+  stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 4s cubic-bezier(.6, 0, .2, 1) .3s; }
+.chapter.in .hz-ridge path { stroke-dashoffset: 0; }
+.hz-meta { position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); top: calc(var(--nav-h) + 3vh); display: flex; align-items: center; gap: 1.6em; color: var(--pink-3);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; white-space: nowrap; }
+.hz-meta i { flex: 1; height: 1px; background: currentColor; opacity: .35; }
+.hz-meta span:nth-of-type(2) { font-family: var(--song); letter-spacing: .6em; }
+.hz-in { position: relative; z-index: 2; display: flex; align-items: flex-end; gap: clamp(28px, 4.4vw, 80px); max-width: 64rem; }
+.hz-ch.orn-huiwalls .hz-in, .hz-ch.orn-fishdance .hz-in { align-items: flex-start; }
+.hz-seal { flex: none; align-self: flex-start; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 2px;
+  background: var(--accent); color: #f7efe4; font-family: var(--song); font-size: 15px; line-height: 1; }
+.hz-ch .hz-seal.reveal { filter: none; transform: scale(1.6); transition: transform .5s cubic-bezier(.3, 1.5, .5, 1) 1.6s, opacity .3s ease 1.6s; }
+.hz-ch.in .hz-seal.reveal { opacity: .95; transform: none; }
+.hz-title { flex: none; writing-mode: vertical-rl; margin: 0; font-family: var(--song); font-weight: 300; font-size: clamp(56px, 6.4vw, 112px); line-height: 1; letter-spacing: .32em; }
+/* written top to bottom */
+.hz-ch .hz-title.reveal { opacity: 1; filter: none; transform: none; clip-path: inset(0 0 100% 0); transition: clip-path 2.6s cubic-bezier(.6, 0, .2, 1) .5s; }
+.hz-ch.in .hz-title.reveal { clip-path: inset(0 0 -4% 0); }
+.hz-side { max-width: 27em; display: flex; flex-direction: column; gap: 22px; padding-bottom: .3em; }
+.hz-ch.orn-huiwalls .hz-side, .hz-ch.orn-fishdance .hz-side { padding-top: .4em; }
+.hz-kicker { font-family: var(--serif); font-style: italic; font-size: clamp(26px, 2.4vw, 40px); line-height: 1.1; }
+.hz-text { margin: 0; font-family: var(--song); font-weight: 300; font-size: clamp(15px, 1.15vw, 18px); line-height: 2.15; }
+.hz-text .w { opacity: .14; transition: opacity .9s var(--ease); }
+.hz-text .w.on { opacity: .9; }
+
+/* ---------- photo effects: embers + fireworks ---------- */
+.embers { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.embers i { position: absolute; bottom: -12px; width: calc(var(--s) * 6px); height: calc(var(--s) * 6px); border-radius: 50%; opacity: 0;
+  background: radial-gradient(circle, rgba(255, 226, 170, .95), rgba(255, 120, 60, .55) 45%, transparent 70%); mix-blend-mode: screen;
+  animation: ember linear infinite; animation-play-state: paused; }
+.panel.in .embers i, .frame.in .embers i { animation-play-state: running; }
+@keyframes ember { 0% { transform: translate(0, 0); opacity: 0; } 12% { opacity: .95; } 75% { opacity: .55; } 100% { transform: translate(var(--x), -92vh); opacity: 0; } }
+.bg canvas.fw { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .embers i { animation: none; }
+  .hz-ch .hz-title.reveal { clip-path: none; transition: none; }
+  body[data-theme="huizhou"] .frame .clip { -webkit-mask: none; mask: none; }
+  .hz-drop, .hz-ghost, .hz-ridge path { transition: none; }
+}

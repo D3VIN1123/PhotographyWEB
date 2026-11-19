@@ -1,11 +1,10 @@
 # AGENTS.md — handoff notes for any coding agent (Claude Code, Codex, Cursor, …)
 
-Photography portfolio with an Apple "Liquid Glass" UI and a small admin ("backstage").
-Current look is **v2 "paper + glass"**: full-bleed photos and glass controls, alternating with warm paper-white
-sections, serif display type and framed photos (inspired by a site the owner likes). v1 (all-dark, every photo
-full-screen) is kept in `versions/v1-liquid-glass/` — see its README to restore; do not delete it.
-The owner is a photographer, not a developer: keep things dependency-free and explain changes plainly.
-They write in a mix of Chinese and English; the admin UI is bilingual, the public site is English.
+Photography portfolio with a quiet "zen" UI and a small admin ("backstage").
+Current look is **v3 "zen"** (Nov 2026): no glass anywhere; plain type on photographs, grey rice-paper sections,
+lots of empty space. Type system from the owner's reference screenshot: mono letter-spaced capitals for every label/number
+(`--mono`), italic display serif for English (`--serif`), heavy Song with a gold fade for big Chinese titles (`--song`, `--gold`).
+v2 ("paper + glass") is in `.backups/before-zen-redesign/`; v1 (all-dark) is in `versions/v1-liquid-glass/` — do not delete either.
 
 ## Hard constraints
 
@@ -15,8 +14,8 @@ They write in a mix of Chinese and English; the admin UI is bilingual, the publi
 - **`public/` must stay a fully static site.** It is deployed as-is (GitHub Pages via
   `.github/workflows/pages.yml`). It may only read `data/content.json` and `uploads/*`; it must never call `/api/*`.
 - **Relative URLs only** inside `public/` (`data/…`, `uploads/…`, `#/p/slug`) so it works under a sub-path.
-- Desktop-first. A dedicated mobile pass is **pending and waits for the owner's instructions** — only basic
-  small-screen rules exist (`@media (max-width: 760px)` at the end of `site.css`).
+- Desktop-first, with a phone layout in `public/css/mobile.css` (loaded last; `max-width: 760px`): album tabs hidden
+  (brand pill leads home), every side-by-side layout stacked, full-screen shots shown whole via `--ar` on `.panel.shot`.
 
 ## Run
 
@@ -34,9 +33,9 @@ Env: `PORT`, `HOST` (default 127.0.0.1), `ADMIN_PASSWORD` (overrides `.admin.jso
 server.py              static server + JSON API (auth, content, uploads)
 start.command          macOS launcher
 public/                THE SITE (static, deployable)
-  index.html           shell: nav, #view, HUD, SVG <defs> for glass filters
-  css/site.css         all styling; .glass is the material
-  js/site.js           router, templates, scroll loop, charge, glass refraction
+  index.html           shell: nav, albums menu, #view, HUD
+  css/site.css         shared styling (themes: yunnan/paris/huizhou/beijing.css, phones: mobile.css)
+  js/site.js           router, templates, threshold, scroll loop, charge, zoom lens
   data/content.json    all content (written by the admin)
   uploads/             images (<id>.jpg + <id>_s.jpg thumbnail); uploads/demo/ = placeholders
 admin/                 backstage UI, served at /admin by server.py (NOT deployed)
@@ -60,15 +59,16 @@ versions/              frozen copies of earlier looks (not deployed)
   },
   "projects": [{                  // array order = gallery order = "next project" queue (wraps around)
     "id", "slug", "title", "subtitle", "description",
+    "place", "placeEn", "coords",  // title plate: big word (else title), English italic line (else subtitle), "39.92°N · 116.39°E"
     "cover": "<photo id>", "published": true,
-    "theme": "" | "indigo" | "yunnan" | "paris", // page style; indigo = dark tie-dye, yunnan = editorial field journal,
+    "theme": "" | "indigo" | "yunnan" | "paris" | "huizhou" | "beijing", // page style; indigo = dark tie-dye, yunnan = editorial field journal,
                                   // paris = limestone + Didot, street-sign chapters (public/css/paris.css)
     "photos": [{ "type": "image"|"stack"|"video"|"youtube"|"text",   // missing = image
                  "id", "src", "thumb", "w", "h", "caption",
                  "focus": [x%, y%],             // object-position when cropped to fill
                  "layout": "auto"|"fill"|"fit"|"wide"|"pair",   // pair = sit side by side with the next photo
                  "mid": "uploads/<id>_m.avif",  // 2560px AVIF display copy the page shows; "src" (5120px) only loads in zoom
-                 "fx": "" | "mist" | "dawn" | "sparkle" }]   // sparkle = twinkling lights on the bright parts (sparkleHTML / placeSparkles)  // mist = drifting cloud overlay; dawn = pinned, scroll raises the sun   // fill = always full-bleed, fit = always framed on paper,
+                 "fx": "" | "mist" | "dawn" | "sparkle" | "embers" | "fireworks" }]   // embers = rising sparks (CSS), fireworks = canvas bursts while on screen (startFireworks)   // sparkle = twinkling lights on the bright parts (sparkleHTML / placeSparkles)  // mist = drifting cloud overlay; dawn = pinned, scroll raises the sun   // fill = always full-bleed, fit = always framed on paper,
                                                        // wide = whole photo at screen width (.panel.wide), snaps by its centre
   }]
 }
@@ -78,9 +78,10 @@ versions/              frozen copies of earlier looks (not deployed)
 // youtube: "yt" (11-char id), "url", thumb = i.ytimg.com poster, w/h = aspect ratio; always framed
 // stack:   layout "scroll" = horizontal handscroll (rollHTML / sizeRolls / rolls in frame)
 // text:    "style": "" | "chapter" (numbered 壹贰叁…, vertical title, "kicker" English line, "ornament"
-//          contour|flags|shibori|roofs|rose|opera|seine|versailles|none; the last five only on paris pages —
+//          contour|flags|shibori|roofs|rose|opera|seine|versailles|huiwalls|fishdance|eaves|studs|none; scenes (SCENES) draw on
+//          paris / huizhou / beijing pages, studs only on beijing —
 //          opera/seine/versailles are line-drawn scenes (SCENES). On a paris page a plain text block's "ornament" can be a
-//          small line drawing above the verse: metro|cafe|lamp|chandelier|eiffel (DOODLES)., plus "kicker" on plain blocks too. shibori = tie-dye medallions
+//          small line drawing above the verse: metro|cafe|lamp|chandelier|eiffel|fish|lantern|cloud (DOODLES)., plus "kicker" on plain blocks too. shibori = tie-dye medallions
 //          (`drawShibori`, seeded, avoids the text boxes).
 // text:    "tone": "" | indigo|dye|jade|maroon|dusk|night — indigo pages only: the whole page re-dyes to that
 //          colour as the block scrolls in (`TONES`, `applyTones` in frame → --cloth/--cloth-hi/--cloth-lo/--pink*/
@@ -115,15 +116,25 @@ server has no image library.
 
 ## Front-end map (`public/js/site.js`)
 
-- **Routes**: `#/` home (hero panel → paper `.intro` with statement + album index → `.marquee` → one
-  `.panel.proj` per project → paper footer); `#/p/<slug>` project (cover panel → paper `.preface` with the
-  description → photos → `.next` block). `render()` swaps `#view` with a blur/fade.
+- **Routes**: `#/` home (`.threshold` → paper `.intro` with statement + album index → one `.panel.proj` per project →
+  paper footer); `#/p/<slug>` project (cover panel → paper `.preface` → photos → `.next` block). `render()` swaps `#view` with a dissolve.
+- **Threshold** (`thresholdHTML` / `Threshold` in site.js): the home page's first screen. Paper with a round opening (clip-path circle
+  on `.th-ap`) ringed by a baked dry-brush ensō (`ensoURL`, drawn in with a conic mask). Album covers cross-fade inside it every 5.6 s;
+  it breathes, drifts with the mouse and closes/reopens on each change; hovering a name in `.th-list` holds that album. Scrolling
+  (290vh section) opens the circle to full screen and fades in the title plate. `hero.projectId` picks the first album.
+- **Title plate** (`plate()`): the screenshot layout over covers, home panels and the opened threshold — mono top row (album n/N,
+  coords), big title bottom-left, English italic + cover caption (`capRich`) + frame count beside it, outlined pill bottom-right.
+- **Nav / menu**: brand left, `#where` (album number + place) centre, "Albums" right opens `#menu`, a full-screen index with a
+  cover peek. There is no album tab bar any more.
+- **Captions** everywhere go through `capRich`: English line in italic serif, Chinese line small and letter-spaced.
+- **Film-edge text** (`frame1`, "Film-edge text" in site.css): framed photos carry the type that runs along a negative's rebate —
+  a row `7 ▸ 7A  ALBUM NAME  8 ▸` and a vertical line (number — album — coords). Variants fe-a / fe-b / fe-c alternate. No film drawn.
 - **Photo layout** (`layoutShots`): auto landscapes alternate between a full-bleed `.panel.shot` and a paper
   `.spread` holding a pair of framed photos (`.frame`, numbered caption underneath); portraits are always framed;
   a leftover photo becomes a `.spread.single`. `fill` forces full-bleed, `fit` forces framed.
 - **Paper sections** (`.paper`): light background, dark ink (`--pink*` tokens), serif (`--serif`, system fonts
   only — no web-font download). While a `.paper` section is under the nav the scroll loop sets `body.on-light`,
-  which turns the nav glass to dark ink.
+  which turns the nav type to dark ink.
 - **Scroll-driven motion** (all in `frame`): `.panel.grow` gets `--f` (1 = framed inside paper margins, 0 =
   full-bleed) so panels open up as they reach the centre; `.words` statements light up word by word. A pair of two landscapes is a `.spread.swap`: a 230vh section with a sticky `.stick`,
   where the loop trades the two photos' sizes (`--s`, grid columns 7fr/4fr ↔ 4fr/7fr) and rewinds on scroll-up.
@@ -150,23 +161,14 @@ server has no image library.
   `--charge` on `#next`. It drains at 0.9/s when input stops. At 1, a `.warp` overlay grows from the block to
   full screen, then the route changes underneath it. Tune feel via the divisors in the `wheel`/`touchmove`
   listeners and the decay rate.
-- **Liquid Glass** (`.glass` in CSS + `Glass` in JS): CSS gives tint, blur, specular rim and a pointer-following
-  sheen everywhere. In Chromium, each `[data-lg="<strength>"]` element also gets a generated SVG
-  `feDisplacementMap` (lens-shaped rim) applied through `backdrop-filter: url(#…)`. Safari/Firefox ignore SVG
-  backdrop filters, so they keep the frosted fallback — do not remove the fallback declaration.
-  `data-bezel` (px, default 22) and `data-blur` (px, default 5) are optional per element.
-  `data-bezel` aside, the default backdrop blur is deliberately low (1.5px refracting / 7px fallback): the owner
-  asked for *clear* glass, not frosted.
-- **Rim colour** (`Rim` in JS, `--rim` / `--rim-glow` in CSS): the 1.5px ring on every `.glass` is a conic gradient
-  of 12 colours sampled from the photo under the element's edge (tiny cached canvas per image), under white
-  specular arcs at top-left / bottom-right (iOS 26 look). Re-sampled ~every 90 ms while scrolling.
+- **Liquid Glass was removed** (owner's request, Nov 2026). The zoom-mode magnifier (`Lens`) is still there.
 - **Auto-hiding chrome** (`setUI` / `poke`, `body.ui-off` / `body.ui-on`): scrolling down half a screen (`HIDE_DOWN`) or `IDLE_MS` (5 s) without
   input wipes away the nav, caption HUD, project cover card and scroll hints with an iridescent mask sweep;
   only a click/tap, mouse movement inside the top 20 % of the screen (`TOP_ZONE`; ignored for 700 ms after
   any scroll), Tab, or scrolling up by half a screen (`SHOW_UP`, measured from the lowest point reached)
   restores them. The home-page cards (`.hero .card`, `.proj .card`) are
   intentionally excluded — to change what hides, edit the selector list in the "Auto-hiding chrome" CSS block.
-- Glass is reserved for text surfaces and navigation (nav pill, cards, HUD). Photos stay untouched.
+- Photos stay untouched: no overlays tint them (the 徽州 lantern glow hides over photographs).
 
 - **Captions** may have two lines ("中文\nEnglish"): `capHTML` sets them as main + small line; the HUD joins them.
 - **彩云之南** (project-vpo0) is the showcase for the indigo theme: chapters, handscroll, mist, dawn. Its pre-redesign
@@ -200,6 +202,14 @@ The owner does not want their photographs used to train AI. `index.html` carries
 domain). Keep these.
 
 ## Gotchas
+
+- **AVIF display copies must have even width and height.** Chrome cannot decode sips' AVIFs with an odd side (2560×1707):
+  the image stays blank and `onerror` never fires, so there is no fallback. `make_display` (server.py) and
+  `scripts/make_display.py` now size to even numbers; `python3 scripts/make_display.py --fix-odd` remakes old odd ones.
+- **徽州 (zen)**: `huizhouChapterHTML` — ghost characters, one ink ridge line, ink-drop bloom, tiny seal; photos bloom in through a
+  growing radial mask (`--bloom`) and gain colour; centred verses are vertical; `Lantern` glow on dark tones. **北京 (zen)**:
+  `beijingChapterHTML` — central axis hairline, title split across it, seal on the line; singles centred; `.bj-ruler` counts
+  0 → 7.8 km (永定门 → 钟鼓楼) with scroll.
 
 - `transform` on `.bg img` belongs to the JS parallax; CSS effects on those images use the separate `scale`
   property. `.next .bg img` is driven by `--charge` and has no `data-plx`.

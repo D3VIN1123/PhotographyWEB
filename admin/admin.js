@@ -198,13 +198,18 @@
       <div class="grid2">
         ${field('项目名称 Title', base + '.title', p.title)}
         ${field('副标题 Subtitle <em>（地点 / 年份）</em>', base + '.subtitle', p.subtitle, { ph: 'Iceland · 2026' })}
+        ${field('大标题 Big title <em>（封面左下角的大字，留空 = 项目名称）</em>', base + '.place', p.place, { ph: '北京' })}
+        ${field('英文名 English name <em>（大字旁的斜体，留空 = 副标题）</em>', base + '.placeEn', p.placeEn, { ph: 'Beijing' })}
+        ${field('坐标 Coordinates <em>（封面右上角）</em>', base + '.coords', p.coords, { ph: '39.92°N · 116.39°E' })}
         ${field('简介 Description', base + '.description', p.description, { full: true, area: true })}
         ${field('网址名 URL slug <em>（英文小写，用 - 连接）</em>', base + '.slug', p.slug)}
         <label class="field"><span>页面风格 Page style</span><select data-bind="${base}.theme" data-rerender>
           <option value="" ${!p.theme ? 'selected' : ''}>默认 · 米白纸 Paper</option>
           <option value="indigo" ${p.theme === 'indigo' ? 'selected' : ''}>靛蓝 · 深色 Indigo (dark)</option>
           <option value="yunnan" ${p.theme === 'yunnan' ? 'selected' : ''}>云南手记 · Yunnan journal</option>
-          <option value="paris" ${p.theme === 'paris' ? 'selected' : ''}>巴黎 · 石头与玻璃 Paris (stone &amp; glass)</option></select></label>
+          <option value="paris" ${p.theme === 'paris' ? 'selected' : ''}>巴黎 · 石头与玻璃 Paris (stone &amp; glass)</option>
+          <option value="huizhou" ${p.theme === 'huizhou' ? 'selected' : ''}>徽州 · 粉墙黛瓦 Huizhou (ink &amp; white walls)</option>
+          <option value="beijing" ${p.theme === 'beijing' ? 'selected' : ''}>北京 · 皇城 Beijing (palace red &amp; gold)</option></select></label>
         <div class="field"><span>状态 Visibility</span><label class="switch" style="height:42px"><input type="checkbox" data-bind="${base}.published" ${p.published === false ? '' : 'checked'}> 在网站上显示 Published</label></div>
       </div>
     </div>
@@ -231,6 +236,8 @@
     ['maroon', '绛红 Maroon'], ['dusk', '暮紫 Dusk'], ['night', '夜 Night'],
     ['stone', '石灰岩 Limestone (light)'], ['zinc', '锌灰 Zinc (light)'], ['lilac', '黄昏淡紫 Lilac (light)'], ['vitrail', '彩窗暗色 Stained glass (dark)'],
     ['gilt', '鎏金 Gilt (dark)'], ['seine', '秋日河岸 Seine (light)'],
+    ['whitewall', '粉墙 White wall (light)'], ['misty', '烟雨 Misty green (light)'], ['lanternnight', '灯夜 Lantern night (dark)'],
+    ['hutong', '胡同灰 Hutong grey (light)'], ['palace', '宫墙红 Palace red (dark)'], ['apricot', '冬日杏色 Winter apricot (light)'],
   ];
   const FONTS = [
     ['serif', '衬线 Serif', '"Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, "Songti SC", Georgia, serif'],
@@ -266,15 +273,19 @@
             <option value="opera" ${ph.ornament === 'opera' ? 'selected' : ''}>歌剧院线描 Opéra (line drawing)</option>
             <option value="seine" ${ph.ornament === 'seine' ? 'selected' : ''}>塞纳河桥线描 Seine bridge (line drawing)</option>
             <option value="versailles" ${ph.ornament === 'versailles' ? 'selected' : ''}>凡尔赛金门线描 Versailles gate (line drawing)</option>
+            <option value="huiwalls" ${ph.ornament === 'huiwalls' ? 'selected' : ''}>马头墙线描 Horse-head walls (line drawing)</option>
+            <option value="fishdance" ${ph.ornament === 'fishdance' ? 'selected' : ''}>舞鱼灯线描 Fish-lantern dance (line drawing)</option>
+            <option value="eaves" ${ph.ornament === 'eaves' ? 'selected' : ''}>宫殿线描 Palace hall (line drawing)</option>
+            <option value="studs" ${ph.ornament === 'studs' ? 'selected' : ''}>宫门门钉 Palace gate studs (北京)</option>
             <option value="none" ${ph.ornament === 'none' ? 'selected' : ''}>无 None</option></select></label>`
-            : (project() || {}).theme === 'paris' ? `<label class="mini"><span>小插画 Line drawing</span><select data-bind="${base}.ornament">
-            ${[['', '无 None'], ['metro', '地铁口 Métro entrance'], ['cafe', '咖啡桌 Café table'], ['lamp', '路灯 Street lamp'], ['chandelier', '吊灯 Chandelier'], ['eiffel', '铁塔 Eiffel Tower']]
+            : ['paris', 'huizhou', 'beijing'].includes((project() || {}).theme) ? `<label class="mini"><span>小插画 Line drawing</span><select data-bind="${base}.ornament">
+            ${[['', '无 None'], ['metro', '地铁口 Métro entrance'], ['cafe', '咖啡桌 Café table'], ['lamp', '路灯 Street lamp'], ['chandelier', '吊灯 Chandelier'], ['eiffel', '铁塔 Eiffel Tower'], ['fish', '鱼灯 Fish lantern'], ['lantern', '灯笼 Lantern'], ['cloud', '祥云 Cloud scroll']]
               .map(o => `<option value="${o[0]}" ${(ph.ornament || '') === o[0] ? 'selected' : ''}>${o[1]}</option>`).join('')}</select></label>` : ''}
-          ${['indigo', 'paris'].includes((project() || {}).theme) ? `<label class="mini"><span title="从这一段开始，整页慢慢染成这个颜色（靛蓝 / 巴黎页面风格有效） The page fades to this colour from this block on">底色 Page colour</span><select data-bind="${base}.tone">
+          ${['indigo', 'paris', 'huizhou', 'beijing'].includes((project() || {}).theme) ? `<label class="mini"><span title="从这一段开始，整页慢慢染成这个颜色（靛蓝 / 巴黎页面风格有效） The page fades to this colour from this block on">底色 Page colour</span><select data-bind="${base}.tone">
             ${TONES.map(t => `<option value="${t[0]}" ${(ph.tone || '') === t[0] ? 'selected' : ''}>${t[1]}</option>`).join('')}</select></label>` : ''}
         </div>
         <label class="mini"><span>小标题 Kicker <em>（标题上方的一行小字，章节里显示为英文副题）</em></span><input type="text" data-bind="${base}.kicker" value="${esc(ph.kicker || '')}"></label>
-        <label class="mini"><span>${ph.style === 'chapter' ? '章节名 Chapter title' + ((project() || {}).theme === 'yunnan' ? '（横排）' : (project() || {}).theme === 'paris' ? '（路牌上的地名）' : '（竖排）') : '标题 Subtitle'}</span><input type="text" data-bind="${base}.title" value="${esc(ph.title || '')}"></label>
+        <label class="mini"><span>${ph.style === 'chapter' ? '章节名 Chapter title' + ((project() || {}).theme === 'yunnan' ? '（横排）' : (project() || {}).theme === 'paris' ? '（路牌上的地名）' : (project() || {}).theme === 'beijing' ? '（匾额上的字）' : '（竖排）') : '标题 Subtitle'}</span><input type="text" data-bind="${base}.title" value="${esc(ph.title || '')}"></label>
         <label class="mini"><span>正文 Caption</span><textarea data-bind="${base}.caption" rows="3">${esc(ph.caption || '')}</textarea></label>
         <div class="seg small">${[['left', '左 Left'], ['center', '中 Centre'], ['right', '右 Right']].map(([v, l]) =>
           `<button class="${al === v ? 'on' : ''}" data-act="text-align" data-k="${k}" data-v="${v}">${l}</button>`).join('')}</div>
@@ -318,7 +329,9 @@
             <option value="" ${!ph.fx ? 'selected' : ''}>无特效 No effect</option>
             <option value="mist" ${ph.fx === 'mist' ? 'selected' : ''}>流云 Drifting mist</option>
             <option value="dawn" ${ph.fx === 'dawn' ? 'selected' : ''}>日照金山 Sunrise on scroll</option>
-            <option value="sparkle" ${ph.fx === 'sparkle' ? 'selected' : ''}>闪烁灯光 Sparkling lights</option></select>` : '';
+            <option value="sparkle" ${ph.fx === 'sparkle' ? 'selected' : ''}>闪烁灯光 Sparkling lights</option>
+            <option value="embers" ${ph.fx === 'embers' ? 'selected' : ''}>飞火 Rising sparks</option>
+            <option value="fireworks" ${ph.fx === 'fireworks' ? 'selected' : ''}>烟花 Fireworks</option></select>` : '';
     return `<div class="photo ${kind}" data-k="${k}">
       <div class="thumb" ${focusable ? `data-act="focus" data-k="${k}" title="点击设置焦点 Click to set focus"` : ''} style="aspect-ratio:${ratio}">
         ${thumbSrc ? `<img src="${esc(url(thumbSrc))}" loading="lazy" alt="">` : ''}

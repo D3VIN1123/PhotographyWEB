@@ -31,7 +31,7 @@ def make(src):
         return ""
     rel = stem + "_m.avif"
     out, inp = CONTENT / rel, CONTENT / src
-    if out.exists():
+    if out.exists() and not ("--fix-odd" in sys.argv and odd(out)):
         return rel
     if not inp.exists():
         return ""
@@ -41,10 +41,23 @@ def make(src):
     if "--dry-run" in sys.argv:
         print("would make", rel)
         return ""
-    subprocess.run(["sips", "-Z", str(EDGE), "-s", "format", "avif", "-s", "formatOptions", str(QUALITY),
+    tw, th = even_size(w, h, EDGE)
+    subprocess.run(["sips", "-z", str(th), str(tw), "-s", "format", "avif", "-s", "formatOptions", str(QUALITY),
                     str(inp), "--out", str(out)], check=True, stdout=subprocess.DEVNULL)
     print("made", rel, "%d KB" % (out.stat().st_size // 1024))
     return rel
+
+
+def even_size(w, h, edge):
+    """Scaled size with the long side = edge and BOTH sides even. Chrome cannot decode the AVIFs sips writes
+    when a side is odd (e.g. 2560 x 1707): the image stays blank and never falls back. Found Nov 2026."""
+    k = edge / float(max(w, h))
+    return max(2, int(round(w * k)) // 2 * 2), max(2, int(round(h * k)) // 2 * 2)
+
+
+def odd(path):
+    w, h = dims(path)
+    return w % 2 or h % 2
 
 
 def dims(path):
