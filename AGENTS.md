@@ -125,14 +125,8 @@ server has no image library.
 - **Landing page plug-in** (Nov 2026 trial): a script loaded before site.js may set `window.HomeLanding = { html(api), setup(view, api) }`;
   `homeHTML` then uses it instead of the threshold. `js/home-gallery.js` + `css/home-gallery.css` = 时空画廊 (photos floating in a 3D room,
   slow forward drift, film-edge type, hover glow + album card, room-colour swatches; `Dust` = light motes on two canvases
-  behind/in front of the photos, projected with the same camera, streaking when the room moves fast). `js/home-matrix.js` + `css/home-matrix.css` =
-  "Matrix" (canvas slideshow, character-band transitions in one hue, glyph-edged window that decodes the album under the mouse);
-  The gallery script also draws the REST of the home page (`after()`; site.js uses it instead of intro / panels / footer):
-  everything stays in the same room — `body.home[data-room]` carries the room colour, the back dust canvas is fixed so the
-  dust keeps drifting, the gallery's photos dissolve as its scroll ends, then `.rm-intro` (statement + index with a floating
-  cover peek), `.rm-al` album frames (one big framed cover with film-edge type, turned in 3D by `--p`/`--a` set in `rest()`,
-  three of the album's photos floating at other depths) and `.rm-foot`. Albums added/removed in the backstage appear automatically.
-  previewed from the temporary folder `../PhotographyWEB-matrix` (port 4174, CONTENT_DIR → this public/). Remove the loser when chosen.
+  behind/in front of the photos, projected with the same camera, streaking when the room moves fast). The "Matrix" trial (canvas slideshow with character transitions) was not chosen;
+  it is kept locally in `.backups/matrix-home/` (gitignored) and the runnable `../PhotographyWEB-matrix` folder.
 - **Loading screen** (`#loader` markup + `js/loader.js` right after it, `css/loader.css`): starfield, site name, hairline bar with
   real progress (content + the gallery's images, ≥1.4 s, gives up at 10 s). On the home page at 100 % the stars streak (fly forward),
   then `HomeLanding.warp()` starts 时空画廊 at speed and it eases down to its drift. Other routes just fade it out. `html.loading`
