@@ -22,174 +22,6 @@
   },
   "projects": [
     {
-      "id": "mwjmi8ubzaj03",
-      "slug": "project-aj04",
-      "title": "新疆",
-      "subtitle": "China2023",
-      "description": "",
-      "cover": "26111763904fd487",
-      "published": true,
-      "photos": [
-        {
-          "id": "2611173561e590d9",
-          "src": "uploads/2611173561e590d9.jpg",
-          "thumb": "uploads/2611173561e590d9_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/2611173561e590d9_m.avif"
-        },
-        {
-          "id": "261117503823a557",
-          "src": "uploads/261117503823a557.jpg",
-          "thumb": "uploads/261117503823a557_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            48,
-            51
-          ],
-          "layout": "auto",
-          "mid": "uploads/261117503823a557_m.avif"
-        },
-        {
-          "id": "2611172a1263325c",
-          "src": "uploads/2611172a1263325c.jpg",
-          "thumb": "uploads/2611172a1263325c_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/2611172a1263325c_m.avif"
-        },
-        {
-          "id": "261117e7fb6a3d7f",
-          "src": "uploads/261117e7fb6a3d7f.jpg",
-          "thumb": "uploads/261117e7fb6a3d7f_s.jpg",
-          "w": 5120,
-          "h": 3413,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/261117e7fb6a3d7f_m.avif"
-        },
-        {
-          "id": "26111763904fd487",
-          "src": "uploads/26111763904fd487.jpg",
-          "thumb": "uploads/26111763904fd487_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/26111763904fd487_m.avif"
-        },
-        {
-          "id": "2611176c91c55d3f",
-          "src": "uploads/2611176c91c55d3f.jpg",
-          "thumb": "uploads/2611176c91c55d3f_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/2611176c91c55d3f_m.avif"
-        },
-        {
-          "id": "26111726286c8b99",
-          "src": "uploads/26111726286c8b99.jpg",
-          "thumb": "uploads/26111726286c8b99_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/26111726286c8b99_m.avif"
-        },
-        {
-          "id": "2611175235886527",
-          "src": "uploads/2611175235886527.jpg",
-          "thumb": "uploads/2611175235886527_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/2611175235886527_m.avif"
-        },
-        {
-          "id": "26111754c066bf73",
-          "src": "uploads/26111754c066bf73.jpg",
-          "thumb": "uploads/26111754c066bf73_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/26111754c066bf73_m.avif"
-        },
-        {
-          "id": "26111924c6a8080d",
-          "src": "uploads/26111924c6a8080d.jpg",
-          "mid": "uploads/26111924c6a8080d_m.avif",
-          "thumb": "uploads/26111924c6a8080d_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        },
-        {
-          "id": "261119cca0813819",
-          "src": "uploads/261119cca0813819.jpg",
-          "mid": "uploads/261119cca0813819_m.avif",
-          "thumb": "uploads/261119cca0813819_s.jpg",
-          "w": 5120,
-          "h": 3834,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
-        }
-      ],
-      "place": "新疆",
-      "placeEn": "Xinjiang",
-      "coords": "43.83°N · 87.62°E"
-    },
-    {
       "id": "mwl4uvcugvpo0",
       "slug": "project-vpo0",
       "title": "彩云之南",
@@ -924,6 +756,441 @@
       "place": "云南",
       "placeEn": "Yunnan",
       "coords": "25.61°N · 100.27°E"
+    },
+    {
+      "id": "mwmr1dqe105a5",
+      "slug": "project-05a5",
+      "title": "徽州",
+      "subtitle": "安徽呈坎 · 2026",
+      "description": "呈坎在黄山市徽州区，是一座按八卦布局的古村。白墙、黑瓦、马头墙，荷塘绕着村子。夏天的夜里，村里人举着鱼灯走过石桥，烟花在头顶炸开。\nChengkan, in the Huizhou district of Huangshan, is an old village laid out to the eight trigrams: white walls, black tiles, stepped gables, lotus ponds all around. On summer nights the villagers carry fish lanterns over the stone bridges while fireworks break overhead.",
+      "cover": "26111802be906147",
+      "published": true,
+      "photos": [
+        {
+          "id": "hz0wall00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "粉墙",
+          "kicker": "White Walls, Dark Tiles",
+          "caption": "徽州的房子，墙是白的，瓦是黑的。马头墙一级一级叠上去，原本是为了挡火。\nIn Huizhou the walls are white and the tiles are black. The stepped “horse-head” gables climb tier by tier — they were built to stop fire spreading.",
+          "ornament": "huiwalls",
+          "tone": "whitewall",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611181b350cff47",
+          "src": "uploads/2611181b350cff47.jpg",
+          "mid": "uploads/2611181b350cff47_m.avif",
+          "thumb": "uploads/2611181b350cff47_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "荷塘边的村子，山在后面\nThe village by the lotus pond, the hills behind",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "fx": ""
+        },
+        {
+          "id": "261118f18d129ad8",
+          "src": "uploads/261118f18d129ad8.jpg",
+          "mid": "uploads/261118f18d129ad8_m.avif",
+          "thumb": "uploads/261118f18d129ad8_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "马头墙，一级一级\nHorse-head walls, tier upon tier",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "fx": ""
+        },
+        {
+          "id": "261118feec349dda",
+          "src": "uploads/261118feec349dda.jpg",
+          "mid": "uploads/261118feec349dda_m.avif",
+          "thumb": "uploads/261118feec349dda_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "墙上的雨痕，和几把晒着的伞\nRain-streaked walls, and a few parasols",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "fx": ""
+        },
+        {
+          "id": "261118d3a376e203",
+          "src": "uploads/261118d3a376e203.jpg",
+          "mid": "uploads/261118d3a376e203_m.avif",
+          "thumb": "uploads/261118d3a376e203_s.jpg",
+          "w": 3415,
+          "h": 5120,
+          "caption": "石桥和它的倒影，合成一个圆\nA stone bridge and its reflection, closing into a circle",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "fx": ""
+        },
+        {
+          "id": "261118fb2f717336",
+          "src": "uploads/261118fb2f717336.jpg",
+          "mid": "uploads/261118fb2f717336_m.avif",
+          "thumb": "uploads/261118fb2f717336_s.jpg",
+          "w": 3840,
+          "h": 5120,
+          "caption": "木门两边的对联\nA couplet either side of a wooden door",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "fx": ""
+        },
+        {
+          "id": "261119044423be1a",
+          "src": "uploads/261119044423be1a.jpg",
+          "mid": "uploads/261119044423be1a_m.avif",
+          "thumb": "uploads/261119044423be1a_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "白墙上贴满了红色的斗方，过节的样子\nRed diamond papers all over a white wall, dressed for the festival",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit"
+        },
+        {
+          "id": "hz0verse0001",
+          "type": "text",
+          "style": "",
+          "title": "心中若有桃花源，何处不是水云间。",
+          "caption": "If a Peach Blossom Spring lives in your heart, where is not among water and clouds?",
+          "kicker": "",
+          "ornament": "cloud",
+          "tone": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "hz0well00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "天井",
+          "kicker": "The Skywell",
+          "caption": "走进屋里，头顶是一方天井。下雨的时候，四面屋檐的水都流进院子里，叫“四水归堂”。\nInside, a square of sky opens overhead. When it rains, the water from all four roofs runs into the courtyard — “four waters return to the hall”.",
+          "ornament": "none",
+          "tone": "misty",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261118fcb57d7d8f",
+          "src": "uploads/261118fcb57d7d8f.jpg",
+          "mid": "uploads/261118fcb57d7d8f_m.avif",
+          "thumb": "uploads/261118fcb57d7d8f_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "抬头，是一方天\nLook up: a square of sky",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "fx": ""
+        },
+        {
+          "id": "2611187e2ea911de",
+          "src": "uploads/2611187e2ea911de.jpg",
+          "mid": "uploads/2611187e2ea911de_m.avif",
+          "thumb": "uploads/2611187e2ea911de_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "院子里的老松和一池水\nAn old pine and a pool in the courtyard",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": ""
+        },
+        {
+          "id": "2611183656f3a749",
+          "src": "uploads/2611183656f3a749.jpg",
+          "mid": "uploads/2611183656f3a749_m.avif",
+          "thumb": "uploads/2611183656f3a749_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "井口里，盛着一井的灯\nA well holding a whole well of lights",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "fx": ""
+        },
+        {
+          "id": "hz0lotu00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "荷塘",
+          "kicker": "Lotus Ponds",
+          "caption": "村子被荷塘围着。白天，鱼灯就靠在桥边，等着天黑。\nThe village is ringed with lotus ponds. By day the fish lanterns rest by the bridges, waiting for dark.",
+          "ornament": "none",
+          "tone": "",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611182df63a305a",
+          "src": "uploads/2611182df63a305a.jpg",
+          "mid": "uploads/2611182df63a305a_m.avif",
+          "thumb": "uploads/2611182df63a305a_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "荷叶中间，一条小船慢慢划过\nA small boat drifting through the lotus leaves",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": ""
+        },
+        {
+          "id": "261119123ea26663",
+          "src": "uploads/261119123ea26663.jpg",
+          "mid": "uploads/261119123ea26663_m.avif",
+          "thumb": "uploads/261119123ea26663_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "山脚下的村子和荷塘\nThe village and its lotus ponds at the foot of the hills",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide"
+        },
+        {
+          "id": "261118a4823904da",
+          "src": "uploads/261118a4823904da.jpg",
+          "mid": "uploads/261118a4823904da_m.avif",
+          "thumb": "uploads/261118a4823904da_s.jpg",
+          "w": 5120,
+          "h": 3414,
+          "caption": "水面上的荷叶\nLotus leaves on still water",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "fx": ""
+        },
+        {
+          "id": "2611192828253a26",
+          "src": "uploads/2611192828253a26.jpg",
+          "mid": "uploads/2611192828253a26_m.avif",
+          "thumb": "uploads/2611192828253a26_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "满塘的荷叶，后面是白墙\nA pond full of lotus, white walls behind",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit"
+        },
+        {
+          "id": "26111821c829080b",
+          "src": "uploads/26111821c829080b.jpg",
+          "mid": "uploads/26111821c829080b_m.avif",
+          "thumb": "uploads/26111821c829080b_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "白天的鱼灯，还没点亮\nA fish lantern by day, not yet lit",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": ""
+        },
+        {
+          "id": "hz0verse0002",
+          "type": "text",
+          "style": "",
+          "title": "鱼，谐音“余”。年年有余。",
+          "caption": "Yú, the fish, sounds like yú, plenty: may every year have more than enough.",
+          "kicker": "",
+          "ornament": "fish",
+          "tone": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "hz0fish00001",
+          "type": "text",
+          "style": "chapter",
+          "title": "鱼灯",
+          "kicker": "The Fish Lanterns",
+          "caption": "天黑了，灯一盏一盏点起来。鼓声里，鱼灯从石桥上游过去，烟花在头顶一朵一朵地开。\nNight falls and the lanterns are lit one by one. To the drums, the fish lanterns swim across the stone bridge, and fireworks open overhead.",
+          "ornament": "fishdance",
+          "tone": "lanternnight",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "mwmr5qxcdgi6l",
+          "type": "youtube",
+          "yt": "rFMs54AoV8o",
+          "url": "https://youtu.be/rFMs54AoV8o",
+          "thumb": "https://i.ytimg.com/vi/rFMs54AoV8o/hqdefault.jpg",
+          "w": 16,
+          "h": 9,
+          "caption": "鱼灯会 · 短片\nThe fish-lantern festival · a short film",
+          "layout": "fill",
+          "fx": ""
+        },
+        {
+          "id": "26111867e476c898",
+          "src": "uploads/26111867e476c898.jpg",
+          "mid": "uploads/26111867e476c898_m.avif",
+          "thumb": "uploads/26111867e476c898_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "天快黑了，广场上的鱼灯都已经就位\nNearly dark, and the fish lanterns are in place on the square",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "fx": "embers"
+        },
+        {
+          "id": "26111802be906147",
+          "src": "uploads/26111802be906147.jpg",
+          "mid": "uploads/26111802be906147_m.avif",
+          "thumb": "uploads/26111802be906147_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "荷塘里亮起来的鱼灯\nFish lanterns lit up on the lotus pond",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide",
+          "fx": "embers"
+        },
+        {
+          "id": "261118e8a738112b",
+          "src": "uploads/261118e8a738112b.jpg",
+          "mid": "uploads/261118e8a738112b_m.avif",
+          "thumb": "uploads/261118e8a738112b_s.jpg",
+          "w": 3840,
+          "h": 5120,
+          "caption": "鼓点响起，烟花升空\nThe drums begin, the fireworks go up",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair",
+          "fx": ""
+        },
+        {
+          "id": "2611194c2dce75d7",
+          "src": "uploads/2611194c2dce75d7.jpg",
+          "mid": "uploads/2611194c2dce75d7_m.avif",
+          "thumb": "uploads/2611194c2dce75d7_s.jpg",
+          "w": 3840,
+          "h": 5120,
+          "caption": "人群头顶，烟花开了\nFireworks open above the crowd",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "id": "2611186bc8341392",
+          "src": "uploads/2611186bc8341392.jpg",
+          "mid": "uploads/2611186bc8341392_m.avif",
+          "thumb": "uploads/2611186bc8341392_s.jpg",
+          "w": 5043,
+          "h": 3364,
+          "caption": "船上的鱼灯，水里还有一条\nA fish lantern on a boat, and another in the water",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": "fireworks"
+        },
+        {
+          "id": "26111877dee8a785",
+          "src": "uploads/26111877dee8a785.jpg",
+          "mid": "uploads/26111877dee8a785_m.avif",
+          "thumb": "uploads/26111877dee8a785_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "石桥上，两条鱼灯迎面相遇\nOn the stone bridge, two fish lanterns meet",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "fx": "embers"
+        },
+        {
+          "id": "hz0verse0003",
+          "type": "text",
+          "style": "",
+          "title": "灯灭了，鱼游回了夜里。",
+          "caption": "The lanterns go out, and the fish swim back into the night.",
+          "kicker": "",
+          "ornament": "lantern",
+          "tone": "",
+          "align": "center",
+          "height": "",
+          "size": "40",
+          "csize": "",
+          "font": "",
+          "color": ""
+        }
+      ],
+      "theme": "huizhou",
+      "place": "徽州",
+      "placeEn": "Chengkan · 呈坎",
+      "coords": "29.98°N · 118.37°E"
     },
     {
       "id": "mwl4fiotklvap",
@@ -1754,181 +2021,6 @@
       "coords": "48.86°N · 2.35°E"
     },
     {
-      "id": "mwl4kwkz15m33",
-      "slug": "deep-in-the-alps",
-      "title": "Deep in the Alps",
-      "subtitle": "Switzerland 2026",
-      "description": "",
-      "cover": "2611179a4ab18e5e",
-      "published": true,
-      "photos": [
-        {
-          "id": "2611179d99d0a6f6",
-          "src": "uploads/2611179d99d0a6f6.jpg",
-          "thumb": "uploads/2611179d99d0a6f6_s.jpg",
-          "w": 5120,
-          "h": 2880,
-          "caption": "",
-          "focus": [
-            85,
-            15
-          ],
-          "layout": "auto",
-          "mid": "uploads/2611179d99d0a6f6_m.avif"
-        },
-        {
-          "id": "2611175d09c73478",
-          "src": "uploads/2611175d09c73478.jpg",
-          "thumb": "uploads/2611175d09c73478_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/2611175d09c73478_m.avif"
-        },
-        {
-          "id": "2611173c9363bea3",
-          "src": "uploads/2611173c9363bea3.jpg",
-          "thumb": "uploads/2611173c9363bea3_s.jpg",
-          "w": 5120,
-          "h": 1891,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/2611173c9363bea3_m.avif"
-        },
-        {
-          "id": "261117229deb66a1",
-          "src": "uploads/261117229deb66a1.jpg",
-          "thumb": "uploads/261117229deb66a1_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/261117229deb66a1_m.avif"
-        },
-        {
-          "id": "mwl4od3dvxndg",
-          "type": "stack",
-          "layers": [
-            {
-              "id": "2611174e6626789b",
-              "src": "uploads/2611174e6626789b.jpg",
-              "thumb": "uploads/2611174e6626789b_s.jpg",
-              "w": 5120,
-              "h": 3840,
-              "label": "",
-              "mid": "uploads/2611174e6626789b_m.avif"
-            },
-            {
-              "id": "261117185408b0a3",
-              "src": "uploads/261117185408b0a3.jpg",
-              "thumb": "uploads/261117185408b0a3_s.jpg",
-              "w": 5120,
-              "h": 3840,
-              "label": "",
-              "mid": "uploads/261117185408b0a3_m.avif"
-            }
-          ],
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "src": "uploads/2611174e6626789b.jpg",
-          "thumb": "uploads/2611174e6626789b_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "mid": "uploads/2611174e6626789b_m.avif"
-        },
-        {
-          "id": "26111717f158cb91",
-          "src": "uploads/26111717f158cb91.jpg",
-          "thumb": "uploads/26111717f158cb91_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/26111717f158cb91_m.avif"
-        },
-        {
-          "id": "261117fa10889513",
-          "src": "uploads/261117fa10889513.jpg",
-          "thumb": "uploads/261117fa10889513_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/261117fa10889513_m.avif"
-        },
-        {
-          "id": "2611179a4ab18e5e",
-          "src": "uploads/2611179a4ab18e5e.jpg",
-          "thumb": "uploads/2611179a4ab18e5e_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            81,
-            13
-          ],
-          "layout": "auto",
-          "mid": "uploads/2611179a4ab18e5e_m.avif"
-        },
-        {
-          "id": "261117545d96e3c0",
-          "src": "uploads/261117545d96e3c0.jpg",
-          "thumb": "uploads/261117545d96e3c0_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/261117545d96e3c0_m.avif"
-        },
-        {
-          "id": "261117e85411d1b1",
-          "src": "uploads/261117e85411d1b1.jpg",
-          "thumb": "uploads/261117e85411d1b1_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/261117e85411d1b1_m.avif"
-        }
-      ],
-      "place": "Alps",
-      "placeEn": "Switzerland",
-      "coords": "46.80°N · 8.23°E"
-    },
-    {
       "id": "mwl4oippauve5",
       "slug": "ber",
       "title": "皇城根ber地道",
@@ -2588,382 +2680,148 @@
       "coords": "39.92°N · 116.39°E"
     },
     {
-      "id": "mwmr1dqe105a5",
-      "slug": "project-05a5",
-      "title": "徽州",
-      "subtitle": "安徽呈坎 · 2026",
-      "description": "呈坎在黄山市徽州区，是一座按八卦布局的古村。白墙、黑瓦、马头墙，荷塘绕着村子。夏天的夜里，村里人举着鱼灯走过石桥，烟花在头顶炸开。\nChengkan, in the Huizhou district of Huangshan, is an old village laid out to the eight trigrams: white walls, black tiles, stepped gables, lotus ponds all around. On summer nights the villagers carry fish lanterns over the stone bridges while fireworks break overhead.",
-      "cover": "26111802be906147",
+      "id": "mwjmi8ubzaj03",
+      "slug": "project-aj04",
+      "title": "新疆",
+      "subtitle": "China2023",
+      "description": "",
+      "cover": "26111763904fd487",
       "published": true,
       "photos": [
         {
-          "id": "hz0wall00001",
-          "type": "text",
-          "style": "chapter",
-          "title": "粉墙",
-          "kicker": "White Walls, Dark Tiles",
-          "caption": "徽州的房子，墙是白的，瓦是黑的。马头墙一级一级叠上去，原本是为了挡火。\nIn Huizhou the walls are white and the tiles are black. The stepped “horse-head” gables climb tier by tier — they were built to stop fire spreading.",
-          "ornament": "huiwalls",
-          "tone": "whitewall",
-          "align": "left",
-          "height": "",
-          "size": "",
-          "csize": "",
-          "font": "",
-          "color": ""
-        },
-        {
-          "id": "2611181b350cff47",
-          "src": "uploads/2611181b350cff47.jpg",
-          "mid": "uploads/2611181b350cff47_m.avif",
-          "thumb": "uploads/2611181b350cff47_s.jpg",
+          "id": "2611173561e590d9",
+          "src": "uploads/2611173561e590d9.jpg",
+          "thumb": "uploads/2611173561e590d9_s.jpg",
           "w": 5120,
-          "h": 2560,
-          "caption": "荷塘边的村子，山在后面\nThe village by the lotus pond, the hills behind",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "wide",
-          "fx": ""
-        },
-        {
-          "id": "261118f18d129ad8",
-          "src": "uploads/261118f18d129ad8.jpg",
-          "mid": "uploads/261118f18d129ad8_m.avif",
-          "thumb": "uploads/261118f18d129ad8_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "马头墙，一级一级\nHorse-head walls, tier upon tier",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "pair",
-          "fx": ""
-        },
-        {
-          "id": "261118feec349dda",
-          "src": "uploads/261118feec349dda.jpg",
-          "mid": "uploads/261118feec349dda_m.avif",
-          "thumb": "uploads/261118feec349dda_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "墙上的雨痕，和几把晒着的伞\nRain-streaked walls, and a few parasols",
+          "h": 3840,
+          "caption": "",
           "focus": [
             50,
             50
           ],
           "layout": "auto",
-          "fx": ""
+          "mid": "uploads/2611173561e590d9_m.avif"
         },
         {
-          "id": "261118d3a376e203",
-          "src": "uploads/261118d3a376e203.jpg",
-          "mid": "uploads/261118d3a376e203_m.avif",
-          "thumb": "uploads/261118d3a376e203_s.jpg",
-          "w": 3415,
-          "h": 5120,
-          "caption": "石桥和它的倒影，合成一个圆\nA stone bridge and its reflection, closing into a circle",
+          "id": "261117503823a557",
+          "src": "uploads/261117503823a557.jpg",
+          "thumb": "uploads/261117503823a557_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "",
           "focus": [
-            50,
-            50
+            48,
+            51
           ],
-          "layout": "pair",
-          "fx": ""
+          "layout": "auto",
+          "mid": "uploads/261117503823a557_m.avif"
         },
         {
-          "id": "261118fb2f717336",
-          "src": "uploads/261118fb2f717336.jpg",
-          "mid": "uploads/261118fb2f717336_m.avif",
-          "thumb": "uploads/261118fb2f717336_s.jpg",
-          "w": 3840,
-          "h": 5120,
-          "caption": "木门两边的对联\nA couplet either side of a wooden door",
+          "id": "2611172a1263325c",
+          "src": "uploads/2611172a1263325c.jpg",
+          "thumb": "uploads/2611172a1263325c_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "",
           "focus": [
             50,
             50
           ],
           "layout": "auto",
-          "fx": ""
+          "mid": "uploads/2611172a1263325c_m.avif"
         },
         {
-          "id": "261119044423be1a",
-          "src": "uploads/261119044423be1a.jpg",
-          "mid": "uploads/261119044423be1a_m.avif",
-          "thumb": "uploads/261119044423be1a_s.jpg",
+          "id": "261117e7fb6a3d7f",
+          "src": "uploads/261117e7fb6a3d7f.jpg",
+          "thumb": "uploads/261117e7fb6a3d7f_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "mid": "uploads/261117e7fb6a3d7f_m.avif"
+        },
+        {
+          "id": "26111763904fd487",
+          "src": "uploads/26111763904fd487.jpg",
+          "thumb": "uploads/26111763904fd487_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "白墙上贴满了红色的斗方，过节的样子\nRed diamond papers all over a white wall, dressed for the festival",
+          "caption": "",
           "focus": [
             50,
             50
           ],
-          "layout": "fit"
+          "layout": "auto",
+          "mid": "uploads/26111763904fd487_m.avif"
         },
         {
-          "id": "hz0verse0001",
-          "type": "text",
-          "style": "",
-          "title": "心中若有桃花源，何处不是水云间。",
-          "caption": "If a Peach Blossom Spring lives in your heart, where is not among water and clouds?",
-          "kicker": "",
-          "ornament": "cloud",
-          "tone": "",
-          "align": "center",
-          "height": "",
-          "size": "40",
-          "csize": "",
-          "font": "",
-          "color": ""
-        },
-        {
-          "id": "hz0well00001",
-          "type": "text",
-          "style": "chapter",
-          "title": "天井",
-          "kicker": "The Skywell",
-          "caption": "走进屋里，头顶是一方天井。下雨的时候，四面屋檐的水都流进院子里，叫“四水归堂”。\nInside, a square of sky opens overhead. When it rains, the water from all four roofs runs into the courtyard — “four waters return to the hall”.",
-          "ornament": "none",
-          "tone": "misty",
-          "align": "left",
-          "height": "",
-          "size": "",
-          "csize": "",
-          "font": "",
-          "color": ""
-        },
-        {
-          "id": "261118fcb57d7d8f",
-          "src": "uploads/261118fcb57d7d8f.jpg",
-          "mid": "uploads/261118fcb57d7d8f_m.avif",
-          "thumb": "uploads/261118fcb57d7d8f_s.jpg",
+          "id": "2611176c91c55d3f",
+          "src": "uploads/2611176c91c55d3f.jpg",
+          "thumb": "uploads/2611176c91c55d3f_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "抬头，是一方天\nLook up: a square of sky",
+          "caption": "",
           "focus": [
             50,
             50
           ],
-          "layout": "fit",
-          "fx": ""
+          "layout": "auto",
+          "mid": "uploads/2611176c91c55d3f_m.avif"
         },
         {
-          "id": "2611187e2ea911de",
-          "src": "uploads/2611187e2ea911de.jpg",
-          "mid": "uploads/2611187e2ea911de_m.avif",
-          "thumb": "uploads/2611187e2ea911de_s.jpg",
+          "id": "26111726286c8b99",
+          "src": "uploads/26111726286c8b99.jpg",
+          "thumb": "uploads/26111726286c8b99_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "院子里的老松和一池水\nAn old pine and a pool in the courtyard",
+          "caption": "",
           "focus": [
             50,
             50
           ],
-          "layout": "fill",
-          "fx": ""
+          "layout": "auto",
+          "mid": "uploads/26111726286c8b99_m.avif"
         },
         {
-          "id": "2611183656f3a749",
-          "src": "uploads/2611183656f3a749.jpg",
-          "mid": "uploads/2611183656f3a749_m.avif",
-          "thumb": "uploads/2611183656f3a749_s.jpg",
+          "id": "2611175235886527",
+          "src": "uploads/2611175235886527.jpg",
+          "thumb": "uploads/2611175235886527_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "井口里，盛着一井的灯\nA well holding a whole well of lights",
+          "caption": "",
           "focus": [
             50,
             50
           ],
-          "layout": "fit",
-          "fx": ""
+          "layout": "auto",
+          "mid": "uploads/2611175235886527_m.avif"
         },
         {
-          "id": "hz0lotu00001",
-          "type": "text",
-          "style": "chapter",
-          "title": "荷塘",
-          "kicker": "Lotus Ponds",
-          "caption": "村子被荷塘围着。白天，鱼灯就靠在桥边，等着天黑。\nThe village is ringed with lotus ponds. By day the fish lanterns rest by the bridges, waiting for dark.",
-          "ornament": "none",
-          "tone": "",
-          "align": "left",
-          "height": "",
-          "size": "",
-          "csize": "",
-          "font": "",
-          "color": ""
-        },
-        {
-          "id": "2611182df63a305a",
-          "src": "uploads/2611182df63a305a.jpg",
-          "mid": "uploads/2611182df63a305a_m.avif",
-          "thumb": "uploads/2611182df63a305a_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "荷叶中间，一条小船慢慢划过\nA small boat drifting through the lotus leaves",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "fill",
-          "fx": ""
-        },
-        {
-          "id": "261119123ea26663",
-          "src": "uploads/261119123ea26663.jpg",
-          "mid": "uploads/261119123ea26663_m.avif",
-          "thumb": "uploads/261119123ea26663_s.jpg",
-          "w": 5120,
-          "h": 2560,
-          "caption": "山脚下的村子和荷塘\nThe village and its lotus ponds at the foot of the hills",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "wide"
-        },
-        {
-          "id": "261118a4823904da",
-          "src": "uploads/261118a4823904da.jpg",
-          "mid": "uploads/261118a4823904da_m.avif",
-          "thumb": "uploads/261118a4823904da_s.jpg",
-          "w": 5120,
-          "h": 3414,
-          "caption": "水面上的荷叶\nLotus leaves on still water",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "fit",
-          "fx": ""
-        },
-        {
-          "id": "2611192828253a26",
-          "src": "uploads/2611192828253a26.jpg",
-          "mid": "uploads/2611192828253a26_m.avif",
-          "thumb": "uploads/2611192828253a26_s.jpg",
+          "id": "26111754c066bf73",
+          "src": "uploads/26111754c066bf73.jpg",
+          "thumb": "uploads/26111754c066bf73_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "满塘的荷叶，后面是白墙\nA pond full of lotus, white walls behind",
+          "caption": "",
           "focus": [
             50,
             50
           ],
-          "layout": "fit"
+          "layout": "auto",
+          "mid": "uploads/26111754c066bf73_m.avif"
         },
         {
-          "id": "26111821c829080b",
-          "src": "uploads/26111821c829080b.jpg",
-          "mid": "uploads/26111821c829080b_m.avif",
-          "thumb": "uploads/26111821c829080b_s.jpg",
+          "id": "26111924c6a8080d",
+          "src": "uploads/26111924c6a8080d.jpg",
+          "mid": "uploads/26111924c6a8080d_m.avif",
+          "thumb": "uploads/26111924c6a8080d_s.jpg",
           "w": 5120,
-          "h": 3415,
-          "caption": "白天的鱼灯，还没点亮\nA fish lantern by day, not yet lit",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "fill",
-          "fx": ""
-        },
-        {
-          "id": "hz0verse0002",
-          "type": "text",
-          "style": "",
-          "title": "鱼，谐音“余”。年年有余。",
-          "caption": "Yú, the fish, sounds like yú, plenty: may every year have more than enough.",
-          "kicker": "",
-          "ornament": "fish",
-          "tone": "",
-          "align": "center",
-          "height": "",
-          "size": "40",
-          "csize": "",
-          "font": "",
-          "color": ""
-        },
-        {
-          "id": "hz0fish00001",
-          "type": "text",
-          "style": "chapter",
-          "title": "鱼灯",
-          "kicker": "The Fish Lanterns",
-          "caption": "天黑了，灯一盏一盏点起来。鼓声里，鱼灯从石桥上游过去，烟花在头顶一朵一朵地开。\nNight falls and the lanterns are lit one by one. To the drums, the fish lanterns swim across the stone bridge, and fireworks open overhead.",
-          "ornament": "fishdance",
-          "tone": "lanternnight",
-          "align": "left",
-          "height": "",
-          "size": "",
-          "csize": "",
-          "font": "",
-          "color": ""
-        },
-        {
-          "id": "mwmr5qxcdgi6l",
-          "type": "youtube",
-          "yt": "rFMs54AoV8o",
-          "url": "https://youtu.be/rFMs54AoV8o",
-          "thumb": "https://i.ytimg.com/vi/rFMs54AoV8o/hqdefault.jpg",
-          "w": 16,
-          "h": 9,
-          "caption": "鱼灯会 · 短片\nThe fish-lantern festival · a short film",
-          "layout": "fill",
-          "fx": ""
-        },
-        {
-          "id": "26111867e476c898",
-          "src": "uploads/26111867e476c898.jpg",
-          "mid": "uploads/26111867e476c898_m.avif",
-          "thumb": "uploads/26111867e476c898_s.jpg",
-          "w": 5120,
-          "h": 2560,
-          "caption": "天快黑了，广场上的鱼灯都已经就位\nNearly dark, and the fish lanterns are in place on the square",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "wide",
-          "fx": "embers"
-        },
-        {
-          "id": "26111802be906147",
-          "src": "uploads/26111802be906147.jpg",
-          "mid": "uploads/26111802be906147_m.avif",
-          "thumb": "uploads/26111802be906147_s.jpg",
-          "w": 5120,
-          "h": 2560,
-          "caption": "荷塘里亮起来的鱼灯\nFish lanterns lit up on the lotus pond",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "wide",
-          "fx": "embers"
-        },
-        {
-          "id": "261118e8a738112b",
-          "src": "uploads/261118e8a738112b.jpg",
-          "mid": "uploads/261118e8a738112b_m.avif",
-          "thumb": "uploads/261118e8a738112b_s.jpg",
-          "w": 3840,
-          "h": 5120,
-          "caption": "鼓点响起，烟花升空\nThe drums begin, the fireworks go up",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "pair",
-          "fx": ""
-        },
-        {
-          "id": "2611194c2dce75d7",
-          "src": "uploads/2611194c2dce75d7.jpg",
-          "mid": "uploads/2611194c2dce75d7_m.avif",
-          "thumb": "uploads/2611194c2dce75d7_s.jpg",
-          "w": 3840,
-          "h": 5120,
-          "caption": "人群头顶，烟花开了\nFireworks open above the crowd",
+          "h": 3840,
+          "caption": "",
           "focus": [
             50,
             50
@@ -2971,56 +2829,198 @@
           "layout": "auto"
         },
         {
-          "id": "2611186bc8341392",
-          "src": "uploads/2611186bc8341392.jpg",
-          "mid": "uploads/2611186bc8341392_m.avif",
-          "thumb": "uploads/2611186bc8341392_s.jpg",
-          "w": 5043,
-          "h": 3364,
-          "caption": "船上的鱼灯，水里还有一条\nA fish lantern on a boat, and another in the water",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "fill",
-          "fx": "fireworks"
-        },
-        {
-          "id": "26111877dee8a785",
-          "src": "uploads/26111877dee8a785.jpg",
-          "mid": "uploads/26111877dee8a785_m.avif",
-          "thumb": "uploads/26111877dee8a785_s.jpg",
+          "id": "261119cca0813819",
+          "src": "uploads/261119cca0813819.jpg",
+          "mid": "uploads/261119cca0813819_m.avif",
+          "thumb": "uploads/261119cca0813819_s.jpg",
           "w": 5120,
-          "h": 3415,
-          "caption": "石桥上，两条鱼灯迎面相遇\nOn the stone bridge, two fish lanterns meet",
+          "h": 3834,
+          "caption": "",
           "focus": [
             50,
             50
           ],
-          "layout": "fill",
-          "fx": "embers"
-        },
-        {
-          "id": "hz0verse0003",
-          "type": "text",
-          "style": "",
-          "title": "灯灭了，鱼游回了夜里。",
-          "caption": "The lanterns go out, and the fish swim back into the night.",
-          "kicker": "",
-          "ornament": "lantern",
-          "tone": "",
-          "align": "center",
-          "height": "",
-          "size": "40",
-          "csize": "",
-          "font": "",
-          "color": ""
+          "layout": "auto"
         }
       ],
-      "theme": "huizhou",
-      "place": "徽州",
-      "placeEn": "Chengkan · 呈坎",
-      "coords": "29.98°N · 118.37°E"
+      "place": "新疆",
+      "placeEn": "Xinjiang",
+      "coords": "43.83°N · 87.62°E"
+    },
+    {
+      "id": "mwl4kwkz15m33",
+      "slug": "deep-in-the-alps",
+      "title": "Deep in the Alps",
+      "subtitle": "Switzerland 2026",
+      "description": "",
+      "cover": "2611179a4ab18e5e",
+      "published": true,
+      "photos": [
+        {
+          "id": "2611179d99d0a6f6",
+          "src": "uploads/2611179d99d0a6f6.jpg",
+          "thumb": "uploads/2611179d99d0a6f6_s.jpg",
+          "w": 5120,
+          "h": 2880,
+          "caption": "",
+          "focus": [
+            85,
+            15
+          ],
+          "layout": "auto",
+          "mid": "uploads/2611179d99d0a6f6_m.avif"
+        },
+        {
+          "id": "2611175d09c73478",
+          "src": "uploads/2611175d09c73478.jpg",
+          "thumb": "uploads/2611175d09c73478_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "mid": "uploads/2611175d09c73478_m.avif"
+        },
+        {
+          "id": "2611173c9363bea3",
+          "src": "uploads/2611173c9363bea3.jpg",
+          "thumb": "uploads/2611173c9363bea3_s.jpg",
+          "w": 5120,
+          "h": 1891,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "mid": "uploads/2611173c9363bea3_m.avif"
+        },
+        {
+          "id": "261117229deb66a1",
+          "src": "uploads/261117229deb66a1.jpg",
+          "thumb": "uploads/261117229deb66a1_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "mid": "uploads/261117229deb66a1_m.avif"
+        },
+        {
+          "id": "mwl4od3dvxndg",
+          "type": "stack",
+          "layers": [
+            {
+              "id": "2611174e6626789b",
+              "src": "uploads/2611174e6626789b.jpg",
+              "thumb": "uploads/2611174e6626789b_s.jpg",
+              "w": 5120,
+              "h": 3840,
+              "label": "",
+              "mid": "uploads/2611174e6626789b_m.avif"
+            },
+            {
+              "id": "261117185408b0a3",
+              "src": "uploads/261117185408b0a3.jpg",
+              "thumb": "uploads/261117185408b0a3_s.jpg",
+              "w": 5120,
+              "h": 3840,
+              "label": "",
+              "mid": "uploads/261117185408b0a3_m.avif"
+            }
+          ],
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "src": "uploads/2611174e6626789b.jpg",
+          "thumb": "uploads/2611174e6626789b_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "mid": "uploads/2611174e6626789b_m.avif"
+        },
+        {
+          "id": "26111717f158cb91",
+          "src": "uploads/26111717f158cb91.jpg",
+          "thumb": "uploads/26111717f158cb91_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "mid": "uploads/26111717f158cb91_m.avif"
+        },
+        {
+          "id": "261117fa10889513",
+          "src": "uploads/261117fa10889513.jpg",
+          "thumb": "uploads/261117fa10889513_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "mid": "uploads/261117fa10889513_m.avif"
+        },
+        {
+          "id": "2611179a4ab18e5e",
+          "src": "uploads/2611179a4ab18e5e.jpg",
+          "thumb": "uploads/2611179a4ab18e5e_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "",
+          "focus": [
+            81,
+            13
+          ],
+          "layout": "auto",
+          "mid": "uploads/2611179a4ab18e5e_m.avif"
+        },
+        {
+          "id": "261117545d96e3c0",
+          "src": "uploads/261117545d96e3c0.jpg",
+          "thumb": "uploads/261117545d96e3c0_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "mid": "uploads/261117545d96e3c0_m.avif"
+        },
+        {
+          "id": "261117e85411d1b1",
+          "src": "uploads/261117e85411d1b1.jpg",
+          "thumb": "uploads/261117e85411d1b1_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "mid": "uploads/261117e85411d1b1_m.avif"
+        }
+      ],
+      "place": "Alps",
+      "placeEn": "Switzerland",
+      "coords": "46.80°N · 8.23°E"
     },
     {
       "id": "mwmd69nuoum0t",

@@ -16,9 +16,22 @@
 <link rel="stylesheet" href="css/huizhou.css">
 <link rel="stylesheet" href="css/beijing.css">
 <link rel="stylesheet" href="css/caiyun.css">
+<link rel="stylesheet" href="css/home-gallery.css">
 <link rel="stylesheet" href="css/mobile.css">
+<link rel="stylesheet" href="css/loader.css">
 </head>
 <body>
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="ld-bg"></div>
+  <canvas class="ld-cv"></canvas>
+  <div class="ld-ui">
+    <div class="ld-top">A photographic record</div>
+    <div class="ld-name"></div>
+    <div class="ld-bar"><i></i></div>
+    <div class="ld-row"><span><em>▸</em> <b class="ld-pct">000</b> / 100</span><span>Entering the room</span></div>
+  </div>
+</div>
+<script src="js/loader.js"></script>
 <header class="nav" id="nav">
   <a class="brand" id="brand" href="#/"></a>
   <div class="nav-where" id="where" aria-live="polite"></div>
@@ -34,6 +47,7 @@
 </aside>
 
 <noscript><p style="padding:40px;color:#fff">This site needs JavaScript.</p></noscript>
+<script src="js/home-gallery.js"></script>
 <script src="js/site.js"></script>
 </body>
 </html>

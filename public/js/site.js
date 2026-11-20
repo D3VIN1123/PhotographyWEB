@@ -212,9 +212,18 @@
     return { setup, scroll, tick };
   })();
 
+  // what a landing page script gets to work with
+  function landingAPI() {
+    return { content, projects, coverOf, placeOf, capRich, capLines, isCJK, esc, pad2, countOf, kindOf, visual, isPortrait, reduceMotion, words, text,
+      go: url => { location.hash = url.replace(/^#/, ''); } };
+  }
+
   function homeHTML() {
     const site = content.site || {};
-    let html = thresholdHTML();
+    // a landing page script (js/home-*.js, loaded before this file) may replace the threshold
+    const L = window.HomeLanding;
+    let html = L ? L.html(landingAPI()) : thresholdHTML();
+    if (L && L.after) return html + L.after(landingAPI());   // the landing script draws the whole home page
     const intro = site.intro || site.tagline || '';
     if (projects.length) {
       html += `
@@ -1193,7 +1202,7 @@
     let top = 0;
     if (r.type === 'home' && prevRoute && prevRoute.type === 'project' && !homeTop) {
       const el = document.getElementById('proj-' + prevRoute.project.slug);
-      if (el) top = el.offsetTop;
+      if (el) top = el.getBoundingClientRect().top + window.scrollY;   // (offsetTop is relative to a positioned parent)
     }
     homeTop = false;
     window.scrollTo(0, top);
@@ -1215,7 +1224,7 @@
     }));
     panels.forEach(p => revealIO.observe(p.el));
     $$('.frame, .paper .reveal, .chapter, .pa-doodle', view).forEach(el => revealIO.observe(el));
-    papers = document.body.classList.contains('theme-dark') ? [] : $$('.paper', view).filter(el => !el.closest('.yn-dark') && !el.classList.contains('yn-photo-page'));   // dark sections and photographs keep the light nav
+    papers = document.body.classList.contains('theme-dark') ? [] : $$('.paper, [data-onlight]', view).filter(el => !el.closest('.yn-dark') && !el.classList.contains('yn-photo-page'));   // dark sections and photographs keep the light nav
     dawns = $$('.dawn', view).map(el => ({ el, sun: -1 }));
     rolls = $$('.roll', view).map(el => ({ el, track: $('.roll-track', el), items: $$('.roll-item', el), w: 0, p: -1 }));
     sizeRolls();
@@ -1239,6 +1248,7 @@
     nextEl = $('#next', view);
     charge.v = 0; charge.done = false; charge.arrived = 0;
     Threshold.setup();
+    if (window.HomeLanding) window.HomeLanding.setup(view, landingAPI());
     bjRuler = $('.bj-ruler', view);
     lastY = -1;
   }
