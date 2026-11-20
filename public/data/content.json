@@ -2684,37 +2684,39 @@
       "slug": "project-aj04",
       "title": "新疆",
       "subtitle": "China2023",
-      "description": "",
+      "description": "从雪山公路一路向下，经过白沙与碧水，走进开满杏花的山谷。\nDown from the snow road, past white sand and blue water, into a valley of apricot blossom.",
       "cover": "26111763904fd487",
       "published": true,
       "photos": [
+        {
+          "type": "text",
+          "id": "xj0ch1road00",
+          "style": "chapter",
+          "title": "路",
+          "kicker": "The Road",
+          "caption": "路沿着山走，山上落着新雪。风很大，云压得很低，一道铁丝网、一排电线杆，就是全部的人迹。\nThe road follows the mountains, fresh snow on their flanks. The wind is strong and the cloud hangs low; a wire fence and a line of poles are all there is of people.",
+          "tone": "xjroad",
+          "ornament": "snow",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
         {
           "id": "2611173561e590d9",
           "src": "uploads/2611173561e590d9.jpg",
           "thumb": "uploads/2611173561e590d9_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "",
+          "caption": "铁丝网后的雪山，碎石一直铺到山脚\nSnow mountains behind the wire, gravel all the way to their feet",
           "focus": [
             50,
             50
           ],
-          "layout": "auto",
+          "layout": "fit",
           "mid": "uploads/2611173561e590d9_m.avif"
-        },
-        {
-          "id": "261117503823a557",
-          "src": "uploads/261117503823a557.jpg",
-          "thumb": "uploads/261117503823a557_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            48,
-            51
-          ],
-          "layout": "auto",
-          "mid": "uploads/261117503823a557_m.avif"
         },
         {
           "id": "2611172a1263325c",
@@ -2722,13 +2724,43 @@
           "thumb": "uploads/2611172a1263325c_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "",
+          "caption": "护栏外是一整片碧蓝，风暴正从山后压过来\nBeyond the guardrail, all turquoise; a storm leaning over the ridge",
           "focus": [
             50,
             50
           ],
-          "layout": "auto",
+          "layout": "fill",
           "mid": "uploads/2611172a1263325c_m.avif"
+        },
+        {
+          "type": "text",
+          "id": "xj0ch2sand00",
+          "style": "chapter",
+          "title": "白沙",
+          "kicker": "White Sand",
+          "caption": "沙是白的，山也是白的，分不清哪一片是雪。只有湖水是另一种颜色。\nThe sand is white and so are the mountains; it is hard to tell which part is snow. Only the lake is another colour.",
+          "tone": "xjsand",
+          "ornament": "sand",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261117503823a557",
+          "src": "uploads/261117503823a557.jpg",
+          "thumb": "uploads/261117503823a557_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "白色的沙山，蓝色的湖，灰色的天\nWhite sand hills, a blue lake, a grey sky",
+          "focus": [
+            48,
+            51
+          ],
+          "layout": "pair",
+          "mid": "uploads/261117503823a557_m.avif"
         },
         {
           "id": "261117e7fb6a3d7f",
@@ -2736,7 +2768,7 @@
           "thumb": "uploads/261117e7fb6a3d7f_s.jpg",
           "w": 5120,
           "h": 3413,
-          "caption": "",
+          "caption": "风把沙吹成一道道波纹，一直推到水边\nThe wind combs the sand into ripples, right down to the water",
           "focus": [
             50,
             50
@@ -2745,18 +2777,64 @@
           "mid": "uploads/261117e7fb6a3d7f_m.avif"
         },
         {
+          "type": "text",
+          "id": "xj0ch3lake00",
+          "style": "chapter",
+          "title": "碧水",
+          "kicker": "Blue Water",
+          "caption": "云影走过的时候，湖水从碧绿变成深蓝。赭色的山不动，水一直在变。\nWhen a cloud's shadow passes, the water turns from turquoise to deep blue. The ochre mountains stay still; the water keeps changing.",
+          "tone": "xjlake",
+          "ornament": "glint",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
           "id": "26111763904fd487",
           "src": "uploads/26111763904fd487.jpg",
           "thumb": "uploads/26111763904fd487_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "",
+          "caption": "赭色的山把一湖深蓝抱在中间\nOchre mountains holding a lake of deep blue",
           "focus": [
             50,
             50
           ],
-          "layout": "auto",
+          "layout": "fit",
           "mid": "uploads/26111763904fd487_m.avif"
+        },
+        {
+          "id": "261119cca0813819",
+          "src": "uploads/261119cca0813819.jpg",
+          "mid": "uploads/261119cca0813819_m.avif",
+          "thumb": "uploads/261119cca0813819_s.jpg",
+          "w": 5120,
+          "h": 3834,
+          "caption": "从高处看，湖水绕过一道道沙岸\nFrom above, the water winds around spits of sand",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
+        },
+        {
+          "type": "text",
+          "id": "xj0ch4willow",
+          "style": "chapter",
+          "title": "红柳",
+          "kicker": "Red Willow",
+          "caption": "雪山下最先醒来的颜色，是红柳的枝条。叶子还没有长出来，枝条已经红透了。\nBeneath the snow range, the first colour to wake is the red of the willow stems — bare of leaves, already red all through.",
+          "tone": "xjwillow",
+          "ornament": "motes",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
         },
         {
           "id": "2611176c91c55d3f",
@@ -2764,13 +2842,44 @@
           "thumb": "uploads/2611176c91c55d3f_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "",
+          "caption": "红柳一丛丛立在雪山前\nRed willow standing in clumps before the snow range",
           "focus": [
             50,
             50
           ],
-          "layout": "auto",
+          "layout": "fill",
           "mid": "uploads/2611176c91c55d3f_m.avif"
+        },
+        {
+          "type": "text",
+          "id": "xj0verse0001",
+          "style": "",
+          "title": "雪线以下，春天来得很慢",
+          "caption": "Below the snow line, spring comes slowly",
+          "align": "center",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": "",
+          "tone": "",
+          "kicker": ""
+        },
+        {
+          "type": "text",
+          "id": "xj0ch5bloom0",
+          "style": "chapter",
+          "title": "杏花",
+          "kicker": "Apricot Blossom",
+          "caption": "山谷里，杏花开了。羊在树下吃草，人从花下走过，岩壁一动不动。\nIn the valley the apricots are in bloom. Sheep graze beneath them, people walk under the flowers, and the cliffs do not move.",
+          "tone": "xjblossom",
+          "ornament": "petals",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
         },
         {
           "id": "26111726286c8b99",
@@ -2778,12 +2887,12 @@
           "thumb": "uploads/26111726286c8b99_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "",
+          "caption": "一树杏花下，羊低头吃草\nUnder an apricot tree in bloom, the sheep keep grazing",
           "focus": [
             50,
             50
           ],
-          "layout": "auto",
+          "layout": "fit",
           "mid": "uploads/26111726286c8b99_m.avif"
         },
         {
@@ -2792,12 +2901,12 @@
           "thumb": "uploads/2611175235886527_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "",
+          "caption": "岩壁下的几间小屋，杏花开在门前\nA few small houses under the cliff, blossom at the door",
           "focus": [
             50,
             50
           ],
-          "layout": "auto",
+          "layout": "pair",
           "mid": "uploads/2611175235886527_m.avif"
         },
         {
@@ -2806,7 +2915,7 @@
           "thumb": "uploads/26111754c066bf73_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "",
+          "caption": "河滩上的石头，岩壁下的花，两个人走过\nStones on the riverbed, blossom under the cliff, two people walking past",
           "focus": [
             50,
             50
@@ -2821,31 +2930,18 @@
           "thumb": "uploads/26111924c6a8080d_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "",
+          "caption": "山在雾里，杏花开在山脚\nMountains in the haze, apricots blooming at their feet",
           "focus": [
             50,
             50
           ],
-          "layout": "auto"
-        },
-        {
-          "id": "261119cca0813819",
-          "src": "uploads/261119cca0813819.jpg",
-          "mid": "uploads/261119cca0813819_m.avif",
-          "thumb": "uploads/261119cca0813819_s.jpg",
-          "w": 5120,
-          "h": 3834,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
+          "layout": "fill"
         }
       ],
       "place": "新疆",
       "placeEn": "Xinjiang",
-      "coords": "43.83°N · 87.62°E"
+      "coords": "43.83°N · 87.62°E",
+      "theme": "xinjiang"
     },
     {
       "id": "mwl4kwkz15m33",

@@ -1,0 +1,70 @@
+/* ============================================================
+   Theme: 新疆 (project.theme = "xinjiang") — the 时空画廊 room inside an album, Nov 2026 (experiment)
+   The page is a room whose colour changes chapter by chapter (tones xjroad → xjsand → xjlake → xjwillow →
+   xjblossom), blended as each chapter opening scrolls in. Beside the vertical title runs a strip of 艾德莱斯 atlas ikat (stepped, feathered motifs, svg built in
+   ikatSVG). Framed photographs turn towards you as they pass the middle of the screen and glow when hovered.
+   Behind everything, the air of each chapter (canvas .xj-air): snow, blown sand, glints, warm motes, petals.
+   Photographs themselves are never covered or faded at their edges.
+   ============================================================ */
+html:has(body[data-theme="xinjiang"]) { background: none; }
+body[data-theme="xinjiang"] {
+  --cloth: rgb(24, 29, 34); --cloth-hi: rgba(58, 70, 82, .3); --cloth-lo: rgba(8, 10, 14, .5);
+  --pink: rgb(228, 231, 234); --pink-2: rgba(228, 231, 234, .66); --pink-3: rgba(228, 231, 234, .4); --accent: rgb(150, 206, 210);
+  --hair: color-mix(in srgb, var(--pink) 14%, transparent);
+  background: var(--cloth); color: var(--pink);
+}
+body[data-theme="xinjiang"] .paper { background: none; color: var(--pink); }
+.xj-air { position: fixed; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+body[data-theme="xinjiang"] .preface .statement { font-family: var(--song); font-weight: 300; font-size: clamp(19px, 1.7vw, 27px); line-height: 2.2; max-width: 30em; }
+body[data-theme="xinjiang"] .textblock .tb-title { font-family: var(--song); font-weight: 300; font-size: clamp(22px, 2.1vw, 34px); letter-spacing: .3em; line-height: 1.8; }
+body[data-theme="xinjiang"] .textblock .tb-cap { font-family: var(--serif); font-style: italic; }
+body[data-theme="xinjiang"] .spread { padding-top: clamp(90px, 18vh, 200px); padding-bottom: clamp(90px, 18vh, 200px); }
+
+/* ---------- framed photographs: hung in the room, turning towards you ---------- */
+body[data-theme="xinjiang"] .spread, body[data-theme="xinjiang"] .spread.swap .stick { perspective: 1400px; }
+body[data-theme="xinjiang"] .frame { rotate: y calc(var(--p, 0) * 13deg); translate: 0 0 calc(var(--a, 0) * -160px); will-change: rotate, translate; }
+body[data-theme="xinjiang"] .spread.single.r .frame, body[data-theme="xinjiang"] .spread.pair .frame:nth-child(2) { rotate: y calc(var(--p, 0) * -13deg); }
+body[data-theme="xinjiang"] .frame .clip { transition: box-shadow .8s ease, filter .8s ease; }
+body[data-theme="xinjiang"] .frame:hover .clip {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--pink) 60%, transparent), 0 0 44px 4px color-mix(in srgb, var(--pink) 34%, transparent),
+              0 0 160px 30px color-mix(in srgb, var(--accent) 22%, transparent);
+  filter: brightness(1.05);
+}
+
+/* ---------- chapter opening: the room changes colour around a quiet title ---------- */
+body[data-theme="xinjiang"] .chapter.xj-ch { position: relative; min-height: 78vh; padding: 20vh var(--gutter) 6vh; overflow: visible; display: flex; align-items: center; }
+.xj-meta { position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); top: calc(var(--nav-h) + 3vh); display: flex; align-items: center; gap: 1.4em; color: var(--pink-3);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; white-space: nowrap; }
+.xj-meta i { flex: 1; height: 1px; background: currentColor; opacity: .35; }
+.xj-in { position: relative; z-index: 2; margin-left: 3vw; display: flex; align-items: flex-start; gap: clamp(22px, 3vw, 56px); max-width: min(64rem, 86vw); }
+.xj-ikat { flex: none; width: 26px; height: 46vh; clip-path: inset(0 0 100% 0); transition: clip-path 3.2s cubic-bezier(.6, 0, .2, 1) .2s; }
+.chapter.in .xj-ikat { clip-path: inset(0 0 0 0); }
+.xj-ikat .a { fill: var(--accent); opacity: .9; }
+.xj-ikat .b { fill: var(--pink); opacity: .55; }
+.xj-ikat .c { fill: var(--cloth); opacity: .85; }
+.xj-num { flex: none; width: 32px; height: 32px; display: grid; place-items: center; background: var(--accent); color: var(--cloth); font-family: var(--song); font-size: 14px; line-height: 1; }
+.xj-ch .xj-num.reveal { filter: none; transform: scale(.3); transition: transform .8s cubic-bezier(.3, 1.5, .5, 1) 1.2s, opacity .4s ease 1.2s; }
+.xj-ch.in .xj-num.reveal { opacity: 1; transform: none; }
+.xj-title { flex: none; writing-mode: vertical-rl; margin: 0; font-family: var(--song); font-weight: 300; font-size: clamp(64px, 7vw, 124px); line-height: 1; letter-spacing: .3em; }
+.xj-ch .xj-title.reveal { opacity: 1; filter: none; transform: none; clip-path: inset(0 0 100% 0); transition: clip-path 2.4s cubic-bezier(.6, 0, .2, 1) .5s; }
+.xj-ch.in .xj-title.reveal { clip-path: inset(0 0 -4% 0); }
+.xj-side { max-width: 26em; display: flex; flex-direction: column; gap: 20px; padding-top: .4em; }
+.xj-kicker { font-family: var(--serif); font-style: italic; font-size: clamp(28px, 2.6vw, 44px); line-height: 1.05; }
+.xj-text { margin: 0; font-family: var(--song); font-weight: 300; font-size: clamp(15px, 1.15vw, 18px); line-height: 2.1; }
+.xj-text .w { opacity: .14; transition: opacity .9s var(--ease); }
+.xj-text .w.on { opacity: .92; }
+/* the album title on the cover: snow into glacier blue */
+.plate-big.cjk.t-xinjiang { --gold: linear-gradient(178deg, #ffffff 0%, #e1eef0 46%, #8fc6cc 100%); }
+
+@media (max-width: 760px) {
+  body[data-theme="xinjiang"] .chapter.xj-ch { min-height: 90svh; padding: 18vh var(--gutter) 12vh; }
+  .xj-in { margin-left: 0; flex-wrap: wrap; gap: 16px 16px; max-width: none; }
+  .xj-ikat { height: 34vh; width: 20px; }
+  .xj-title { font-size: clamp(54px, 15vw, 78px); }
+  .xj-side { flex: 1 1 100%; }
+  .xj-meta span:nth-of-type(2), .xj-meta i:nth-of-type(2) { display: none; }
+  body[data-theme="xinjiang"] .frame { rotate: y calc(var(--p, 0) * 6deg); translate: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .xj-ikat { transition: none; clip-path: none; }
+}

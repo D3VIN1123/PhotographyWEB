@@ -210,7 +210,8 @@
           <option value="paris" ${p.theme === 'paris' ? 'selected' : ''}>巴黎 · 石头与玻璃 Paris (stone &amp; glass)</option>
           <option value="huizhou" ${p.theme === 'huizhou' ? 'selected' : ''}>徽州 · 粉墙黛瓦 Huizhou (ink &amp; white walls)</option>
           <option value="beijing" ${p.theme === 'beijing' ? 'selected' : ''}>北京 · 中轴 Beijing (zen, central axis)</option>
-          <option value="caiyun" ${p.theme === 'caiyun' ? 'selected' : ''}>彩云 · 禅 Caiyun (zen, coloured clouds)</option></select></label>
+          <option value="caiyun" ${p.theme === 'caiyun' ? 'selected' : ''}>彩云 · 禅 Caiyun (zen, coloured clouds)</option>
+          <option value="xinjiang" ${p.theme === 'xinjiang' ? 'selected' : ''}>新疆 · 时空 Xinjiang (spatial, fly through chapters)</option></select></label>
         <div class="field"><span>状态 Visibility</span><label class="switch" style="height:42px"><input type="checkbox" data-bind="${base}.published" ${p.published === false ? '' : 'checked'}> 在网站上显示 Published</label></div>
       </div>
     </div>
@@ -242,6 +243,8 @@
     ['snow', '雪白 Snow (light)'],
     ['cloud', '云白 Cloud (light)'], ['indigodusk', '靛夜 Indigo night (dark)'], ['jadewater', '碧水 Jade water (light)'],
     ['ochre', '赭石 Plateau ochre (light)'], ['snowlight', '雪光 First light (light)'],
+    ['xjroad', '风暴公路 Storm road (dark)'], ['xjsand', '白沙 White sand (light)'], ['xjlake', '碧湖 Glacier lake (dark)'],
+    ['xjwillow', '红柳 Red willow (dark)'], ['xjblossom', '杏花 Apricot blossom (light)'],
   ];
   const FONTS = [
     ['serif', '衬线 Serif', '"Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, "Songti SC", Georgia, serif'],
@@ -281,11 +284,16 @@
             <option value="fishdance" ${ph.ornament === 'fishdance' ? 'selected' : ''}>舞鱼灯线描 Fish-lantern dance (line drawing)</option>
             <option value="eaves" ${ph.ornament === 'eaves' ? 'selected' : ''}>宫殿线描 Palace hall (line drawing)</option>
             <option value="studs" ${ph.ornament === 'studs' ? 'selected' : ''}>宫门门钉 Palace gate studs (北京)</option>
+            <option value="snow" ${ph.ornament === 'snow' ? 'selected' : ''}>新疆 · 飘雪 Snow (air)</option>
+            <option value="sand" ${ph.ornament === 'sand' ? 'selected' : ''}>新疆 · 风沙 Blown sand (air)</option>
+            <option value="glint" ${ph.ornament === 'glint' ? 'selected' : ''}>新疆 · 水光 Glints on water (air)</option>
+            <option value="motes" ${ph.ornament === 'motes' ? 'selected' : ''}>新疆 · 暖尘 Warm motes (air)</option>
+            <option value="petals" ${ph.ornament === 'petals' ? 'selected' : ''}>新疆 · 落花 Petals (air)</option>
             <option value="none" ${ph.ornament === 'none' ? 'selected' : ''}>无 None</option></select></label>`
             : ['paris', 'huizhou', 'beijing'].includes((project() || {}).theme) ? `<label class="mini"><span>小插画 Line drawing</span><select data-bind="${base}.ornament">
             ${[['', '无 None'], ['metro', '地铁口 Métro entrance'], ['cafe', '咖啡桌 Café table'], ['lamp', '路灯 Street lamp'], ['chandelier', '吊灯 Chandelier'], ['eiffel', '铁塔 Eiffel Tower'], ['fish', '鱼灯 Fish lantern'], ['lantern', '灯笼 Lantern'], ['cloud', '祥云 Cloud scroll']]
               .map(o => `<option value="${o[0]}" ${(ph.ornament || '') === o[0] ? 'selected' : ''}>${o[1]}</option>`).join('')}</select></label>` : ''}
-          ${['indigo', 'paris', 'huizhou', 'beijing', 'caiyun'].includes((project() || {}).theme) ? `<label class="mini"><span title="从这一段开始，整页慢慢染成这个颜色（靛蓝 / 巴黎页面风格有效） The page fades to this colour from this block on">底色 Page colour</span><select data-bind="${base}.tone">
+          ${['indigo', 'paris', 'huizhou', 'beijing', 'caiyun', 'xinjiang'].includes((project() || {}).theme) ? `<label class="mini"><span title="从这一段开始，整页慢慢染成这个颜色（靛蓝 / 巴黎页面风格有效） The page fades to this colour from this block on">底色 Page colour</span><select data-bind="${base}.tone">
             ${TONES.map(t => `<option value="${t[0]}" ${(ph.tone || '') === t[0] ? 'selected' : ''}>${t[1]}</option>`).join('')}</select></label>` : ''}
         </div>
         <label class="mini"><span>小标题 Kicker <em>（标题上方的一行小字，章节里显示为英文副题）</em></span><input type="text" data-bind="${base}.kicker" value="${esc(ph.kicker || '')}"></label>

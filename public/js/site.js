@@ -405,7 +405,15 @@
     snow:         { bg: [240, 241, 242], hi: [252, 252, 253, .6], lo: [222, 224, 228, .4], ink: [32, 34, 38], ac: [160, 52, 40], pat: 0 },
     apricot:      { bg: [236, 228, 216], hi: [248, 240, 228, .6], lo: [220, 204, 184, .4], ink: [48, 36, 28], ac: [178, 96, 52], pat: 0 },
   });
-  const BASE_TONE = { indigo: 'indigo', paris: 'stone', huizhou: 'whitewall', beijing: 'hutong', caiyun: 'cloud' };   // the page colour before the first toned block
+  Object.assign(TONES, {
+    // 新疆 (spatial): the storm road, white sand, glacier-blue water, red willow, apricot blossom
+    xjroad:    { bg: [24, 29, 34], hi: [58, 70, 82, .3], lo: [8, 10, 14, .5], ink: [228, 231, 234], ac: [150, 206, 210], pat: 0 },
+    xjsand:    { bg: [231, 230, 226], hi: [247, 246, 243, .6], lo: [206, 204, 197, .4], ink: [34, 38, 42], ac: [38, 140, 150], pat: 0 },
+    xjlake:    { bg: [9, 38, 44], hi: [22, 88, 96, .35], lo: [2, 16, 20, .6], ink: [226, 238, 236], ac: [218, 164, 98], pat: 0 },
+    xjwillow:  { bg: [40, 19, 17], hi: [118, 40, 34, .3], lo: [18, 7, 6, .6], ink: [242, 230, 216], ac: [222, 82, 62], pat: 0 },
+    xjblossom: { bg: [239, 232, 230], hi: [251, 246, 244, .6], lo: [224, 208, 206, .4], ink: [46, 36, 38], ac: [192, 98, 116], pat: 0 },
+  });
+  const BASE_TONE = { indigo: 'indigo', paris: 'stone', huizhou: 'whitewall', beijing: 'hutong', caiyun: 'cloud', xinjiang: 'xjroad' };   // the page colour before the first toned block
   const NUMERALS = ['壹','贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾', '拾壹', '拾贰'];
   // Five-colour prayer flags strung across a chapter opening (blue, white, red, green, yellow)
   function flagsHTML() {
@@ -846,7 +854,50 @@
       </div>
     </section>`;
   }
+  // ---------- 新疆 (theme "xinjiang"): the 时空画廊 room inside an album ----------
+  // Each chapter opening is a short flight: the chapter's photographs hang in depth around its title and scrolling
+  // flies you through them (a pinned section; site.js → Xj). Then the photographs settle into the page, framed,
+  // turning towards you as they pass. Along the title runs a strip of 艾德莱斯 (atlas) ikat — the silk of
+  // Xinjiang, woven from threads dyed in bands so every motif has stepped, feathered edges. The air changes per
+  // chapter (data-air): snow on the road, blown sand, glints on the lakes, warm motes in the willows, petals.
+  let xjFlights = new Map();   // chapter text block → the photographs that follow it (set in projectHTML)
+  function ikatSVG(seed) {
+    const rnd = seeded(seed * 7 + 3), H = 640, W = 36;
+    let out = '', y = 8, k = 0;
+    while (y < H - 40) {
+      const h = 46 + rnd() * 40, cls = k++ % 3 === 1 ? 'b' : 'a';
+      // one motif: a stepped diamond drawn as woven rows; each row is shifted a little, as the dyed warp drifts
+      for (let r = 0; r < h; r += 3) {
+        const t = r / h, half = (t < .5 ? t : 1 - t) * 2 * (W / 2 - 2) * (0.82 + rnd() * 0.3);
+        const off = (rnd() - 0.5) * 3.2;
+        if (half > 0.8) out += `<rect class="${cls}" x="${(W / 2 - half + off).toFixed(1)}" y="${(y + r).toFixed(1)}" width="${(half * 2).toFixed(1)}" height="2.2"/>`;
+        if (half > 6 && rnd() < 0.85) out += `<rect class="c" x="${(W / 2 - half * 0.38 + off).toFixed(1)}" y="${(y + r).toFixed(1)}" width="${(half * 0.76).toFixed(1)}" height="2.2"/>`;
+      }
+      y += h + 10 + rnd() * 10;
+      if (rnd() < 0.5) { out += `<rect class="a" x="2" y="${y.toFixed(1)}" width="${W - 4}" height="1.4"/>`; y += 8; }
+    }
+    return `<svg class="xj-ikat" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMin slice" aria-hidden="true">${out}</svg>`;
+  }
+  const XJ_AIR = ['snow', 'sand', 'glint', 'motes', 'petals'];
+  function xinjiangChapterHTML(x, n, st) {
+    const flight = xjFlights.get(x) || [], t = String(x.title || '');
+    const air = XJ_AIR.includes(x.ornament) ? x.ornament : XJ_AIR[(n - 1) % XJ_AIR.length];
+    return `
+    <section class="paper chapter xj-ch" data-air="${air}"${st.length ? ` style='${st.join(';')}'` : ''} data-seed="${n}"${toneAttr(x)}>
+      <div class="xj-meta reveal"><span>Ch. ${pad2(n)} / ${pad2(chTotal)}</span><i></i><span>${esc(edge.coords || '')}</span><i></i><span>${pad2(flight.length)} fr</span></div>
+      <div class="xj-in">
+        ${ikatSVG(n)}
+        <div class="xj-num reveal"><span>${NUMERALS[n - 1] || n}</span></div>
+        ${t ? `<h2 class="xj-title reveal" style="--d:1">${esc(t)}</h2>` : ''}
+        <div class="xj-side">
+          ${x.kicker ? `<div class="xj-kicker reveal" style="--d:2">${esc(x.kicker)}</div>` : ''}
+          ${x.caption ? `<p class="xj-text words">${words(x.caption)}</p>` : ''}
+        </div>
+      </div>
+    </section>`;
+  }
   function chapterHTML(x, n, st) {
+    if (pageTheme === 'xinjiang') return xinjiangChapterHTML(x, n, st);
     if (pageTheme === 'caiyun') return caiyunChapterHTML(x, n, st);
     if (pageTheme === 'paris') return parisChapterHTML(x, n, st);
     if (pageTheme === 'huizhou') return huizhouChapterHTML(x, n, st);
@@ -1052,6 +1103,14 @@
     const pl = placeOf(p);
     edge = { code: (pl.en + (isCJK(pl.big) ? ' ' + pl.big : '')).trim() || p.title, coords: pl.coords };
     chTotal = photos.filter(x => kindOf(x) === 'text' && x.style === 'chapter').length;
+    xjFlights = new Map();
+    if (pageTheme === 'xinjiang') {
+      let cur = null;
+      for (const x of photos) {
+        if (kindOf(x) === 'text' && x.style === 'chapter') { cur = []; xjFlights.set(x, cur); }
+        else if (cur && visual(x)) cur.push(kindOf(x) === 'stack' ? Object.assign({}, x, { src: x.src, mid: x.mid }) : x);
+      }
+    }
     let html = `
     <section class="panel cover grow" data-plx="8">
       <div class="bg">${img(coverOf(p), '', true)}</div><div class="shade"></div>
@@ -1248,10 +1307,101 @@
     nextEl = $('#next', view);
     charge.v = 0; charge.done = false; charge.arrived = 0;
     Threshold.setup();
+    Xj.setup();
     if (window.HomeLanding) window.HomeLanding.setup(view, landingAPI());
     bjRuler = $('.bj-ruler', view);
     lastY = -1;
   }
+
+  // ---------- 新疆: turning frames, the air ----------
+  const Xj = (() => {
+    let on = false, frames = [], chs = [], cv = null, ctx = null, W = 0, H = 0, dpr = 1, parts = [], air = '', lastY = 0, ink = [255, 255, 255];
+    function setup() {
+      on = document.body.dataset.theme === 'xinjiang';
+      if (cv) { cv.remove(); cv = null; }
+      frames = []; chs = []; parts = []; air = '';
+      if (!on) return;
+      chs = $$('.xj-ch', view);
+      frames = $$('.frame', view).filter(f => !f.closest('.roll')).map(el => ({ el, p: 9 }));
+      cv = document.createElement('canvas'); cv.className = 'xj-air'; cv.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(cv); ctx = cv.getContext('2d'); air = chs[0] ? chs[0].dataset.air : 'snow'; size();
+      lastY = window.scrollY;
+    }
+    function size() {
+      if (!cv) return;
+      dpr = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      const n = W <= 760 ? 70 : 150;
+      parts = Array.from({ length: n }, () => spawn(true));
+    }
+    addEventListener('resize', () => { if (on) size(); });
+    // one particle of the current air; "fresh" scatters it over the whole screen instead of an edge
+    function spawn(fresh, p) {
+      p = p || {};
+      const k = air || 'snow', z = 0.35 + Math.random() * 0.65;
+      p.k = k; p.z = z; p.life = 8 + Math.random() * 10; p.age = fresh ? Math.random() * p.life : 0; p.ph = Math.random() * 6.28; p.rot = Math.random() * 6.28;
+      p.x = Math.random() * W; p.y = Math.random() * H;
+      if (!fresh) {   // enter from the side they travel from, spread out so they don't arrive in a line
+        if (k === 'snow' || k === 'petals') p.y = -10 - Math.random() * H * 0.12;
+        else if (k === 'sand') p.x = -10 - Math.random() * W * 0.12;
+        else p.y = H + 10 + Math.random() * H * 0.12;
+      }
+      p.r = k === 'petals' ? 2.6 + Math.random() * 3 : k === 'sand' ? 0.6 + Math.random() * 0.9 : k === 'snow' ? 0.9 + Math.random() * 1.8 : k === 'glint' ? 0.5 + Math.random() * 0.8 : 0.7 + Math.random() * 1.6;
+      return p;
+    }
+    function scroll(vh) {
+      if (!on) return;
+      // the chapter whose opening has come up past the middle of the screen decides the air
+      let active = null;
+      for (const el of chs) if (rect(el).top < vh * 0.6) active = el;
+      const a = active ? active.dataset.air : (chs[0] ? chs[0].dataset.air : 'snow');
+      if (a !== air) { air = a; for (const p of parts) { p.life = Math.min(p.life, p.age + 0.4 + Math.random() * 2.2); p.swap = true; } }   // the old air fades out over a moment
+      // framed photographs turn towards you as they reach the middle of the screen
+      for (const fr of frames) {
+        const r = rect(fr.el); if (r.bottom < -100 || r.top > vh + 100) continue;
+        const p = reduceMotion ? 0 : +Math.max(-1, Math.min(1, ((r.top + r.height / 2) - vh / 2) / (vh * 0.85))).toFixed(3);
+        if (p !== fr.p) { fr.p = p; fr.el.style.setProperty('--p', p); fr.el.style.setProperty('--a', Math.abs(p)); }
+      }
+    }
+    function tick(t, dt) {
+      if (!on || !cv || document.hidden || reduceMotion) return;
+      const y = window.scrollY, dy = y - lastY; lastY = y;
+      const st = getComputedStyle(document.body).getPropertyValue('--pink');
+      const m = st.match(/\d+/g); if (m) ink = m.slice(0, 3).map(Number);
+      const dark = (ink[0] + ink[1] + ink[2]) / 3 > 140;   // light ink = a dark page
+      const C = {
+        snow: dark ? [255, 255, 255] : [120, 132, 142], sand: dark ? [214, 196, 160] : [150, 132, 104],
+        glint: dark ? [200, 244, 244] : [40, 150, 160], motes: [238, 150, 104], petals: [232, 164, 178],
+      };
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
+      const s = t / 1000;
+      for (const p of parts) {
+        p.age += dt;
+        if (p.age > p.life) { const sw = p.swap && p.age > p.life; spawn(sw, p); if (sw) { p.age = 0; p.swap = false; } }
+        const z = p.z;
+        if (p.k === 'snow') { p.y += (14 + 26 * z) * dt; p.x += Math.sin(s * 0.7 + p.ph) * 10 * dt + 4 * dt; }
+        else if (p.k === 'sand') { p.x += (70 + 150 * z) * dt; p.y += (Math.sin(s * 2 + p.ph) * 8 + 4) * dt; }
+        else if (p.k === 'glint') { p.y -= (4 + 8 * z) * dt; p.x += Math.sin(s * 0.5 + p.ph) * 4 * dt; }
+        else if (p.k === 'motes') { p.y -= (6 + 12 * z) * dt; p.x += Math.sin(s * 0.6 + p.ph) * 9 * dt; }
+        else { p.y += (18 + 26 * z) * dt; p.x += (Math.sin(s * 1.1 + p.ph) * 26 + 10) * dt; p.rot += dt * (0.8 + z); }
+        p.y -= dy * (0.25 + z * 0.5);   // nearer particles slide further when you scroll: depth
+        // the air wraps around the screen (so a fast scroll never empties it or bunches it at one edge)
+        if (p.y < -H * 0.1) p.y += H * 1.2; else if (p.y > H * 1.1) p.y -= H * 1.2;
+        if (p.x < -W * 0.1) p.x += W * 1.2; else if (p.x > W * 1.1) p.x -= W * 1.2;
+        const life = Math.min(1, p.age / 0.8, (p.life - p.age) / 0.8);
+        let a = Math.max(0, life) * (0.35 + z * 0.55);
+        if (p.k === 'glint') a *= 0.35 + 0.65 * Math.max(0, Math.sin(s * (2 + z * 3) + p.ph));
+        const c = C[p.k]; ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${a.toFixed(3)})`;
+        const r = p.r * (0.6 + z * 0.7);
+        ctx.beginPath();
+        if (p.k === 'sand') ctx.ellipse(p.x, p.y, r * 2.6, r * 0.7, 0.08, 0, 6.283);
+        else if (p.k === 'petals') ctx.ellipse(p.x, p.y, r, r * 0.55, p.rot, 0, 6.283);
+        else ctx.arc(p.x, p.y, r, 0, 6.283);
+        ctx.fill();
+      }
+    }
+    return { setup, scroll, tick };
+  })();
 
   // ---------- scroll loop: parallax, HUD, charge decay ----------
   let lastY = -1, lastT = 0, hudKey = null, hudTimer = 0;
@@ -1288,6 +1438,7 @@
         }
       }
       updateHud(current);
+      Xj.scroll(vh);
       if (ynGuide) {
         const hidden = y < vh * .75 || (nextEl && rect(nextEl).top < vh * .7);
         ynGuide.classList.toggle('is-hidden', hidden); ynGuide.inert = hidden;
@@ -1382,6 +1533,7 @@
       }
     }
     Threshold.tick(t);
+    Xj.tick(t, dt);
     // charge bookkeeping
     if (nextEl && !charge.done) {
       if (atBottom()) { if (!charge.arrived) charge.arrived = t; }

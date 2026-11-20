@@ -221,6 +221,12 @@ domain). Keep these.
   scrolls in (`--nb`, set in `frame`), not a spatial gradient.
 - **Full-width film**: a YouTube module with `layout: "fill"` plays muted with `controls=0` (iframe scaled 1.24 to crop YouTube's
   overlays, pointer-events off); clicking opens `.ytmodal` full screen with sound (`openFilm`).
+- **新疆 (spatial)**: `theme: "xinjiang"` brings the 时空画廊 language into an album. `xinjiangChapterHTML` = a quiet opening
+  (meta row, `ikatSVG` 艾德莱斯 atlas-ikat strip, numeral, vertical title, text); the page re-dyes per chapter (tones xjroad / xjsand /
+  xjlake / xjwillow / xjblossom). Framed photos turn towards you via `--p/--a` (CSS `rotate`/`translate`, set in `Xj.scroll`) and glow
+  on hover. `.xj-air` (fixed canvas behind the page, html background off) = the chapter's air from the chapter block's `ornament`:
+  snow · sand · glint · motes · petals. A per-chapter fly-through of the photos was tried and removed at the owner's request
+  (`.backups/site-xinjiang-with-flights.js`). Content backup: `.backups/content-before-xinjiang.json`.
 - **Title colour**: `.plate-big.cjk.t-<theme>` sets `--gold` per album (gold only for 北京).
 
 - **AVIF display copies must have even width and height.** Chrome cannot decode sips' AVIFs with an odd side (2560×1707):
