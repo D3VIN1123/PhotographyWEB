@@ -412,8 +412,20 @@
     xjlake:    { bg: [9, 38, 44], hi: [22, 88, 96, .35], lo: [2, 16, 20, .6], ink: [226, 238, 236], ac: [218, 164, 98], pat: 0 },
     xjwillow:  { bg: [40, 19, 17], hi: [118, 40, 34, .3], lo: [18, 7, 6, .6], ink: [242, 230, 216], ac: [222, 82, 62], pat: 0 },
     xjblossom: { bg: [239, 232, 230], hi: [251, 246, 244, .6], lo: [224, 208, 206, .4], ink: [46, 36, 38], ac: [192, 98, 116], pat: 0 },
+    // 富士 (spatial): summer sky, lakeside dusk, torii vermilion on washi, moss garden, lantern night
+    fjsky:     { bg: [236, 240, 244], hi: [250, 252, 253, .6], lo: [214, 222, 232, .4], ink: [28, 36, 52], ac: [200, 72, 48], pat: 0 },
+    fjdusk:    { bg: [14, 22, 40], hi: [36, 54, 92, .35], lo: [4, 8, 18, .6], ink: [228, 232, 240], ac: [236, 170, 96], pat: 0 },
+    fjshu:     { bg: [241, 234, 224], hi: [252, 248, 242, .6], lo: [226, 214, 198, .4], ink: [40, 30, 26], ac: [214, 72, 38], pat: 0 },
+    fjmoss:    { bg: [16, 28, 22], hi: [44, 76, 52, .3], lo: [4, 12, 8, .6], ink: [226, 236, 224], ac: [176, 206, 120], pat: 0 },
+    fjlantern: { bg: [32, 18, 12], hi: [110, 60, 26, .3], lo: [12, 6, 4, .6], ink: [244, 232, 214], ac: [240, 176, 84], pat: 0 },
+    // 阿尔卑斯 (spatial): spring town, meadow valley, alpenglow, star night, village lights
+    alspring:  { bg: [238, 236, 240], hi: [250, 249, 252, .6], lo: [220, 214, 226, .4], ink: [34, 34, 44], ac: [206, 40, 48], pat: 0 },
+    almeadow:  { bg: [234, 234, 226], hi: [248, 248, 242, .6], lo: [212, 212, 196, .4], ink: [32, 38, 34], ac: [196, 44, 44], pat: 0 },
+    alglow:    { bg: [38, 24, 40], hi: [120, 60, 80, .3], lo: [14, 8, 18, .6], ink: [244, 230, 232], ac: [246, 150, 120], pat: 0 },
+    alnight:   { bg: [10, 14, 32], hi: [30, 44, 96, .35], lo: [2, 4, 12, .6], ink: [226, 230, 244], ac: [210, 214, 240], pat: 0 },
+    alvillage: { bg: [22, 16, 26], hi: [90, 50, 40, .3], lo: [8, 6, 10, .6], ink: [244, 234, 220], ac: [240, 170, 80], pat: 0 },
   });
-  const BASE_TONE = { indigo: 'indigo', paris: 'stone', huizhou: 'whitewall', beijing: 'hutong', caiyun: 'cloud', xinjiang: 'xjroad' };   // the page colour before the first toned block
+  const BASE_TONE = { indigo: 'indigo', paris: 'stone', huizhou: 'whitewall', beijing: 'hutong', caiyun: 'cloud', xinjiang: 'xjroad', fuji: 'fjsky', alps: 'alspring' };   // the page colour before the first toned block
   const NUMERALS = ['壹','贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾', '拾壹', '拾贰'];
   // Five-colour prayer flags strung across a chapter opening (blue, white, red, green, yellow)
   function flagsHTML() {
@@ -854,7 +866,11 @@
       </div>
     </section>`;
   }
-  // ---------- 新疆 (theme "xinjiang"): the 时空画廊 room inside an album ----------
+  // ---------- 时空集 "Spatial Album" (themes in SPATIAL): the 时空画廊 room inside an album ----------
+  // First made for 新疆. A page style of this family = a colour journey of tones, a textile strip from the place beside
+  // each chapter title (ikat / seigaiha / cross-stitch), photographs hung in the room that turn towards you, and the
+  // air of each chapter on a canvas behind the page (Xj). Add a place: tones, a strip function, an entry in SPATIAL,
+  // a var block + title colour in spatial.css, the backstage option.
   // Each chapter opening is a short flight: the chapter's photographs hang in depth around its title and scrolling
   // flies you through them (a pinned section; site.js → Xj). Then the photographs settle into the page, framed,
   // turning towards you as they pass. Along the title runs a strip of 艾德莱斯 (atlas) ikat — the silk of
@@ -876,17 +892,52 @@
       y += h + 10 + rnd() * 10;
       if (rnd() < 0.5) { out += `<rect class="a" x="2" y="${y.toFixed(1)}" width="${W - 4}" height="1.4"/>`; y += 8; }
     }
-    return `<svg class="xj-ikat" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMin slice" aria-hidden="true">${out}</svg>`;
+    return `<svg class="xj-strip ikat" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMin slice" aria-hidden="true">${out}</svg>`;
   }
-  const XJ_AIR = ['snow', 'sand', 'glint', 'motes', 'petals'];
-  function xinjiangChapterHTML(x, n, st) {
-    const flight = xjFlights.get(x) || [], t = String(x.title || '');
-    const air = XJ_AIR.includes(x.ornament) ? x.ornament : XJ_AIR[(n - 1) % XJ_AIR.length];
+  // 青海波 seigaiha: rows of overlapping fans of concentric arcs (Japanese waves); now and then one in vermilion
+  function seigaihaSVG(seed) {
+    const rnd = seeded(seed * 11 + 7), W = 36, H = 640, R = 12;
+    let out = '';
+    for (let r = 0; r * 7 < H + R; r++) {
+      const y = r * 7 + R;
+      for (let c = -1; c < 3; c++) {
+        const cx = c * 24 + (r % 2 ? 12 : 0), red = rnd() < 0.08 ? ' sa' : ' sb';
+        out += `<circle class="c" cx="${cx}" cy="${y}" r="${R}"/>`;
+        for (const k of [12, 8.4, 4.8]) out += `<circle class="ring${red}" cx="${cx}" cy="${y}" r="${k - 0.7}"/>`;
+      }
+    }
+    return `<svg class="xj-strip seigaiha" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMin slice" aria-hidden="true">${out}</svg>`;
+  }
+  // Swiss cross-stitch: edelweiss stars and hearts stitched cell by cell between two dashed borders
+  function stitchSVG(seed) {
+    const S = 2.4, W = 15 * S, H = 640;
+    const EDEL = ['....#....', '...###...', '.#..#..#.', '.##.#.##.', '#########', '.##.#.##.', '.#..#..#.', '...###...', '....#....'];
+    const HEART = ['.##...##.', '####.####', '#########', '#########', '.#######.', '..#####..', '...###...', '....#....'];
+    let out = '', y = 2, k = seed;
+    for (let r = 0; r * S < H; r += 2) out += `<rect class="b" x="0" y="${r * S}" width="${S - .4}" height="${S - .4}"/><rect class="b" x="${14 * S}" y="${r * S}" width="${S - .4}" height="${S - .4}"/>`;
+    while (y * S < H - 30) {
+      const m = k++ % 2 ? HEART : EDEL, cls = m === HEART ? 'a' : 'b';
+      m.forEach((row, j) => [...row].forEach((ch, i) => {
+        if (ch === '#') out += `<rect class="${m === EDEL && i === 4 && j === 4 ? 'a' : cls}" x="${(3 + i) * S}" y="${(y + j) * S}" width="${S - .4}" height="${S - .4}"/>`;
+      }));
+      y += m.length + 5;
+    }
+    return `<svg class="xj-strip stitch" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMin slice" aria-hidden="true">${out}</svg>`;
+  }
+  const XJ_AIR = ['snow', 'sand', 'glint', 'motes', 'petals', 'bokeh', 'fireflies', 'stars', 'leaves'];
+  const SPATIAL = {
+    xinjiang: { strip: n => ikatSVG(n), airs: ['snow', 'sand', 'glint', 'motes', 'petals'] },
+    fuji:     { strip: n => seigaihaSVG(n), airs: ['glint', 'fireflies', 'motes', 'leaves', 'bokeh'] },
+    alps:     { strip: n => stitchSVG(n), airs: ['petals', 'motes', 'motes', 'stars', 'snow'] },
+  };
+  function spatialChapterHTML(x, n, st) {
+    const flight = xjFlights.get(x) || [], t = String(x.title || ''), S = SPATIAL[pageTheme];
+    const air = XJ_AIR.includes(x.ornament) ? x.ornament : S.airs[(n - 1) % S.airs.length];
     return `
     <section class="paper chapter xj-ch" data-air="${air}"${st.length ? ` style='${st.join(';')}'` : ''} data-seed="${n}"${toneAttr(x)}>
       <div class="xj-meta reveal"><span>Ch. ${pad2(n)} / ${pad2(chTotal)}</span><i></i><span>${esc(edge.coords || '')}</span><i></i><span>${pad2(flight.length)} fr</span></div>
       <div class="xj-in">
-        ${ikatSVG(n)}
+        ${S.strip(n)}
         <div class="xj-num reveal"><span>${NUMERALS[n - 1] || n}</span></div>
         ${t ? `<h2 class="xj-title reveal" style="--d:1">${esc(t)}</h2>` : ''}
         <div class="xj-side">
@@ -897,7 +948,7 @@
     </section>`;
   }
   function chapterHTML(x, n, st) {
-    if (pageTheme === 'xinjiang') return xinjiangChapterHTML(x, n, st);
+    if (SPATIAL[pageTheme]) return spatialChapterHTML(x, n, st);
     if (pageTheme === 'caiyun') return caiyunChapterHTML(x, n, st);
     if (pageTheme === 'paris') return parisChapterHTML(x, n, st);
     if (pageTheme === 'huizhou') return huizhouChapterHTML(x, n, st);
@@ -1104,7 +1155,7 @@
     edge = { code: (pl.en + (isCJK(pl.big) ? ' ' + pl.big : '')).trim() || p.title, coords: pl.coords };
     chTotal = photos.filter(x => kindOf(x) === 'text' && x.style === 'chapter').length;
     xjFlights = new Map();
-    if (pageTheme === 'xinjiang') {
+    if (SPATIAL[pageTheme]) {
       let cur = null;
       for (const x of photos) {
         if (kindOf(x) === 'text' && x.style === 'chapter') { cur = []; xjFlights.set(x, cur); }
@@ -1254,6 +1305,7 @@
     // per-album page style ("theme"), set in the backstage; "indigo" is a dark theme
     const theme = r.type === 'project' && /^[a-z]+$/.test(r.project.theme || '') ? r.project.theme : '';
     document.body.dataset.theme = theme;
+    document.body.classList.toggle('spatial', !!SPATIAL[theme]);
     document.body.classList.toggle('theme-dark', theme === 'indigo');
     document.body.classList.toggle('home', r.type === 'home');
 
@@ -1313,11 +1365,11 @@
     lastY = -1;
   }
 
-  // ---------- 新疆: turning frames, the air ----------
+  // ---------- 时空集: turning frames, the air ----------
   const Xj = (() => {
     let on = false, frames = [], chs = [], cv = null, ctx = null, W = 0, H = 0, dpr = 1, parts = [], air = '', lastY = 0, ink = [255, 255, 255];
     function setup() {
-      on = document.body.dataset.theme === 'xinjiang';
+      on = document.body.classList.contains('spatial');
       if (cv) { cv.remove(); cv = null; }
       frames = []; chs = []; parts = []; air = '';
       if (!on) return;
@@ -1342,11 +1394,12 @@
       p.k = k; p.z = z; p.life = 8 + Math.random() * 10; p.age = fresh ? Math.random() * p.life : 0; p.ph = Math.random() * 6.28; p.rot = Math.random() * 6.28;
       p.x = Math.random() * W; p.y = Math.random() * H;
       if (!fresh) {   // enter from the side they travel from, spread out so they don't arrive in a line
-        if (k === 'snow' || k === 'petals') p.y = -10 - Math.random() * H * 0.12;
+        if (k === 'snow' || k === 'petals' || k === 'leaves') p.y = -10 - Math.random() * H * 0.12;
         else if (k === 'sand') p.x = -10 - Math.random() * W * 0.12;
-        else p.y = H + 10 + Math.random() * H * 0.12;
+        else if (k === 'glint' || k === 'motes' || k === 'bokeh') p.y = H + 10 + Math.random() * H * 0.12;
+        // fireflies and stars simply appear where they are
       }
-      p.r = k === 'petals' ? 2.6 + Math.random() * 3 : k === 'sand' ? 0.6 + Math.random() * 0.9 : k === 'snow' ? 0.9 + Math.random() * 1.8 : k === 'glint' ? 0.5 + Math.random() * 0.8 : 0.7 + Math.random() * 1.6;
+      p.r = k === 'bokeh' ? 6 + Math.random() * 12 : k === 'leaves' ? 3 + Math.random() * 3 : k === 'fireflies' ? 1 + Math.random() * 1.2 : k === 'stars' ? 0.4 + Math.random() * 0.8 : k === 'petals' ? 2.6 + Math.random() * 3 : k === 'sand' ? 0.6 + Math.random() * 0.9 : k === 'snow' ? 0.9 + Math.random() * 1.8 : k === 'glint' ? 0.5 + Math.random() * 0.8 : 0.7 + Math.random() * 1.6;
       return p;
     }
     function scroll(vh) {
@@ -1371,7 +1424,9 @@
       const dark = (ink[0] + ink[1] + ink[2]) / 3 > 140;   // light ink = a dark page
       const C = {
         snow: dark ? [255, 255, 255] : [120, 132, 142], sand: dark ? [214, 196, 160] : [150, 132, 104],
-        glint: dark ? [200, 244, 244] : [40, 150, 160], motes: [238, 150, 104], petals: [232, 164, 178],
+        glint: dark ? [200, 244, 244] : [40, 150, 160], motes: dark ? [238, 150, 104] : [196, 120, 70], petals: [232, 164, 178],
+        bokeh: dark ? [246, 190, 110] : [210, 140, 80], fireflies: [214, 240, 120], stars: dark ? [240, 244, 255] : [90, 100, 130],
+        leaves: dark ? [150, 196, 98] : [104, 150, 70],
       };
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
       const s = t / 1000;
@@ -1383,21 +1438,32 @@
         else if (p.k === 'sand') { p.x += (70 + 150 * z) * dt; p.y += (Math.sin(s * 2 + p.ph) * 8 + 4) * dt; }
         else if (p.k === 'glint') { p.y -= (4 + 8 * z) * dt; p.x += Math.sin(s * 0.5 + p.ph) * 4 * dt; }
         else if (p.k === 'motes') { p.y -= (6 + 12 * z) * dt; p.x += Math.sin(s * 0.6 + p.ph) * 9 * dt; }
+        else if (p.k === 'bokeh') { p.y -= (3 + 6 * z) * dt; p.x += Math.sin(s * 0.3 + p.ph) * 5 * dt; }
+        else if (p.k === 'fireflies') { p.x += Math.sin(s * 0.9 + p.ph) * 16 * dt; p.y += Math.cos(s * 0.7 + p.ph * 1.3) * 12 * dt; }
+        else if (p.k === 'stars') { /* still: they only move with the scroll */ }
+        else if (p.k === 'leaves') { p.y += (12 + 18 * z) * dt; p.x += (Math.sin(s * 0.8 + p.ph) * 30 + 6) * dt; p.rot += dt * (0.6 + z); }
         else { p.y += (18 + 26 * z) * dt; p.x += (Math.sin(s * 1.1 + p.ph) * 26 + 10) * dt; p.rot += dt * (0.8 + z); }
-        p.y -= dy * (0.25 + z * 0.5);   // nearer particles slide further when you scroll: depth
+        p.y -= dy * (p.k === 'stars' ? 0.08 * z : 0.25 + z * 0.5);   // nearer particles slide further when you scroll: depth (stars are far)
         // the air wraps around the screen (so a fast scroll never empties it or bunches it at one edge)
         if (p.y < -H * 0.1) p.y += H * 1.2; else if (p.y > H * 1.1) p.y -= H * 1.2;
         if (p.x < -W * 0.1) p.x += W * 1.2; else if (p.x > W * 1.1) p.x -= W * 1.2;
         const life = Math.min(1, p.age / 0.8, (p.life - p.age) / 0.8);
         let a = Math.max(0, life) * (0.35 + z * 0.55);
-        if (p.k === 'glint') a *= 0.35 + 0.65 * Math.max(0, Math.sin(s * (2 + z * 3) + p.ph));
+        if (p.k === 'glint' || p.k === 'stars') a *= 0.35 + 0.65 * Math.max(0, Math.sin(s * (p.k === 'stars' ? 0.8 + z : 2 + z * 3) + p.ph));
+        else if (p.k === 'fireflies') a *= Math.max(0, Math.sin(s * 0.9 + p.ph * 2)) ** 2;
+        else if (p.k === 'bokeh') a *= 0.22;
         const c = C[p.k]; ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${a.toFixed(3)})`;
         const r = p.r * (0.6 + z * 0.7);
         ctx.beginPath();
         if (p.k === 'sand') ctx.ellipse(p.x, p.y, r * 2.6, r * 0.7, 0.08, 0, 6.283);
         else if (p.k === 'petals') ctx.ellipse(p.x, p.y, r, r * 0.55, p.rot, 0, 6.283);
+        else if (p.k === 'leaves') ctx.ellipse(p.x, p.y, r, r * 0.42, p.rot, 0, 6.283);
         else ctx.arc(p.x, p.y, r, 0, 6.283);
         ctx.fill();
+        if (p.k === 'fireflies' || p.k === 'bokeh') {   // a soft halo
+          ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${(a * 0.25).toFixed(3)})`;
+          ctx.beginPath(); ctx.arc(p.x, p.y, r * (p.k === 'bokeh' ? 1.5 : 4), 0, 6.283); ctx.fill();
+        }
       }
     }
     return { setup, scroll, tick };

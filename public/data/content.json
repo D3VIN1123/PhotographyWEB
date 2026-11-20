@@ -750,6 +750,20 @@
           "font": "",
           "color": "",
           "tone": ""
+        },
+        {
+          "id": "261120af4d44f6dc",
+          "src": "uploads/261120af4d44f6dc.jpg",
+          "mid": "uploads/261120af4d44f6dc_m.avif",
+          "thumb": "uploads/261120af4d44f6dc_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
         }
       ],
       "theme": "caiyun",
@@ -2944,27 +2958,294 @@
       "theme": "xinjiang"
     },
     {
+      "id": "mwpc8f4i4e7ja",
+      "slug": "fujisan",
+      "title": "Fujisan",
+      "subtitle": "Japan · 2025",
+      "description": "从湖对岸的富士山，到京都的鸟居、庭园与灯火。\nFrom Mount Fuji across the lake to the torii, gardens and lanterns of Kyoto.",
+      "cover": "261120f8b4a62af8",
+      "published": true,
+      "photos": [
+        {
+          "type": "text",
+          "id": "fj0ch1fuji00",
+          "style": "chapter",
+          "title": "富士",
+          "kicker": "Fuji-san",
+          "caption": "山顶停着一朵云，像刚刚升起的烟。湖面很静，水鸟游过，留下一道光。\nA single cloud rests on the summit like smoke just risen. The lake is still; a pair of water birds leaves a line of light behind.",
+          "tone": "fjsky",
+          "ornament": "glint",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611201d7a9ca7db",
+          "src": "uploads/2611201d7a9ca7db.jpg",
+          "mid": "uploads/2611201d7a9ca7db_m.avif",
+          "thumb": "uploads/2611201d7a9ca7db_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "云从山顶散开，湖上横着一座桥\nClouds drifting off the summit, a bridge laid across the lake",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
+        },
+        {
+          "id": "261120f8b4a62af8",
+          "src": "uploads/261120f8b4a62af8.jpg",
+          "mid": "uploads/261120f8b4a62af8_m.avif",
+          "thumb": "uploads/261120f8b4a62af8_s.jpg",
+          "w": 3413,
+          "h": 5120,
+          "caption": "山顶一朵云，湖面一道光\nA cloud on the summit, a line of light on the water",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit"
+        },
+        {
+          "type": "text",
+          "id": "fj0ch2lake00",
+          "style": "chapter",
+          "title": "湖畔",
+          "kicker": "Lakeside at Dusk",
+          "caption": "天黑下来，湖边的灯一盏一盏亮了，山只剩下一道轮廓。\nAs the dark comes down, the lamps by the lake come on one by one; the mountain is only an outline now.",
+          "tone": "fjdusk",
+          "ornament": "fireflies",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611202230fc8111",
+          "src": "uploads/2611202230fc8111.jpg",
+          "mid": "uploads/2611202230fc8111_m.avif",
+          "thumb": "uploads/2611202230fc8111_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "湖边的灯亮了，山退成一道影子\nThe lakeside lamps come on; the mountain recedes into a silhouette",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
+        },
+        {
+          "type": "text",
+          "id": "fj0ch3torii0",
+          "style": "chapter",
+          "title": "鸟居",
+          "kicker": "Torii",
+          "caption": "一道道朱红的门，一层层往山里去。阳光从杉树间漏下来，落在朱红上。\nVermilion gates, one after another, leading up into the hill; sunlight slips between the cedars and lands on the red.",
+          "tone": "fjshu",
+          "ornament": "motes",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "26112062dbbd34cd",
+          "src": "uploads/26112062dbbd34cd.jpg",
+          "mid": "uploads/26112062dbbd34cd_m.avif",
+          "thumb": "uploads/26112062dbbd34cd_s.jpg",
+          "w": 3392,
+          "h": 3392,
+          "caption": "杉林里的鸟居，阳光照在朱红上\nTorii among the cedars, sunlight on vermilion",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit"
+        },
+        {
+          "id": "261120d21494cfd5",
+          "src": "uploads/261120d21494cfd5.jpg",
+          "mid": "uploads/261120d21494cfd5_m.avif",
+          "thumb": "uploads/261120d21494cfd5_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "抬头看，鸟居一座接一座\nLooking up: one torii after another",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide"
+        },
+        {
+          "id": "261120d0f276e5c7",
+          "src": "uploads/261120d0f276e5c7.jpg",
+          "mid": "uploads/261120d0f276e5c7_m.avif",
+          "thumb": "uploads/261120d0f276e5c7_s.jpg",
+          "w": 4843,
+          "h": 2422,
+          "caption": "朱红的门，框住了整座城\nA vermilion gateway framing the whole city",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide"
+        },
+        {
+          "type": "text",
+          "id": "fj0ch4garden",
+          "style": "chapter",
+          "title": "庭",
+          "kicker": "The Garden",
+          "caption": "青苔、石灯笼、一池倒影。窗外的绿落在漆黑的桌面上，又长出一座庭园。\nMoss, a stone lantern, a pool of reflections. The green outside the window falls on a black lacquered table and grows a second garden.",
+          "tone": "fjmoss",
+          "ornament": "leaves",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261120dd8d7fd534",
+          "src": "uploads/261120dd8d7fd534.jpg",
+          "mid": "uploads/261120dd8d7fd534_m.avif",
+          "thumb": "uploads/261120dd8d7fd534_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "青苔、石灯笼和一池倒影\nMoss, a stone lantern, a pool of reflections",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
+        },
+        {
+          "id": "2611202dea1e21fb",
+          "src": "uploads/2611202dea1e21fb.jpg",
+          "mid": "uploads/2611202dea1e21fb_m.avif",
+          "thumb": "uploads/2611202dea1e21fb_s.jpg",
+          "w": 5120,
+          "h": 3450,
+          "caption": "窗外的绿，落在漆黑的桌面上\nThe green outside, fallen onto a black lacquered table",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit"
+        },
+        {
+          "type": "text",
+          "id": "fj0ch5lamp00",
+          "style": "chapter",
+          "title": "灯",
+          "kicker": "Lanterns",
+          "caption": "夜里，一排灯笼写着「不动明王」。香烟慢慢升起，有人在灯下停了一会儿。\nAt night a row of lanterns reads “Fudō Myōō”. Incense smoke rises slowly; someone pauses beneath the light.",
+          "tone": "fjlantern",
+          "ornament": "bokeh",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "26112042042ff863",
+          "src": "uploads/26112042042ff863.jpg",
+          "mid": "uploads/26112042042ff863_m.avif",
+          "thumb": "uploads/26112042042ff863_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "灯笼上写着「不动明王」，香烟慢慢升起\nLanterns inscribed “Fudō Myōō”, incense rising slowly",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit"
+        },
+        {
+          "id": "2611202653ce2fa6",
+          "src": "uploads/2611202653ce2fa6.jpg",
+          "mid": "uploads/2611202653ce2fa6_m.avif",
+          "thumb": "uploads/2611202653ce2fa6_s.jpg",
+          "w": 3414,
+          "h": 5120,
+          "caption": "取景器里，又是一座富士山 —— 按下快门的人\nIn the viewfinder, another Mount Fuji — the one behind the camera",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit"
+        }
+      ],
+      "place": "富士",
+      "theme": "fuji",
+      "placeEn": "Mount Fuji · Kyoto",
+      "coords": "35.36°N · 138.73°E"
+    },
+    {
       "id": "mwl4kwkz15m33",
       "slug": "deep-in-the-alps",
       "title": "Deep in the Alps",
       "subtitle": "Switzerland 2026",
-      "description": "",
+      "description": "从开花的小镇出发，走进雪山下的山谷，一直待到满天星斗。\nFrom a town in blossom up into the valleys below the snow, staying until the sky fills with stars.",
       "cover": "2611179a4ab18e5e",
       "published": true,
       "photos": [
+        {
+          "type": "text",
+          "id": "al0ch1spring",
+          "style": "chapter",
+          "title": "春",
+          "kicker": "Spring",
+          "caption": "山下已经开花了，山上还是雪。\nDown in the town the trees are in blossom; up on the mountains it is still snow.",
+          "tone": "alspring",
+          "ornament": "petals",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
         {
           "id": "2611179d99d0a6f6",
           "src": "uploads/2611179d99d0a6f6.jpg",
           "thumb": "uploads/2611179d99d0a6f6_s.jpg",
           "w": 5120,
           "h": 2880,
-          "caption": "",
+          "caption": "粉色的花开在老房子前\nPink blossom in front of an old house",
           "focus": [
             85,
             15
           ],
-          "layout": "auto",
+          "layout": "fill",
           "mid": "uploads/2611179d99d0a6f6_m.avif"
+        },
+        {
+          "type": "text",
+          "id": "al0ch2valley",
+          "style": "chapter",
+          "title": "山谷",
+          "kicker": "The Valley",
+          "caption": "小路沿着山坡往下，木屋散在草地上，对面是一整面雪山和悬崖。\nA path runs down the slope, wooden chalets scattered over the meadow; across the valley, a whole wall of snow and cliff.",
+          "tone": "almeadow",
+          "ornament": "motes",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
         },
         {
           "id": "2611175d09c73478",
@@ -2972,12 +3253,12 @@
           "thumb": "uploads/2611175d09c73478_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "",
+          "caption": "小路、木屋和对面的雪山\nA path, the chalets, and the snow mountains across the valley",
           "focus": [
             50,
             50
           ],
-          "layout": "auto",
+          "layout": "fit",
           "mid": "uploads/2611175d09c73478_m.avif"
         },
         {
@@ -2986,12 +3267,12 @@
           "thumb": "uploads/2611173c9363bea3_s.jpg",
           "w": 5120,
           "h": 1891,
-          "caption": "",
+          "caption": "雪山和峡谷，一整面山墙\nSnow peaks and the gorge, one long wall of mountain",
           "focus": [
             50,
             50
           ],
-          "layout": "auto",
+          "layout": "wide",
           "mid": "uploads/2611173c9363bea3_m.avif"
         },
         {
@@ -3000,48 +3281,80 @@
           "thumb": "uploads/261117229deb66a1_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "",
+          "caption": "枯草里的一道小溪，远处是雪山\nA trickle of water through dry grass, snow peaks beyond",
           "focus": [
             50,
             50
           ],
-          "layout": "auto",
+          "layout": "fill",
           "mid": "uploads/261117229deb66a1_m.avif"
+        },
+        {
+          "type": "text",
+          "id": "al0ch3glow00",
+          "style": "chapter",
+          "title": "山光",
+          "kicker": "Alpenglow",
+          "caption": "太阳落下以后，最后一点光留在山顶；然后，山谷里的灯亮了起来。\nAfter sunset the last light stays on the summits; then the lights come on down in the valley.",
+          "tone": "alglow",
+          "ornament": "motes",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
         },
         {
           "id": "mwl4od3dvxndg",
           "type": "stack",
           "layers": [
             {
-              "id": "2611174e6626789b",
-              "src": "uploads/2611174e6626789b.jpg",
-              "thumb": "uploads/2611174e6626789b_s.jpg",
-              "w": 5120,
-              "h": 3840,
-              "label": "",
-              "mid": "uploads/2611174e6626789b_m.avif"
-            },
-            {
               "id": "261117185408b0a3",
               "src": "uploads/261117185408b0a3.jpg",
               "thumb": "uploads/261117185408b0a3_s.jpg",
               "w": 5120,
               "h": 3840,
-              "label": "",
+              "label": "日落 Sunset",
               "mid": "uploads/261117185408b0a3_m.avif"
+            },
+            {
+              "id": "2611174e6626789b",
+              "src": "uploads/2611174e6626789b.jpg",
+              "thumb": "uploads/2611174e6626789b_s.jpg",
+              "w": 5120,
+              "h": 3840,
+              "label": "入夜 Nightfall",
+              "mid": "uploads/2611174e6626789b_m.avif"
             }
           ],
-          "caption": "",
+          "caption": "同一座山，从日落到入夜\nThe same mountains, from sunset to nightfall",
           "focus": [
             50,
             50
           ],
           "layout": "auto",
-          "src": "uploads/2611174e6626789b.jpg",
-          "thumb": "uploads/2611174e6626789b_s.jpg",
+          "src": "uploads/261117185408b0a3.jpg",
+          "thumb": "uploads/261117185408b0a3_s.jpg",
           "w": 5120,
           "h": 3840,
-          "mid": "uploads/2611174e6626789b_m.avif"
+          "mid": "uploads/261117185408b0a3_m.avif"
+        },
+        {
+          "type": "text",
+          "id": "al0ch4stars0",
+          "style": "chapter",
+          "title": "星",
+          "kicker": "Stars",
+          "caption": "夜里，木屋只剩一扇亮着的窗，天上全是星。\nAt night a chalet is one lit window, and the sky is all stars.",
+          "tone": "alnight",
+          "ornament": "stars",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
         },
         {
           "id": "26111717f158cb91",
@@ -3049,27 +3362,13 @@
           "thumb": "uploads/26111717f158cb91_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "",
+          "caption": "星空下，木屋亮着灯\nUnder the stars, a chalet with its lights on",
           "focus": [
             50,
             50
           ],
-          "layout": "auto",
+          "layout": "fit",
           "mid": "uploads/26111717f158cb91_m.avif"
-        },
-        {
-          "id": "261117fa10889513",
-          "src": "uploads/261117fa10889513.jpg",
-          "thumb": "uploads/261117fa10889513_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/261117fa10889513_m.avif"
         },
         {
           "id": "2611179a4ab18e5e",
@@ -3077,13 +3376,43 @@
           "thumb": "uploads/2611179a4ab18e5e_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "",
+          "caption": "星星落满山谷，灯光沿着谷底流\nStars over the valley, lights running along its floor",
           "focus": [
             81,
             13
           ],
-          "layout": "auto",
+          "layout": "fill",
           "mid": "uploads/2611179a4ab18e5e_m.avif"
+        },
+        {
+          "type": "text",
+          "id": "al0ch5lights",
+          "style": "chapter",
+          "title": "灯火",
+          "kicker": "Village Lights",
+          "caption": "峡谷里的村子亮着灯，瀑布从崖上落下；另一条山谷里，马特洪峰立在夜色中。\nIn the gorge a village is lit, a waterfall dropping from the cliff; in another valley, the Matterhorn stands in the night.",
+          "tone": "alvillage",
+          "ornament": "snow",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261117fa10889513",
+          "src": "uploads/261117fa10889513.jpg",
+          "thumb": "uploads/261117fa10889513_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "峡谷里的村子、教堂和瀑布\nA village in the gorge: the church, the waterfall",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill",
+          "mid": "uploads/261117fa10889513_m.avif"
         },
         {
           "id": "261117545d96e3c0",
@@ -3091,32 +3420,19 @@
           "thumb": "uploads/261117545d96e3c0_s.jpg",
           "w": 5120,
           "h": 3840,
-          "caption": "",
+          "caption": "马特洪峰下，小镇的灯火\nBeneath the Matterhorn, the lights of the town",
           "focus": [
             50,
             50
           ],
-          "layout": "auto",
+          "layout": "fit",
           "mid": "uploads/261117545d96e3c0_m.avif"
-        },
-        {
-          "id": "261117e85411d1b1",
-          "src": "uploads/261117e85411d1b1.jpg",
-          "thumb": "uploads/261117e85411d1b1_s.jpg",
-          "w": 5120,
-          "h": 3840,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto",
-          "mid": "uploads/261117e85411d1b1_m.avif"
         }
       ],
-      "place": "Alps",
+      "place": "阿尔卑斯",
       "placeEn": "Switzerland",
-      "coords": "46.80°N · 8.23°E"
+      "coords": "46.80°N · 8.23°E",
+      "theme": "alps"
     },
     {
       "id": "mwmd69nuoum0t",
@@ -3970,6 +4286,16 @@
       "place": "Yunnan",
       "placeEn": "Southwest China",
       "coords": "26.87°N · 100.23°E"
+    },
+    {
+      "id": "mwpc344zeznhz",
+      "slug": "project-znhz",
+      "title": "New Project",
+      "subtitle": "",
+      "description": "",
+      "cover": "",
+      "published": true,
+      "photos": []
     }
   ]
 }
