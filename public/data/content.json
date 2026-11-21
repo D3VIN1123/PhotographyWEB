@@ -37,14 +37,14 @@
           "caption": "山把云留住，云又把山藏起来。\nMountains keep the clouds, and the clouds keep the mountains.",
           "kicker": "Beneath the Clouds",
           "style": "chapter",
-          "ornament": "contour",
+          "ornament": "motes",
           "align": "left",
           "height": "",
           "size": "",
           "csize": "",
           "font": "",
           "color": "",
-          "tone": ""
+          "tone": "dncloud"
         },
         {
           "id": "26111721fdd5f89a",
@@ -72,7 +72,22 @@
             50
           ],
           "layout": "fit",
-          "mid": "uploads/261117c970dba410_m.avif"
+          "mid": "uploads/261117c970dba410_m.avif",
+          "note": "云一直在动，山只露出一会儿，又被盖上。\nThe cloud keeps moving; the mountain shows for a moment, then is covered again."
+        },
+        {
+          "id": "261120af4d44f6dc",
+          "src": "uploads/261120af4d44f6dc.jpg",
+          "mid": "uploads/261120af4d44f6dc_m.avif",
+          "thumb": "uploads/261120af4d44f6dc_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "乌云裂开，光柱落在湖面上\nThe storm cloud opens, and shafts of light fall on the lake",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
         },
         {
           "id": "ynmooxu81aky",
@@ -145,7 +160,22 @@
             50
           ],
           "layout": "fit",
-          "mid": "uploads/261117069c258b66_m.avif"
+          "mid": "uploads/261117069c258b66_m.avif",
+          "note": "梯田顺着山坡一层一层往下，房子就盖在田边上。\nThe terraces step down the hillside, and the houses are built right at their edges."
+        },
+        {
+          "id": "261120dcdb85d55c",
+          "src": "uploads/261120dcdb85d55c.jpg",
+          "mid": "uploads/261120dcdb85d55c_m.avif",
+          "thumb": "uploads/261120dcdb85d55c_s.jpg",
+          "w": 5120,
+          "h": 3834,
+          "caption": "云从山谷里散开，江水和村庄露了出来\nCloud lifting from the valley: the river and the villages show through",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
         },
         {
           "id": "yn9ntrgv1lbu",
@@ -154,14 +184,14 @@
           "caption": "天一黑，木楼里的灯一盏一盏亮起来。下过雨的石板路，把每一盏灯都映了两遍。\nWhen dusk comes, the wooden lanes light up one window at a time — and the rain-washed stones show every lamp twice.",
           "kicker": "The Old Town, After Dark",
           "style": "chapter",
-          "ornament": "shibori",
+          "ornament": "rain",
           "align": "left",
           "height": "",
           "size": "",
           "csize": "",
           "font": "",
           "color": "",
-          "tone": "indigodusk"
+          "tone": "dndusk"
         },
         {
           "id": "261118ddfe29e7bc",
@@ -237,7 +267,8 @@
           ],
           "layout": "fit",
           "fx": "",
-          "mid": "uploads/261118b2064f560e_m.avif"
+          "mid": "uploads/261118b2064f560e_m.avif",
+          "note": "雨打在伞上，伞上的花比树上的还亮。\nRain on the umbrella, and the flowers printed on it shine brighter than any on the trees."
         },
         {
           "id": "2611175799cd534f",
@@ -350,14 +381,14 @@
           "caption": "水从雪山上下来，一路都不肯慢。把快门放慢一点，它就变成了雾。\nThe water comes down from the snow in a hurry. Slow the shutter, and it turns to mist.",
           "kicker": "Where the Rivers Run",
           "style": "chapter",
-          "ornament": "contour",
+          "ornament": "glint",
           "align": "left",
           "height": "",
           "size": "",
           "csize": "",
           "font": "",
           "color": "",
-          "tone": "jadewater"
+          "tone": "dnjade"
         },
         {
           "id": "2611170c8a36b895",
@@ -463,14 +494,14 @@
           "caption": "高原的风很干净，经幡把每一句祈愿都吹向更远的地方。\nOn the plateau the wind is clean, and the prayer flags carry every wish a little further.",
           "kicker": "Shangri-La",
           "style": "chapter",
-          "ornament": "flags",
+          "ornament": "sand",
           "align": "left",
           "height": "",
           "size": "",
           "csize": "",
           "font": "",
           "color": "",
-          "tone": "ochre"
+          "tone": "dnochre"
         },
         {
           "id": "261117d70e3594b7",
@@ -499,7 +530,8 @@
             50
           ],
           "layout": "fit",
-          "mid": "uploads/261117320674abde_m.avif"
+          "mid": "uploads/261117320674abde_m.avif",
+          "note": "天压得很低，金顶在乌云下面，反倒更亮了。\nThe sky hangs low; under the dark cloud the golden roofs look all the brighter."
         },
         {
           "id": "261117c5a99d54a3",
@@ -530,6 +562,21 @@
           "mid": "uploads/2611174df24bdb93_m.avif"
         },
         {
+          "id": "261121199887df62",
+          "src": "uploads/261121199887df62.jpg",
+          "mid": "uploads/261121199887df62_m.avif",
+          "thumb": "uploads/261121199887df62_s.jpg",
+          "w": 5120,
+          "h": 3415,
+          "caption": "玻璃上的倒影：金顶的寺院浮在山前\nReflected in the glass: the golden-roofed monastery floating before the hills",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "note": "隔着一层玻璃和网，寺院、山和云叠在了一起。\nThrough glass and netting, the monastery, the hills and the clouds fold into one picture."
+        },
+        {
           "id": "261118c8eec052a6",
           "src": "uploads/261118c8eec052a6.jpg",
           "thumb": "uploads/261118c8eec052a6_s.jpg",
@@ -556,7 +603,8 @@
             50
           ],
           "layout": "fit",
-          "mid": "uploads/261117bb989ee3b4_m.avif"
+          "mid": "uploads/261117bb989ee3b4_m.avif",
+          "note": "屋脊上的金饰对着远处的山，像是在跟它们说话。\nThe gilded ornaments on the ridge face the far mountains, as if in conversation."
         },
         {
           "id": "ynez60h8ivtq",
@@ -595,14 +643,14 @@
           "caption": "梅里雪山主峰，海拔六千七百四十米，至今无人登顶。云散开的那几分钟里，整座山被点亮。\nThe highest peak of the Meili range — 6,740 metres, and never climbed. For the few minutes the clouds part, the whole mountain is lit.",
           "kicker": "Kawagebo",
           "style": "chapter",
-          "ornament": "contour",
+          "ornament": "snow",
           "align": "left",
           "height": "",
           "size": "",
           "csize": "",
           "font": "",
           "color": "",
-          "tone": "snowlight"
+          "tone": "dnsnow"
         },
         {
           "id": "261117ec83cc68a6",
@@ -616,7 +664,8 @@
             50
           ],
           "layout": "fit",
-          "mid": "uploads/261117ec83cc68a6_m.avif"
+          "mid": "uploads/261117ec83cc68a6_m.avif",
+          "note": "林子还是绿的，再往上一点，雪已经落下来了。\nThe forest is still green; a little higher, the snow has already come down."
         },
         {
           "id": "261117982ac6039f",
@@ -689,7 +738,8 @@
             50
           ],
           "layout": "fit",
-          "mid": "uploads/2611176538f908de_m.avif"
+          "mid": "uploads/2611176538f908de_m.avif",
+          "note": "太阳再升高一点，金色就会退成白色。这一刻只有几分钟。\nLet the sun climb a little more and the gold fades to white. It lasts only a few minutes."
         },
         {
           "id": "26111770f6915682",
@@ -712,14 +762,14 @@
           "caption": "夜里的山谷很安静。银河挂在头顶，盘山路上的车灯，是另一条慢慢流动的河。\nAt night the valley goes quiet. The Milky Way hangs overhead, and the headlights on the switchbacks become a second, slower river.",
           "kicker": "Night",
           "style": "chapter",
-          "ornament": "none",
+          "ornament": "stars",
           "align": "left",
           "height": "",
           "size": "",
           "csize": "",
           "font": "",
           "color": "",
-          "tone": "night"
+          "tone": "dnnight"
         },
         {
           "id": "261117e56ba49aff",
@@ -750,23 +800,9 @@
           "font": "",
           "color": "",
           "tone": ""
-        },
-        {
-          "id": "261120af4d44f6dc",
-          "src": "uploads/261120af4d44f6dc.jpg",
-          "mid": "uploads/261120af4d44f6dc_m.avif",
-          "thumb": "uploads/261120af4d44f6dc_s.jpg",
-          "w": 5120,
-          "h": 3415,
-          "caption": "",
-          "focus": [
-            50,
-            50
-          ],
-          "layout": "auto"
         }
       ],
-      "theme": "caiyun",
+      "theme": "dian",
       "place": "云南",
       "placeEn": "Yunnan",
       "coords": "25.61°N · 100.27°E"
@@ -775,7 +811,7 @@
       "id": "mwmr1dqe105a5",
       "slug": "project-05a5",
       "title": "徽州",
-      "subtitle": "安徽呈坎 · 2026",
+      "subtitle": "江南之行 2026",
       "description": "呈坎在黄山市徽州区，是一座按八卦布局的古村。白墙、黑瓦、马头墙，荷塘绕着村子。夏天的夜里，村里人举着鱼灯走过石桥，烟花在头顶炸开。\nChengkan, in the Huizhou district of Huangshan, is an old village laid out to the eight trigrams: white walls, black tiles, stepped gables, lotus ponds all around. On summer nights the villagers carry fish lanterns over the stone bridges while fireworks break overhead.",
       "cover": "26111802be906147",
       "published": true,
@@ -883,7 +919,8 @@
             50,
             50
           ],
-          "layout": "fit"
+          "layout": "fit",
+          "note": "红纸一张一张贴上墙，白墙就热闹起来了。\nOne red paper after another goes up, and the white wall comes alive."
         },
         {
           "id": "hz0verse0001",
@@ -930,7 +967,8 @@
             50
           ],
           "layout": "fit",
-          "fx": ""
+          "fx": "",
+          "note": "徽州的老房子，屋檐都朝里收，雨水落进天井，叫「四水归堂」。\nIn the old Huizhou houses the eaves all slope inward, so the rain falls into the courtyard — “four waters returning to the hall”."
         },
         {
           "id": "2611187e2ea911de",
@@ -960,7 +998,8 @@
             50
           ],
           "layout": "fit",
-          "fx": ""
+          "fx": "",
+          "note": "一口井，映着灯，也映着头顶那一方天。\nA well, holding the lamps — and the square of sky above."
         },
         {
           "id": "hz0lotu00001",
@@ -1019,7 +1058,7 @@
             50,
             50
           ],
-          "layout": "fit",
+          "layout": "pair",
           "fx": ""
         },
         {
@@ -1034,7 +1073,7 @@
             50,
             50
           ],
-          "layout": "fit"
+          "layout": "auto"
         },
         {
           "id": "26111821c829080b",
@@ -1275,7 +1314,8 @@
           ],
           "layout": "fit",
           "mid": "uploads/2611176cd85be7b9_m.avif",
-          "fx": ""
+          "fx": "",
+          "note": "巴黎的屋顶是灰的、平的，一座钟楼从里面站起来，远处还有一座塔。\nThe roofs of Paris are grey and level; one bell tower rises out of them, and further off, another tower."
         },
         {
           "id": "pa0verse0001",
@@ -1337,7 +1377,8 @@
           ],
           "layout": "fit",
           "mid": "uploads/2611177147657ff3_m.avif",
-          "fx": ""
+          "fx": "",
+          "note": "镜头一歪，整栋楼就跟着草坡一起倾了过来。\nTilt the camera, and the whole building leans with the slope of the grass."
         },
         {
           "id": "pa0cafe00001",
@@ -1919,7 +1960,8 @@
             50
           ],
           "layout": "fit",
-          "fx": ""
+          "fx": "",
+          "note": "夜里，一道光从远处转过来，宫殿的屋顶亮了一下，又暗了下去。\nAt night a beam swings round from far away; the palace roofs light up for a moment, then go dark again."
         },
         {
           "id": "261117cbae5fb81b",
@@ -2026,7 +2068,8 @@
             50
           ],
           "layout": "fit",
-          "fx": ""
+          "fx": "",
+          "note": "金色的灯、镜子和雕像之间，坐下来歇一会儿。\nAmong the gilt, the chandeliers and the mirrors, a moment sitting down."
         }
       ],
       "theme": "paris",
@@ -2036,8 +2079,8 @@
     },
     {
       "id": "mwl4oippauve5",
-      "slug": "ber",
-      "title": "皇城根ber地道",
+      "slug": "project-uve5",
+      "title": "北京",
       "subtitle": "Beijing ",
       "description": "皇城根儿底下：红墙金瓦的紫禁城，一条将近八公里的中轴线，胡同里的灰瓦，冬天的冰糖葫芦，还有夜里亮着灯的国贸。\nAt the foot of the imperial city: the red walls and golden tiles of the Forbidden City, a central axis nearly eight kilometres long, grey hutong roofs, candied hawthorns in winter, and the business district lit up at night.",
       "cover": "2611173c2bf836d3",
@@ -2217,6 +2260,20 @@
             50
           ],
           "layout": "fill"
+        },
+        {
+          "id": "26112167eb901194",
+          "src": "uploads/26112167eb901194.jpg",
+          "mid": "uploads/26112167eb901194_m.avif",
+          "thumb": "uploads/26112167eb901194_s.jpg",
+          "w": 5120,
+          "h": 3413,
+          "caption": "雪落在神武门上，门额写着「故宫博物院」\nSnow on the Gate of Divine Prowess; the plaque reads “Palace Museum”",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit"
         },
         {
           "id": "261119af1e4b06e7",
@@ -2730,7 +2787,8 @@
             50
           ],
           "layout": "fit",
-          "mid": "uploads/2611173561e590d9_m.avif"
+          "mid": "uploads/2611173561e590d9_m.avif",
+          "note": "铁丝网把路和山分开，山那边什么也没有，只有雪。\nThe wire divides the road from the mountains; beyond it there is nothing but snow."
         },
         {
           "id": "2611172a1263325c",
@@ -2745,6 +2803,21 @@
           ],
           "layout": "fill",
           "mid": "uploads/2611172a1263325c_m.avif"
+        },
+        {
+          "id": "2611216b2ea9e68c",
+          "src": "uploads/2611216b2ea9e68c.jpg",
+          "mid": "uploads/2611216b2ea9e68c_m.avif",
+          "thumb": "uploads/2611216b2ea9e68c_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "雪山下是一层层赭色的山，再往下是干了的河床\nSnow peaks above ochre ranges, and below them a dry riverbed",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "note": "雪、赭石、碎石，三种颜色从上往下排开，一层压着一层。\nSnow, ochre, gravel: three colours laid one above another, all the way down."
         },
         {
           "type": "text",
@@ -2818,7 +2891,8 @@
             50
           ],
           "layout": "fit",
-          "mid": "uploads/26111763904fd487_m.avif"
+          "mid": "uploads/26111763904fd487_m.avif",
+          "note": "赭色的山，深蓝的水，中间只隔着一道白色的岸。\nOchre mountain, deep blue water, and only a thin white shore between them."
         },
         {
           "id": "261119cca0813819",
@@ -2833,6 +2907,20 @@
             50
           ],
           "layout": "fill"
+        },
+        {
+          "id": "261121984f9cbada",
+          "src": "uploads/261121984f9cbada.jpg",
+          "mid": "uploads/261121984f9cbada_m.avif",
+          "thumb": "uploads/261121984f9cbada_s.jpg",
+          "w": 5120,
+          "h": 2133,
+          "caption": "从空中看，碧蓝的湖水咬进灰白的沙岸\nFrom the air, blue water biting into pale shores of sand",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide"
         },
         {
           "type": "text",
@@ -2907,7 +2995,8 @@
             50
           ],
           "layout": "fit",
-          "mid": "uploads/26111726286c8b99_m.avif"
+          "mid": "uploads/26111726286c8b99_m.avif",
+          "note": "花开得正好，羊只顾低头吃草，一次也没抬头看。\nThe blossom is at its best; the sheep keep their heads down and never once look up."
         },
         {
           "id": "2611175235886527",
@@ -2950,6 +3039,21 @@
             50
           ],
           "layout": "fill"
+        },
+        {
+          "id": "261121e12d791457",
+          "src": "uploads/261121e12d791457.jpg",
+          "mid": "uploads/261121e12d791457_m.avif",
+          "thumb": "uploads/261121e12d791457_s.jpg",
+          "w": 4976,
+          "h": 4976,
+          "caption": "站在山口，回头看来时的盘山路\nAt the pass, looking back down the switchback road",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "note": "盘山路一圈一圈绕下去，回头才看见走了多远。\nThe road winds down in loop after loop; only looking back does it show how far it has come."
         }
       ],
       "place": "新疆",
@@ -3008,7 +3112,8 @@
             50,
             50
           ],
-          "layout": "fit"
+          "layout": "fit",
+          "note": "云从山顶升起，像一缕烟；阳光在湖面上铺出一条路，一直铺到岸边。\nThe cloud lifts from the summit like a wisp of smoke, and the sun lays a path across the lake, all the way to the shore."
         },
         {
           "type": "text",
@@ -3068,7 +3173,8 @@
             50,
             50
           ],
-          "layout": "fit"
+          "layout": "fit",
+          "note": "杉树很高，光落下来只剩几块，正好落在朱红上。\nThe cedars are tall; by the time the light reaches the ground it is only a few patches, and they land on the red."
         },
         {
           "id": "261120d21494cfd5",
@@ -3140,7 +3246,8 @@
             50,
             50
           ],
-          "layout": "fit"
+          "layout": "fit",
+          "note": "漆面像一池静水，把整片园子倒映进屋里。\nThe lacquer is like still water, carrying the whole garden into the room."
         },
         {
           "type": "text",
@@ -3170,7 +3277,7 @@
             50,
             50
           ],
-          "layout": "fit"
+          "layout": "pair"
         },
         {
           "id": "2611202653ce2fa6",
@@ -3184,7 +3291,7 @@
             50,
             50
           ],
-          "layout": "fit"
+          "layout": "auto"
         }
       ],
       "place": "富士",
@@ -3259,7 +3366,8 @@
             50
           ],
           "layout": "fit",
-          "mid": "uploads/2611175d09c73478_m.avif"
+          "mid": "uploads/2611175d09c73478_m.avif",
+          "note": "草坡往下走，木屋一间隔着一间，谁也不挡谁的山。\nDown the meadow the chalets stand well apart, none of them in the way of another’s mountains."
         },
         {
           "id": "2611173c9363bea3",
@@ -3368,7 +3476,8 @@
             50
           ],
           "layout": "fit",
-          "mid": "uploads/26111717f158cb91_m.avif"
+          "mid": "uploads/26111717f158cb91_m.avif",
+          "note": "四周都黑了，只有这扇窗还亮着。头顶的星，比山下的灯还多。\nEverything around has gone dark but this one window. Overhead there are more stars than lights in the valley."
         },
         {
           "id": "2611179a4ab18e5e",
@@ -3426,7 +3535,8 @@
             50
           ],
           "layout": "fit",
-          "mid": "uploads/261117545d96e3c0_m.avif"
+          "mid": "uploads/261117545d96e3c0_m.avif",
+          "note": "山尖还留着一点天光，小镇已经亮成一片，有一处被灯照成了紫色。\nThe peak still holds a little of the sky’s light; below, the town is lit end to end, one stretch of it washed purple."
         }
       ],
       "place": "阿尔卑斯",
@@ -4290,12 +4400,273 @@
     {
       "id": "mwpc344zeznhz",
       "slug": "project-znhz",
-      "title": "New Project",
-      "subtitle": "",
-      "description": "",
-      "cover": "",
+      "title": "灵隐寺",
+      "subtitle": "江南之行 2026",
+      "description": "杭州灵隐寺：香烟、黄墙、木格窗与竹林；傍晚，走到湖边。\nLingyin Temple, Hangzhou: incense, yellow walls, lattice windows and bamboo — and at dusk, down to the lake.",
+      "cover": "261121976369b1dd",
       "published": true,
-      "photos": []
+      "photos": [
+        {
+          "type": "text",
+          "id": "ly0ch1xiang0",
+          "style": "chapter",
+          "title": "香",
+          "kicker": "Incense",
+          "caption": "香烟从殿前升起，树影落在黄墙上。殿上的匾额写着「最胜觉场」。\nIncense smoke rises before the hall, and tree shadows fall across the yellow walls. The plaque above reads “Supreme Field of Awakening”.",
+          "tone": "lyxiang",
+          "ornament": "motes",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261121976369b1dd",
+          "src": "uploads/261121976369b1dd.jpg",
+          "mid": "uploads/261121976369b1dd_m.avif",
+          "thumb": "uploads/261121976369b1dd_s.jpg",
+          "w": 5120,
+          "h": 2560,
+          "caption": "香烟缭绕的大殿，匾额上写着「最胜觉场」\nIncense smoke before the great hall; the plaque reads “Supreme Field of Awakening”",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide"
+        },
+        {
+          "id": "26112177447430ed",
+          "src": "uploads/26112177447430ed.jpg",
+          "mid": "uploads/26112177447430ed_m.avif",
+          "thumb": "uploads/26112177447430ed_s.jpg",
+          "w": 5120,
+          "h": 3414,
+          "caption": "古树之间的黄墙与殿宇\nYellow walls and temple halls among old trees",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
+        },
+        {
+          "type": "text",
+          "id": "ly0ch2chuang",
+          "style": "chapter",
+          "title": "窗",
+          "kicker": "Lattice",
+          "caption": "木格窗一扇挨着一扇。光从格子里漏进来，玻璃里映着另一座殿。\nLattice windows, one beside the next. Light slips through the grid, and the glass holds another hall.",
+          "tone": "lychuang",
+          "ornament": "bokeh",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "2611213d6f1995a4",
+          "src": "uploads/2611213d6f1995a4.jpg",
+          "mid": "uploads/2611213d6f1995a4_m.avif",
+          "thumb": "uploads/2611213d6f1995a4_s.jpg",
+          "w": 5120,
+          "h": 1891,
+          "caption": "阳光斜照在一排木格窗上\nSunlight slanting across a row of lattice windows",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "wide"
+        },
+        {
+          "id": "261121ab5a682fef",
+          "src": "uploads/261121ab5a682fef.jpg",
+          "mid": "uploads/261121ab5a682fef_m.avif",
+          "thumb": "uploads/261121ab5a682fef_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "窗格后面，殿里的灯亮着\nBehind the lattice, the lamps inside the hall",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair"
+        },
+        {
+          "id": "261121de0e87e3b6",
+          "src": "uploads/261121de0e87e3b6.jpg",
+          "mid": "uploads/261121de0e87e3b6_m.avif",
+          "thumb": "uploads/261121de0e87e3b6_s.jpg",
+          "w": 5120,
+          "h": 3414,
+          "caption": "窗玻璃里，映着树和另一座殿\nTrees and another hall reflected in the window glass",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        },
+        {
+          "type": "text",
+          "id": "ly0ch3qiang0",
+          "style": "chapter",
+          "title": "檐",
+          "kicker": "Under the Eaves",
+          "caption": "飞檐挑出去，黄墙接住树影。太阳从树后出来的那一刻，整面窗格都亮了。\nThe eaves reach out and the yellow wall catches the shadows of the trees. When the sun clears them, the whole lattice lights up.",
+          "tone": "lyqiang",
+          "ornament": "glint",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261121688fa7faad",
+          "src": "uploads/261121688fa7faad.jpg",
+          "mid": "uploads/261121688fa7faad_m.avif",
+          "thumb": "uploads/261121688fa7faad_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "飞檐下，树影落在黄墙上\nBeneath the upturned eaves, leaf shadows on the yellow wall",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fit",
+          "note": "黄墙上的树影一直在动，风停了，它才停。\nThe tree shadows on the yellow wall keep moving; they stop only when the wind does."
+        },
+        {
+          "id": "ly0stackeave",
+          "type": "stack",
+          "layers": [
+            {
+              "id": "261121597c310ad9",
+              "src": "uploads/261121597c310ad9.jpg",
+              "thumb": "uploads/261121597c310ad9_s.jpg",
+              "w": 5120,
+              "h": 3840,
+              "mid": "uploads/261121597c310ad9_m.avif",
+              "label": "树荫 In shade"
+            },
+            {
+              "id": "2611212adde88394",
+              "src": "uploads/2611212adde88394.jpg",
+              "thumb": "uploads/2611212adde88394_s.jpg",
+              "w": 5120,
+              "h": 3840,
+              "mid": "uploads/2611212adde88394_m.avif",
+              "label": "日出树梢 Sun through the trees"
+            }
+          ],
+          "caption": "同一道屋檐，太阳从树后出来\nThe same eaves, as the sun comes out from behind the trees",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto",
+          "src": "uploads/261121597c310ad9.jpg",
+          "thumb": "uploads/261121597c310ad9_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "mid": "uploads/261121597c310ad9_m.avif"
+        },
+        {
+          "type": "text",
+          "id": "ly0ch4zhu000",
+          "style": "chapter",
+          "title": "竹径",
+          "kicker": "The Bamboo Path",
+          "caption": "石板小路穿过竹林，尽头是一间小屋。\nA flagstone path runs through the bamboo to a small house at its end.",
+          "tone": "lyzhu",
+          "ornament": "leaves",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "261121bd8f174f6e",
+          "src": "uploads/261121bd8f174f6e.jpg",
+          "mid": "uploads/261121bd8f174f6e_m.avif",
+          "thumb": "uploads/261121bd8f174f6e_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "竹林里的小路\nA path through the bamboo",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
+        },
+        {
+          "type": "text",
+          "id": "ly0ch5hu0000",
+          "style": "chapter",
+          "title": "湖",
+          "kicker": "The Lake at Dusk",
+          "caption": "天黑下来，荷叶在风里翻动。远处的山只剩一道线，岸边的灯亮了。\nNight comes down and the lotus leaves turn in the wind. The far hills are a single line; lights come on along the shore.",
+          "tone": "lyhu",
+          "ornament": "fireflies",
+          "align": "left",
+          "height": "",
+          "size": "",
+          "csize": "",
+          "font": "",
+          "color": ""
+        },
+        {
+          "id": "26112111de72f66d",
+          "src": "uploads/26112111de72f66d.jpg",
+          "mid": "uploads/26112111de72f66d_m.avif",
+          "thumb": "uploads/26112111de72f66d_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "暮色里的荷塘，远处岸边亮着灯\nA lotus pond at dusk, lights along the far shore",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "fill"
+        },
+        {
+          "id": "26112117c1a27cf7",
+          "src": "uploads/26112117c1a27cf7.jpg",
+          "mid": "uploads/26112117c1a27cf7_m.avif",
+          "thumb": "uploads/26112117c1a27cf7_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "柳树和它们的倒影\nWillows, and their reflections in the water",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "pair"
+        },
+        {
+          "id": "2611213d912bccf9",
+          "src": "uploads/2611213d912bccf9.jpg",
+          "mid": "uploads/2611213d912bccf9_m.avif",
+          "thumb": "uploads/2611213d912bccf9_s.jpg",
+          "w": 5120,
+          "h": 3840,
+          "caption": "窗格玻璃里 —— 按下快门的人\nIn the lattice glass — the one behind the camera",
+          "focus": [
+            50,
+            50
+          ],
+          "layout": "auto"
+        }
+      ],
+      "theme": "lingyin",
+      "place": "灵隐寺",
+      "placeEn": "Lingyin Temple · Hangzhou",
+      "coords": "30.24°N · 120.10°E"
     }
   ]
 }

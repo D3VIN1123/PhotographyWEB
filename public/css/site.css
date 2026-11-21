@@ -294,6 +294,19 @@ body.home:not(.menu-open) .nav-where { opacity: 0; }
 .spread.single.r .frame { justify-self: end; }
 .spread.single.l .frame.tall { margin-left: 10vw; }
 .spread.single.r .frame.tall { margin-right: 10vw; }
+/* single photo + side note: the free half of the page holds a few lines of text (sideNote in site.js) */
+.spread.single.note { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); align-items: center; }
+.spread.single.note.r { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); }
+.spread.single.note .frame { width: min(100%, calc(74vh * var(--ar, 1.5))); margin: 0; justify-self: start; }
+.spread.single.note.r .frame { justify-self: end; }
+.spread.single.note .frame.tall { justify-self: center; }
+.snote { max-width: 24em; display: flex; flex-direction: column; gap: 18px; color: var(--pink); }
+.spread.single.note.r .snote { justify-self: end; }
+.snote::before { content: ''; width: 34px; height: 1px; background: var(--accent); opacity: .8; }
+.sn-zh { margin: 0; font-family: var(--song); font-weight: 300; font-size: clamp(15px, 1.15vw, 18px); line-height: 2.1; letter-spacing: .06em; }
+.sn-zh .w { opacity: .14; transition: opacity .8s var(--ease); }
+.sn-zh .w.on { opacity: .92; }
+.sn-en { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(15px, 1.1vw, 18px); line-height: 1.75; color: var(--pink-2); }
 .frame { margin: 0; min-width: 0; display: flex; flex-direction: column; }
 .frame .clip {
   overflow: hidden; background: rgba(28, 27, 24, .06);

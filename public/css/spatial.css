@@ -15,6 +15,10 @@ body[data-theme="fuji"] { --cloth: rgb(236, 240, 244); --cloth-hi: rgba(250, 252
   --pink: rgb(28, 36, 52); --pink-2: rgba(28, 36, 52, .66); --pink-3: rgba(28, 36, 52, .4); --accent: rgb(200, 72, 48); }
 body[data-theme="alps"] { --cloth: rgb(238, 236, 240); --cloth-hi: rgba(250, 249, 252, .6); --cloth-lo: rgba(220, 214, 226, .4);
   --pink: rgb(34, 34, 44); --pink-2: rgba(34, 34, 44, .66); --pink-3: rgba(34, 34, 44, .4); --accent: rgb(206, 40, 48); }
+body[data-theme="dian"] { --cloth: rgb(236, 238, 241); --cloth-hi: rgba(249, 250, 251, .6); --cloth-lo: rgba(214, 218, 228, .4);
+  --pink: rgb(30, 34, 46); --pink-2: rgba(30, 34, 46, .66); --pink-3: rgba(30, 34, 46, .4); --accent: rgb(92, 108, 168); }
+body[data-theme="lingyin"] { --cloth: rgb(237, 233, 225); --cloth-hi: rgba(250, 248, 243, .6); --cloth-lo: rgba(216, 208, 194, .4);
+  --pink: rgb(42, 36, 30); --pink-2: rgba(42, 36, 30, .66); --pink-3: rgba(42, 36, 30, .4); --accent: rgb(196, 146, 44); }
 body.spatial { --hair: color-mix(in srgb, var(--pink) 14%, transparent); background: var(--cloth); color: var(--pink); }
 body.spatial .paper { background: none; color: var(--pink); }
 .xj-air { position: fixed; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
@@ -59,15 +63,28 @@ body.spatial .chapter.xj-ch { position: relative; min-height: 78vh; padding: 20v
 .xj-text { margin: 0; font-family: var(--song); font-weight: 300; font-size: clamp(15px, 1.15vw, 18px); line-height: 2.1; }
 .xj-text .w { opacity: .14; transition: opacity .9s var(--ease); }
 .xj-text .w.on { opacity: .92; }
+/* the chapter's line drawing (sketchSVG): faint, in the empty half beside the title, drawn in stroke by stroke */
+.xj-sketch { position: absolute; z-index: 1; right: max(var(--gutter), 9vw); top: 50%; width: clamp(170px, 19vw, 300px); height: auto;
+  translate: 0 -40%; overflow: visible; pointer-events: none; color: var(--pink); }
+.xj-sketch path { fill: none; stroke: currentColor; stroke-width: 1.15; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke;
+  opacity: .5; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 2.4s cubic-bezier(.5, 0, .2, 1); transition-delay: calc(.8s + var(--k) * 140ms); }
+.xj-sketch path.a { stroke: var(--accent); opacity: .9; }
+.chapter.in .xj-sketch path { stroke-dashoffset: 0; }
 /* the album title on the cover: 新疆 snow into glacier blue · 富士 white into dusk blue · 阿尔卑斯 snow into alpenglow */
 .plate-big.cjk.t-xinjiang { --gold: linear-gradient(178deg, #ffffff 0%, #e1eef0 46%, #8fc6cc 100%); }
 .plate-big.cjk.t-fuji { --gold: linear-gradient(178deg, #ffffff 0%, #e6ebf3 46%, #9fb2d2 100%); }
+.plate-big.cjk.t-dian { --gold: linear-gradient(178deg, #ffffff 0%, #f2e6ea 44%, #b9a8d4 100%); }   /* 彩云: white into rose and violet cloud */
+.plate-big.cjk.t-lingyin { --gold: linear-gradient(178deg, #ffffff 0%, #f4ead2 46%, #d9b25e 100%); }   /* 灵隐: white into temple-wall gold */
+.xj-strip.lattice .ring { stroke-width: 1.1; }
+.xj-strip.zharan .a { fill: #2d3f7a; opacity: 1; }   /* tie-dye stays indigo and white whatever the chapter colour */
+.xj-strip.zharan .c { fill: #eef0f5; opacity: .92; }
 .plate-big.cjk.t-alps { --gold: linear-gradient(178deg, #ffffff 0%, #f1e6ea 48%, #d6a6b0 100%); }
 
 @media (max-width: 760px) {
   body.spatial .chapter.xj-ch { min-height: 90svh; padding: 18vh var(--gutter) 12vh; }
   .xj-in { margin-left: 0; flex-wrap: wrap; gap: 16px 16px; max-width: none; }
   .xj-strip { height: 34vh; width: 20px; }
+  .xj-sketch { top: 22vh; right: var(--gutter); width: 38vw; translate: none; }
   .xj-title { font-size: clamp(54px, 15vw, 78px); }
   .xj-side { flex: 1 1 100%; }
   .xj-meta span:nth-of-type(2), .xj-meta i:nth-of-type(2) { display: none; }
@@ -75,4 +92,5 @@ body.spatial .chapter.xj-ch { position: relative; min-height: 78vh; padding: 20v
 }
 @media (prefers-reduced-motion: reduce) {
   .xj-strip { transition: none; clip-path: none; }
+  .xj-sketch path { transition: none; stroke-dashoffset: 0; }
 }

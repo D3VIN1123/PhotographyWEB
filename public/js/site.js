@@ -309,6 +309,14 @@
       `<figcaption><b>${pad2(n)}</b>${capRich(ph.caption)}</figcaption></figure>`;
   };
 
+  // Side note: a few lines beside a single framed photo ("note": "中文\nEnglish"), lit word by word as it scrolls in
+  function sideNote(x) {
+    const L = String((x && x.note) || '').split(/\n+/).map(t => t.trim()).filter(Boolean);
+    if (!L.length) return '';
+    const zh = L.filter(isCJK), en = L.filter(t => !isCJK(t));
+    return `<div class="snote">${zh.length ? `<p class="sn-zh words">${words(zh.join(' '))}</p>` : ''}${en.length ? `<p class="sn-en reveal">${esc(en.join(' '))}</p>` : ''}</div>`;
+  }
+
   // Handscroll (长卷): a stack whose layout is "scroll". The photos sit side by side on one long
   // strip that slides sideways as you scroll down, like unrolling a Chinese handscroll.
   function rollHTML(x, i) {
@@ -424,8 +432,21 @@
     alglow:    { bg: [38, 24, 40], hi: [120, 60, 80, .3], lo: [14, 8, 18, .6], ink: [244, 230, 232], ac: [246, 150, 120], pat: 0 },
     alnight:   { bg: [10, 14, 32], hi: [30, 44, 96, .35], lo: [2, 4, 12, .6], ink: [226, 230, 244], ac: [210, 214, 240], pat: 0 },
     alvillage: { bg: [22, 16, 26], hi: [90, 50, 40, .3], lo: [8, 6, 10, .6], ink: [244, 234, 220], ac: [240, 170, 80], pat: 0 },
+    // 彩云之南 (spatial, theme dian 滇): silver cloud, the indigo old town in rain, jade river, monastery ochre, snow light, night
+    dncloud:   { bg: [236, 238, 241], hi: [249, 250, 251, .6], lo: [214, 218, 228, .4], ink: [30, 34, 46], ac: [92, 108, 168], pat: 0 },
+    dndusk:    { bg: [18, 24, 44], hi: [40, 54, 96, .32], lo: [6, 10, 22, .58], ink: [232, 232, 238], ac: [222, 174, 110], pat: 0 },
+    dnjade:    { bg: [225, 234, 231], hi: [242, 247, 245, .6], lo: [194, 212, 206, .4], ink: [26, 40, 38], ac: [48, 126, 114], pat: 0 },
+    dnochre:   { bg: [50, 24, 20], hi: [124, 54, 36, .3], lo: [20, 8, 6, .6], ink: [244, 230, 212], ac: [234, 172, 72], pat: 0 },
+    dnsnow:    { bg: [240, 237, 234], hi: [253, 251, 249, .6], lo: [222, 214, 208, .4], ink: [36, 32, 34], ac: [204, 128, 70], pat: 0 },
+    dnnight:   { bg: [8, 12, 28], hi: [28, 40, 90, .35], lo: [2, 4, 12, .6], ink: [226, 230, 244], ac: [196, 206, 240], pat: 0 },
+    // 灵隐寺 (spatial, theme lingyin): incense haze, maroon lattice, yellow temple wall, bamboo shade, the lake at dusk
+    lyxiang:   { bg: [237, 233, 225], hi: [250, 248, 243, .6], lo: [216, 208, 194, .4], ink: [42, 36, 30], ac: [196, 146, 44], pat: 0 },
+    lychuang:  { bg: [44, 20, 18], hi: [116, 46, 36, .3], lo: [18, 7, 6, .6], ink: [242, 230, 216], ac: [226, 172, 98], pat: 0 },
+    lyqiang:   { bg: [238, 228, 198], hi: [250, 244, 224, .6], lo: [220, 202, 158, .4], ink: [46, 36, 24], ac: [146, 58, 40], pat: 0 },
+    lyzhu:     { bg: [16, 30, 22], hi: [42, 80, 54, .3], lo: [4, 12, 8, .6], ink: [226, 236, 226], ac: [168, 206, 128], pat: 0 },
+    lyhu:      { bg: [12, 18, 38], hi: [40, 54, 100, .35], lo: [3, 6, 16, .6], ink: [228, 232, 244], ac: [238, 162, 120], pat: 0 },
   });
-  const BASE_TONE = { indigo: 'indigo', paris: 'stone', huizhou: 'whitewall', beijing: 'hutong', caiyun: 'cloud', xinjiang: 'xjroad', fuji: 'fjsky', alps: 'alspring' };   // the page colour before the first toned block
+  const BASE_TONE = { indigo: 'indigo', paris: 'stone', huizhou: 'whitewall', beijing: 'hutong', caiyun: 'cloud', xinjiang: 'xjroad', fuji: 'fjsky', alps: 'alspring', dian: 'dncloud', lingyin: 'lyxiang' };   // the page colour before the first toned block
   const NUMERALS = ['壹','贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾', '拾壹', '拾贰'];
   // Five-colour prayer flags strung across a chapter opening (blue, white, red, green, yellow)
   function flagsHTML() {
@@ -924,15 +945,144 @@
     }
     return `<svg class="xj-strip stitch" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMin slice" aria-hidden="true">${out}</svg>`;
   }
-  const XJ_AIR = ['snow', 'sand', 'glint', 'motes', 'petals', 'bokeh', 'fireflies', 'stars', 'leaves'];
+  // 扎染 Bai tie-dye (大理周城): indigo cloth, white flowers of stitched dots where the thread kept the dye out — each
+  // dot a little soft-edged, the rings never quite round
+  function zharanSVG(seed) {
+    const rnd = seeded(seed * 13 + 5), W = 36, H = 640;
+    let out = `<rect class="a" x="0" y="0" width="${W}" height="${H}"/>`, y = 22;
+    while (y < H - 20) {
+      const cx = W / 2 + (rnd() - 0.5) * 3, big = rnd() < 0.55, R = big ? 11 : 7, n = big ? 12 : 8;
+      for (let i = 0; i < n; i++) {   // the ring of stitched dots
+        const a = i / n * 6.283 + rnd() * 0.2, rr = R + (rnd() - 0.5) * 1.6;
+        out += `<circle class="c" cx="${(cx + Math.cos(a) * rr).toFixed(1)}" cy="${(y + Math.sin(a) * rr).toFixed(1)}" r="${(1 + rnd() * 0.7).toFixed(1)}"/>`;
+      }
+      if (big) for (let i = 0; i < 5; i++) {   // petals inside
+        const a = i / 5 * 6.283 + seed;
+        out += `<ellipse class="c" cx="${(cx + Math.cos(a) * 4.4).toFixed(1)}" cy="${(y + Math.sin(a) * 4.4).toFixed(1)}" rx="2.6" ry="1.2" transform="rotate(${(a * 57.3).toFixed(0)} ${(cx + Math.cos(a) * 4.4).toFixed(1)} ${(y + Math.sin(a) * 4.4).toFixed(1)})"/>`;
+      }
+      out += `<circle class="c" cx="${cx.toFixed(1)}" cy="${y.toFixed(1)}" r="${big ? 1.6 : 2.2}"/>`;
+      y += R * 2 + 10 + rnd() * 10;
+      if (rnd() < 0.4) { for (let x = 4; x < W - 2; x += 4.5) out += `<circle class="c" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="0.8"/>`; y += 12; }
+    }
+    return `<svg class="xj-strip zharan" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMin slice" aria-hidden="true">${out}</svg>`;
+  }
+  // 灵隐寺 窗棂: the temple's wooden lattice windows — 步步锦 frets cell after cell, now and then a lotus in a round panel
+  function latticeSVG(seed) {
+    const rnd = seeded(seed * 17 + 9), W = 36, H = 640, S = 36;
+    let out = '';
+    const line = (x1, y1, x2, y2, cls) => `<line class="ring ${cls || 'sb'}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
+    out += line(1, 0, 1, H) + line(W - 1, 0, W - 1, H);
+    for (let r = 0; r * S < H; r++) {
+      const y = r * S;
+      out += line(1, y, W - 1, y);
+      if (r % 4 === 2) {   // a round panel with a lotus
+        out += `<circle class="ring sb" cx="18" cy="${y + 18}" r="13"/>`;
+        for (const [a, l] of [[-90, 8], [-140, 6.5], [-40, 6.5]]) {
+          const t = a / 57.3, cx = 18 + Math.cos(t) * l * 0.5, cy = y + 21 + Math.sin(t) * l * 0.5;
+          out += `<ellipse class="a" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" rx="${(l * 0.32).toFixed(1)}" ry="${(l * 0.62).toFixed(1)}" transform="rotate(${a + 90} ${cx.toFixed(1)} ${cy.toFixed(1)})"/>`;
+        }
+        out += `<rect class="a" x="11" y="${y + 24}" width="14" height="1.6"/>`;
+        continue;
+      }
+      // 步步锦: short bars stepping in from the frame, rotated a quarter turn cell by cell
+      const flip = (r + seed) % 2, k = 5 + Math.round(rnd() * 2);
+      if (flip) {
+        out += line(1, y + 12, 24, y + 12) + line(12, y + 24, W - 1, y + 24) + line(12, y + 12, 12, y + 24) + line(24, y + 12, 24, y + 24);
+        out += line(k + 1, y, k + 1, y + 12) + line(W - k - 1, y + 24, W - k - 1, y + S);
+      } else {
+        out += line(12, y + 1, 12, y + S) + line(24, y, 24, y + S - 1) + line(12, y + 12, 24, y + 12) + line(12, y + 24, 24, y + 24);
+        out += line(1, y + k + 6, 12, y + k + 6) + line(24, y + S - k - 6, W - 1, y + S - k - 6);
+      }
+      if (rnd() < 0.18) out += `<rect class="a" x="${flip ? 16 : 16}" y="${y + 16}" width="4" height="4"/>`;
+    }
+    return `<svg class="xj-strip lattice" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMin slice" aria-hidden="true">${out}</svg>`;
+  }
+
+  // 时空集 line drawings (chapter "sketch"): one small single-line drawing per chapter, of something in its photographs,
+  // drawn in beside the title as the chapter scrolls in. 200×200; [path, 'a'] = drawn in the chapter's accent colour.
+  const ring = (x, y, r) => `M${x - r} ${y}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0`;
+  const flower = (x, y, s = 1) => [0, 1, 2, 3, 4].map(i => { const a = i * 1.2566 - 1.57; return ring(+(x + Math.cos(a) * 5 * s).toFixed(1), +(y + Math.sin(a) * 5 * s).toFixed(1), 3.6 * s); }).join('');
+  const star = (x, y, s = 6) => `M${x} ${y - s}L${x} ${y + s}M${x - s} ${y}L${x + s} ${y}`;
+  const SKETCHES = {
+    // 新疆
+    road: ['M10 92L50 62L72 78L104 48L140 84L162 70L190 92', 'M70 196L98 96', 'M150 196L104 96', 'M126 190L122 172M118 156L115 142M112 130L110 120M108 112L107 104',
+      'M40 182V120M32 126H48', 'M62 152V112M56 116H68', 'M78 128V104', ['M40 124Q51 121 62 114Q70 109 78 106', 'a']],
+    dunes: [[ring(158, 48, 11), 'a'], 'M10 122Q50 82 90 112Q120 136 150 104Q170 86 190 100', 'M30 132Q60 114 82 128', 'M20 150Q60 140 100 150Q140 160 180 148',
+      'M30 166Q70 158 110 166Q150 174 186 164', 'M60 188H170M92 196H150'],
+    lake: ['M10 110L44 70L64 88L92 52L124 96L150 74L190 110', 'M10 110Q100 124 190 110', 'M112 46Q116 34 128 38Q134 26 148 32Q160 28 162 40Q172 42 168 50H116Q108 50 112 46',
+      ['M30 134H90M110 134H170', 'a'], 'M50 150H120M136 150H160', 'M70 166H130'],
+    willow: ['M100 196Q96 140 70 90Q60 70 44 56', 'M100 196Q104 130 128 80Q138 60 156 44', 'M100 196V40', 'M98 150Q80 132 60 128', 'M102 132Q124 116 146 116',
+      ['M70 90L60 84M78 106L66 102M128 80L140 76M120 96L132 94M100 70L90 64M100 90L110 84M100 56L108 50M60 128L52 132M146 116L154 112', 'a'], 'M60 196H140'],
+    blossom: ['M16 172Q70 142 100 110Q130 80 184 60', 'M100 110Q110 130 132 142', 'M70 136Q60 112 64 90', 'M150 74Q156 56 170 46',
+      [flower(64, 86) + flower(134, 144) + flower(150, 72) + flower(100, 106, .8) + flower(170, 44, .8), 'a']],
+    // 富士
+    fuji: ['M10 150L70 70Q80 58 90 64L100 70L110 62Q120 56 130 70L190 150', 'M56 88L68 96L78 86L90 98L100 88L112 98L124 86L134 92L144 88',
+      'M84 56Q86 40 100 42Q108 30 120 40Q132 40 128 54', 'M20 166H180M50 178H150', ['M92 190H108M96 166V196', 'a']],
+    lakelamp: ['M70 190V70', 'M58 70H82L78 52H62Z', 'M70 52V44', ['M48 64A24 24 0 0 1 92 64', 'a'], 'M100 122L140 96L170 112L190 104', 'M20 170H120M100 184H180',
+      ['M70 176V180M70 186V190', 'a']],
+    torii: [['M20 50Q100 62 180 50L176 60Q100 70 24 60Z', 'a'], 'M40 84H160M40 92H160', 'M58 64L52 196M142 64L148 196', 'M100 66V84',
+      'M70 122H130M78 128L76 170M122 128L124 170', 'M84 140H116'],
+    toro: ['M70 196H130L124 184H76Z', 'M90 184V140M110 184V140', 'M78 140H122L118 132H82Z', 'M84 132V104H116V132', ['M94 112H106V124H94Z', 'a'],
+      'M64 104Q100 78 136 104Z', 'M100 86V76M95 76H105', 'M20 196Q50 188 70 194M130 194Q160 186 184 196'],
+    chochin: ['M100 50C140 50 150 90 150 110C150 130 140 170 100 170C60 170 50 130 50 110C50 90 60 50 100 50Z', 'M76 50H124L120 40H80Z', 'M76 170H124L120 180H80Z',
+      'M54 80Q100 92 146 80', 'M51 110Q100 120 149 110', 'M54 140Q100 150 146 140', 'M100 40V12', ['M100 180V196M96 196H104', 'a']],
+    // 阿尔卑斯
+    chalet: ['M28 100L100 48L172 100', 'M40 92V180H160V92', 'M50 130H150M50 140H150', 'M62 130V140M76 130V140M90 130V140M104 130V140M118 130V140M132 130V140',
+      ['M64 104H84V120H64ZM116 104H136V120H116Z', 'a'], 'M92 180V154H108V180', 'M8 186H192', 'M100 70V80'],
+    peaks: ['M10 150L50 90L66 108L100 50L128 96L146 80L190 150', 'M86 74L94 80L100 72L108 80L116 76', 'M100 50L92 150',
+      ['M100 42V26M88 46L76 32M112 46L124 32', 'a'], 'M30 170H170M60 182H140'],
+    starhut: [[star(40, 40) + star(150, 30, 8) + star(170, 80, 5) + star(90, 24, 4) + star(120, 70, 4), 'a'], 'M60 170L100 136L140 170', 'M68 164V196M132 164V196',
+      ['M92 172H108V186H92Z', 'a'], 'M10 196H190', ring(64, 92, 1.5) + ring(30, 120, 1.5) + ring(176, 130, 1.5)],
+    matterhorn: ['M30 168L80 110L100 40L112 52L130 100L170 168', 'M100 40L96 100L80 110', 'M104 60L100 80M112 70L108 92', 'M150 168V150L156 136L162 150V168',
+      ['M40 182H60M70 186H100M110 182H140M150 186H166', 'a']],
+    // 彩云之南
+    clouds: ['M20 90Q24 70 44 74Q52 54 74 62Q90 50 104 66Q124 64 124 84Q140 88 134 100H28Q14 98 20 90', 'M90 140Q96 124 112 128Q122 112 140 120Q160 116 164 132Q180 136 174 148H96Q84 146 90 140',
+      'M10 192L60 152L90 170L130 132L190 192', ['M150 40L160 30M164 52L178 48M140 30L142 16', 'a']],
+    umbrella: ['M30 100Q100 20 170 100', 'M30 100Q47 88 65 100Q82 88 100 100Q117 88 135 100Q152 88 170 100', 'M100 40L65 100M100 40L135 100M100 40V100',
+      'M100 30V40M100 100V176Q100 188 90 188Q82 188 82 180', ['M40 130L36 142M60 152L56 164M150 128L146 140M170 154L166 166M130 172L126 184', 'a'], [flower(124, 70, .7), 'a']],
+    river: ['M30 120Q40 96 70 100Q92 104 90 124Z', 'M120 152Q130 132 160 138Q176 144 170 160Z', ['M10 80Q60 90 100 120Q130 140 190 130', 'a'],
+      'M10 96Q60 104 96 132Q126 154 190 150', 'M10 172Q80 162 110 172Q150 186 190 178'],
+    stupa: ['M50 196H150M58 186H142M66 176H134', 'M70 176Q70 130 100 128Q130 130 130 176', 'M90 128V118H110V128', 'M94 118L100 70L106 118',
+      'M95 108H105M96 98H104M97 88H103', ['M92 62Q100 70 108 62M100 58V52', 'a'], 'M104 74Q140 92 190 84',
+      ['M120 81h6v8h-6ZM140 86h6v8h-6ZM160 87h6v8h-6ZM178 85h6v8h-6Z', 'a']],
+    milkyway: [['M10 150Q100 10 190 60', 'a'], 'M20 162Q100 32 190 82', 'M10 172L50 142L80 158L120 128L190 170',
+      ['M60 196Q90 188 80 178Q66 168 100 162Q130 156 112 148Q100 142 120 138', 'a'], ring(60, 40, 1.4) + ring(150, 30, 1.4) + ring(130, 100, 1.4) + ring(30, 110, 1.4) + ring(176, 120, 1.4)],
+    // 灵隐寺
+    incense: ['M50 130Q50 170 100 170Q150 170 150 130Z', 'M44 130H156', 'M70 168L64 190M130 168L136 190M100 170V190', 'M56 130Q48 116 62 114M144 130Q152 116 138 114',
+      'M92 130L88 90M100 130V86M108 130L112 90', ['M88 90Q80 70 92 56Q104 42 94 24', 'a'], ['M100 86Q110 66 100 52Q90 38 104 20', 'a'], 'M112 90Q124 72 116 58'],
+    lattice: ['M40 30H160V180H40Z', 'M40 80H160M40 130H160M80 30V180M120 30V180', 'M60 30V55H80M100 80V105H120M140 130V155H160M60 130V155H80M100 30V55M140 80V105',
+      [ring(100, 105, 8), 'a'], 'M30 190H170'],
+    eave: ['M10 90Q90 100 150 70Q172 58 186 40', 'M10 70Q90 80 150 50Q166 40 176 24', 'M30 74V92M50 77V95M70 79V96M90 79V96M110 76V92M130 68V84M148 56L150 72',
+      'M60 96V120M120 88V116', 'M40 120H190', ['M180 44V60M174 60H186L180 70Z', 'a']],
+    bamboo: ['M60 196L70 10', 'M110 196L104 20', 'M150 196L160 30', 'M58 160H66M62 120H70M64 80H72M66 40H74', 'M108 160H116M106 110H114M104 60H112',
+      'M148 150H158M152 100H162M155 60H165', 'M70 80Q90 70 112 76Q90 82 70 80Z', 'M104 60Q86 46 66 50Q86 56 104 60Z', ['M160 100Q176 88 194 92Q178 100 160 100Z', 'a'],
+      'M150 150Q132 140 116 144Q132 152 150 150Z', 'M20 196Q100 186 180 196'],
+    lotus: ['M30 150Q30 110 90 110Q150 110 150 150Q150 170 90 170Q30 170 30 150Z', 'M90 140V110', 'M90 140L60 122M90 140L120 122M90 140L48 150M90 140L132 150', 'M90 170V196',
+      ['M140 62Q128 32 140 14Q152 32 140 62Z', 'a'], 'M140 62Q146 120 136 196', 'M10 188H190'],
+  };
+  const SKETCH_NAMES = {
+    road: '公路电线杆 Road & poles', dunes: '沙丘 Dunes', lake: '湖与山 Lake & mountains', willow: '红柳 Red willow', blossom: '花枝 Blossom branch',
+    fuji: '富士山 Mount Fuji', lakelamp: '湖边路灯 Lakeside lamp', torii: '鸟居 Torii', toro: '石灯笼 Stone lantern', chochin: '灯笼 Paper lantern',
+    chalet: '木屋 Chalet', peaks: '山光 Peaks in glow', starhut: '星下木屋 Hut under stars', matterhorn: '马特洪峰 Matterhorn',
+    clouds: '云 Clouds', umbrella: '雨伞 Umbrella in rain', river: '江水与石 River & stones', stupa: '白塔经幡 Stupa & flags', milkyway: '银河与山路 Milky Way & road',
+    incense: '香炉 Incense burner', lattice: '木格窗 Lattice window', eave: '飞檐 Flying eave', bamboo: '竹 Bamboo', lotus: '荷 Lotus',
+  };
+  const sketchSVG = name => !SKETCHES[name] ? '' : `<svg class="xj-sketch" viewBox="0 0 200 200" aria-hidden="true">${SKETCHES[name].map((p, k) => {
+    const [d, cls] = Array.isArray(p) ? p : [p, ''];
+    return `<path d="${d}"${cls ? ` class="${cls}"` : ''} pathLength="1" style="--k:${k}"/>`;
+  }).join('')}</svg>`;
+  const XJ_AIR = ['snow', 'sand', 'glint', 'motes', 'petals', 'bokeh', 'fireflies', 'stars', 'leaves', 'rain'];
   const SPATIAL = {
-    xinjiang: { strip: n => ikatSVG(n), airs: ['snow', 'sand', 'glint', 'motes', 'petals'] },
-    fuji:     { strip: n => seigaihaSVG(n), airs: ['glint', 'fireflies', 'motes', 'leaves', 'bokeh'] },
-    alps:     { strip: n => stitchSVG(n), airs: ['petals', 'motes', 'motes', 'stars', 'snow'] },
+    xinjiang: { strip: n => ikatSVG(n), airs: ['snow', 'sand', 'glint', 'motes', 'petals'], sketches: ['road', 'dunes', 'lake', 'willow', 'blossom'] },
+    fuji:     { strip: n => seigaihaSVG(n), airs: ['glint', 'fireflies', 'motes', 'leaves', 'bokeh'], sketches: ['fuji', 'lakelamp', 'torii', 'toro', 'chochin'] },
+    alps:     { strip: n => stitchSVG(n), airs: ['petals', 'motes', 'motes', 'stars', 'snow'], sketches: ['blossom', 'chalet', 'peaks', 'starhut', 'matterhorn'] },
+    dian:     { strip: n => zharanSVG(n), airs: ['motes', 'rain', 'glint', 'sand', 'snow', 'stars'], sketches: ['clouds', 'umbrella', 'river', 'stupa', 'peaks', 'milkyway'] },
+    lingyin:  { strip: n => latticeSVG(n), airs: ['motes', 'bokeh', 'glint', 'leaves', 'fireflies'], sketches: ['incense', 'lattice', 'eave', 'bamboo', 'lotus'] },
   };
   function spatialChapterHTML(x, n, st) {
     const flight = xjFlights.get(x) || [], t = String(x.title || ''), S = SPATIAL[pageTheme];
     const air = XJ_AIR.includes(x.ornament) ? x.ornament : S.airs[(n - 1) % S.airs.length];
+    const sk = x.sketch === 'none' ? '' : SKETCHES[x.sketch] ? x.sketch : (S.sketches || [])[n - 1] || '';
     return `
     <section class="paper chapter xj-ch" data-air="${air}"${st.length ? ` style='${st.join(';')}'` : ''} data-seed="${n}"${toneAttr(x)}>
       <div class="xj-meta reveal"><span>Ch. ${pad2(n)} / ${pad2(chTotal)}</span><i></i><span>${esc(edge.coords || '')}</span><i></i><span>${pad2(flight.length)} fr</span></div>
@@ -945,6 +1095,7 @@
           ${x.caption ? `<p class="xj-text words">${words(x.caption)}</p>` : ''}
         </div>
       </div>
+      ${sketchSVG(sk)}
     </section>`;
   }
   function chapterHTML(x, n, st) {
@@ -1200,7 +1351,10 @@
       } else if (s.type === 'video' || s.type === 'youtube') {
         html += mediaHTML(s.items[0], s.from, total, singles++ % 2 ? 'r' : 'l');
       } else {
-        html += `<section class="paper spread single ${singles++ % 2 ? 'r' : 'l'}">${frame1(s.items[0], s.from)}</section>`;
+        const side = singles++ % 2 ? 'r' : 'l', x = s.items[0], nt = sideNote(x);
+        // a single photo never sits alone on one side of an empty page: its "note" goes in the free half
+        html += nt ? `<section class="paper spread single note ${side}">${side === 'r' ? nt + frame1(x, s.from) : frame1(x, s.from) + nt}</section>`
+          : `<section class="paper spread single ${side}">${frame1(x, s.from)}</section>`;
       }
     }
     const target = next ? { href: '#/p/' + next.slug, title: next.title, sub: next.subtitle || '', image: coverOf(next), line: 'Keep scrolling for next project' }
@@ -1394,12 +1548,12 @@
       p.k = k; p.z = z; p.life = 8 + Math.random() * 10; p.age = fresh ? Math.random() * p.life : 0; p.ph = Math.random() * 6.28; p.rot = Math.random() * 6.28;
       p.x = Math.random() * W; p.y = Math.random() * H;
       if (!fresh) {   // enter from the side they travel from, spread out so they don't arrive in a line
-        if (k === 'snow' || k === 'petals' || k === 'leaves') p.y = -10 - Math.random() * H * 0.12;
+        if (k === 'snow' || k === 'petals' || k === 'leaves' || k === 'rain') p.y = -10 - Math.random() * H * 0.12;
         else if (k === 'sand') p.x = -10 - Math.random() * W * 0.12;
         else if (k === 'glint' || k === 'motes' || k === 'bokeh') p.y = H + 10 + Math.random() * H * 0.12;
         // fireflies and stars simply appear where they are
       }
-      p.r = k === 'bokeh' ? 6 + Math.random() * 12 : k === 'leaves' ? 3 + Math.random() * 3 : k === 'fireflies' ? 1 + Math.random() * 1.2 : k === 'stars' ? 0.4 + Math.random() * 0.8 : k === 'petals' ? 2.6 + Math.random() * 3 : k === 'sand' ? 0.6 + Math.random() * 0.9 : k === 'snow' ? 0.9 + Math.random() * 1.8 : k === 'glint' ? 0.5 + Math.random() * 0.8 : 0.7 + Math.random() * 1.6;
+      p.r = k === 'rain' ? 8 + Math.random() * 10 : k === 'bokeh' ? 6 + Math.random() * 12 : k === 'leaves' ? 3 + Math.random() * 3 : k === 'fireflies' ? 1 + Math.random() * 1.2 : k === 'stars' ? 0.4 + Math.random() * 0.8 : k === 'petals' ? 2.6 + Math.random() * 3 : k === 'sand' ? 0.6 + Math.random() * 0.9 : k === 'snow' ? 0.9 + Math.random() * 1.8 : k === 'glint' ? 0.5 + Math.random() * 0.8 : 0.7 + Math.random() * 1.6;
       return p;
     }
     function scroll(vh) {
@@ -1426,7 +1580,7 @@
         snow: dark ? [255, 255, 255] : [120, 132, 142], sand: dark ? [214, 196, 160] : [150, 132, 104],
         glint: dark ? [200, 244, 244] : [40, 150, 160], motes: dark ? [238, 150, 104] : [196, 120, 70], petals: [232, 164, 178],
         bokeh: dark ? [246, 190, 110] : [210, 140, 80], fireflies: [214, 240, 120], stars: dark ? [240, 244, 255] : [90, 100, 130],
-        leaves: dark ? [150, 196, 98] : [104, 150, 70],
+        leaves: dark ? [150, 196, 98] : [104, 150, 70], rain: dark ? [196, 210, 236] : [96, 110, 136],
       };
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, H);
       const s = t / 1000;
@@ -1441,6 +1595,7 @@
         else if (p.k === 'bokeh') { p.y -= (3 + 6 * z) * dt; p.x += Math.sin(s * 0.3 + p.ph) * 5 * dt; }
         else if (p.k === 'fireflies') { p.x += Math.sin(s * 0.9 + p.ph) * 16 * dt; p.y += Math.cos(s * 0.7 + p.ph * 1.3) * 12 * dt; }
         else if (p.k === 'stars') { /* still: they only move with the scroll */ }
+        else if (p.k === 'rain') { p.y += (380 + 420 * z) * dt; p.x += (40 + 30 * z) * dt; }
         else if (p.k === 'leaves') { p.y += (12 + 18 * z) * dt; p.x += (Math.sin(s * 0.8 + p.ph) * 30 + 6) * dt; p.rot += dt * (0.6 + z); }
         else { p.y += (18 + 26 * z) * dt; p.x += (Math.sin(s * 1.1 + p.ph) * 26 + 10) * dt; p.rot += dt * (0.8 + z); }
         p.y -= dy * (p.k === 'stars' ? 0.08 * z : 0.25 + z * 0.5);   // nearer particles slide further when you scroll: depth (stars are far)
@@ -1452,7 +1607,14 @@
         if (p.k === 'glint' || p.k === 'stars') a *= 0.35 + 0.65 * Math.max(0, Math.sin(s * (p.k === 'stars' ? 0.8 + z : 2 + z * 3) + p.ph));
         else if (p.k === 'fireflies') a *= Math.max(0, Math.sin(s * 0.9 + p.ph * 2)) ** 2;
         else if (p.k === 'bokeh') a *= 0.22;
-        const c = C[p.k]; ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${a.toFixed(3)})`;
+        else if (p.k === 'rain') a *= 0.4;
+        const c = C[p.k];
+        if (p.k === 'rain') {   // a thin slanted streak
+          const r = p.r * (0.6 + z * 0.7);
+          ctx.strokeStyle = `rgba(${c[0]},${c[1]},${c[2]},${a.toFixed(3)})`; ctx.lineWidth = 0.5 + z * 0.6;
+          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x - r * 0.1, p.y - r); ctx.stroke();
+          continue;
+        } ctx.fillStyle = `rgba(${c[0]},${c[1]},${c[2]},${a.toFixed(3)})`;
         const r = p.r * (0.6 + z * 0.7);
         ctx.beginPath();
         if (p.k === 'sand') ctx.ellipse(p.x, p.y, r * 2.6, r * 0.7, 0.08, 0, 6.283);

@@ -213,7 +213,9 @@
           <option value="caiyun" ${p.theme === 'caiyun' ? 'selected' : ''}>彩云 · 禅 Caiyun (zen, coloured clouds)</option>
           <option value="xinjiang" ${p.theme === 'xinjiang' ? 'selected' : ''}>时空集 · 新疆 Spatial album — Xinjiang (atlas ikat)</option>
           <option value="fuji" ${p.theme === 'fuji' ? 'selected' : ''}>时空集 · 富士 Spatial album — Japan (seigaiha waves)</option>
-          <option value="alps" ${p.theme === 'alps' ? 'selected' : ''}>时空集 · 阿尔卑斯 Spatial album — Alps (cross-stitch)</option></select></label>
+          <option value="alps" ${p.theme === 'alps' ? 'selected' : ''}>时空集 · 阿尔卑斯 Spatial album — Alps (cross-stitch)</option>
+          <option value="dian" ${p.theme === 'dian' ? 'selected' : ''}>时空集 · 彩云之南 Spatial album — Yunnan (Bai tie-dye)</option>
+          <option value="lingyin" ${p.theme === 'lingyin' ? 'selected' : ''}>时空集 · 灵隐寺 Spatial album — Lingyin (lattice windows)</option></select></label>
         <div class="field"><span>状态 Visibility</span><label class="switch" style="height:42px"><input type="checkbox" data-bind="${base}.published" ${p.published === false ? '' : 'checked'}> 在网站上显示 Published</label></div>
       </div>
     </div>
@@ -251,7 +253,19 @@
     ['fjmoss', '富士 · 苔庭 Moss garden (dark)'], ['fjlantern', '富士 · 灯笼 Lantern night (dark)'],
     ['alspring', '阿尔卑斯 · 春 Spring (light)'], ['almeadow', '阿尔卑斯 · 草坡 Meadow (light)'], ['alglow', '阿尔卑斯 · 山光 Alpenglow (dark)'],
     ['alnight', '阿尔卑斯 · 星夜 Star night (dark)'], ['alvillage', '阿尔卑斯 · 灯火 Village lights (dark)'],
+    ['dncloud', '彩云 · 云白 Cloud (light)'], ['dndusk', '彩云 · 雨夜古城 Old town in rain (dark)'], ['dnjade', '彩云 · 碧水 Jade river (light)'],
+    ['dnochre', '彩云 · 寺院赭红 Monastery ochre (dark)'], ['dnsnow', '彩云 · 雪光 Snow light (light)'], ['dnnight', '彩云 · 星河 Night (dark)'],
+    ['lyxiang', '灵隐 · 香烟 Incense haze (light)'], ['lychuang', '灵隐 · 窗棂 Lattice maroon (dark)'], ['lyqiang', '灵隐 · 黄墙 Temple wall (light)'],
+    ['lyzhu', '灵隐 · 竹径 Bamboo shade (dark)'], ['lyhu', '灵隐 · 湖畔暮色 Lake at dusk (dark)'],
   ];
+  // 时空集 chapter line drawings (keys = SKETCHES in public/js/site.js)
+  const SKETCH_NAMES = {
+    road: '公路电线杆 Road & poles', dunes: '沙丘 Dunes', lake: '湖与山 Lake & mountains', willow: '红柳 Red willow', blossom: '花枝 Blossom branch',
+    fuji: '富士山 Mount Fuji', lakelamp: '湖边路灯 Lakeside lamp', torii: '鸟居 Torii', toro: '石灯笼 Stone lantern', chochin: '灯笼 Paper lantern',
+    chalet: '木屋 Chalet', peaks: '山光 Peaks in glow', starhut: '星下木屋 Hut under stars', matterhorn: '马特洪峰 Matterhorn',
+    clouds: '云 Clouds', umbrella: '雨伞 Umbrella in rain', river: '江水与石 River & stones', stupa: '白塔经幡 Stupa & flags', milkyway: '银河与山路 Milky Way & road',
+    incense: '香炉 Incense burner', lattice: '木格窗 Lattice window', eave: '飞檐 Flying eave', bamboo: '竹 Bamboo', lotus: '荷 Lotus',
+  };
   const FONTS = [
     ['serif', '衬线 Serif', '"Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, "Songti SC", Georgia, serif'],
     ['sans', '无衬线 Sans', '-apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif'],
@@ -299,11 +313,14 @@
             <option value="fireflies" ${ph.ornament === 'fireflies' ? 'selected' : ''}>时空集 · 萤火 Fireflies (air)</option>
             <option value="stars" ${ph.ornament === 'stars' ? 'selected' : ''}>时空集 · 星光 Stars (air)</option>
             <option value="leaves" ${ph.ornament === 'leaves' ? 'selected' : ''}>时空集 · 青叶 Green leaves (air)</option>
-            <option value="none" ${ph.ornament === 'none' ? 'selected' : ''}>无 None</option></select></label>`
+            <option value="rain" ${ph.ornament === 'rain' ? 'selected' : ''}>时空集 · 夜雨 Rain (air)</option>
+            <option value="none" ${ph.ornament === 'none' ? 'selected' : ''}>无 None</option></select></label>
+          ${['xinjiang', 'fuji', 'alps', 'dian', 'lingyin'].includes((project() || {}).theme) ? `<label class="mini"><span>线稿 Line drawing（时空集）</span><select data-bind="${base}.sketch">
+            ${[['', '默认 Default for this chapter'], ['none', '无 None'], ...Object.entries(SKETCH_NAMES)].map(o => `<option value="${o[0]}" ${(ph.sketch || '') === o[0] ? 'selected' : ''}>${o[1]}</option>`).join('')}</select></label>` : ''}`
             : ['paris', 'huizhou', 'beijing'].includes((project() || {}).theme) ? `<label class="mini"><span>小插画 Line drawing</span><select data-bind="${base}.ornament">
             ${[['', '无 None'], ['metro', '地铁口 Métro entrance'], ['cafe', '咖啡桌 Café table'], ['lamp', '路灯 Street lamp'], ['chandelier', '吊灯 Chandelier'], ['eiffel', '铁塔 Eiffel Tower'], ['fish', '鱼灯 Fish lantern'], ['lantern', '灯笼 Lantern'], ['cloud', '祥云 Cloud scroll']]
               .map(o => `<option value="${o[0]}" ${(ph.ornament || '') === o[0] ? 'selected' : ''}>${o[1]}</option>`).join('')}</select></label>` : ''}
-          ${['indigo', 'paris', 'huizhou', 'beijing', 'caiyun', 'xinjiang', 'fuji', 'alps'].includes((project() || {}).theme) ? `<label class="mini"><span title="从这一段开始，整页慢慢染成这个颜色（靛蓝 / 巴黎页面风格有效） The page fades to this colour from this block on">底色 Page colour</span><select data-bind="${base}.tone">
+          ${['indigo', 'paris', 'huizhou', 'beijing', 'caiyun', 'xinjiang', 'fuji', 'alps', 'dian', 'lingyin'].includes((project() || {}).theme) ? `<label class="mini"><span title="从这一段开始，整页慢慢染成这个颜色（靛蓝 / 巴黎页面风格有效） The page fades to this colour from this block on">底色 Page colour</span><select data-bind="${base}.tone">
             ${TONES.map(t => `<option value="${t[0]}" ${(ph.tone || '') === t[0] ? 'selected' : ''}>${t[1]}</option>`).join('')}</select></label>` : ''}
         </div>
         <label class="mini"><span>小标题 Kicker <em>（标题上方的一行小字，章节里显示为英文副题）</em></span><input type="text" data-bind="${base}.kicker" value="${esc(ph.kicker || '')}"></label>
@@ -372,6 +389,7 @@
           <button class="layer add" data-act="add-layer" data-k="${k}" title="添加图层 Add layers">＋</button></div>` : ''}
         ${kind === 'youtube' ? `<input type="text" data-yt="${k}" value="${esc(ph.url || '')}" placeholder="https://youtu.be/…">` : ''}
         <textarea data-bind="${base}.caption" placeholder="说明文字 Caption…（第二行可写英文）" rows="2">${esc(ph.caption || '')}</textarea>
+        ${kind === 'image' ? `<textarea data-bind="${base}.note" placeholder="旁注 Side note…（单独一张、不并排时显示在照片旁边；第二行可写英文）" rows="2">${esc(ph.note || '')}</textarea>` : ''}
         ${fxSel ? `<div class="acts">${fxSel}</div>` : ''}
         <div class="acts">
           <span class="grip" title="按住拖动排序 Drag to reorder">⠿</span>

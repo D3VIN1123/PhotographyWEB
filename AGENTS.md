@@ -6,6 +6,43 @@ lots of empty space. Type system from the owner's reference screenshot: mono let
 (`--mono`), italic display serif for English (`--serif`), heavy Song with a gold fade for big Chinese titles (`--song`, `--gold`).
 v2 ("paper + glass") is in `.backups/before-zen-redesign/`; v1 (all-dark) is in `versions/v1-liquid-glass/` — do not delete either.
 
+## Project ledger — read this first when the owner talks about albums
+
+The table below records, per album, its style, what it held, a fingerprint (`Sig`) of it, a version (bumped by each
+agent pass) and who changed it last. `python3 scripts/ledger.py` compares it with the live backstage content
+(`public/data/content.json`) and prints every album that is **NEW**, **CHANGED** (edited in the backstage since its
+row was written: photos added / removed / reordered, captions, title, cover…) or **REMOVED**.
+
+**Workflow** — run the check at the start of any request about albums ("build the new projects", "added photo",
+"update X", "what changed?"), then:
+
+1. **NEW album** and the owner wants new albums built → lay it out in the site's current house style for albums,
+   which is **时空集** (skill `.claude/skills/spatial-album/`; the 新疆 approach): new place tones, textile strip,
+   chapters, captions. Ask nothing first unless the photos are ambiguous.
+2. **CHANGED album** → do not assume. **Ask the owner**: "Should I continue as always? (blend the new photographs into
+   the rest of the album)" — or follow their own instructions instead.
+   **Exception:** when the owner's message already says **"added photo(s)"** for that album, that *is* the answer:
+   blend the new photographs into the album's existing style (chapter, caption in the album's voice, layout that keeps
+   the rhythm; no style change).
+3. **REMOVED album** → mention it; `--record` drops the row.
+4. After you change an album: `python3 scripts/ledger.py --record agent "<what you did>" <title|slug|id>`.
+   If the owner says to leave their edit as it is: `--record user "<their edit>" <album>` (no version bump).
+5. Never edit the table by hand except the Notes cell; the script writes it.
+
+<!-- ledger:start -->
+| Album | id | Style | Items | Sig | Ver | Last change | Notes |
+|---|---|---|---|---|---|---|---|
+| 彩云之南 | `mwl4uvcugvpo0` | dian | 39 ph / 13 txt | 60bd4fd2 | v2 | agent 2026-11-21 | lone singles: side notes / pairs (Nov 21); chapter line drawings (code, Nov 21) |
+| 徽州 | `mwmr1dqe105a5` | huizhou | 21 ph / 7 txt | 3e6716ed | v2 | agent 2026-11-21 | lone singles: side notes / pairs (Nov 21) |
+| Paris | `mwl4fiotklvap` | paris | 35 ph / 18 txt | 4c1f75f2 | v2 | agent 2026-11-21 | lone singles: side notes / pairs (Nov 21) |
+| 北京 | `mwl4oippauve5` | beijing | 36 ph / 9 txt | 967a9e8d | v1 | agent 2026-11-21 | beijing zen; 神武门 snow photo blended into 雪 |
+| 新疆 | `mwjmi8ubzaj03` | xinjiang | 14 ph / 6 txt | aaeb1124 | v2 | agent 2026-11-21 | lone singles: side notes / pairs (Nov 21); chapter line drawings (code, Nov 21) |
+| Fujisan | `mwpc8f4i4e7ja` | fuji | 10 ph / 5 txt | 4cf5492f | v2 | agent 2026-11-21 | lone singles: side notes / pairs (Nov 21); chapter line drawings (code, Nov 21) |
+| Deep in the Alps | `mwl4kwkz15m33` | alps | 10 ph / 5 txt | a7dd6de3 | v2 | agent 2026-11-21 | lone singles: side notes / pairs (Nov 21); chapter line drawings (code, Nov 21) |
+| Yunnan | `mwmd69nuoum0t` | yunnan | 51 ph / 9 txt | be445500 | v1 | agent 2026-11-21 | baseline: yunnan field-journal theme |
+| 灵隐寺 | `mwpc344zeznhz` | lingyin | 12 ph / 5 txt | 5676390b | v2 | agent 2026-11-21 | lone singles: side notes / pairs (Nov 21); chapter line drawings (code, Nov 21) |
+<!-- ledger:end -->
+
 ## Hard constraints
 
 - **No dependencies, no build step.** Vanilla HTML/CSS/JS; the server is Python **standard library only**.
@@ -61,12 +98,14 @@ versions/              frozen copies of earlier looks (not deployed)
     "id", "slug", "title", "subtitle", "description",
     "place", "placeEn", "coords",  // title plate: big word (else title), English italic line (else subtitle), "39.92°N · 116.39°E"
     "cover": "<photo id>", "published": true,
-    "theme": "" | "indigo" | "yunnan" | "paris" | "huizhou" | "beijing" | "caiyun" | "xinjiang" | "fuji" | "alps", // page style; indigo = dark tie-dye, yunnan = editorial field journal,
+    "theme": "" | "indigo" | "yunnan" | "paris" | "huizhou" | "beijing" | "caiyun" | "xinjiang" | "fuji" | "alps" | "dian" | "lingyin", // page style; indigo = dark tie-dye, yunnan = editorial field journal,
                                   // paris = limestone + Didot, street-sign chapters (public/css/paris.css)
     "photos": [{ "type": "image"|"stack"|"video"|"youtube"|"text",   // missing = image
                  "id", "src", "thumb", "w", "h", "caption",
                  "focus": [x%, y%],             // object-position when cropped to fill
                  "layout": "auto"|"fill"|"fit"|"wide"|"pair",   // pair = sit side by side with the next photo
+                 "note": "中文\nEnglish",              // side note: shown beside the photo when it ends up as a single framed photo
+                                                       // (.spread.single.note, sideNote in site.js); ignored in pairs / full-bleed
                  "mid": "uploads/<id>_m.avif",  // 2560px AVIF display copy the page shows; "src" (5120px) only loads in zoom
                  "fx": "" | "mist" | "dawn" | "sparkle" | "embers" | "fireworks" }]   // embers = rising sparks (CSS), fireworks = canvas bursts while on screen (startFireworks)   // sparkle = twinkling lights on the bright parts (sparkleHTML / placeSparkles)  // mist = drifting cloud overlay; dawn = pinned, scroll raises the sun   // fill = always full-bleed, fit = always framed on paper,
                                                        // wide = whole photo at screen width (.panel.wide), snaps by its centre
@@ -78,6 +117,7 @@ versions/              frozen copies of earlier looks (not deployed)
 // youtube: "yt" (11-char id), "url", thumb = i.ytimg.com poster, w/h = aspect ratio; always framed
 // stack:   layout "scroll" = horizontal handscroll (rollHTML / sizeRolls / rolls in frame)
 // text:    "style": "" | "chapter" (numbered 壹贰叁…, vertical title, "kicker" English line, "ornament"
+//          (时空集 pages: "sketch" = chapter line drawing, see Gotchas → 时空集)
 //          contour|flags|shibori|roofs|rose|opera|seine|versailles|huiwalls|fishdance|eaves|studs|none; scenes (SCENES) draw on
 //          paris / huizhou / beijing pages, studs only on beijing —
 //          opera/seine/versailles are line-drawn scenes (SCENES). On a paris page a plain text block's "ornament" can be a
@@ -214,20 +254,29 @@ domain). Keep these.
 
 - **Zen design concept** (owner's name for it): the shared approach of the 徽州, 北京 and 彩云之南 pages — quiet tones that change per
   chapter, vertical Song-light titles, one small seal/dot for the number, one drawn line per chapter, faint ornaments, lots of
-  empty space, photos that reveal softly. 彩云之南 uses `theme: "caiyun"` (`caiyunChapterHTML`, `css/caiyun.css`, tones cloud /
+  empty space, photos that reveal softly. 彩云之南 used `theme: "caiyun"` until Nov 21 2026 (now 时空集 `dian`; the zen code is kept: `caiyunChapterHTML`, `css/caiyun.css`, tones cloud /
   indigodusk / jadewater / ochre / snowlight / night); the old dark `indigo` theme is unused but kept.
+- **No lone single photos on one side** (owner, Nov 21 2026): a framed photo that would sit alone on one side of an empty
+  page must either pair with a neighbour (`layout: "pair"` on the first) or carry a `note` (a few lines in the album's
+  voice, 中文\nEnglish), which fills the free half. No fitting text → pair it. 北京 centres its singles on the axis
+  (beijing.css) and is left as is.
 - **No fades on photos or video** (owner: 绝对不要): never put gradient/mask edges, paper gradients or overlaps on photographs or
   films — they keep hard full edges. The `.next` hand-off is a blurred copy (`.next-blur`) whose opacity drops as the block
   scrolls in (`--nb`, set in `frame`), not a spatial gradient.
 - **Full-width film**: a YouTube module with `layout: "fill"` plays muted with `controls=0` (iframe scaled 1.24 to crop YouTube's
   overlays, pointer-events off); clicking opens `.ytmodal` full screen with sound (`openFilm`).
-- **时空集 "Spatial Album"** (codename; skill `.claude/skills/spatial-album/`): themes `xinjiang` / `fuji` / `alps` (`SPATIAL` in
+- **时空集 "Spatial Album"** (codename; skill `.claude/skills/spatial-album/`): themes `xinjiang` / `fuji` / `alps` / `dian` (彩云之南) / `lingyin` (灵隐寺) (`SPATIAL` in
   site.js → `body.spatial`, `css/spatial.css`). Quiet chapter openings (`spatialChapterHTML`: meta row, the place's textile strip —
-  `ikatSVG` 艾德莱斯 / `seigaihaSVG` 青海波 / `stitchSVG` Swiss cross-stitch — numeral, vertical title, text); the page re-dyes per
-  chapter (tones xj… / fj… / al…). Framed photos turn towards you via `--p/--a` (set in `Xj.scroll`) and glow on hover. `.xj-air`
+  `ikatSVG` 艾德莱斯 / `seigaihaSVG` 青海波 / `stitchSVG` Swiss cross-stitch / `zharanSVG` 白族扎染 (always indigo + white) /
+  `latticeSVG` 灵隐 窗棂 lattice + lotus — plus a line drawing in the empty half (`sketchSVG`, library `SKETCHES`: road · dunes ·
+  lake · willow · blossom · fuji · lakelamp · torii · toro · chochin · chalet · peaks · starhut · matterhorn · clouds · umbrella ·
+  river · stupa · milkyway · incense · lattice · eave · bamboo · lotus; chapter field `sketch`, else `SPATIAL[theme].sketches[n-1]`,
+  "none" = off; drawn in stroke by stroke when the chapter scrolls in; names for the backstage in `SKETCH_NAMES` in admin.js) — numeral, vertical title, text); the page re-dyes per
+  chapter (tones xj… / fj… / al… / dn… / ly…). Framed photos turn towards you via `--p/--a` (set in `Xj.scroll`) and glow on hover. `.xj-air`
   (fixed canvas behind the page, html background off) = the chapter's air from the chapter block's `ornament`: snow · sand · glint ·
-  motes · petals · bokeh · fireflies · stars · leaves. A per-chapter fly-through was tried and removed at the owner's request
-  (`.backups/site-xinjiang-with-flights.js`). Content backups: `content-before-xinjiang.json`, `content-before-fuji-alps.json`.
+  motes · petals · bokeh · fireflies · stars · leaves · rain. A per-chapter fly-through was tried and removed at the owner's request
+  (`.backups/site-xinjiang-with-flights.js`). Content backups: `content-before-xinjiang.json`, `content-before-fuji-alps.json`,
+  `content-before-dian-lingyin.json` (彩云之南 as the zen `caiyun` page, before it became 时空集).
 - **Title colour**: `.plate-big.cjk.t-<theme>` sets `--gold` per album (gold only for 北京).
 
 - **AVIF display copies must have even width and height.** Chrome cannot decode sips' AVIFs with an odd side (2560×1707):
