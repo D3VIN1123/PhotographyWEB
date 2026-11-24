@@ -2231,7 +2231,39 @@
       if (e.pointerType !== 'mouse') return;
       z.mx = e.clientX; z.my = e.clientY; if (z.ready) Lens.move(e.clientX, e.clientY);
     });
-    box.addEventListener('pointerleave', () => Lens.hide());
+    box.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') Lens.hide(); });
+    // Touch: hold a finger on the photo (~0.28 s) and the glass appears just above the fingertip, its lower edge where
+    // the finger is, magnifying what is under the finger (like the iOS text loupe), so the finger never hides it.
+    // Drag to move it, lift to put it away. The system long-press menu is switched off here (CSS + contextmenu).
+    let hold = 0, sx = 0, sy = 0;
+    const above = (fx, fy) => { const r = Lens.radius(), gap = 18; return fy - r * 2 - gap < 8 ? [0, r + gap] : [0, -(r + gap)]; };
+    const show = (fx, fy) => { const [dx, dy] = above(fx, fy); Lens.move(fx, fy, dx, dy); };
+    box.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'mouse' || !e.isPrimary) return;
+      sx = e.clientX; sy = e.clientY; clearTimeout(hold);
+      hold = setTimeout(() => {
+        if (zoomed !== z || !z.ready) return;
+        z.lens = true; z.lensAt = Date.now(); box.classList.add('loupe');
+        if (navigator.vibrate && (!navigator.userActivation || navigator.userActivation.hasBeenActive)) try { navigator.vibrate(8); } catch (er) {}
+        show(sx, sy);
+      }, 280);
+    });
+    box.addEventListener('pointermove', e => {
+      if (e.pointerType === 'mouse' || !e.isPrimary) return;
+      if (z.lens) { show(e.clientX, e.clientY); return; }
+      if (Math.hypot(e.clientX - sx, e.clientY - sy) > 10) clearTimeout(hold);
+    });
+    const lift = e => {
+      if (e.pointerType === 'mouse') return;
+      clearTimeout(hold);
+      if (z.lens) { z.lens = false; z.lensAt = Date.now(); box.classList.remove('loupe'); Lens.hide(); }
+    };
+    box.addEventListener('pointerup', lift); box.addEventListener('pointercancel', lift);
+    box.addEventListener('contextmenu', e => e.preventDefault());
+    if (matchMedia('(hover: none)').matches) {
+      const hint = document.createElement('div'); hint.className = 'zoom-hint'; hint.textContent = '长按放大 · Hold to magnify';
+      box.appendChild(hint); setTimeout(() => hint.classList.add('gone'), 2600);
+    }
   }
   // quiet = closed by scrolling, so the chrome stays hidden
   function closeZoom(now, quiet) {
@@ -2243,14 +2275,19 @@
     setTimeout(done, 640); if (!quiet) poke();
   }
   document.addEventListener('click', e => {
-    if (zoomed) { closeZoom(); return; }
+    if (zoomed) { if (zoomed.lens || Date.now() - (zoomed.lensAt || 0) < 450) return; closeZoom(); return; }
     const zb = e.target.closest && e.target.closest('[data-zoom]');
     if (zb) { const bg = $('.bg', zb.closest('.panel')); if (bg) openZoom(bg); return; }
     const clip = e.target.closest && e.target.closest(ZOOMABLE); if (clip) openZoom(clip);
   });
   addEventListener('keydown', e => { if (zoomed && e.key === 'Escape') closeZoom(); });
   addEventListener('wheel', () => { if (zoomed) closeZoom(false, true); }, { passive: true });
-  addEventListener('touchmove', () => { if (zoomed) closeZoom(false, true); }, { passive: true });
+  let zTouch = null;
+  addEventListener('touchstart', e => { zTouch = e.touches[0] ? [e.touches[0].clientX, e.touches[0].clientY] : null; }, { passive: true });
+  addEventListener('touchmove', e => {
+    if (!zoomed || zoomed.lens || !zTouch || !e.touches[0]) return;
+    if (Math.hypot(e.touches[0].clientX - zTouch[0], e.touches[0].clientY - zTouch[1]) > 40) closeZoom(false, true);
+  }, { passive: true });
 
   // ---------- zoom-mode magnifier ----------
   // A round piece of clear glass, nothing painted on top of it:
@@ -2261,19 +2298,19 @@
   // The photo is read into memory once when zoom mode opens; after that each frame is only
   // a table lookup per pixel (the table is built once per screen density).
   const Lens = (() => {
-    const R = 144;          // lens radius, css px
-    const B = 33;           // width of the refracting rim
+    let R = 144;            // lens radius, css px (96 on phones, see canvas())
+    let B = 33;             // width of the refracting rim
     const M = 2;            // magnification in the centre
     const EDGE = 1.5;       // at the very edge the rim samples the photo this many radii away
     const DISPERSION = 0.32; // how far red and blue separate, relative to how much the rim bends
     const LEVELS = 4;       // the photo is kept at full, ½, ¼ and ⅛ resolution; squeezed rim pixels read
                             // from a smaller (pre-averaged) copy so they shimmer instead of sparkling
     let cv = null, ctx, out, alpha, lvl, ofs = null, size = 0, dpr = 0, mq = 0;
-    let im = null, mips = null, q = 1, x = 0, y = 0, raf = 0, on = false;
+    let im = null, mips = null, q = 1, x = 0, y = 0, ox = 0, oy = 0, raf = 0, on = false;
 
     function canvas() {
-      const d = Math.min(2, window.devicePixelRatio || 1);
-      if (cv && d === dpr) return; dpr = d; mq = 0;
+      const d = Math.min(2, window.devicePixelRatio || 1), r = window.innerWidth <= 760 ? 96 : 144;
+      if (cv && d === dpr && r === R) return; dpr = d; mq = 0; R = r; B = Math.round(33 * r / 144);
       size = Math.round(2 * R * dpr);
       if (!cv) { cv = document.createElement('canvas'); cv.className = 'lens'; ctx = cv.getContext('2d'); }
       cv.width = cv.height = size; cv.style.width = cv.style.height = 2 * R + 'px';
@@ -2337,17 +2374,19 @@
         }
       }
       ctx.putImageData(out, 0, 0);
-      cv.style.transform = `translate3d(${x - R}px, ${y - R}px, 0)`;
+      cv.style.transform = `translate3d(${x + ox - R}px, ${y + oy - R}px, 0)`;
     }
     return {
       attach(img) { canvas(); im = img; mips = null; document.body.appendChild(cv); },
       detach() { on = false; im = null; mips = null; if (cv) { cv.classList.remove('on'); setTimeout(() => { if (!im && cv) cv.remove(); }, 260); } },
       hide() { on = false; if (cv) cv.classList.remove('on'); },
-      move(mx, my) {
+      radius() { return R; },
+      // (mx, my) = the point magnified; (dx, dy) = where the glass sits relative to it (touch: above the finger)
+      move(mx, my, dx, dy) {
         if (!im || !cv) return;
         const r = im.getBoundingClientRect();
         if (mx < r.left || mx > r.right || my < r.top || my > r.bottom) { this.hide(); return; }
-        x = mx; y = my; on = true; cv.classList.add('on');
+        x = mx; y = my; ox = dx || 0; oy = dy || 0; on = true; cv.classList.add('on');
         if (!raf) raf = requestAnimationFrame(paint);
       },
     };
