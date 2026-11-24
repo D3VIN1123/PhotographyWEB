@@ -195,8 +195,9 @@ server has no image library.
   glass bead edge, sampling up to `EDGE`× the radius away, with red/green/blue split by `DISPERSION`; squeezed rim pixels
   read from the smaller copies to avoid sparkle. Nothing opaque is drawn (owner's request: no shadow, tint or solid
   ring). A bevelled "small lens" edge between centre and rim was tried and rejected by the owner. Sizes: R 144, B 33. Cursor hidden over the photo.
-  **Touch** (Nov 24 2026): hold a finger ~0.28 s on the zoomed photo → the glass appears just above the fingertip (its lower edge
-  at the finger; flips below near the top), magnifying what is under the finger; drag to move, lift to hide; a tap still closes.
+  **Touch** (Nov 24 2026): hold a finger ~0.28 s on the zoomed photo → the same glass as on desktop appears (magnifying what is
+  under its own centre), lifted so the fingertip sits just below its lower edge — never flips below; it stays on, even off the
+  photo, until the finger leaves the screen; drag to move; a tap still closes (owner, Nov 24: not "magnify under the finger").
   `.zoom` has `touch-action: none` + no touch-callout so the system long-press menu doesn't fire; R 96 on phones; a
   "长按放大 · Hold to magnify" hint shows for 2.6 s. A swipe (>40 px) without the loupe still closes zoom.
 - **Time stacks** (`stackHTML`, `stacks` in `frame`): a tall section with a sticky frame; scroll progress cross-fades

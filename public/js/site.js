@@ -2236,8 +2236,9 @@
     // the finger is, magnifying what is under the finger (like the iOS text loupe), so the finger never hides it.
     // Drag to move it, lift to put it away. The system long-press menu is switched off here (CSS + contextmenu).
     let hold = 0, sx = 0, sy = 0;
-    const above = (fx, fy) => { const r = Lens.radius(), gap = 18; return fy - r * 2 - gap < 8 ? [0, r + gap] : [0, -(r + gap)]; };
-    const show = (fx, fy) => { const [dx, dy] = above(fx, fy); Lens.move(fx, fy, dx, dy); };
+    // same glass as on desktop (it magnifies what is under its own centre), only lifted so the fingertip sits just
+    // below its lower edge; it always stays above the finger and stays on while the finger is down, even off the photo
+    const show = (fx, fy) => Lens.move(fx, fy - Lens.radius() - 10, 0, 0, true);
     box.addEventListener('pointerdown', e => {
       if (e.pointerType === 'mouse' || !e.isPrimary) return;
       sx = e.clientX; sy = e.clientY; clearTimeout(hold);
@@ -2382,10 +2383,10 @@
       hide() { on = false; if (cv) cv.classList.remove('on'); },
       radius() { return R; },
       // (mx, my) = the point magnified; (dx, dy) = where the glass sits relative to it (touch: above the finger)
-      move(mx, my, dx, dy) {
+      move(mx, my, dx, dy, keep) {
         if (!im || !cv) return;
         const r = im.getBoundingClientRect();
-        if (mx < r.left || mx > r.right || my < r.top || my > r.bottom) { this.hide(); return; }
+        if (!keep && (mx < r.left || mx > r.right || my < r.top || my > r.bottom)) { this.hide(); return; }
         x = mx; y = my; ox = dx || 0; oy = dy || 0; on = true; cv.classList.add('on');
         if (!raf) raf = requestAnimationFrame(paint);
       },
